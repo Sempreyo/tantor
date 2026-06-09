@@ -1,0 +1,38 @@
+extends ../layouts/default
+
+block vars
+	-
+		const page = {
+			title: 'Tantor'
+		};
+
+block main
+	section.hero
+		+icon('plus', 'hero__plus')
+		.container
+			.hero__title Что бизнес ожидает от <br> <span>корпоративной СУБД</span> нового поколения?
+		.hero__wrapper
+			+icon('blob-1', 'blob blob--1')
+			.hero__left
+				.hero__machines
+					.hero__machine.hero__machine--1
+						+picture('machine-1', 'png', '', '')
+					.hero__machine.hero__machine--2
+						+picture('machine-2', 'png', '', '')
+					.hero__machine.hero__machine--3
+						+picture('machine-3', 'png', '', '')
+					.hero__labels
+						.hero__label.hero__label--1 Oracle Exadata
+						.hero__label.hero__label--2 IBM Netezza
+						.hero__label.hero__label--3 SAP HANA
+				.hero__car
+					+picture('car', 'png', '', '')
+			.hero__right
+				.hero__text.
+					Почему так трудно замещать западные решения в&nbsp;ключевых системах банков (АБС), энергетики, промышленности и&nbsp;других
+					отраслей, где требования наиболее высоки – тысячи пользователей, потоки транзакций и&nbsp;тяжелая аналитика?
+				.hero__text.
+					«Классический» PostgreSQL и&nbsp;его производные не&nbsp;позволяют это делать ввиду архитектурных ограничений: нет
+					горизонтального масштабирования и&nbsp;нельзя эффективно обрабатывать смешанные нагрузки.
+				.hero__text.
+					Архитектуры с&nbsp;раздельными системами под транзакции и&nbsp;аналитику себя не&nbsp;оправдывают.

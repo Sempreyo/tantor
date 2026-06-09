@@ -1,0 +1,20 @@
+.title {
+	color: $color-text;
+	font-family: $secondFont;
+	font-weight: 500;
+	font-size: 20px;
+	line-height: 1.2;
+	text-transform: uppercase;
+
+	@include max(d) {
+		font-size: fluid(19, 20, 992, 1280);
+	}
+
+	@include max(tl) {
+		font-size: fluid(17, 19, 768, 992);
+	}
+
+	@include max(ti) {
+		font-size: 20px;
+	}
+}

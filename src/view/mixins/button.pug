@@ -1,0 +1,13 @@
+mixin button(text, className, href, icon)
+	if href
+		a.button(class=className, href=href)&attributes(attributes)
+			if text
+				span!= text
+			if icon
+				+icon(icon)
+	else
+		button.button(class=className)&attributes(attributes)
+			if text
+				span!= text
+			if icon
+				+icon(icon)

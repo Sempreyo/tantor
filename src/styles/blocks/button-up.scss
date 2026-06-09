@@ -1,0 +1,31 @@
+.button-up {
+	position: fixed;
+	left: 88.7%;
+	bottom: 35px;
+	z-index: 12;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 35px;
+	height: 35px;
+	padding: 5px;
+	border-radius: 3px;
+	background-color: rgba($black, 0.2);
+	opacity: 0;
+	pointer-events: none;
+	transition: background-color 0.3s ease;
+	cursor: pointer;
+
+	@include max(tl) {
+		bottom: 15px;
+	}
+
+	&--visible {
+		opacity: 1;
+		pointer-events: auto;
+	}
+
+	&:hover {
+		background-color: rgba($black, 0.7);
+	}
+}

@@ -1,0 +1,65 @@
+.button {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 10px;
+	max-width: 400px;
+	width: 100%;
+	padding: 15px 33px;
+	box-sizing: border-box;
+	background-color: $color-button;
+	clip-path: polygon(0 0, calc(100% - 18px) 0, 100% 18px, 100% 100%, 0 100%);
+	color: $color-text;
+	font-family: $mainFont;
+	font-size: 20px;
+	line-height: 1.2;
+	font-weight: 500;
+	text-align: center;
+	text-transform: uppercase;
+	cursor: pointer;
+	transition: 0.3s ease;
+
+	@include max(d) {
+		font-size: fluid(18, 20, 992, 1280);
+	}
+
+	@include max(tl) {
+		font-size: fluid(16, 18, 768, 992);
+	}
+
+	@include max(ti) {
+		padding: 10px 25px;
+		clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 0 100%);
+		font-size: fluid(13, 16, 0, 768);
+	}
+
+	&:hover {
+		background-color: rgba($color-button, 0.7);
+	}
+
+	&--gray {
+		background-color: $color-button-2;
+
+		&:hover {
+			background-color: $color-button-2-hover;
+		}
+	}
+
+	&--dark {
+		background-color: $color-button-2-hover;
+
+		&:hover {
+			background-color: $color-button-2;
+		}
+	}
+
+	&--outline {
+		background-color: transparent;
+		clip-path: none;
+		border: 1px solid $color-button;
+
+		&:hover {
+			background-color: $color-button;
+		}
+	}
+}
