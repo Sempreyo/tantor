@@ -1,0 +1,153 @@
+.advantages {
+	position: absolute;
+	inset: 0;
+	padding: 35px 0 0;
+	border-bottom: 1px solid rgba($color-text, 0.3);
+	opacity: 0;
+
+	&__title {
+		font-size: 48px;
+		line-height: 1.2;
+		text-align: center;
+	}
+
+	&__top {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 20px;
+		padding-left: 44px;
+		padding-bottom: 61px;
+		margin-top: 40px;
+	}
+
+	&__text {
+		max-width: 560px;
+		font-size: 18px;
+		line-height: 1.2;
+
+		&--full {
+			max-width: 600px;
+		}
+
+		b {
+			color: $color-accent;
+		}
+
+		p + p {
+			margin-top: 20px;
+		}
+
+		sup {
+			font-size: 12px;
+		}
+	}
+
+	&__net {
+		flex-grow: 1;
+		position: relative;
+		width: 100%;
+		min-width: 0;
+		height: 350px;
+	}
+
+	&__images {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		z-index: 1;
+		width: 280px;
+		height: 200px;
+		pointer-events: none;
+	}
+
+	&__image {
+		position: absolute;
+
+		&--1 {
+			top: 75%;
+			left: 27%;
+			width: 74px;
+			height: 150px;
+			transform: translate(-50%, -50%) rotate(-11deg);
+		}
+
+		&--2 {
+			top: 54%;
+			left: 46%;
+			width: 93px;
+			height: 165px;
+			transform: translate(-50%, -50%) rotate(-9deg);
+		}
+
+		&--3 {
+			left: 56%;
+			width: 94px;
+			height: 200px;
+		}
+	}
+
+	&__graphs {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+	}
+
+	&__bottom {
+		background-color: $white;
+		border-top: 1px solid rgba($color-text, 0.3);
+		padding: 52px 0 20px;
+		overflow: hidden;
+	}
+
+	&__container-bottom {
+		display: flex;
+	}
+
+	&__col {
+		position: relative;
+
+		&:last-child {
+			width: 48%;
+		}
+	}
+
+	&__eleph {
+		mix-blend-mode: exclusion;
+		pointer-events: none;
+		margin-top: -200px;
+	}
+
+	&__items {
+		display: flex;
+		flex-direction: column;
+		gap: 30px;
+		position: absolute;
+		top: 100px;
+		left: 28%;
+	}
+
+	&__item {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+		font-family: $secondFont;
+		font-size: 16px;
+		opacity: 0;
+		transform: translateX(-10px);
+
+		&::before {
+			content: "";
+			width: 93px;
+			height: 1px;
+			background-color: $black;
+		}
+	}
+
+	&__link {
+		margin-top: 35px;
+	}
+}

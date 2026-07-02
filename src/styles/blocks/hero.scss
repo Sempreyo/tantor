@@ -3,10 +3,13 @@
 	padding-bottom: 7px;
 
 	&__title {
-		padding: 30px 0 36px;
+		padding: 106px 0 36px;
 		font-size: 64px;
 		line-height: 1.2;
 		text-align: center;
+		box-sizing: border-box;
+		opacity: 0;
+		transform: translateY(20px);
 
 		span {
 			color: $color-accent;
@@ -30,7 +33,6 @@
 
 	&__left {
 		padding: 21px 48px 183px 0;
-		border-right: 1px solid rgba($color-text, 0.3);
 	}
 
 	&__right {
@@ -39,12 +41,19 @@
 		justify-content: center;
 		gap: 72px;
 		padding: 26px;
+		border-left: 1px solid rgba($color-text, 0.3);
 	}
 
 	&__text {
 		position: relative;
 		font-size: 24px;
 		line-height: 1.2;
+
+		span {
+			display: inline-block;
+			opacity: 0;
+			transform: translateX(-20px);
+		}
 
 		&::before {
 			content: "";
@@ -119,7 +128,7 @@
 
 	&__plus {
 		position: absolute;
-		bottom: 0;
+		bottom: -6px;
 		left: 50%;
 		transform: translateX(-50%);
 		z-index: 1;

@@ -1,0 +1,136 @@
+.server {
+	position: relative;
+	width: 100%;
+	height: 99vh;
+	border-bottom: 1px solid rgba($color-text, 0.3);
+
+	/*&__plus {
+		position: absolute;
+		bottom: -8px;
+		left: 50%;
+		transform: translateX(-50%);
+		z-index: 1;
+		width: 14px;
+		height: 14px;
+	}*/
+
+	&__container {
+		display: flex;
+		flex-direction: column;
+		height: 100%;
+	}
+
+	&__model {
+		position: absolute;
+		inset: 0;
+		z-index: 2;
+		width: 100%;
+		height: 99vh;
+		opacity: 0;
+		pointer-events: none;
+	}
+
+	&__captions {
+		position: absolute;
+		display: flex;
+		justify-content: center;
+		width: 100%;
+		opacity: 0;
+		transform: translateY(40vh);
+	}
+
+	&__caption {
+		flex-shrink: 0;
+		position: relative;
+
+		&--1 {
+			text-align: right;
+			transform: translateX(-170px);
+			/*left: -82%;
+
+			.caption__title {
+				margin-left: 95px;
+			}*/
+		}
+
+		&--2 {
+			transform: translate(180px, 50px);
+			//left: 44px;
+			/*top: -48px;
+			right: -82%;
+
+			.caption__subtitle {
+				margin-left: 140px;
+			}*/
+		}
+	}
+
+	&__config {
+		position: absolute;
+		top: 350px;
+		left: calc(50% + 264px);
+		transform: translateX(-50%);
+		display: flex;
+		align-items: center;
+		gap: 13px;
+		font-family: $secondFont;
+		font-size: 16px;
+		opacity: 0;
+
+		svg {
+			width: 28px;
+			height: 304px;
+		}
+	}
+
+	&__boards {
+		position: absolute;
+		top: 191px;
+		left: calc(50% + 343px);
+		transform: translateX(-50%);
+		display: flex;
+		flex-direction: column;
+		gap: 12px;
+
+		.board {
+			&:nth-child(even) {
+				margin-left: -30px;
+			}
+		}
+
+		&--bottom {
+			top: 684px;
+			left: calc(50% + 334px);
+
+			.board {
+				&:nth-child(odd) {
+					margin-left: -30px;
+				}
+
+				&:nth-child(even) {
+					margin-left: 0;
+				}
+			}
+		}
+	}
+
+	&__widget {
+		position: absolute;
+		top: 207px;
+		left: calc(50% + 386px);
+		transform: translateX(-50%);
+		opacity: 0;
+
+		&--2 {
+			top: 509px;
+			left: calc(50% + 396px);
+			max-width: 344px;
+		}
+
+		&--3 {
+			top: 693px;
+			left: calc(50% + 494px);
+			max-width: 252px;
+		}
+	}
+}

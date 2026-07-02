@@ -1,0 +1,56 @@
+.board {
+	$parent: &;
+
+	display: flex;
+	align-items: center;
+	gap: 16px;
+	opacity: 0;
+	transform: translateX(-10px);
+
+	&--light {
+		#{$parent} {
+			&__line::before {
+				background-color: rgba($color-text, 0.6);
+			}
+
+			&__icon {
+				color: rgba($color-text, 0.6);
+			}
+
+			&__text {
+				color: rgba($color-text, 0.6);
+			}
+		}
+	}
+
+	&__line {
+		flex-shrink: 0;
+		position: relative;
+		width: 124px;
+		height: 1px;
+		background-color: rgba($color-text, 0.3);
+
+		&::before {
+			content: "";
+			position: absolute;
+			top: 0;
+			right: 0;
+			width: 28px;
+			height: 1px;
+			background-color: $color-text;
+		}
+	}
+
+	&__icon {
+		color: $color-text;
+		flex-shrink: 0;
+		width: 200px;
+		height: 37px;
+	}
+
+	&__text {
+		flex-shrink: 0;
+		font-family: $secondFont;
+		font-size: 16px;
+	}
+}

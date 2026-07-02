@@ -7,4 +7,13 @@
 		left: -400px;
 		bottom: -800px;
 	}
+
+	&--2 {
+		width: 1137px;
+		height: 912px;
+		top: 50%;
+		left: 50%;
+		opacity: 0;
+		transform: translate(-50%, -50%) rotate(126deg);
+	}
 }

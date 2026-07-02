@@ -7,7 +7,7 @@ block vars
 		};
 
 block main
-	section.hero
+	section.hero.scroll-1
 		+icon('plus', 'hero__plus')
 		.container
 			.hero__title Что бизнес ожидает от <br> <span>корпоративной СУБД</span> нового поколения?
@@ -28,11 +28,390 @@ block main
 				.hero__car
 					+picture('car', 'png', '', '')
 			.hero__right
-				.hero__text.
-					Почему так трудно замещать западные решения в&nbsp;ключевых системах банков (АБС), энергетики, промышленности и&nbsp;других
-					отраслей, где требования наиболее высоки – тысячи пользователей, потоки транзакций и&nbsp;тяжелая аналитика?
-				.hero__text.
-					«Классический» PostgreSQL и&nbsp;его производные не&nbsp;позволяют это делать ввиду архитектурных ограничений: нет
-					горизонтального масштабирования и&nbsp;нельзя эффективно обрабатывать смешанные нагрузки.
-				.hero__text.
-					Архитектуры с&nbsp;раздельными системами под транзакции и&nbsp;аналитику себя не&nbsp;оправдывают.
+				.hero__text
+					span.
+						Почему так трудно замещать западные решения в&nbsp;ключевых системах банков (АБС), энергетики, промышленности и&nbsp;других
+						отраслей, где требования наиболее высоки – тысячи пользователей, потоки транзакций и&nbsp;тяжелая аналитика?
+				.hero__text
+					span.
+						«Классический» PostgreSQL и&nbsp;его производные не&nbsp;позволяют это делать ввиду архитектурных ограничений: нет
+						горизонтального масштабирования и&nbsp;нельзя эффективно обрабатывать смешанные нагрузки.
+				.hero__text
+					span.
+						Архитектуры с&nbsp;раздельными системами под транзакции и&nbsp;аналитику себя не&nbsp;оправдывают.
+	section.server.scroll-2
+		//+icon('plus', 'server__plus')
+		+icon('blob-1', 'blob blob--2')
+		.server__container.container
+			.server__captions
+				.server__caption.server__caption--1.caption
+					.caption__subtitle Машина баз данных
+					.caption__title Tantor XData <sup>Gen3</sup>
+				.server__caption.server__caption--2.caption
+					.caption__title Новая точка сборки
+					.caption__subtitle enterprise-архитектуры
+			.server-slider.swiper
+				.swiper-wrapper
+					.swiper-slide
+						.server-slider__subtitle
+							span Преодоление ограничений «классического» PostgreSQL
+							.server-slider__filler
+								span
+						.server-slider__title Горизонтальное масштабирование вычислений и&nbsp;хранения
+						.server-slider__text
+							p.
+								МБД Tantor XData Gen3 позволяет масштабировать Compute и Storage в&nbsp;любой момент в&nbsp;зависимости от&nbsp;нагрузки
+								в&nbsp;вашей информационной системе.
+							p.
+								Это именно то, чего недостает «классическому» PostgreSQL.
+						+button('Узнать больше', 'server-slider__link', '#', 'arrow-link')
+					.swiper-slide
+						.server-slider__subtitle
+							span Преодоление ограничений «классического» PostgreSQL
+							.server-slider__filler
+								span
+						.server-slider__title Горизонтальное масштабирование вычислений и&nbsp;хранения
+						.server-slider__text
+							p.
+								МБД Tantor XData Gen3 позволяет масштабировать Compute и Storage в&nbsp;любой момент в&nbsp;зависимости от&nbsp;нагрузки
+								в&nbsp;вашей информационной системе.
+							p.
+								Это именно то, чего недостает «классическому» PostgreSQL.
+						+button('Подробнее о Tantor XData Gen3', 'server-slider__link', '#', 'arrow-link')
+					.swiper-slide
+						.server-slider__subtitle
+							span Преодоление ограничений «классического» PostgreSQL
+							.server-slider__filler
+								span
+						.server-slider__title Единая платформа для транзакций и&nbsp;аналитики
+						.server-slider__text.
+							Впервые на российском рынке МБД Tantor XData Gen3 открывает полноценный HTAP — возможность параллельной
+							обработки смешанных нагрузок (OLAP+OLTP) на&nbsp;едином наборе данных без&nbsp;дублирования и&nbsp;лишних контуров.
+							Важно, что при этом не&nbsp;нарушается совместимость с&nbsp;PostgreSQL.
+						+button('Подробнее о Tantor XData Gen3', 'server-slider__link', '#', 'arrow-link')
+			.server__config
+				+icon('bracket')
+				span Начальная конфигурация
+			.server__boards
+				.board.board--light
+					.board__line
+					+icon('server', 'board__icon')
+					.board__text +1 сервер вычисления...
+				.board.board--light
+					.board__line
+					+icon('server', 'board__icon')
+					.board__text +1 сервер вычисления...
+				.board.board--light
+					.board__line
+					+icon('server', 'board__icon')
+					.board__text +1 сервер вычисления...
+			.server__boards.server__boards--bottom
+				.board.board--dark
+					.board__line
+					+icon('server', 'board__icon')
+					.board__text +1 сервер хранения...
+				.board.board--dark
+					.board__line
+					+icon('server', 'board__icon')
+					.board__text +1 сервер хранения...
+				.board.board--dark
+					.board__line
+					+icon('server', 'board__icon')
+					.board__text +1 сервер хранения...
+				.board.board--dark
+					.board__line
+					+icon('server', 'board__icon')
+					.board__text +1 сервер хранения...
+			.server__widget.server__widget--1.widget
+				+button('Транзакции', 'button--black widget__link', '#', 'arrow-link')
+				table.widget__table
+					tr
+						th ID/Клиент
+						th Сумма
+						th Статус
+					tr
+						td 10293847
+						td ₽4100
+						td ОК
+					tr
+						td 16267384
+						td ₽299.5
+						td Ожидает
+					tr
+						td 19290498
+						td ₽6670
+						td ОК
+					tr
+						td 04002881
+						td ₽2500
+						td ОК
+					tr
+						td 87492342
+						td ₽400
+						td ОК
+					tr
+						td 26401232
+						td ₽1000
+						td Ожидает
+					tr
+						td 10957366
+						td ₽600
+						td Ожидает
+					tr
+						td 98374551
+						td ₽420
+						td ОК
+					tr
+						td 00492213
+						td ₽119.5
+						td ОК
+			.server__widget.server__widget--2.widget
+				+button('Аналитика', 'button--black widget__link', '#', 'arrow-link')
+				.widget__title query.sql
+				.widget__code.
+					SELECT <br>
+					&nbsp;&nbsp;SUM(amount) AS revenue, <br>
+					&nbsp;&nbsp;COUNT(*) AS tx_count, <br>
+					&nbsp;&nbsp;AVG(amount) AS avg_check <br>
+					FROM transactions <br>
+					WHERE status = 'ok' <br>
+					&nbsp;&nbsp;AND created_at >= NOW() - "7d" <br>
+					GROUP BY day <br>
+					ORDER BY day ASC
+			.server__widget.server__widget--3.widget.widget--small
+				.widget__title Продажи
+				.widget__stats
+					.widget__stats-item
+						p Выручка
+						p ₽1.24 млн
+						p ↑ 8.3%
+					.widget__stats-item
+						p Транзакции
+						p 4 218
+						p ↑ 12%
+					.widget__stats-item
+						p Средний чек
+						p ₽294
+						p ↑ 2.1%
+				.widget__bars
+					.widget__bar
+						span Пн
+						span.widget__bar-progress(style='--percent: 55%')
+						span 55%
+					.widget__bar
+						span Вт
+						span.widget__bar-progress(style='--percent: 72%')
+						span 72%
+					.widget__bar
+						span Ср
+						span.widget__bar-progress(style='--percent: 48%')
+						span 48%
+					.widget__bar
+						span Чт
+						span.widget__bar-progress(style='--percent: 88%')
+						span 88%
+					.widget__bar
+						span Пт
+						span.widget__bar-progress(style='--percent: 95%')
+						span 95%
+					.widget__bar
+						span Сб
+						span.widget__bar-progress(style='--percent: 61%')
+						span 61%
+					.widget__bar
+						span Вс
+						span.widget__bar-progress(style='--percent: 78%')
+						span 78%
+				+icon('chart', 'widget__chart-icon')
+		#model.server__model
+		.advantages.scroll-3
+			.container
+				.advantages__title.advantages-anim Ваши приложения «выросли» из PostgreSQL? <br> Не спешите их переписывать.
+				.advantages__top
+					.advantages__text.advantages-anim
+						p.
+							На&nbsp;PostgreSQL уже работают сотни российских бизнес-приложений, есть зрелая экосистема инструментов и&nbsp;расширений.
+						p.
+							С&nbsp;ростом нагрузки архитектура усложняется: появляются отдельные СУБД для аналитики, инструменты синхронизации
+							данных между контурами, дополнительные слои интеграции. Инфраструктура становится разрозненной и&nbsp;сложной в&nbsp;сопровождении.
+					.advantages__net.advantages-anim
+						.advantages__images
+							+picture('machine-3', 'png', 'advantages__image advantages__image--3', '')
+							+picture('machine-2', 'png', 'advantages__image advantages__image--2', '')
+							+picture('machine-1', 'png', 'advantages__image advantages__image--1', '')
+						#graph.advantages__graphs
+			.advantages__bottom
+				.container.advantages__container-bottom
+					.advantages__col
+						+picture('eleph', 'png', 'advantages__eleph', '')
+						.advantages__items
+							.advantages__item 100% совместимость <br> с&nbsp;Postgres, 1С и&nbsp;другим ПО
+							.advantages__item Обработка транзакций <br> и&nbsp;аналитики
+							.advantages__item Горизонтальное <br> масштабирование
+					.advantages__col.advantages-anim
+						.advantages__text.advantages__text--full
+							p
+								b.
+									Подход Tantor: 100% совместимость с&nbsp;PostgreSQL и&nbsp;упрощение архитектуры без переписывания кода бизнес-приложений.
+							p.
+								МБД Tantor XData <sup>Gen3</sup> – горизонтально масштабируемая платформа, которая объединяет OLTP и&nbsp;OLAP в&nbsp;одном
+								контуре и сохраняет полную совместимость с&nbsp;PostgreSQL, существующим ПО и&nbsp;расширениями.
+							p.
+								Инфраструктура остаётся привычной для разработки и эксплуатации, при этом исчезает необходимость в&nbsp;разнородных
+								СУБД, синхронизациях и&nbsp;переписывании приложений.
+						+button('Как это работает?', 'advantages__link', '#', 'arrow-link')
+	section.migration.scroll-4
+		.container
+			.migration__title Миграция важнейших информационных систем <br> без риска для бизнеса
+		.migration__marquee
+			span Финансы (АБС)
+			span.divider //
+			span Госкорпорации
+			span.divider //
+			span Энергетика
+			span.divider //
+			span Промышленность
+			span.divider //
+			span Ритейл
+			span.divider //
+			span Госсектор
+			span.divider //
+			span Телеком
+			span.divider //
+		.container
+			.migration__wrapper
+				.migration__video
+				.migration__content
+					.migration__quote.
+						«Tantor XData <sup>Gen3</sup> — решение <br> для тех, кто отвечает не&nbsp;за&nbsp;тестовые стенды,
+						а&nbsp;за&nbsp;<span>непрерывность крупнейшего бизнеса».</span>
+					.migration__person
+						+picture('person', 'jpg', 'migration__person-image', '')
+						.migration__person-info
+							.migration__name Вадим Яценко
+							.migration__position генеральный директор «Тантор Лабс»
+					+button('Читать интервью', 'migration__link', '#', 'arrow-link')
+	section.product.scroll-5
+		.product__logo
+			+picture('tantor-platform', 'png', 'product__logo-image', '')
+		.container.product__container
+			.product__title.product-anim «Платформа Tantor»: <br> централизованное управление БД PostgreSQL с ИИ
+			.product__text.product-anim.
+				Без прозрачного управления и&nbsp;контроля даже мощная архитектура превращается в постоянную зону риска. Важна не&nbsp;только
+				сама СУБД, но&nbsp;и&nbsp;дополненная современными ИИ-инструментами платформа, которая позволяет эффективно ее эксплуатировать
+				в&nbsp;enterprise-среде.
+			.product__slider.swiper.product-anim
+				.swiper-wrapper
+					.product-card.swiper-slide
+						.product-card__image-wrapper
+							+picture('product/1', 'jpg', 'product-card__image', '')
+						.product-card__title Дашборд администратора
+					.product-card.swiper-slide
+						.product-card__image-wrapper
+							+picture('product/2', 'jpg', 'product-card__image', '')
+						.product-card__title AI-first: <br> продвинутое контекстное взаимодействие
+					.product-card.swiper-slide
+						.product-card__image-wrapper
+							+picture('product/3', 'jpg', 'product-card__image', '')
+						.product-card__title Управление кластерами Patroni
+					.product-card.swiper-slide
+						.product-card__image-wrapper
+							+picture('product/4', 'jpg', 'product-card__image', '')
+						.product-card__title Просмотр топологии кластеров
+					.product-card.swiper-slide
+						.product-card__image-wrapper
+							+picture('product/5', 'jpg', 'product-card__image', '')
+						.product-card__title Управление правилами доступа
+					.product-card.swiper-slide
+						.product-card__image-wrapper
+							+picture('product/6', 'jpg', 'product-card__image', '')
+						.product-card__title Анонимизация конфиденциальной информации
+					.product-card.swiper-slide
+						.product-card__image-wrapper
+							+picture('product/7', 'jpg', 'product-card__image', '')
+						.product-card__title Профилирование запросов и аналитика
+					.product-card.swiper-slide
+						.product-card__image-wrapper
+							+picture('product/8', 'jpg', 'product-card__image', '')
+						.product-card__title Планировщик заданий
+					.product-card.swiper-slide
+						.product-card__image-wrapper
+							+picture('product/9', 'jpg', 'product-card__image', '')
+						.product-card__title SQL-редактор
+					.product-card.swiper-slide
+						.product-card__image-wrapper
+							+picture('product/10', 'jpg', 'product-card__image', '')
+						.product-card__title Обслуживание
+					.product-card.swiper-slide
+						.product-card__image-wrapper
+							+picture('product/11', 'jpg', 'product-card__image', '')
+						.product-card__title Группы параметров
+					.product-card.swiper-slide
+						.product-card__image-wrapper
+							+picture('product/12', 'jpg', 'product-card__image', '')
+						.product-card__title Мультитенантность
+					.product-card.swiper-slide
+						.product-card__image-wrapper
+							+picture('product/13', 'jpg', 'product-card__image', '')
+						.product-card__title Инспекция уязвимостей
+				.product__pagination.swiper-pagination
+			.product__items.product-anim
+				.product__item Централизованное управление c ИИ
+				.product__item Мониторинг и&nbsp;администрирование любых БД Postgres
+				.product__item Рекомендации по настройкам серверов
+				.product__item Выявление неоптимальных запросов
+				.product__item Заблаговременные оповещения об&nbsp;инцидентах
+				.product__item Автоматизация рутинных операций
+				.product__item Низкий порог вхождения для администраторов БД
+				.product__item Маскирование конфиденциальных данных
+	section.about.scroll-6
+		.container
+			.about__top
+				.about__title.about-anim Технологическое лидерство – в каждом продукте Tantor
+				.about__text.about-anim.
+					Единый технологический стек, в&nbsp;который входят СУБД для&nbsp;высоконагруженных систем, наиболее функциональная на&nbsp;российском
+					рынке платформа управления СУБД и&nbsp;машина баз данных, предоставляющая бизнесу целый ряд прорывных технологий.
+			.about__bottom
+				.about__chart.chart
+					.chart__top.chart-anim-1
+						+icon('logo-chart', 'chart__logo')
+						span Единый стек Tantor
+					.chart__window
+						.chart__list
+							.chart__list-item.chart-anim-1 СУБД Tantor Postgres
+							.chart__list-item.chart-anim-1 СУБД Tantor Postgres
+							.chart__list-item.chart-anim-1 Платформа Tantor
+							.chart__list-item.chart-anim-1 МБД Tantor XData
+							.chart__list-item.chart-anim-1 ПО Tantor DI
+				.about__content.about-anim
+					+picture('tantor-postgres', 'png', 'about__logo', '')
+					.about__description
+						p.
+							<b>Tantor Postgres 18 —</b> это СУБД для высоконагруженных систем с&nbsp;огромным количеством доработок на&nbsp;уровне ядра
+							для&nbsp;повышения производительности, в&nbsp;том&nbsp;числе для работы с&nbsp;«1С».
+						p Каждый релиз проходит тщательное тестирование на&nbsp;прикладных сценариях.
+					+button('Узнать о новинках 18 релиза', 'about__link', '#', 'arrow-link')
+	section.gallery.scroll-7
+		+picture('gallery/1', 'jpg', 'gallery__image gallery__image--1 gallery-anim-image', '')
+		+picture('gallery/2', 'jpg', 'gallery__image gallery__image--2 gallery-anim-image', '')
+		+picture('gallery/3', 'jpg', 'gallery__image gallery__image--3 gallery-anim-image', '')
+		+picture('gallery/4', 'jpg', 'gallery__image gallery__image--4 gallery-anim-image', '')
+		+picture('gallery/5', 'jpg', 'gallery__image gallery__image--5 gallery-anim-image', '')
+		+picture('gallery/6', 'jpg', 'gallery__image gallery__image--6 gallery-anim-image', '')
+		+picture('gallery/7', 'jpg', 'gallery__image gallery__image--7 gallery-anim-image', '')
+		+picture('gallery/8', 'jpg', 'gallery__image gallery__image--8 gallery-anim-image', '')
+		+picture('gallery/9', 'jpg', 'gallery__image gallery__image--9 gallery-anim-image', '')
+		+picture('gallery/10', 'jpg', 'gallery__image gallery__image--10 gallery-anim-image-last', '')
+		+picture('gallery/11', 'jpg', 'gallery__image gallery__image--11 gallery-anim-image-last', '')
+		.container.gallery__container
+			+icon('logo-tantor', 'gallery__logo-icon')
+			.gallery__text
+				p.
+					В этом году «Тантор Лабс» исполняется 5 лет.
+				p.
+					За это время мы выросли из компании, оказывающей коммерческие услуги вокруг PostgreSQL, в&nbsp;полноценного вендора
+					и&nbsp;одного из технологических лидеров российского рынка СУБД.
+				p.
+					Отметить юбилей предлагаем вместе — на&nbsp;нашем традиционном Tantor JAM, который состоится 10 сентября 2026 г. в&nbsp;Москве.
+					Будут новинки, общение и, конечно, немного праздника в&nbsp;честь нашего пятилетия!
+			+button('Зарегистрироваться', 'gallery__link', '#', 'arrow-link')

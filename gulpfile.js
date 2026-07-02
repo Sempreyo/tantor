@@ -2,7 +2,7 @@ const {src, dest, parallel, series, watch} = require('gulp');
 
 const browserSync = require('browser-sync').create();
 const concat = require('gulp-concat');
-const uglify = require('gulp-uglify-es').default;
+const terser = require('gulp-terser');
 const sass = require('gulp-sass')(require('sass'));
 const autoprefixer = require('gulp-autoprefixer');
 const cleancss = require('gulp-clean-css');
@@ -16,6 +16,10 @@ const pug = require('gulp-pug');
 const rigger = require('gulp-rigger');
 const svgstore = require("gulp-svgstore");
 const rename = require("gulp-rename");
+const rollup = require('@rollup/stream');
+const resolve = require('@rollup/plugin-node-resolve').nodeResolve;
+const source = require('vinyl-source-stream');
+const buffer = require('vinyl-buffer');
 
 function browsersync() {
 	browserSync.init({
@@ -46,16 +50,35 @@ function pugHtml() {
 		.pipe(browserSync.stream())
 }
 
-function scripts() {
-	return src('src/js/main.js')
+function scriptsLibs() {
+	return src('src/js/libs/*.*')
 		.pipe(plumber())
-		.pipe(rigger())
-		.pipe(sourcemaps.init())
-		.pipe(concat('main.min.js'))
-		.pipe(uglify())
-		.pipe(sourcemaps.write('./maps'))
 		.pipe(dest('public/js/'))
 		.pipe(browserSync.stream())
+}
+
+function scripts() {
+	return rollup({
+		input: 'src/js/main.js',
+		plugins: [resolve()],
+		output: {
+			format: 'iife',
+			sourcemap: 'inline'
+		}
+	})
+		.pipe(source('main.min.js'))
+		.pipe(buffer())
+		.pipe(plumber())
+		.pipe(terser({
+			mangle: {
+				toplevel: true
+			},
+			format: {
+				comments: false
+			}
+		}))
+		.pipe(dest('public/js/'))
+		.pipe(browserSync.stream());
 }
 
 function styles() {
@@ -105,6 +128,13 @@ function imagesWebp() {
 		.pipe(browserSync.stream())
 }
 
+function assets() {
+	return src('src/assets/**/*.*')
+		.pipe(plumber())
+		.pipe(dest('public/assets/'))
+		.pipe(browserSync.stream())
+}
+
 function icons() {
 	return src('src/icons/**/*.svg')
 		.pipe(plumber())
@@ -147,6 +177,6 @@ exports.imagesWebp = imagesWebp;
 exports.icons = icons;
 exports.favicons = favicons;
 
-exports.public = series(cleandist, pugHtml, fonts, styles, scripts, imagesWebp, images, icons, favicons);
+exports.public = series(cleandist, pugHtml, fonts, styles, scriptsLibs, scripts, imagesWebp, images, icons, favicons, assets);
 
-exports.default = series(images, icons, imagesWebp, parallel(pugHtml, fonts, styles, scripts, favicons, browsersync, startwatch));
+exports.default = series(images, icons, imagesWebp, parallel(pugHtml, fonts, styles, scriptsLibs, scripts, favicons, assets, browsersync, startwatch));

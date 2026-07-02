@@ -58,6 +58,13 @@ body {
 main {
 	position: relative;
 	z-index: 1;
+	max-width: 1440px;
+	margin: 0 auto;
+}
+
+section {
+	height: 100vh !important;
+	background-color: $color-background;
 }
 
 a {
@@ -136,7 +143,7 @@ ol {
 	left: 0;
 	bottom: 100%;
 	width: 270px;
-	border: 2px solid $color-button;
+	border: 2px solid $color-button-bg;
 	background: rgba($black, 0.7);
 	backdrop-filter: blur(11px);
 	border-radius: 2px;
@@ -183,7 +190,7 @@ ol {
 		}
 
 		svg {
-			color: $color-button;
+			color: $color-button-bg;
 		}
 	}
 
@@ -198,17 +205,17 @@ ol {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	gap: 6px;
+	gap: 8px;
 	position: absolute;
 	top: unset !important;
 	bottom: 10px !important;
 	z-index: 12;
 
 	.swiper-pagination-bullet {
-		width: 9px;
-		height: 9px;
+		width: 8px;
+		height: 8px;
 		opacity: 1;
-		background-color: $color-divider;
+		background-color: rgba($color-text, 0.3);
 		margin: 0 !important;
 		transition: opacity 0.3s ease;
 
@@ -217,7 +224,9 @@ ol {
 		}
 
 		&-active {
-			background-color: $color-button;
+			width: 12px;
+			height: 12px;
+			background-color: $color-button-bg;
 			cursor: default;
 		}
 	}

@@ -1,0 +1,144 @@
+.widget {
+	$parent: &;
+
+	max-width: 323px;
+	width: 100%;
+
+	&--small {
+		#{$parent} {
+			&__title {
+				font-size: 9px;
+			}
+		}
+	}
+
+	&__link {
+		position: relative;
+		padding: 3px 14px 3px 3px;
+		font-size: 16px;
+
+		&::before {
+			content: "";
+			position: absolute;
+			top: 15px;
+			right: 100%;
+			width: 160px;
+			height: 1px;
+			background-color: $color-text;
+		}
+	}
+
+	&__title {
+		font-family: $secondFont;
+		font-size: 12px;
+		color: $white;
+		background-color: $color-widget;
+		padding: 3px 5px;
+		margin-top: 6px;
+	}
+
+	&__code {
+		font-family: $secondFont;
+		font-size: 12px;
+		line-height: 1.3;
+		padding: 7px 5px;
+	}
+
+	&__stats {
+		display: flex;
+		justify-content: space-between;
+		gap: 20px;
+		padding: 5px 3px 3px;
+		border-bottom: 1px solid $color-text;
+	}
+
+	&__stats-item {
+		font-family: $secondFont;
+		color: rgba($color-text, 0.6);
+		font-size: 7px;
+		line-height: 1.4;
+
+		p {
+			&:nth-child(2) {
+				color: $color-text;
+				font-size: 9px;
+			}
+		}
+	}
+
+	&__bars {
+		display: flex;
+		flex-direction: column;
+		gap: 1px;
+		padding: 7px 0 7px 4px;
+	}
+
+	&__bar {
+		display: flex;
+		align-items: center;
+		gap: 7px;
+		font-family: $secondFont;
+		color: $color-widget;
+		font-size: 9px;
+	}
+
+	&__bar-progress {
+		position: relative;
+		flex-grow: 1;
+		height: 7px;
+		background-color: rgba($color-text, 0.3);
+
+		&::before {
+			content: "";
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			left: 0;
+			width: var(--percent, 0%);
+			background-color: $color-widget;
+		}
+	}
+
+	&__chart-icon {
+		width: 260px;
+		height: 24px;
+	}
+
+	&__table {
+		width: 100%;
+		border-collapse: collapse;
+		margin-top: 8px;
+
+		tr {
+			border-bottom: 1px solid rgba($color-text, 0.6);
+
+			&:first-child {
+				background-color: rgba($color-text, 0.6);
+			}
+		}
+
+		th,
+		td {
+			font-size: 12px;
+			padding: 5px 3px;
+
+			&:nth-child(2) {
+				width: 36%;
+			}
+
+			&:nth-child(3) {
+				width: 23%;
+			}
+		}
+
+		th {
+			color: $color-button-text;
+			font-weight: 400;
+			text-align: left;
+		}
+
+		td {
+			color: rgba($color-text, 0.6);
+		}
+	}
+}

@@ -1,6 +1,12 @@
 footer.footer
 	.container.footer__container
-		.footer__adv
+		a.footer__logo(href='#', target='_blank')
+			+icon('logo-tantor-2')
+		.footer__menu
+			a.footer__menu-link(href='#', target='_blank') Новости
+			a.footer__menu-link(href='#', target='_blank') Кейсы
+			a.footer__menu-link.footer__menu-link--accent(href='#', target='_blank') Связаться с Tantor
+		//.footer__adv
 			span Реклама
 			.footer__adv-tooltip
 				.footer__adv-tooltip-block.

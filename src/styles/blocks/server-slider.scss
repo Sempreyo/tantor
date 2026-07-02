@@ -1,0 +1,58 @@
+.server-slider {
+	$parent: &;
+
+	position: relative;
+	max-width: 37.6%;
+	margin: auto 0;
+	opacity: 0;
+	transform: translateX(-10px);
+
+	.swiper-slide-active #{$parent}__filler span {
+		width: 100%;
+		transition: width 6s linear;
+	}
+
+	&__subtitle {
+		color: $black;
+		font-size: 18px;
+	}
+
+	&__filler {
+		position: relative;
+		width: 100%;
+		height: 1px;
+		background-color: rgba($color-text, 0.3);
+		margin-top: 15px;
+
+		span {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 34px;
+			height: 2px;
+			background-color: $color-text;
+		}
+	}
+
+	&__title {
+		font-weight: 600;
+		font-size: 36px;
+		line-height: 1.2;
+		margin-top: 32px;
+	}
+
+	&__text {
+		max-width: 395px;
+		font-size: 18px;
+		line-height: 1.2;
+		margin-top: 16px;
+
+		p + p {
+			margin-top: 20px;
+		}
+	}
+
+	&__link {
+		margin-top: 50px;
+	}
+}

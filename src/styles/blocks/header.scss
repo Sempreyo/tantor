@@ -1,6 +1,17 @@
 .header {
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 10;
+	width: 100%;
 	padding: 22px 0 0;
 	border-bottom: 1px solid rgba($color-text, 0.3);
+	background-color: $color-background;
+	transition: 0.5s ease;
+
+	&--hide {
+		transform: translateY(-100%);
+	}
 
 	&__container {
 		display: flex;

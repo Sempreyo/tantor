@@ -1,3 +1,52 @@
 .footer {
+	padding: 84px 0 42px;
 
+	&__container {
+		display: flex;
+		justify-content: space-between;
+		align-items: flex-end;
+		gap: 20px;
+	}
+
+	&__menu {
+		display: flex;
+		align-items: center;
+		gap: 18px;
+	}
+
+	&__menu-link {
+		position: relative;
+		font-size: 18px;
+		padding: 0 12px;
+
+		&:hover {
+			&::before {
+				transform: translateX(-6px);
+			}
+
+			&::after {
+				transform: translateX(6px);
+			}
+		}
+
+		&--accent {
+			color: $color-accent;
+		}
+
+		&::before,
+		&::after {
+			position: absolute;
+			transition: 0.3s ease;
+		}
+
+		&::before {
+			content: "[";
+			left: 0;
+		}
+
+		&::after {
+			content: "]";
+			right: 0;
+		}
+	}
 }
