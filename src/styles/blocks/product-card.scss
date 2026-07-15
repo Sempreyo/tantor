@@ -6,6 +6,22 @@
 	background-color: $white;
 	padding: 25px 25px 0;
 
+	@include max(tl) {
+		max-width: 600px;
+	}
+
+	@include max(ti) {
+		max-width: 420px;
+	}
+
+	@include max(620) {
+		max-width: 360px;
+	}
+
+	@include max(t) {
+		max-width: 100%;
+	}
+
 	&__image-wrapper {
 		border-radius: 4px;
 		overflow: hidden;
@@ -21,5 +37,9 @@
 		font-size: 20px;
 		line-height: 1.2;
 		text-align: center;
+
+		@include max(ti) {
+			font-size: 16px;
+		}
 	}
 }

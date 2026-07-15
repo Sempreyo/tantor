@@ -1,9 +1,9 @@
 .button-up {
 	position: fixed;
-	left: 88.7%;
+	right: 10px;
 	bottom: 35px;
 	z-index: 12;
-	display: flex;
+	display: none;
 	align-items: center;
 	justify-content: center;
 	width: 35px;
@@ -16,6 +16,10 @@
 	transition: background-color 0.3s ease;
 	cursor: pointer;
 
+	@include max(d) {
+		display: flex;
+	}
+
 	@include max(tl) {
 		bottom: 15px;
 	}
@@ -27,5 +31,12 @@
 
 	&:hover {
 		background-color: rgba($black, 0.7);
+	}
+
+	svg {
+		color: $color-accent;
+		width: 24px;
+		height: 23px;
+		transform: rotate(-90deg);
 	}
 }

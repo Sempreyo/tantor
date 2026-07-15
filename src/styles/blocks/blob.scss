@@ -6,6 +6,12 @@
 		height: 1283px;
 		left: -400px;
 		bottom: -800px;
+
+		@include max(d) {
+			left: 50%;
+			bottom: -400px;
+			transform: translateX(-50%);
+		}
 	}
 
 	&--2 {

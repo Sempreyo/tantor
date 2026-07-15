@@ -7,6 +7,14 @@
 	opacity: 0;
 	transform: translateX(-10px);
 
+	@include max(ti) {
+		flex-direction: column;
+	}
+
+	@include max(450) {
+		align-items: flex-start;
+	}
+
 	&--light {
 		#{$parent} {
 			&__line::before {
@@ -30,6 +38,10 @@
 		height: 1px;
 		background-color: rgba($color-text, 0.3);
 
+		@include max(ti) {
+			display: none;
+		}
+
 		&::before {
 			content: "";
 			position: absolute;
@@ -46,11 +58,25 @@
 		flex-shrink: 0;
 		width: 200px;
 		height: 37px;
+
+		@include max(ti) {
+			order: 1;
+			max-width: 100%;
+			width: auto;
+		}
+
+		@include max(450) {
+			height: 56px;
+		}
 	}
 
 	&__text {
 		flex-shrink: 0;
 		font-family: $secondFont;
 		font-size: 16px;
+
+		@include max(tl) {
+			font-size: 12px;
+		}
 	}
 }

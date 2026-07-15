@@ -1,6 +1,6 @@
 .hero {
 	position: relative;
-	padding-bottom: 7px;
+	height: auto !important;
 
 	&__title {
 		padding: 106px 0 36px;
@@ -10,6 +10,18 @@
 		box-sizing: border-box;
 		opacity: 0;
 		transform: translateY(20px);
+
+		@include max(d) {
+			font-size: fluid(52, 64, 992, 1280);
+		}
+
+		@include max(tl) {
+			font-size: fluid(44, 52, 768, 992);
+		}
+
+		@include max(ti) {
+			font-size: fluid(28, 44, 0, 768);
+		}
 
 		span {
 			color: $color-accent;
@@ -22,6 +34,13 @@
 		border-top: 1px solid rgba($color-text, 0.3);
 		border-bottom: 1px solid rgba($color-text, 0.3);
 		overflow: hidden;
+		height: 100vh;
+
+		@include max(d) {
+			flex-direction: column;
+			align-items: center;
+			height: auto;
+		}
 	}
 
 	&__left,
@@ -29,10 +48,19 @@
 		position: relative;
 		width: 50%;
 		box-sizing: border-box;
+
+		@include max(d) {
+			width: 100%;
+		}
 	}
 
 	&__left {
 		padding: 21px 48px 183px 0;
+
+		@include max(d) {
+			height: 100%;
+			padding: 21px 20px 100px;
+		}
 	}
 
 	&__right {
@@ -42,12 +70,31 @@
 		gap: 72px;
 		padding: 26px;
 		border-left: 1px solid rgba($color-text, 0.3);
+
+		@include max(d) {
+			order: -1;
+			gap: 20px;
+			border-left: 0;
+		}
 	}
 
 	&__text {
 		position: relative;
+		z-index: 1;
 		font-size: 24px;
 		line-height: 1.2;
+
+		@include max(d) {
+			font-size: fluid(19, 20, 992, 1280);
+		}
+
+		@include max(tl) {
+			font-size: fluid(18, 19, 768, 992);
+		}
+
+		@include max(ti) {
+			font-size: fluid(16, 18, 0, 768);
+		}
 
 		span {
 			display: inline-block;
@@ -71,6 +118,20 @@
 		display: flex;
 		align-items: flex-end;
 		justify-content: flex-end;
+		width: max-content;
+		margin-left: auto;
+
+		@include max(d) {
+			align-items: center;
+			justify-content: center;
+			width: auto;
+			margin-left: 0;
+		}
+
+		@include max(ti) {
+			max-width: 100%;
+			min-width: 660px;
+		}
 	}
 
 	&__machine {
@@ -83,6 +144,13 @@
 			transform: rotate(-11deg);
 			left: -30px;
 			bottom: 30px;
+
+			@include max(d) {
+				left: 5vw;
+				bottom: -10vw;
+				margin-right: unset;
+				margin-bottom: unset;
+			}
 		}
 
 		&--2 {
@@ -90,15 +158,32 @@
 			margin-right: -38px;
 			margin-bottom: 40px;
 			transform: rotate(-9deg);
+
+			@include max(d) {
+				margin-right: unset;
+				margin-bottom: unset;
+			}
 		}
 
-		&--3 {}
+		&--3 {
+			@include max(d) {
+				right: 6vw;
+			}
+		}
 	}
 
 	&__labels {
 		position: absolute;
 		inset: 0;
 		z-index: 2;
+
+		@include max(d) {
+			inset: unset;
+			top: 0;
+			bottom: 0;
+			max-width: 670px;
+			width: 100%;
+		}
 	}
 
 	&__label {
@@ -106,23 +191,40 @@
 		font-family: $secondFont;
 		color: $color-background;
 		font-size: 20px;
+		white-space: nowrap;
 
 		&--1 {
 			bottom: -1%;
-			left: 7.4%;
+			right: 450px;
 			transform: rotate(-12deg);
+
+			@include max(d) {
+				right: unset;
+				bottom: 10%;
+				left: 3%;
+			}
 		}
 
 		&--2 {
 			bottom: 36%;
-			left: 36%;
+			right: 302px;
 			transform: rotate(6deg);
+
+			@include max(d) {
+				right: unset;
+				left: 30%;
+			}
 		}
 
 		&--3 {
 			bottom: 10%;
-			left: 70%;
+			right: 107px;
 			transform: rotate(-38deg);
+
+			@include max(d) {
+				right: unset;
+				left: 64%;
+			}
 		}
 	}
 
@@ -139,6 +241,6 @@
 	&__car {
 		position: absolute;
 		bottom: -2px;
-		left: 54%;
+		right: 10vw;
 	}
 }

@@ -1,4 +1,6 @@
 .header {
+	$parent: &;
+
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -6,17 +8,26 @@
 	width: 100%;
 	padding: 22px 0 0;
 	border-bottom: 1px solid rgba($color-text, 0.3);
-	background-color: $color-background;
-	transition: 0.5s ease;
-
-	&--hide {
-		transform: translateY(-100%);
-	}
+	background-color: rgba($color-background, 0.8);
 
 	&__container {
 		display: flex;
 		align-items: flex-end;
 		justify-content: space-between;
+
+		@include max(d) {
+			align-items: flex-start;
+		}
+	}
+
+	&__logos {
+		display: flex;
+		align-items: flex-end;
+		gap: 20px;
+
+		@include max(t) {
+			gap: 10px;
+		}
 	}
 
 	&__logo {
@@ -25,9 +36,24 @@
 		padding-bottom: 12px;
 	}
 
-	&__logo-icon {
+	&__logo-icon-tantor {
 		width: 166px;
 		height: 41px;
+
+		@include max(t) {
+			width: 120px;
+			height: 27px;
+		}
+	}
+
+	&__logo-icon-cnews {
+		width: 180px;
+		height: 35px;
+
+		@include max(t) {
+			width: 100px;
+			height: 19px;
+		}
 	}
 
 	&__menu {
@@ -35,6 +61,22 @@
 		align-items: flex-end;
 		gap: 70px;
 		padding-right: 30px;
+		transition: 0.5s ease;
+
+		@include max(dxl) {
+			gap: 40px;
+		}
+
+		@include max(d) {
+			position: fixed;
+			inset: 0;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			background-color: $white;
+			padding-right: 0;
+			transform: translateX(100%);
+		}
 	}
 
 	&__menu-item {
@@ -43,6 +85,15 @@
 		font-size: 14px;
 		padding-bottom: 12px;
 		transition: 0.3s ease;
+
+		@include max(dl) {
+			font-size: 12px;
+		}
+
+		@include max(d) {
+			font-size: 14px;
+			text-align: center;
+		}
 
 		&.active {
 			color: $color-text;
@@ -62,6 +113,83 @@
 
 		&:hover {
 			color: $color-text;
+		}
+	}
+
+	&__menu-close {
+		position: absolute;
+		top: 20px;
+		right: 20px;
+		display: none;
+		align-items: center;
+		justify-content: center;
+		width: 30px;
+		height: 30px;
+		cursor: pointer;
+
+		@include max(d) {
+			display: flex;
+		}
+
+		&:hover svg {
+			color: $color-accent;
+		}
+
+		svg {
+			color: $color-text;
+			transition: 0.3s ease;
+		}
+	}
+
+	&__burger {
+		display: none;
+		align-items: center;
+		justify-content: center;
+		min-width: 30px;
+		max-width: 30px;
+		height: 30px;
+		margin-left: auto;
+		cursor: pointer;
+
+		@include max(d) {
+			display: inline-flex;
+		}
+
+		&:hover #{$parent}__burger-line {
+			&::before,
+			&::after {
+				width: 100%;
+			}
+		}
+	}
+
+	&__burger-line {
+		position: relative;
+		width: 100%;
+		height: 2px;
+		background-color: $color-text;
+		border-radius: 10px;
+
+		&::before,
+		&::after {
+			position: absolute;
+			left: 0;
+			display: block;
+			height: 2px;
+			background-color: $color-text;
+			border-radius: 10px;
+			content: "";
+			transition: 0.3s ease;
+		}
+
+		&::before {
+			top: -6px;
+			width: 75%;
+		}
+
+		&::after {
+			bottom: -6px;
+			width: 50%;
 		}
 	}
 }

@@ -1,11 +1,18 @@
 header.header
 	.container.header__container
-		a.header__logo(href='#', target='_blank')
-			+icon('logo-tantor', 'header__logo-icon')
+		.header__logos
+			a.header__logo(href='#', target='_blank')
+				+icon('logo-tantor', 'header__logo-icon-tantor')
+			a.header__logo(href='#', target='_blank')
+				+icon('logo-cnews', 'header__logo-icon-cnews')
+		.header__burger
+			.header__burger-line
 		.header__menu
-			a.header__menu-item(href='#')
+			.header__menu-close
+				+icon('close')(width='30', height='30')
+			a.header__menu-item.anchor(href='#anchor-1')
 				span Замещение СУБД <br> в core-системах
-			a.header__menu-item.active(href='#') Горизонтальное масштабирование, <br> HTAP и совместимость с PostgreSQL
-			a.header__menu-item(href='#') Центр управления <br> корпоративными СУБД
-			a.header__menu-item(href='#') Новая СУБД <br> Tantor Postgres 18
-			a.header__menu-item(href='#') 5 лет <br> «Тантор Лабс»
+			a.header__menu-item.anchor(href='#anchor-2') Горизонтальное масштабирование, <br> HTAP и совместимость с PostgreSQL
+			a.header__menu-item.anchor(href='#anchor-3') Центр управления <br> корпоративными СУБД
+			a.header__menu-item.anchor(href='#anchor-4') Новая СУБД <br> Tantor Postgres 18
+			a.header__menu-item.anchor(href='#anchor-5') 5 лет <br> «Тантор Лабс»

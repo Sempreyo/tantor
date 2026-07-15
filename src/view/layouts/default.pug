@@ -19,12 +19,16 @@ html(lang='ru')
 		main.main
 			block main
 
+		.button-up
+			+icon('arrow-link')
+
 		include ../blocks/footer
 
 	block modals
 
 	script(src="js/gsap.min.js")
 	script(src="js/ScrollTrigger.min.js")
+	script(src="js/ScrollToPlugin.min.js")
 	script(src="js/force-graph.js")
 	script(src="js/swiper-bundle.min.js")
 	script(src="js/main.min.js", defer)

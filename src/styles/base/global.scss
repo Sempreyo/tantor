@@ -58,13 +58,25 @@ body {
 main {
 	position: relative;
 	z-index: 1;
-	max-width: 1440px;
-	margin: 0 auto;
+	//max-width: 1440px;
+	//margin: 0 auto;
+}
+
+[data-state="mobile-menu"] {
+	overflow: hidden;
+
+	.header__menu {
+		transform: translateX(0);
+	}
 }
 
 section {
 	height: 100vh !important;
 	background-color: $color-background;
+
+	@include max(d) {
+		height: auto !important;
+	}
 }
 
 a {

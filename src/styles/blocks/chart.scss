@@ -1,10 +1,16 @@
 .chart {
 	$parent: &;
 
+	position: absolute;
 	max-width: 514px;
 	width: 100%;
 	border: 1px solid $color-text;
 	background-color: $white;
+	opacity: 0;
+
+	@include max(d) {
+		position: relative;
+	}
 
 	&__top {
 		display: flex;
@@ -15,15 +21,24 @@
 		font-family: $secondFont;
 		color: $white;
 		font-size: 20px;
+
+		@include max(t) {
+			gap: 15px;
+			font-size: 16px;
+		}
 	}
 
 	&__logo {
-		width: 54px;
+		min-width: 54px;
+		max-width: 54px;
 		height: 54px;
 	}
 
-	&__list {
+	&__list {}
 
+	.chart-anim-1 {
+		opacity: 0;
+		transform: translateY(-10px);
 	}
 
 	&__list-item {
@@ -44,6 +59,167 @@
 
 		& + #{$parent}__list-item {
 			border-top: 1px solid $color-text;
+		}
+	}
+
+	&__legend {
+		padding: 40px 0 80px;
+		text-align: center;
+
+		@include max(t) {
+			font-size: 14px;
+		}
+	}
+
+	&__graph {
+		position: relative;
+		padding: 0 30px 107px;
+
+		@include max(t) {
+			padding: 0 10px 107px;
+		}
+	}
+
+	&__osy {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 30px;
+
+		span {
+			position: relative;
+			display: flex;
+			align-items: flex-end;
+			width: calc(100% - 84px);
+			height: 1px;
+			background-color: rgba($color-text, 0.6);
+
+			&::before {
+				position: absolute;
+				bottom: 0;
+				left: -42px;
+				content: attr(data-value);
+				width: 30px;
+				color: rgba($color-text, 0.6);
+				font-size: 16px;
+				text-align: right;
+			}
+		}
+	}
+
+	&__bars {
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		display: flex;
+		justify-content: space-around;
+		align-items: flex-end;
+		height: 100%;
+		padding: 0 76px 107px;
+
+		@include max(t) {
+			padding: 0 50px 107px;
+		}
+	}
+
+	&__bar {
+		width: 42px;
+		height: 0;
+		background-color: $color-text;
+		padding: 15px 0;
+		color: $white;
+		font-size: 16px;
+		line-height: 0;
+		text-align: center;
+		overflow: hidden;
+
+		@include max(t) {
+			width: 30px;
+			font-size: 12px;
+		}
+	}
+
+	&__dot {
+		position: relative;
+		bottom: var(--dot-offset);
+		color: $color-accent;
+		font-weight: 700;
+		font-size: 14px;
+
+		&:not(:first-of-type):not(:last-of-type)::before {
+			position: absolute;
+			top: 14px;
+			left: 4px;
+			content: "";
+			display: block;
+			width: 10px;
+			height: 10px;
+			border-radius: 50%;
+			background-color: $color-accent;
+		}
+
+		&::before {
+			@include max(t) {
+				position: absolute;
+				top: 14px;
+				left: 4px;
+				content: "";
+				display: block;
+				width: 10px;
+				height: 10px;
+				border-radius: 50%;
+				background-color: $color-accent;
+			}
+		}
+	}
+
+	&__dashed-line {
+		position: absolute;
+		top: 6px;
+		left: 50%;
+		transform: translateX(-50%);
+
+		@include max(t) {
+			display: none;
+		}
+	}
+
+	&__osx {
+		position: absolute;
+		bottom: 55px;
+		left: 0;
+		right: 0;
+		display: flex;
+		justify-content: space-around;
+		align-items: flex-end;
+		width: 100%;
+		padding: 0 76px;
+
+		@include max(t) {
+			padding: 0 45px;
+		}
+
+		span {
+			width: 86px;
+			font-size: 16px;
+			text-align: center;
+
+			@include max(t) {
+				font-size: 12px;
+			}
+
+			b {
+				color: $color-accent;
+
+				span {
+					font-size: 24px;
+
+					@include max(t) {
+						font-size: 16px;
+					}
+				}
+			}
 		}
 	}
 }

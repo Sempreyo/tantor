@@ -4,21 +4,35 @@
 	height: auto !important;
 	padding: 136px 0 66px;
 
+	@include max(d) {
+		padding: 80px 0 40px;
+	}
+
+	@include max(ti) {
+		padding: 40px 0;
+	}
+
 	&__container {
 		opacity: 0;
+
+		@include max(d) {
+			opacity: 1;
+		}
 	}
 
 	&__logo {
 		position: absolute;
 		top: 50%;
 		left: 50%;
+
+		@include max(d) {
+			display: none;
+		}
 	}
 
 	&__logo-image {
 		width: 377px;
 		height: 210px;
-		//width: 90px;
-		//height: 50px;
 	}
 
 	&__title {
@@ -28,6 +42,17 @@
 		line-height: 1.2;
 		text-align: center;
 
+		@include max(d) {
+			font-size: fluid(40, 48, 992, 1280);
+		}
+
+		@include max(tl) {
+			font-size: fluid(34, 40, 768, 992);
+		}
+
+		@include max(ti) {
+			font-size: fluid(24, 34, 0, 768);
+		}
 	}
 
 	&__text {
@@ -37,22 +62,81 @@
 		font-size: 24px;
 		line-height: 1.2;
 		text-align: center;
+
+		@include max(d) {
+			font-size: fluid(19, 20, 992, 1280);
+		}
+
+		@include max(tl) {
+			font-size: fluid(18, 19, 768, 992);
+		}
+
+		@include max(ti) {
+			font-size: fluid(16, 18, 0, 768);
+		}
 	}
 
 	&__slider {
 		margin: 75px auto 0;
+		padding-left: 50px;
 		padding-bottom: 60px;
+
+		@include max(d) {
+			padding-left: 0;
+		}
+
+		@include max(ti) {
+			margin: 40px auto 0;
+		}
 
 		.swiper-slide {
 			opacity: 0.6;
 			transition: 0.3s ease;
 
+			@include max(t) {
+				opacity: 1;
+			}
+
+			&:not(.swiper-slide-prev):not(.swiper-slide-next):not(.swiper-slide-active) {
+				transform: scale(0.3);
+
+				@include max(t) {
+					transform: unset;
+				}
+			}
+
 			&-prev {
 				transform: translateX(40%) scale(0.7);
+				cursor: pointer;
+
+				@include max(d) {
+					transform: translateX(77%) scale(0.7);
+				}
+
+				@include max(ti) {
+					transform: translateX(70%) scale(0.7);
+				}
+
+				@include max(t) {
+					transform: unset;
+				}
 			}
 
 			&-next {
 				transform: translateX(-40%) scale(0.7);
+				cursor: pointer;
+
+				@include max(d) {
+					transform: translateX(-77%) scale(0.7);
+				}
+
+				@include max(ti) {
+					transform: translateX(-70%) scale(0.7);
+				}
+
+				@include max(t) {
+					transform: unset;
+				}
 			}
 
 			&-active {
@@ -69,6 +153,23 @@
 		gap: 47px 116px;
 		max-width: 1156px;
 		margin: 60px auto 0;
+
+		@include max(d) {
+			gap: 40px;
+		}
+
+		@include max(tl) {
+			grid-template-columns: repeat(3, 1fr);
+			gap: 40px 20px;
+		}
+
+		@include max(ti) {
+			grid-template-columns: repeat(2, 1fr);
+		}
+
+		@include max(t) {
+			grid-template-columns: repeat(1, 1fr);
+		}
 	}
 
 	&__item {

@@ -2,22 +2,29 @@
 	position: relative;
 	width: 100%;
 	height: 99vh;
+	min-height: 1200px;
+	max-height: 1200px;
 	border-bottom: 1px solid rgba($color-text, 0.3);
+	overflow: hidden;
 
-	/*&__plus {
-		position: absolute;
-		bottom: -8px;
-		left: 50%;
-		transform: translateX(-50%);
-		z-index: 1;
-		width: 14px;
-		height: 14px;
-	}*/
+	@include max(d) {
+		min-height: auto;
+		max-height: unset;
+	}
 
 	&__container {
+		position: relative;
 		display: flex;
 		flex-direction: column;
-		height: 100%;
+		height: 99vh;
+		min-height: 1200px;
+		max-height: 1200px;
+
+		@include max(d) {
+			min-height: auto;
+			max-height: unset;
+			height: auto;
+		}
 	}
 
 	&__model {
@@ -26,6 +33,8 @@
 		z-index: 2;
 		width: 100%;
 		height: 99vh;
+		min-height: 1200px;
+		max-height: 1200px;
 		opacity: 0;
 		pointer-events: none;
 	}
@@ -37,45 +46,120 @@
 		width: 100%;
 		opacity: 0;
 		transform: translateY(40vh);
+
+		@include max(d) {
+			position: relative;
+			gap: 30px;
+			padding-top: 20px;
+			opacity: 1;
+			transform: unset;
+		}
+
+		@include max(tl) {
+			order: -2;
+		}
+
+		@include max(ti) {
+			margin-bottom: 40px;
+		}
+
+		@include max(t) {
+			flex-direction: column;
+		}
 	}
 
 	&__caption {
+		width: 50%;
 		flex-shrink: 0;
 		position: relative;
 
+		@include max(d) {
+			opacity: 0;
+		}
+
+		@include max(t) {
+			width: 100%;
+		}
+
 		&--1 {
 			text-align: right;
-			transform: translateX(-170px);
-			/*left: -82%;
+			transform: translateX(-21vh);
 
-			.caption__title {
-				margin-left: 95px;
-			}*/
+			@include max(d) {
+				transform: translateX(0);
+			}
+
+			@include max(t) {
+				text-align: center;
+			}
 		}
 
 		&--2 {
-			transform: translate(180px, 50px);
-			//left: 44px;
-			/*top: -48px;
-			right: -82%;
+			transform: translate(17vh, 50px);
 
-			.caption__subtitle {
-				margin-left: 140px;
-			}*/
+			@include max(d) {
+				transform: translate(0);
+			}
+
+			@include max(t) {
+				text-align: center;
+			}
+		}
+	}
+
+	&__model-static {
+		display: none;
+
+		@include max(d) {
+			display: block;
+			margin-top: 30px;
+		}
+
+		@include max(ti) {
+			margin-bottom: 30px;
 		}
 	}
 
 	&__config {
 		position: absolute;
-		top: 350px;
-		left: calc(50% + 264px);
-		transform: translateX(-50%);
+		top: 325px;
+		left: calc(50% + 125px);
 		display: flex;
 		align-items: center;
 		gap: 13px;
 		font-family: $secondFont;
 		font-size: 16px;
 		opacity: 0;
+
+		@include max(d) {
+			top: 380px;
+			left: 290px;
+		}
+
+		@include max(ti) {
+			top: 476px;
+		}
+
+		@include max(655) {
+			top: 502px;
+		}
+
+		@include max(t) {
+			top: 643px;
+		}
+
+		@include max(450) {
+			top: 768px;
+		}
+
+		span {
+			@include max(t) {
+				position: absolute;
+				left: -94px;
+				white-space: nowrap;
+				transform: rotate(-90deg);
+			}
+		}
 
 		svg {
 			width: 28px;
@@ -85,26 +169,68 @@
 
 	&__boards {
 		position: absolute;
-		top: 191px;
-		left: calc(50% + 343px);
-		transform: translateX(-50%);
+		top: 170px;
+		left: calc(50% + 70px);
 		display: flex;
 		flex-direction: column;
 		gap: 12px;
 
+		@include max(d) {
+			top: 170px;
+			left: 250px;
+		}
+
+		@include max(tl) {
+			left: 230px;
+		}
+
+		@include max(ti) {
+			position: relative;
+			top: 0;
+			left: 0;
+			order: -1;
+			display: grid;
+			grid-template-columns: repeat(3, 1fr);
+		}
+
+		@include max(t) {
+			grid-template-columns: repeat(2, 1fr);
+		}
+
+		@include max(450) {
+			grid-template-columns: repeat(1, 1fr);
+		}
+
 		.board {
 			&:nth-child(even) {
 				margin-left: -30px;
+
+				@include max(ti) {
+					margin-left: 0;
+				}
 			}
 		}
 
 		&--bottom {
-			top: 684px;
-			left: calc(50% + 334px);
+			top: 640px;
+
+			@include max(d) {
+				top: 720px;
+				bottom: unset;
+			}
+
+			@include max(ti) {
+				order: 0;
+				top: 0;
+			}
 
 			.board {
 				&:nth-child(odd) {
 					margin-left: -30px;
+
+					@include max(ti) {
+						margin-left: 0;
+					}
 				}
 
 				&:nth-child(even) {
@@ -116,21 +242,42 @@
 
 	&__widget {
 		position: absolute;
-		top: 207px;
+		top: 154px;
 		left: calc(50% + 386px);
 		transform: translateX(-50%);
 		opacity: 0;
 
+		@include max(d) {
+			position: relative;
+			top: 0;
+			left: 0;
+			transform: unset;
+			max-width: 100%;
+			margin-top: 40px;
+		}
+
 		&--2 {
-			top: 509px;
+			top: 443px;
 			left: calc(50% + 396px);
 			max-width: 344px;
+
+			@include max(d) {
+				top: 0;
+				left: 0;
+				max-width: 100%;
+			}
 		}
 
 		&--3 {
-			top: 693px;
+			top: 620px;
 			left: calc(50% + 494px);
 			max-width: 252px;
+
+			@include max(d) {
+				top: 0;
+				left: 0;
+				max-width: 100%;
+			}
 		}
 	}
 }

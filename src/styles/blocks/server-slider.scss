@@ -7,6 +7,16 @@
 	opacity: 0;
 	transform: translateX(-10px);
 
+	@media (max-height: 800px) and (min-width: 1280px) {
+		top: -80px;
+	}
+
+	@include max(d) {
+		order: 1;
+		max-width: 100%;
+		margin-top: 40px;
+	}
+
 	.swiper-slide-active #{$parent}__filler span {
 		width: 100%;
 		transition: width 6s linear;
@@ -46,6 +56,10 @@
 		font-size: 18px;
 		line-height: 1.2;
 		margin-top: 16px;
+
+		@include max(d) {
+			max-width: 100%;
+		}
 
 		p + p {
 			margin-top: 20px;
