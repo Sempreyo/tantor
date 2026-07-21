@@ -3,7 +3,7 @@
 	right: 10px;
 	bottom: 35px;
 	z-index: 12;
-	display: none;
+	display: flex;
 	align-items: center;
 	justify-content: center;
 	width: 35px;
@@ -15,10 +15,6 @@
 	pointer-events: none;
 	transition: background-color 0.3s ease;
 	cursor: pointer;
-
-	@include max(d) {
-		display: flex;
-	}
 
 	@include max(tl) {
 		bottom: 15px;

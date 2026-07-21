@@ -35,7 +35,6 @@
 		height: 99vh;
 		min-height: 1200px;
 		max-height: 1200px;
-		opacity: 0;
 		pointer-events: none;
 	}
 
@@ -44,14 +43,14 @@
 		display: flex;
 		justify-content: center;
 		width: 100%;
-		opacity: 0;
+		//opacity: 0;
 		transform: translateY(40vh);
 
 		@include max(d) {
 			position: relative;
 			gap: 30px;
 			padding-top: 20px;
-			opacity: 1;
+			//opacity: 1;
 			transform: unset;
 		}
 

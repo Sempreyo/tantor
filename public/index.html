@@ -8,16 +8,12 @@
     <link href="css/main.min.css" rel="stylesheet" type="text/css">
     <title>Tantor</title>
   </head>
-  <body>
+  <body class="hidden">
     <header class="header">
-      <div class="container header__container">
-        <div class="header__logos"><a class="header__logo" href="#" target="_blank">
-            <svg class="header__logo-icon-tantor">
-              <use xlink:href="./images/sprite.svg#logo-tantor"></use>
-            </svg></a><a class="header__logo" href="#" target="_blank">
-            <svg class="header__logo-icon-cnews">
-              <use xlink:href="./images/sprite.svg#logo-cnews"></use>
-            </svg></a></div>
+      <div class="container header__container"><a class="header__logo" href="#" target="_blank">
+          <svg class="header__logo-icon-tantor">
+            <use xlink:href="./images/sprite.svg#logo-tantor"></use>
+          </svg></a>
         <div class="header__burger">
           <div class="header__burger-line"></div>
         </div>
@@ -26,8 +22,11 @@
             <svg width="30" height="30">
               <use xlink:href="./images/sprite.svg#close"></use>
             </svg>
-          </div><a class="header__menu-item anchor" href="#anchor-1"><span>Замещение СУБД <br> в core-системах</span></a><a class="header__menu-item anchor" href="#anchor-2">Горизонтальное масштабирование, <br> HTAP и совместимость с PostgreSQL</a><a class="header__menu-item anchor" href="#anchor-3">Центр управления <br> корпоративными СУБД</a><a class="header__menu-item anchor" href="#anchor-4">Новая СУБД <br> Tantor Postgres 18</a><a class="header__menu-item anchor" href="#anchor-5">5 лет <br> «Тантор Лабс»</a>
-        </div>
+          </div><a class="header__menu-item anchor active" href="#anchor-1"><span>Замещение СУБД <br> в core-системах</span></a><a class="header__menu-item anchor" href="#anchor-2">Горизонтальное масштабирование, <br> HTAP и совместимость с PostgreSQL</a><a class="header__menu-item anchor" href="#anchor-3">Центр управления <br> корпоративными СУБД</a><a class="header__menu-item anchor" href="#anchor-4">Новая СУБД <br> Tantor Postgres 18</a><a class="header__menu-item anchor" href="#anchor-5">5 лет <br> «Тантор Лабс»</a>
+        </div><a class="header__logo" href="#" target="_blank">
+          <svg class="header__logo-icon-cnews">
+            <use xlink:href="./images/sprite.svg#logo-cnews"></use>
+          </svg></a>
       </div>
     </header>
     <main class="main">
@@ -370,7 +369,7 @@
                 </div>
               </div>
               <div class="advantages__col advantages-anim">
-                <div class="advantages__text advantages__text--full">
+                <div class="advantages__text advantages__text--full advantages-anim">
                   <p><b>Подход Tantor: 100% совместимость с&nbsp;PostgreSQL и&nbsp;упрощение архитектуры без переписывания кода бизнес-приложений.</b></p>
                   <p>
                     МБД Tantor XData <sup>Gen3</sup> – горизонтально масштабируемая платформа, которая объединяет OLTP и&nbsp;OLAP в&nbsp;одном

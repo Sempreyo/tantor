@@ -29,12 +29,12 @@ html {
 	-o-text-size-adjust: 100%;
 	-webkit-text-size-adjust: 100%;
 	text-size-adjust: 100%;
-	scroll-behavior: smooth;
+	//scroll-behavior: smooth;
 }
 
 body {
 	min-height: 100vh;
-	scroll-behavior: smooth;
+	//scroll-behavior: smooth;
 	text-rendering: optimizeSpeed;
 	font-family: $mainFont;
 	background: $color-background;
@@ -42,6 +42,15 @@ body {
 	font-weight: 400;
 	font-size: 20px;
 	line-height: 1;
+	transition: 0.2s ease;
+
+	&.hidden {
+		opacity: 0;
+
+		@include max(d) {
+			opacity: 1;
+		}
+	}
 
 	/* iOS fix */
 	-webkit-font-smoothing: antialiased;

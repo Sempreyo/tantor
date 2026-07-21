@@ -8,7 +8,12 @@
 	width: 100%;
 	padding: 22px 0 0;
 	border-bottom: 1px solid rgba($color-text, 0.3);
-	background-color: rgba($color-background, 0.8);
+	background-color: rgba($color-background, 1);
+	transition: 0.3s ease;
+
+	&--hide {
+		transform: translateY(-100%);
+	}
 
 	&__container {
 		display: flex;
@@ -20,20 +25,28 @@
 		}
 	}
 
-	&__logos {
-		display: flex;
-		align-items: flex-end;
-		gap: 20px;
-
-		@include max(t) {
-			gap: 10px;
-		}
-	}
-
 	&__logo {
 		display: inline-block;
 		line-height: 0;
 		padding-bottom: 12px;
+
+		&:first-child {
+			@include max(d) {
+				order: -2;
+			}
+		}
+
+		&:last-child {
+			@include max(d) {
+				order: -1;
+				align-self: flex-end;
+				margin-left: 20px;
+			}
+
+			@include max(t) {
+				margin-left: 4px;
+			}
+		}
 	}
 
 	&__logo-icon-tantor {
@@ -47,8 +60,8 @@
 	}
 
 	&__logo-icon-cnews {
-		width: 180px;
-		height: 35px;
+		width: 140px;
+		height: 27px;
 
 		@include max(t) {
 			width: 100px;

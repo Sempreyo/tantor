@@ -13,6 +13,8 @@
 
 		@include max(d) {
 			font-size: fluid(52, 64, 992, 1280);
+			opacity: 1;
+			transform: none;
 		}
 
 		@include max(tl) {
@@ -100,6 +102,11 @@
 			display: inline-block;
 			opacity: 0;
 			transform: translateX(-20px);
+
+			@include max(d) {
+				opacity: 1;
+				transform: none;
+			}
 		}
 
 		&::before {

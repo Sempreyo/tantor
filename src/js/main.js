@@ -197,7 +197,7 @@ document.addEventListener("DOMContentLoaded", () => {
 		node.homeY = pos.homeY;
 	});
 
-// Устанавливаем позицию центрального узла
+	// Устанавливаем позицию центрального узла
 	const centerNode = combinedData.nodes.find(node => node.id === "center");
 	if (centerNode) {
 		centerNode.x = centerX;
@@ -287,669 +287,7 @@ document.addEventListener("DOMContentLoaded", () => {
 		Graph.zoomToFit(400, 10);
 	}, 100);
 
-	// Анимации на первом экране
-	const hero = document.querySelector(".hero");
-	const heroRight = document.querySelector(".hero__right");
-
-	setIntersection(hero, () => {
-		gsap.to(".hero__title", {
-			opacity: 1,
-			y: 0,
-			duration: 0.4,
-			ease: "none"
-		});
-	});
-
-	setIntersection(heroRight, () => {
-		gsap.to(".hero__text span", {
-			opacity: 1,
-			x: 0,
-			duration: 0.4,
-			delay: 0.3,
-			stagger: 0.2,
-			ease: "none"
-		});
-	});
-
 	mm.add("(min-width: 1280px)", () => {
-		const tl1 = gsap.timeline({
-			scrollTrigger: {
-				trigger: "#anchor-1",
-				pin: true,
-				start: "top top",
-				end: "+=300%",
-				scrub: 3,
-				invalidateOnRefresh: true,
-				onToggle: (self) => {
-					if (self.isActive) setActiveMenuItem("#anchor-1");
-				}
-			}
-		});
-
-		// Сервера перемещаются в погрузчик
-		tl1
-			.to(".hero__machine--1", {
-				x: "62%",
-				y: -111,
-				scale: 0.2,
-				rotate: 0,
-				duration: 0.2,
-				ease: "none"
-			}, 0)
-			.to(".hero__machine--2", {
-				x: "-2%",
-				scale: 0.2,
-				rotate: "5deg",
-				duration: 0.2,
-				ease: "none"
-			}, 0)
-			.to(".hero__machine--3", {
-				x: "-72%",
-				scale: 0.2,
-				rotate: 0,
-				duration: 0.2,
-				ease: "none"
-			}, 0);
-
-		// Подписи к серверам перемещаются в погрузчик
-		tl1
-			.to(".hero__label--1", {
-				x: 195,
-				y: -210,
-				scale: 0.8,
-				rotate: "-3deg",
-				duration: 0.2,
-				ease: "none"
-			}, 0)
-			.to(".hero__label--2", {
-				x: 2,
-				y: -45,
-				scale: 0.8,
-				rotate: 0,
-				duration: 0.2,
-				ease: "none"
-			}, 0)
-			.to(".hero__label--3", {
-				x: -163,
-				y: -228,
-				scale: 0.8,
-				rotate: "5deg",
-				duration: 0.2,
-				ease: "none"
-			}, 0);
-
-		const coords = getMoveCoords();
-
-		// Погрузчик с серверами уезжает влево за экран
-		tl1
-			.to(".hero__machines", {
-				x: coords.x,
-				y: coords.y,
-				duration: 0.2,
-				ease: "none"
-			}, 0)
-			.to(".hero__left", {
-				x: "-100vw",
-				duration: 0.2,
-				ease: "none"
-			}, 0.25);
-
-		const tl2 = gsap.timeline({
-			scrollTrigger: {
-				trigger: "#anchor-2",
-				pin: true,
-				start: "top top",
-				end: "+=800%",
-				scrub: 3,
-				invalidateOnRefresh: true,
-				onToggle: (self) => {
-					if (self.isActive) setActiveMenuItem("#anchor-2");
-				}
-			}
-		});
-
-		tl2
-			.to(".server__captions", {
-				y: 0,
-				duration: 0.2,
-				ease: "none"
-			}, 0)
-			.to(".server__caption--1", {
-				scale: 0.5,
-				x: "10vh",
-				duration: 0.2,
-				ease: "none"
-			}, 0)
-			.to(".server__caption--2", {
-				scale: 0.5,
-				x: "-18vh",
-				y: 0,
-				duration: 0.2,
-				ease: "none"
-			}, 0)
-			.to(".blob--2", {
-				scale: 0.5,
-				y: "-100%",
-				duration: 0.2,
-				ease: "none"
-			}, 0)
-			.add(() => {
-				if (tl2.scrollTrigger.direction === 1) {
-					gsap.to(".server-slider", {
-						opacity: 1,
-						x: 0,
-						duration: 0.5,
-						ease: "power2.out",
-						overwrite: "auto"
-					});
-				}
-			}, 0.2)
-			.add(() => {
-				if (tl2.scrollTrigger.direction === -1) {
-					gsap.to(".server-slider", {
-						opacity: 0,
-						x: -10,
-						duration: 0.3,
-						overwrite: "auto"
-					});
-				}
-			}, 0.19)
-			.add(() => {
-				if (tl2.scrollTrigger.direction === 1) {
-					gsap.to(".server__config", {
-						opacity: 1,
-						x: 0,
-						duration: 0.5,
-						ease: "power2.out",
-						overwrite: "auto"
-					});
-				}
-			}, 0.3)
-			.add(() => {
-				if (tl2.scrollTrigger.direction === -1) {
-					gsap.to(".server__config", {
-						opacity: 0,
-						x: -10,
-						duration: 0.3,
-						overwrite: "auto"
-					});
-				}
-			}, 0.29)
-			.add(() => {
-				if (tl2.scrollTrigger.direction === 1) {
-					gsap.to(".server__config", {
-						opacity: 0,
-						x: -10,
-						duration: 0.5,
-						ease: "power2.out",
-						overwrite: "auto"
-					});
-				}
-			}, 0.4)
-			.add(() => {
-				if (tl2.scrollTrigger.direction === -1) {
-					gsap.to(".server__config", {
-						opacity: 1,
-						x: 0,
-						duration: 0.3,
-						overwrite: "auto"
-					});
-				}
-			}, 0.39)
-			.add(() => {
-				if (tl2.scrollTrigger.direction === 1) {
-					gsap.to(".board--light", {
-						opacity: 1,
-						x: 0,
-						stagger: 0.2,
-						duration: 0.5,
-						ease: "power2.out",
-						overwrite: "auto"
-					});
-				}
-			}, 0.5)
-			.add(() => {
-				if (tl2.scrollTrigger.direction === -1) {
-					gsap.to(".board--light", {
-						opacity: 0,
-						x: -10,
-						stagger: 0.2,
-						duration: 0.3,
-						overwrite: "auto"
-					});
-				}
-			}, 0.49)
-			.add(() => {
-				if (tl2.scrollTrigger.direction === 1) {
-					gsap.to(".board--dark", {
-						opacity: 1,
-						x: 0,
-						stagger: 0.2,
-						duration: 0.5,
-						ease: "power2.out",
-						overwrite: "auto"
-					});
-				}
-			}, 0.53)
-			.add(() => {
-				if (tl2.scrollTrigger.direction === -1) {
-					gsap.to(".board--dark", {
-						opacity: 0,
-						x: -10,
-						stagger: 0.2,
-						duration: 0.3,
-						overwrite: "auto"
-					});
-				}
-			}, 0.52)
-			.add(() => {
-				if (tl2.scrollTrigger.direction === 1) {
-					gsap.to(".board--light", {
-						opacity: 0,
-						x: -10,
-						stagger: 0.2,
-						duration: 0.5,
-						ease: "power2.out",
-						overwrite: "auto"
-					});
-				}
-			}, 0.6)
-			.add(() => {
-				if (tl2.scrollTrigger.direction === -1) {
-					gsap.to(".board--light", {
-						opacity: 1,
-						x: 0,
-						stagger: 0.2,
-						duration: 0.3,
-						overwrite: "auto"
-					});
-				}
-			}, 0.59)
-			.add(() => {
-				if (tl2.scrollTrigger.direction === 1) {
-					gsap.to(".board--dark", {
-						opacity: 0,
-						x: -10,
-						stagger: 0.2,
-						duration: 0.5,
-						ease: "power2.out",
-						overwrite: "auto"
-					});
-				}
-			}, 0.63)
-			.add(() => {
-				if (tl2.scrollTrigger.direction === -1) {
-					gsap.to(".board--dark", {
-						opacity: 1,
-						x: 0,
-						stagger: 0.2,
-						duration: 0.3,
-						overwrite: "auto"
-					});
-				}
-			}, 0.62)
-			.add(() => {
-				if (tl2.scrollTrigger.direction === 1) {
-					gsap.to(".server__widget", {
-						opacity: 1,
-						stagger: 0.2,
-						duration: 0.5,
-						ease: "power2.out",
-						overwrite: "auto"
-					});
-				}
-			}, 0.7)
-			.add(() => {
-				if (tl2.scrollTrigger.direction === -1) {
-					gsap.to(".server__widget", {
-						opacity: 0,
-						stagger: 0.2,
-						duration: 0.3,
-						overwrite: "auto"
-					});
-				}
-			}, 0.69)
-			.add(() => {
-				if (tl2.scrollTrigger.direction === 1) {
-					gsap.to(".blob--2", {
-						opacity: 0,
-						duration: 0.5,
-						ease: "power2.out",
-						overwrite: "auto"
-					});
-
-					gsap.to(".server__container", {
-						opacity: 0,
-						duration: 0.5,
-						ease: "power2.out",
-						overwrite: "auto"
-					});
-				}
-			}, 0.75)
-			.add(() => {
-				if (tl2.scrollTrigger.direction === -1) {
-					gsap.to(".blob--2", {
-						opacity: 1,
-						duration: 0.3,
-						overwrite: "auto"
-					});
-
-					gsap.to(".server__container", {
-						opacity: 1,
-						duration: 0.5,
-						ease: "power2.out",
-						overwrite: "auto"
-					});
-				}
-			}, 0.74)
-			.add(() => {
-				if (tl2.scrollTrigger.direction === 1) {
-					gsap.to(".advantages", {
-						opacity: 1,
-						duration: 0.5,
-						ease: "power2.out",
-						overwrite: "auto"
-					});
-				}
-			}, 0.8)
-			.add(() => {
-				if (tl2.scrollTrigger.direction === -1) {
-					gsap.to(".advantages", {
-						opacity: 0,
-						duration: 0.3,
-						overwrite: "auto"
-					});
-				}
-			}, 0.79)
-			.add(() => {
-				if (tl2.scrollTrigger.direction === 1) {
-					gsap.to(".advantages-anim", {
-						opacity: 1,
-						stagger: 0.2,
-						duration: 0.5,
-						ease: "power2.out",
-						overwrite: "auto"
-					});
-				}
-			}, 0.85)
-			.add(() => {
-				if (tl2.scrollTrigger.direction === -1) {
-					gsap.to(".advantages-anim", {
-						opacity: 0,
-						stagger: 0.2,
-						duration: 0.3,
-						overwrite: "auto"
-					});
-				}
-			}, 0.84)
-			.to({}, { duration: 0.1 }, 0.9);
-
-		/*const tl3 = gsap.timeline({
-			scrollTrigger: {
-				trigger: ".scroll-3",
-				pin: true,
-				start: "top top",
-				end: "+=300%",
-				scrub: 3,
-				markers: true,
-				invalidateOnRefresh: true
-			}
-		});*/
-
-		/*const tl4 = gsap.timeline({
-			scrollTrigger: {
-				trigger: ".scroll-4",
-				pin: true,
-				start: "top top",
-				end: "+=300%",
-				scrub: 3,
-				markers: true,
-				invalidateOnRefresh: true
-			}
-		});*/
-
-		const tl5 = gsap.timeline({
-			scrollTrigger: {
-				trigger: "#anchor-3",
-				pin: true,
-				start: "top top",
-				end: "+=300%",
-				scrub: 3,
-				invalidateOnRefresh: true,
-				onToggle: (self) => {
-					if (self.isActive) setActiveMenuItem("#anchor-3");
-				}
-			}
-		});
-
-		tl5
-			.fromTo(".product__logo", {
-				top: "50%",
-				y: "-50%",
-				x: "-50%"
-			}, {
-				top: -30,
-				y: 20,
-				x: "-50%",
-				duration: 0.2,
-				ease: "none"
-			}, 0)
-			.to(".product__logo-image", {
-				scale: 0.3,
-				duration: 0.2,
-				ease: "none"
-			}, 0)
-			.to(".product__container", {
-				opacity: 1,
-				duration: 0.2,
-				ease: "none"
-			}, 0.2)
-			.fromTo(".product-anim", {
-				opacity: 0,
-				y: 10
-			}, {
-				opacity: 1,
-				y: 0,
-				stagger: 0.1,
-				duration: 0.2,
-				ease: "none"
-			}, 0.2);
-
-		const tl6 = gsap.timeline({
-			scrollTrigger: {
-				trigger: "#anchor-4",
-				pin: true,
-				start: "top top",
-				end: "+=200%",
-				scrub: 3,
-				invalidateOnRefresh: true,
-				onToggle: (self) => {
-					if (self.isActive) setActiveMenuItem("#anchor-4");
-				}
-			}
-		});
-
-		setIntersection(document.querySelector(".about__title"), () => {
-			gsap.to(".about__title", {
-				opacity: 1,
-				y: 0,
-				duration: 0.4,
-				ease: "none"
-			});
-		}, 0.4);
-
-		setIntersection(document.querySelector(".about__text"), () => {
-			gsap.to(".about__text", {
-				opacity: 1,
-				y: 0,
-				duration: 0.4,
-				ease: "none"
-			});
-		}, 0.4);
-
-		setIntersection(document.querySelector(".about__content"), () => {
-			gsap.to(".about__content", {
-				opacity: 1,
-				y: 0,
-				duration: 0.4,
-				ease: "none"
-			});
-		}, 0.4);
-
-		const aboutTl1 = gsap.timeline({ paused: true })
-			.to(".chart--1", {
-				opacity: 1,
-				duration: 0.4,
-				ease: "none"
-			})
-			.to(".chart-anim-1", {
-				opacity: 1,
-				y: 0,
-				stagger: 0.1,
-				duration: 0.4,
-				ease: "none"
-			});
-
-		const aboutTl2 = gsap.timeline({ paused: true })
-			.to(".chart--2", {
-				opacity: 1,
-				duration: 0.4,
-				ease: "none"
-			})
-			.to(".chart-anim-2", {
-				opacity: 1,
-				y: 0,
-				duration: 0.4,
-				ease: "none"
-			})
-			.fromTo(".chart__bar", {
-				height: 0
-			}, {
-				height: (index, target) => getComputedStyle(target).getPropertyValue("--bar-height").trim(),
-				stagger: 0.1,
-				duration: 0.4,
-				ease: "none"
-			});
-
-		const aboutTl3 = gsap.timeline({ paused: true })
-			.to(".chart--3", {
-				opacity: 1,
-				duration: 0.4,
-				ease: "none"
-			})
-			.to(".chart-anim-3", {
-				opacity: 1,
-				y: 0,
-				duration: 0.4,
-				ease: "none"
-			});
-
-		tl6
-			.to({}, { duration: 0.5 })
-			.add(() => {
-				if (tl6.scrollTrigger.direction === 1) {
-					aboutTl1.play();
-				} else if (tl6.scrollTrigger.direction === -1) {
-					aboutTl1.reverse();
-				}
-			})
-			.to({}, { duration: 0.5 })
-			.add(() => {
-				if (tl6.scrollTrigger.direction === 1) {
-					gsap.to(".chart--1", {
-						opacity: 0,
-						duration: 0.2,
-						ease: "none"
-					});
-					aboutTl2.play();
-				} else if (tl6.scrollTrigger.direction === -1) {
-					gsap.to(".chart--1", {
-						opacity: 1,
-						duration: 0.2,
-						ease: "none"
-					})
-					aboutTl2.reverse();
-				}
-			})
-			.to({}, { duration: 0.5 })
-			.add(() => {
-				if (tl6.scrollTrigger.direction === 1) {
-					gsap.to(".chart--2", {
-						opacity: 0,
-						duration: 0.2,
-						ease: "none"
-					});
-					aboutTl3.play();
-				} else if (tl6.scrollTrigger.direction === -1) {
-					gsap.to(".chart--2", {
-						opacity: 1,
-						duration: 0.2,
-						ease: "none"
-					})
-					aboutTl3.reverse();
-				}
-			})
-			.to({}, { duration: 0.5 });
-
-		const tl7 = gsap.timeline({
-			scrollTrigger: {
-				trigger: "#anchor-5",
-				pin: true,
-				start: "top top",
-				end: "+=300%",
-				scrub: 3,
-				invalidateOnRefresh: true,
-				onToggle: (self) => {
-					if (self.isActive) setActiveMenuItem("#anchor-5");
-				}
-			}
-		});
-
-		tl7
-			.to(".gallery__logo-icon", {
-				y: -150,
-				scale: 0.5,
-				duration: 0.2,
-				ease: "none"
-			}, 0)
-			.to(".gallery__text", {
-				opacity: 1,
-				y: 0,
-				duration: 0.2,
-				ease: "none"
-			}, 0.2)
-			.to(".gallery__link", {
-				opacity: 1,
-				y: 0,
-				duration: 0.2,
-				ease: "none"
-			}, 0.2)
-			.to(".gallery-anim-image", {
-				opacity: 0,
-				duration: 0.2,
-				ease: "none"
-			}, 0.1)
-			.to(".gallery-anim-image-last", {
-				opacity: 1,
-				duration: 0.2,
-				ease: "none"
-			}, 0.15)
-
-		const gallery = document.querySelector(".gallery");
-
-		setIntersection(gallery, () => {
-			gsap.to(".gallery-anim-image", {
-				opacity: 1,
-				stagger: 0.3,
-				duration: 0.5,
-				ease: "none"
-			}, 0);
-		});
-
-
-
-
-
 		const scene = new THREE.Scene();
 		//scene.background = new THREE.Color(0x1a1a1a);
 
@@ -1023,10 +361,38 @@ document.addEventListener("DOMContentLoaded", () => {
 		let doorObject = null;
 		let isDoorOpen = false;
 		let model;
+		// Координаты смещения по оси X и Y для адаптивных экранов
+		function getLeftPositionX(targetZ = -2.4, paddingPercentage = 0.20) {
+			// Считаем точное расстояние от камеры до модели с учетом смещения по Z
+			const distance = camera.position.z - targetZ;
+
+			// Переводим FOV в радианы
+			const vFov = (camera.fov * Math.PI) / 180;
+
+			// Считаем видимые границы на этой конкретной глубине
+			const visibleHeight = 2 * Math.tan(vFov / 2) * distance;
+			const visibleWidth = visibleHeight * (container.clientWidth / container.clientHeight);
+
+			// Крайняя левая точка
+			const leftEdge = -visibleWidth / 2;
+
+			// Добавляем отступ вправо (20% от ширины видимой области)
+			return leftEdge + (visibleWidth * paddingPercentage);
+		}
+		function getTopPositionY(targetZ = -2.4, shiftDownPercentage = 0.15) {
+			const distance = camera.position.z - targetZ;
+			const vFov = (camera.fov * Math.PI) / 180;
+			const visibleHeight = 2 * Math.tan(vFov / 2) * distance;
+
+			return -(visibleHeight * shiftDownPercentage);
+		}
 
 		loader.load(
 			"./assets/xdata.glb",
 			function (gltf) {
+				// Показываем страницу когда модель загрузилась
+				document.body.classList.remove("hidden");
+
 				model = gltf.scene;
 
 				// Центрирование модели автоматически
@@ -1034,7 +400,7 @@ document.addEventListener("DOMContentLoaded", () => {
 				const center = box.getCenter(new THREE.Vector3());
 				model.position.x += (model.position.x - center.x);
 				model.position.z += (model.position.z - center.z);
-				model.scale.set(0, 1, 0);
+				//model.scale.set(0, 1, 0);
 
 				scene.add(model);
 				doorObject = model.getObjectByName("0-Door");
@@ -1064,126 +430,621 @@ document.addEventListener("DOMContentLoaded", () => {
 					});
 				}
 
-				const server = document.querySelector(".server");
 
-				setIntersection(server, () => {
-					gsap.to(".blob--2", {
+
+				// Анимации на первом экране
+				const hero = document.querySelector(".hero");
+				const heroRight = document.querySelector(".hero__right");
+
+				setIntersection(hero, () => {
+					gsap.to(".hero__title", {
 						opacity: 1,
+						y: 0,
+						duration: 0.4,
+						ease: "none"
+					});
+				});
+
+				setIntersection(heroRight, () => {
+					gsap.to(".hero__text span", {
+						opacity: 1,
+						x: 0,
+						duration: 0.4,
+						delay: 0.3,
+						stagger: 0.2,
+						ease: "none"
+					});
+				});
+
+				const tl1 = gsap.timeline({
+					scrollTrigger: {
+						trigger: "#anchor-1",
+						start: "top top",
+						end: "top top",
+						invalidateOnRefresh: true,
+						toggleActions: "play none none reverse"
+					}
+				});
+
+				const coords = getMoveCoords();
+
+				tl1
+					// Сервера перемещаются в погрузчик
+					.to(".hero__machine--1", {
+						x: "62%",
+						y: -111,
+						scale: 0.2,
+						rotate: 0,
+						duration: 0.2,
+						ease: "none",
+						overwrite: "auto"
+					})
+					.to(".hero__machine--2", {
+						x: "-2%",
+						scale: 0.2,
+						rotate: "5deg",
+						duration: 0.2,
+						ease: "none",
+						overwrite: "auto"
+					}, "<")
+					.to(".hero__machine--3", {
+						x: "-72%",
+						scale: 0.2,
+						rotate: 0,
+						duration: 0.2,
+						ease: "none",
+						overwrite: "auto"
+					}, "<")
+					// Подписи к серверам перемещаются в погрузчик
+					.to(".hero__label--1", {
+						x: 195,
+						y: -210,
+						scale: 0.8,
+						rotate: "-3deg",
+						duration: 0.2,
+						ease: "none",
+						overwrite: "auto"
+					})
+					.to(".hero__label--2", {
+						x: 2,
+						y: -45,
+						scale: 0.8,
+						rotate: 0,
+						duration: 0.2,
+						ease: "none",
+						overwrite: "auto"
+					})
+					.to(".hero__label--3", {
+						x: -163,
+						y: -228,
+						scale: 0.8,
+						rotate: "5deg",
+						duration: 0.2,
+						ease: "none",
+						overwrite: "auto"
+					})
+					// Погрузчик с серверами уезжает влево за экран
+					.to(".hero__machines", {
+						x: coords.x,
+						y: coords.y,
+						duration: 0.4,
+						ease: "none",
+						overwrite: "auto"
+					})
+					.to(".hero__left", {
+						x: "-100vw",
+						duration: 0.8,
+						ease: "none",
+						overwrite: "auto"
+					})
+					.to(".blob--1", {
+						opacity: 0,
+						scale: 0,
 						ease: "none",
 						duration: 1
-					}, 0);
+					});
 
-					// Появление модели
-					gsap.to(".server__model", {
+				const tl2part1 = gsap.timeline({ paused: true });
+				const tl2part2 = gsap.timeline({ paused: true });
+				const tl2part3 = gsap.timeline({ paused: true });
+				const tl2 = gsap.timeline({
+					scrollTrigger: {
+						trigger: "#anchor-2",
+						start: "top top",
+						end: "+=300%",
+						pin: true,
+						onUpdate: (self) => {
+							const progress = self.progress; // значение от 0 (начало фиксации) до 1 (конец фиксации)
+
+							// Запускаем первый цикл
+							if (progress > 0 && progress < 0.3) {
+								tl2part1.play();
+							}
+
+							// Скролл ниже 35%: Запускаем второй цикл в том случае, если первый завершился
+							if (progress >= 0.35 && progress < 0.7) {
+								if (tl2part1.progress() === 1) {
+									tl2part2.play();
+								} else {
+									tl2part1.progress(1);
+									tl2part2.play();
+								}
+							}
+
+							// Скролл ниже 75%: Запускаем третий цикл в том случае, если второй завершился
+							if (progress >= 0.75) {
+								if (tl2part2.progress() === 1) {
+									tl2part3.play();
+								} else {
+									// Принудительно завершаем промежуточный, чтобы избежать каши на экране
+									tl2part2.progress(1);
+									tl2part3.play();
+								}
+							}
+
+							// Реверс
+							// Если крутим вверх и поднялись выше третьего цикла
+							if (progress < 0.7) {
+								tl2part3.reverse();
+							}
+							// Если поднялись выше второго цикла
+							if (progress < 0.32) {
+								if (tl2part3.progress() === 0) {
+									tl2part2.reverse();
+								} else {
+									tl2part3.progress(0);
+									tl2part2.reverse();
+								}
+							}
+							// Если вернулись в самое начало
+							if (progress === 0) {
+								if (tl2part2.progress() === 0) {
+									tl2part1.reverse();
+								} else {
+									tl2part2.progress(0);
+									tl2part1.reverse();
+								}
+							}
+						}
+					}
+				});
+
+				tl2part1
+					.to(".blob--2", {
 						opacity: 1,
+						scale: 1,
 						ease: "none",
-						duration: 1.5
-					}, 0);
-
+						duration: 1
+					})
 					// Масштабирование модели
-					gsap.to(model.scale, {
+					/*.to(model.scale, {
 						x: 1,
 						z: 1,
-						duration: 3,
+						duration: 0.7,
 						ease: "none"
-					}, 0);
-
+					})*/
 					// Вращение модели на 1 оборот
-					gsap.to(model.rotation, {
+					.to(model.rotation, {
 						y: Math.PI * 2,
 						ease: "none",
-						duration: 3
-					}, 0);
+						duration: 1.4
+					});
 
-					gsap.to(".server__captions", {
+				// Открытие двери
+				if (doorObject) {
+					tl2part1.to(doorObject.rotation, {
+						y: Math.PI / 2,
+						duration: 0.7,
+						ease: "none"
+					});
+
+					if (doorMaterials.length > 0) {
+						tl2part1.to(doorMaterials, {
+							opacity: 0,
+							duration: 0.7,
+							ease: "none"
+						});
+					}
+				}
+
+				tl2part1
+					.to(".server__captions", {
+						y: 0,
+						duration: 0.5,
+						ease: "none"
+					})
+					.to(".server__caption--1", {
+						scale: 0.5,
+						x: "10vh",
+						duration: 0.5,
+						ease: "none"
+					})
+					.to(".server__caption--2", {
+						scale: 0.5,
+						x: "-18vh",
+						y: 0,
+						duration: 0.5,
+						ease: "none"
+					}, "<")
+					.to(".blob--2", {
+						scale: 0.5,
+						y: "-100%",
+						duration: 0.5,
+						ease: "none"
+					}, "<")
+					.to(".server-slider", {
 						opacity: 1,
-						ease: "none",
-						duration: 1
-					}, 3);
+						x: 0,
+						duration: 0.7,
+						ease: "power2.out",
+						overwrite: "auto"
+					})
+					.to(".server__config", {
+						opacity: 1,
+						x: 0,
+						duration: 0.5,
+						ease: "power2.out",
+						overwrite: "auto"
+					})
+					.to(".board--light", {
+						opacity: 1,
+						x: 0,
+						stagger: 0.2,
+						duration: 0.5,
+						ease: "power2.out",
+						overwrite: "auto"
+					})
+					.to(".board--dark", {
+						opacity: 1,
+						x: 0,
+						stagger: 0.2,
+						duration: 0.5,
+						ease: "power2.out",
+						overwrite: "auto"
+					});
 
-					// Открытие двери
-					if (doorObject) {
-						gsap.to(doorObject.rotation, {
-							y: Math.PI / 2,
-							duration: 1,
-							ease: "none"
-						}, 3);
+				tl2part2
+					.to(".server__config", {
+						opacity: 0,
+						x: -10,
+						stagger: 0.2,
+						duration: 0.5,
+						ease: "power2.out",
+						overwrite: "auto"
+					})
+					.to(".board--light", {
+						opacity: 0,
+						x: -10,
+						stagger: 0.2,
+						duration: 0.5,
+						ease: "power2.out",
+						overwrite: "auto"
+					}, "<")
+					.to(".board--dark", {
+						opacity: 0,
+						x: -10,
+						stagger: 0.2,
+						duration: 0.5,
+						ease: "power2.out",
+						overwrite: "auto"
+					}, "<")
+					.to(".server__widget", {
+						opacity: 1,
+						stagger: 0.2,
+						duration: 0.5,
+						ease: "power2.out",
+						overwrite: "auto"
+					}, "<");
 
-						if (doorMaterials.length > 0) {
-							gsap.to(doorMaterials, {
-								opacity: 0,
-								duration: 1,
-								ease: "none"
-							}, 3.5);
-						}
-					}
-
-					// Координаты смещения по оси X для адаптивных экранов
-					function getLeftPositionX(targetZ = -2.4, paddingPercentage = 0.20) {
-						// Считаем точное расстояние от камеры до модели с учетом смещения по Z
-						const distance = camera.position.z - targetZ;
-
-						// Переводим FOV в радианы
-						const vFov = (camera.fov * Math.PI) / 180;
-
-						// Считаем видимые границы на этой конкретной глубине
-						const visibleHeight = 2 * Math.tan(vFov / 2) * distance;
-						const visibleWidth = visibleHeight * (container.clientWidth / container.clientHeight);
-
-						// Крайняя левая точка
-						const leftEdge = -visibleWidth / 2;
-
-						// Добавляем отступ вправо (20% от ширины видимой области)
-						return leftEdge + (visibleWidth * paddingPercentage);
-					}
-
-					function getTopPositionY(targetZ = -2.4, shiftDownPercentage = 0.15) {
-						const distance = camera.position.z - targetZ;
-						const vFov = (camera.fov * Math.PI) / 180;
-						const visibleHeight = 2 * Math.tan(vFov / 2) * distance;
-
-						return -(visibleHeight * shiftDownPercentage);
-					}
-
+				tl2part3
+					.to(".blob--2", {
+						opacity: 0,
+						duration: 0.5,
+						ease: "power2.out",
+						overwrite: "auto"
+					})
+					.to(".server__container", {
+						opacity: 0,
+						duration: 0.5,
+						ease: "power2.out",
+						overwrite: "auto"
+					}, "<")
+					.to(".advantages", {
+						opacity: 1,
+						duration: 0.5,
+						ease: "power2.out",
+						overwrite: "auto"
+					}, "<")
+					.to(".advantages-anim", {
+						opacity: 1,
+						y: 0,
+						stagger: 0.2,
+						duration: 0.5,
+						ease: "power2.out",
+						overwrite: "auto"
+					}, "+=0.5")
 					// Смена ракурса со смещением на 3 блок
-					tl2
-						.to(model.position, {
-							x: () => getLeftPositionX(-2.4, window.matchMedia("(min-width: 1800px)").matches ? 0.11 : 0.14), // Сдвиг влево
-							y: getTopPositionY(-2.4, 0.28), // Сдвиг вниз
-							z: -2.4, // Масштаб
-							duration: 0.05,
-							ease: "none"
-						}, 0.82)
-						.to(model.rotation, {
-							y: 0.88, // Отрицательное значение вращает модель влево
-							duration: 0.05,
-							ease: "none"
-						}, 0.82)
-						.to(".advantages__item", {
+					.to(model.position, {
+						x: () => getLeftPositionX(-2.4, window.matchMedia("(min-width: 1800px)").matches ? 0.11 : 0.14), // Сдвиг влево
+						y: getTopPositionY(-2.4, 0.28), // Сдвиг вниз
+						z: -2.4, // Масштаб
+						duration: 0.5,
+						ease: "none"
+					}, "<")
+					.to(model.rotation, {
+						y: 0.88, // Отрицательное значение вращает модель влево
+						duration: 0.5,
+						ease: "none"
+					}, "<")
+					.to(".advantages__item", {
+						opacity: 1,
+						x: 0,
+						stagger: 0.5,
+						duration: 0.5,
+						ease: "none"
+					}, "<");
+
+				// Закрытие двери
+				if (doorObject) {
+					tl2part3.to(doorObject.rotation, {
+						y: 0,
+						duration: 0.5,
+						ease: "none"
+					}, "<");
+
+					if (doorMaterials.length > 0) {
+						tl2part3.to(doorMaterials, {
 							opacity: 1,
-							x: 0,
-							stagger: 0.05,
-							duration: 0.05,
+							duration: 0.5,
 							ease: "none"
-						}, 0.87)
+						}, "<");
+					}
+				}
 
-					// Закрытие двери
-					if (doorObject) {
-						tl2.to(doorObject.rotation, {
-							y: 0,
-							duration: 0.05,
-							ease: "none"
-						}, 0.85);
+				const tl5 = gsap.timeline({
+					scrollTrigger: {
+						trigger: "#anchor-3",
+						start: "-50% top",
+						end: "top top",
+						invalidateOnRefresh: true,
+						toggleActions: "play none none reverse"
+					}
+				});
 
-						if (doorMaterials.length > 0) {
-							tl2.to(doorMaterials, {
-								opacity: 1,
-								duration: 0.05,
-								ease: "none"
-							}, 0.85);
+				tl5
+					.to(".product__logo", {
+						scale: 1,
+						xPercent: -50,
+						y: -60,
+						transformOrigin: "center top",
+						duration: 0.2,
+						ease: "none"
+					})
+					.to(".product__logo-image", {
+						scale: 0.3,
+						duration: 0.2,
+						ease: "none"
+					})
+					.to(".product__container", {
+						opacity: 1,
+						duration: 0.2,
+						ease: "none"
+					})
+					.fromTo(".product-anim", {
+						opacity: 0,
+						y: 10
+					}, {
+						opacity: 1,
+						y: 0,
+						stagger: 0.2,
+						duration: 0.2,
+						ease: "none"
+					});
+
+				const tl6part1 = gsap.timeline({ paused: true });
+				const tl6part2 = gsap.timeline({ paused: true });
+				const tl6 = gsap.timeline({
+					scrollTrigger: {
+						trigger: "#anchor-4",
+						start: "top top",
+						end: "+=300%",
+						invalidateOnRefresh: true,
+						toggleActions: "play none none reverse",
+						pin: true,
+						onUpdate: (self) => {
+							const progress = self.progress; // значение от 0 (начало фиксации) до 1 (конец фиксации)
+
+							// Запускаем первый цикл
+							if (progress > 0.3 && progress < 0.6) {
+								tl6part1.play();
+							}
+
+							// Скролл ниже 55%
+							if (progress >= 0.65) {
+								if (tl6part1.progress() === 1) {
+									tl6part2.play();
+								} else {
+									tl6part1.progress(1);
+									tl6part2.play();
+								}
+							}
+
+							// Реверс
+							if (progress < 0.6) {
+								tl6part2.reverse();
+							}
+
+							if (progress === 0) {
+								if (tl6part2.progress() === 0) {
+									tl6part1.reverse();
+								} else {
+									tl6part2.progress(0);
+									tl6part1.reverse();
+								}
+							}
 						}
 					}
-				}, 0.6);
+				});
+
+				const about = document.querySelector(".about");
+				const aboutTl = gsap.timeline();
+				setIntersection(about, () => {
+					aboutTl
+						.to(".about__title", {
+							opacity: 1,
+							y: 0,
+							duration: 0.5,
+							ease: "none"
+						})
+						.to(".about__text", {
+							opacity: 1,
+							y: 0,
+							duration: 0.5,
+							ease: "none"
+						})
+						.to(".about__content", {
+							opacity: 1,
+							y: 0,
+							duration: 0.5,
+							ease: "none"
+						})
+						.to(".chart--1", {
+							opacity: 1,
+							duration: 0.4,
+							ease: "none"
+						})
+						.to(".chart-anim-1", {
+							opacity: 1,
+							y: 0,
+							stagger: 0.1,
+							duration: 0.4,
+							ease: "none"
+						});
+				}, 0.3);
+
+				tl6part1
+					.to(".chart--2", {
+						opacity: 1,
+						duration: 0.4,
+						ease: "none"
+					})
+					.to(".chart-anim-2", {
+						opacity: 1,
+						y: 0,
+						duration: 0.4,
+						ease: "none"
+					})
+					.fromTo(".chart__bar", {
+						height: 0
+					}, {
+						height: (index, target) => getComputedStyle(target).getPropertyValue("--bar-height").trim(),
+						stagger: 0.1,
+						duration: 0.4,
+						ease: "none"
+					});
+
+				tl6part2
+					.to(".chart--3", {
+						opacity: 1,
+						duration: 0.4,
+						ease: "none"
+					})
+					.to(".chart-anim-3", {
+						opacity: 1,
+						y: 0,
+						duration: 0.4,
+						ease: "none"
+					});
+
+				const tl7part1 = gsap.timeline({ paused: true });
+				const tl7part2 = gsap.timeline({ paused: true });
+
+				const tl7 = gsap.timeline({
+					scrollTrigger: {
+						trigger: "#anchor-5",
+						start: "top top",
+						end: "+=300%",
+						invalidateOnRefresh: true,
+						toggleActions: "play none none reverse",
+						pin: true,
+						onUpdate: (self) => {
+							const progress = self.progress; // значение от 0 (начало фиксации) до 1 (конец фиксации)
+
+							// Запускаем первый цикл
+							if (progress > 0.3 && progress < 0.6) {
+								tl7part1.play();
+							}
+
+							// Скролл ниже 55%
+							if (progress >= 0.65) {
+								if (tl7part1.progress() === 1) {
+									tl7part2.play();
+								} else {
+									tl7part1.progress(1);
+									tl7part2.play();
+								}
+							}
+
+							// Реверс
+							if (progress < 0.6) {
+								tl7part2.reverse();
+							}
+
+							if (progress === 0) {
+								if (tl7part2.progress() === 0) {
+									tl7part1.reverse();
+								} else {
+									tl7part2.progress(0);
+									tl7part1.reverse();
+								}
+							}
+						}
+					}
+				});
+
+				const gallery = document.querySelector(".gallery");
+				const galleryTl = gsap.timeline();
+				setIntersection(gallery, () => {
+					galleryTl
+						.to(".gallery__image", {
+							opacity: 1,
+							stagger: 0.2,
+							duration: 0.5,
+							ease: "none"
+						});
+				}, 0.3);
+
+				tl7part1
+					.to(".gallery-anim-image", {
+						opacity: 0,
+						duration: 0.2,
+						ease: "none"
+					})
+					.to(".gallery-anim-image-last", {
+						opacity: 1,
+						duration: 0.2,
+						ease: "none"
+					});
+
+				tl7part2
+					.to(".gallery__logo-icon", {
+						y: -150,
+						scale: 0.5,
+						duration: 0.5,
+						ease: "none"
+					})
+					.to(".gallery__text", {
+						opacity: 1,
+						y: 0,
+						duration: 0.5,
+						ease: "none"
+					})
+					.to(".gallery__link", {
+						opacity: 1,
+						y: 0,
+						duration: 0.5,
+						ease: "none"
+					});
 			}
 		);
 
@@ -1558,24 +1419,57 @@ document.addEventListener("DOMContentLoaded", () => {
 
 	// Смарт хэдер
 	const header = document.querySelector(".header");
-	const HEADER_SCROLL_HIDE = 3000;
+	const HEADER_SCROLL_HIDE = 100;
 	const media1280 = window.matchMedia("(min-width: 1280px)").matches;
 	let previousTop = window.scrollY;
-
-	header.classList.remove("header--hide");
+	let headerTimeout;
+	// Высота зоны у верхнего края экрана в пикселях, где курсор активирует шапку
+	// По умолчанию берем высоту самой шапки (или 100px как запасной вариант)
+	const MOUSE_TOP_ZONE = header ? header.offsetHeight + 20 : 100;
 
 	const setHeaderStyles = () => {
-		if (media1280) {
-			let currentTop = window.scrollY;
+		if (!media1280) return;
 
-			if (currentTop > HEADER_SCROLL_HIDE && currentTop > previousTop) {
-				header.classList.add("header--hide");
-			} else {
-				header.classList.remove("header--hide");
-			}
-			previousTop = currentTop;
+		let currentTop = window.scrollY;
+
+		clearTimeout(headerTimeout);
+
+		if (currentTop > HEADER_SCROLL_HIDE) {
+			// Показываем шапку во время самого процесса скролла (если она была скрыта)
+			header.classList.remove("header--hide");
+
+			// Запускаем таймер на 3 секунды бездействия
+			headerTimeout = setTimeout(() => {
+				// Скрываем только если пользователь не находится в самом верху страницы
+				if (window.scrollY > HEADER_SCROLL_HIDE) {
+					header.classList.add("header--hide");
+				}
+			}, 1000);
+
+		} else {
+			// Если мы вернулись в самый верх страницы, шапка всегда видна
+			header.classList.remove("header--hide");
 		}
+
+		previousTop = currentTop;
 	};
+
+	document.addEventListener("mousemove", (e) => {
+		if (!media1280) return;
+
+		if (e.clientY <= MOUSE_TOP_ZONE) {
+			// Если курсор зашел в верхнюю зону:
+			clearTimeout(headerTimeout);
+			header.classList.remove("header--hide");
+		} else if (header.classList.contains("header--hide") === false && window.scrollY > HEADER_SCROLL_HIDE) {
+			clearTimeout(headerTimeout);
+			headerTimeout = setTimeout(() => {
+				if (window.scrollY > HEADER_SCROLL_HIDE) {
+					header.classList.add("header--hide");
+				}
+			}, 1000);
+		}
+	});
 
 	document.addEventListener("scroll", () => {
 		setHeaderStyles();
@@ -1583,6 +1477,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 	setHeaderStyles();
 
+	let isAnimating = false;
 	function setActiveMenuItem(targetId) {
 		document.querySelectorAll(".anchor").forEach(link => {
 			if (link.getAttribute("href") === targetId) {
@@ -1593,40 +1488,65 @@ document.addEventListener("DOMContentLoaded", () => {
 		});
 	}
 
-	// Якорь со ссылок меню
+	const headerHeight = header ? header.offsetHeight : 80;
+
+	const observerOptions = {
+		root: null,
+		rootMargin: `-${headerHeight}px 0px -50% 0px`,
+		threshold: 0
+	};
+
+	const observer = new IntersectionObserver((entries) => {
+		if (isAnimating) return;
+
+		const visibleEntries = entries.filter(entry => entry.isIntersecting);
+
+		if (visibleEntries.length > 0) {
+			const targetId = `#${visibleEntries[0].target.id}`;
+			setActiveMenuItem(targetId);
+		}
+	}, observerOptions);
+
+	document.querySelectorAll(".anchor").forEach(anchor => {
+		const targetId = anchor.getAttribute("href");
+		if (targetId.startsWith("#")) {
+			const targetElement = document.querySelector(targetId);
+			if (targetElement) {
+				observer.observe(targetElement);
+			}
+		}
+	});
+
 	document.querySelectorAll(".anchor").forEach(anchor => {
 		anchor.addEventListener("click", function(e) {
 			e.preventDefault();
-
 			const targetId = this.getAttribute("href");
-			const targetTrigger = ScrollTrigger.getAll().find(st => st.vars.trigger === targetId);
 
-			if (targetTrigger) {
-				const scrollPosition = targetTrigger.start;
+			if (targetId.startsWith("#") && document.querySelector(targetId)) {
+				const targetElement = document.querySelector(targetId);
 
+				isAnimating = true; // Блокируем обсервер на время скролла к блоку
 				setActiveMenuItem(targetId);
 
 				gsap.to(window, {
-					duration: 1,
-					scrollTo: {
-						y: scrollPosition
-					},
+					duration: 0.8,
 					ease: "power2.out",
-					overwrite: "auto"
+					scrollTo: {
+						y: targetElement,
+						offsetY: headerHeight,
+						autoKill: false
+					},
+					overwrite: "auto",
+					onComplete: () => {
+						// Разблокируем обсервер чуть позже, когда страница полностью остановится
+						setTimeout(() => {
+							isAnimating = false;
+						}, 100);
+					}
 				});
-			} else {
-				const targetElement = document.querySelector(targetId);
-
+			}
+			else {
 				setActiveMenuItem(targetId);
-
-				if (targetElement) {
-					gsap.to(window, {
-						duration: 1,
-						scrollTo: { y: targetElement },
-						ease: "power2.out",
-						overwrite: "auto"
-					});
-				}
 			}
 
 			if (!media1280 && anchor.closest(".header__menu") !== null) {
