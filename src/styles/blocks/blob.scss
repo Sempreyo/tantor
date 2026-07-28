@@ -4,8 +4,8 @@
 	&--1 {
 		width: 1283px;
 		height: 1283px;
-		left: -400px;
-		bottom: -800px;
+		right: 50%;
+		bottom: -50vh;
 
 		@include max(d) {
 			left: 50%;

@@ -13,8 +13,6 @@
 
 		@include max(d) {
 			font-size: fluid(52, 64, 992, 1280);
-			opacity: 1;
-			transform: none;
 		}
 
 		@include max(tl) {
@@ -102,11 +100,6 @@
 			display: inline-block;
 			opacity: 0;
 			transform: translateX(-20px);
-
-			@include max(d) {
-				opacity: 1;
-				transform: none;
-			}
 		}
 
 		&::before {
@@ -137,7 +130,7 @@
 
 		@include max(ti) {
 			max-width: 100%;
-			min-width: 660px;
+			//min-width: 660px;
 		}
 	}
 
@@ -199,6 +192,18 @@
 		color: $color-background;
 		font-size: 20px;
 		white-space: nowrap;
+
+		&:nth-child(1) {
+			animation: moveRotate 7s linear infinite;
+		}
+
+		&:nth-child(2) {
+			animation: centeredRotate 4s linear infinite;
+		}
+
+		&:nth-child(3) {
+			animation: moveRotate2 20s linear infinite;
+		}
 
 		&--1 {
 			bottom: -1%;

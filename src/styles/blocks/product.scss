@@ -99,51 +99,11 @@
 			}
 
 			&:not(.swiper-slide-prev):not(.swiper-slide-next):not(.swiper-slide-active) {
-				transform: scale(0.3);
-
-				@include max(t) {
-					transform: unset;
-				}
-			}
-
-			&-prev {
-				transform: translateX(40%) scale(0.7);
-				cursor: pointer;
-
-				@include max(d) {
-					transform: translateX(77%) scale(0.7);
-				}
-
-				@include max(ti) {
-					transform: translateX(70%) scale(0.7);
-				}
-
-				@include max(t) {
-					transform: unset;
-				}
-			}
-
-			&-next {
-				transform: translateX(-40%) scale(0.7);
-				cursor: pointer;
-
-				@include max(d) {
-					transform: translateX(-77%) scale(0.7);
-				}
-
-				@include max(ti) {
-					transform: translateX(-70%) scale(0.7);
-				}
-
-				@include max(t) {
-					transform: unset;
-				}
+				opacity: 0 !important;
 			}
 
 			&-active {
 				z-index: 1;
-				opacity: 1;
-				transform: scale(1);
 			}
 		}
 	}

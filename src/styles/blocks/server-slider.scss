@@ -4,6 +4,7 @@
 	position: relative;
 	max-width: 37.6%;
 	margin: auto 0;
+	padding-bottom: 60px;
 	opacity: 0;
 	transform: translateX(-10px);
 
@@ -17,10 +18,10 @@
 		margin-top: 40px;
 	}
 
-	.swiper-slide-active #{$parent}__filler span {
+	/*.swiper-slide-active #{$parent}__filler span {
 		width: 100%;
 		transition: width 6s linear;
-	}
+	}*/
 
 	&__subtitle {
 		color: $black;
@@ -52,14 +53,9 @@
 	}
 
 	&__text {
-		max-width: 395px;
 		font-size: 18px;
 		line-height: 1.2;
 		margin-top: 16px;
-
-		@include max(d) {
-			max-width: 100%;
-		}
 
 		p + p {
 			margin-top: 20px;

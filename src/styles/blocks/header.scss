@@ -19,9 +19,11 @@
 		display: flex;
 		align-items: flex-end;
 		justify-content: space-between;
+		padding: 0 70px;
 
 		@include max(d) {
 			align-items: flex-start;
+			padding: 0 24px;
 		}
 	}
 

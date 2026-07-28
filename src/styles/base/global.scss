@@ -60,6 +60,10 @@ body {
 	white-space: normal;
 }
 
+.sections-wrapper {
+	position: relative;
+}
+
 .bottom-overflow {
 	overflow: hidden;
 }
@@ -80,8 +84,12 @@ main {
 }
 
 section {
-	height: 100vh !important;
+	height: auto !important;
 	background-color: $color-background;
+
+	@media (min-height: 900px) and (min-width: 1280px) {
+		height: 100vh !important;
+	}
 
 	@include max(d) {
 		height: auto !important;

@@ -31,200 +31,188 @@ block main
 				.hero__text
 					span.
 						Почему так трудно замещать западные решения в&nbsp;ключевых системах банков, энергетики, промышленности и&nbsp;других
-						отраслей с&nbsp;высокими требованиями – тысячи пользователей, потоки транзакций и&nbsp;тяжелая аналитика?
+						отраслей с&nbsp;высокими требованиями &mdash; тысячи пользователей, потоки транзакций и&nbsp;тяжелая аналитика?
 				.hero__text
 					span.
 						«Классический» PostgreSQL и&nbsp;его производные не&nbsp;позволяют это делать из-за архитектурных ограничений: нет
 						горизонтального масштабирования и&nbsp;нельзя эффективно обрабатывать смешанные нагрузки.
 				.hero__text
 					span.
-						Каким может быть выход - читайте в&nbsp;спецпроекте CNews.
-	section#anchor-2.server.scroll-2
-		+icon('blob-1', 'blob blob--2')
-		.server__container.container
-			.server__captions
-				.server__caption.server__caption--1.caption
-					.caption__subtitle Машина баз данных
-					.caption__title Tantor XData <sup>Gen3</sup>
-				.server__caption.server__caption--2.caption
-					.caption__title Новая точка сборки
-					.caption__subtitle enterprise-архитектуры
-			+picture('server-open', 'png', 'server__model-static', '')
-			.server-slider.swiper
-				.swiper-wrapper
-					.swiper-slide
-						.server-slider__subtitle
-							span Преодоление ограничений «классического» PostgreSQL
-							.server-slider__filler
-								span
-						.server-slider__title Горизонтальное масштабирование вычислений и&nbsp;хранения
-						.server-slider__text
-							p.
-								МБД Tantor XData Gen3 позволяет масштабировать Compute и Storage в&nbsp;любой момент в&nbsp;зависимости от&nbsp;нагрузки
-								в&nbsp;вашей информационной системе.
-							p.
-								Это именно то, чего недостает «классическому» PostgreSQL.
-						+button('Узнать больше', 'server-slider__link', '#', 'arrow-link')
-					.swiper-slide
-						.server-slider__subtitle
-							span Преодоление ограничений «классического» PostgreSQL
-							.server-slider__filler
-								span
-						.server-slider__title Горизонтальное масштабирование вычислений и&nbsp;хранения
-						.server-slider__text
-							p.
-								МБД Tantor XData Gen3 позволяет масштабировать Compute и Storage в&nbsp;любой момент в&nbsp;зависимости от&nbsp;нагрузки
-								в&nbsp;вашей информационной системе.
-							p.
-								Это именно то, чего недостает «классическому» PostgreSQL.
-						+button('Подробнее о Tantor XData Gen3', 'server-slider__link', '#', 'arrow-link')
-					.swiper-slide
-						.server-slider__subtitle
-							span Преодоление ограничений «классического» PostgreSQL
-							.server-slider__filler
-								span
-						.server-slider__title Единая платформа для транзакций и&nbsp;аналитики
-						.server-slider__text.
-							Впервые на российском рынке МБД Tantor XData Gen3 открывает полноценный HTAP — возможность параллельной
-							обработки смешанных нагрузок (OLAP+OLTP) на&nbsp;едином наборе данных без&nbsp;дублирования и&nbsp;лишних контуров.
-							Важно, что при этом не&nbsp;нарушается совместимость с&nbsp;PostgreSQL.
-						+button('Подробнее о Tantor XData Gen3', 'server-slider__link', '#', 'arrow-link')
-			.server__config
-				+icon('bracket')
-				span Начальная конфигурация
-			.server__boards
-				.board.board--light
-					.board__line
-					+icon('server', 'board__icon')
-					.board__text +1 сервер вычисления...
-				.board.board--light
-					.board__line
-					+icon('server', 'board__icon')
-					.board__text +1 сервер вычисления...
-				.board.board--light
-					.board__line
-					+icon('server', 'board__icon')
-					.board__text +1 сервер вычисления...
-			.server__boards.server__boards--bottom
-				.board.board--dark
-					.board__line
-					+icon('server', 'board__icon')
-					.board__text +1 сервер хранения...
-				.board.board--dark
-					.board__line
-					+icon('server', 'board__icon')
-					.board__text +1 сервер хранения...
-				.board.board--dark
-					.board__line
-					+icon('server', 'board__icon')
-					.board__text +1 сервер хранения...
-				.board.board--dark
-					.board__line
-					+icon('server', 'board__icon')
-					.board__text +1 сервер хранения...
-			.server__widget.server__widget--1.widget
-				+button('Транзакции', 'button--black widget__link', '#', 'arrow-link')
-				table.widget__table
-					tr
-						th ID/Клиент
-						th Сумма
-						th Статус
-					tr
-						td 10293847
-						td ₽4100
-						td ОК
-					tr
-						td 16267384
-						td ₽299.5
-						td Ожидает
-					tr
-						td 19290498
-						td ₽6670
-						td ОК
-					tr
-						td 04002881
-						td ₽2500
-						td ОК
-					tr
-						td 87492342
-						td ₽400
-						td ОК
-					tr
-						td 26401232
-						td ₽1000
-						td Ожидает
-					tr
-						td 10957366
-						td ₽600
-						td Ожидает
-					tr
-						td 98374551
-						td ₽420
-						td ОК
-					tr
-						td 00492213
-						td ₽119.5
-						td ОК
-			.server__widget.server__widget--2.widget
-				+button('Аналитика', 'button--black widget__link', '#', 'arrow-link')
-				.widget__title query.sql
-				.widget__code.
-					SELECT <br>
-					&nbsp;&nbsp;SUM(amount) AS revenue, <br>
-					&nbsp;&nbsp;COUNT(*) AS tx_count, <br>
-					&nbsp;&nbsp;AVG(amount) AS avg_check <br>
-					FROM transactions <br>
-					WHERE status = 'ok' <br>
-					&nbsp;&nbsp;AND created_at >= NOW() - "7d" <br>
-					GROUP BY day <br>
-					ORDER BY day ASC
-			.server__widget.server__widget--3.widget.widget--small
-				.widget__title Продажи
-				.widget__stats
-					.widget__stats-item
-						p Выручка
-						p ₽1.24 млн
-						p ↑ 8.3%
-					.widget__stats-item
-						p Транзакции
-						p 4 218
-						p ↑ 12%
-					.widget__stats-item
-						p Средний чек
-						p ₽294
-						p ↑ 2.1%
-				.widget__bars
-					.widget__bar
-						span Пн
-						span.widget__bar-progress(style='--percent: 55%')
-						span 55%
-					.widget__bar
-						span Вт
-						span.widget__bar-progress(style='--percent: 72%')
-						span 72%
-					.widget__bar
-						span Ср
-						span.widget__bar-progress(style='--percent: 48%')
-						span 48%
-					.widget__bar
-						span Чт
-						span.widget__bar-progress(style='--percent: 88%')
-						span 88%
-					.widget__bar
-						span Пт
-						span.widget__bar-progress(style='--percent: 95%')
-						span 95%
-					.widget__bar
-						span Сб
-						span.widget__bar-progress(style='--percent: 61%')
-						span 61%
-					.widget__bar
-						span Вс
-						span.widget__bar-progress(style='--percent: 78%')
-						span 78%
-				+icon('chart', 'widget__chart-icon')
+						Каким может быть выход &mdash; читайте в&nbsp;спецпроекте CNews.
+	.sections-wrapper
+		section#anchor-2.server.scroll-2
+			+icon('blob-1', 'blob blob--2')
+			.server__container.container
+				.server__captions
+					.server__caption.server__caption--1.caption
+						.caption__subtitle Машина баз данных
+						.caption__title Tantor XData <sup>Gen3</sup>
+					.server__caption.server__caption--2.caption
+						.caption__title Новая точка сборки
+						.caption__subtitle enterprise-архитектуры
+				+picture('server-open', 'png', 'server__model-static', '')
+				.server-slider.swiper
+					.swiper-wrapper
+						.swiper-slide
+							.server-slider__subtitle
+								span Преодоление ограничений «классического» PostgreSQL
+								.server-slider__filler
+									span
+							.server-slider__title Горизонтальное масштабирование вычислений и&nbsp;хранения
+							.server-slider__text
+								p.
+									МБД Tantor XData Gen3 позволяет масштабировать Compute и Storage в&nbsp;любой момент в&nbsp;зависимости от&nbsp;нагрузки
+									в&nbsp;вашей информационной системе.
+								p.
+									Это именно то, чего недостает «классическому» PostgreSQL.
+							+button('Подробнее о Tantor XData Gen3', 'server-slider__link', '#', 'arrow-link')
+						.swiper-slide
+							.server-slider__subtitle
+								span Преодоление ограничений «классического» PostgreSQL
+								.server-slider__filler
+									span
+							.server-slider__title Единая платформа для транзакций и&nbsp;аналитики
+							.server-slider__text.
+								Впервые на российском рынке МБД Tantor XData Gen3 открывает полноценный HTAP — возможность параллельной
+								обработки смешанных нагрузок (OLAP+OLTP) на&nbsp;едином наборе данных без&nbsp;дублирования и&nbsp;лишних контуров.
+								Важно, что при этом не&nbsp;нарушается совместимость с&nbsp;PostgreSQL.
+							+button('Подробнее о Tantor XData Gen3', 'server-slider__link', '#', 'arrow-link')
+					.server-slider__pagination.swiper-pagination
+				.server__slider-content
+					.server__config
+						+icon('bracket')
+						span Начальная конфигурация
+					.server__boards
+						.board.board--light.board--3
+							.board__line
+							+icon('server', 'board__icon')
+							.board__text +1 сервер вычисления...
+						.board.board--light.board--2
+							.board__line
+							+icon('server', 'board__icon')
+							.board__text +1 сервер вычисления...
+						.board.board--light.board--1
+							.board__line
+							+icon('server', 'board__icon')
+							.board__text +1 сервер вычисления...
+					.server__boards.server__boards--bottom
+						.board.board--dark.board--1
+							.board__line
+							+icon('server', 'board__icon')
+							.board__text +1 сервер хранения...
+						.board.board--dark.board--2
+							.board__line
+							+icon('server', 'board__icon')
+							.board__text +1 сервер хранения...
+						.board.board--dark.board--3
+							.board__line
+							+icon('server', 'board__icon')
+							.board__text +1 сервер хранения...
+						.board.board--dark.board--4
+							.board__line
+							+icon('server', 'board__icon')
+							.board__text +1 сервер хранения...
+					.server__widget.server__widget--1.widget
+						+button('Транзакции', 'button--black widget__link', '#', 'arrow-link')
+						table.widget__table
+							tr
+								th ID/Клиент
+								th Сумма
+								th Статус
+							tr
+								td 10293847
+								td ₽4100
+								td ОК
+							tr
+								td 16267384
+								td ₽299.5
+								td Ожидает
+							tr
+								td 19290498
+								td ₽6670
+								td ОК
+							tr
+								td 04002881
+								td ₽2500
+								td ОК
+							tr
+								td 87492342
+								td ₽400
+								td ОК
+							tr
+								td 26401232
+								td ₽1000
+								td Ожидает
+							tr
+								td 10957366
+								td ₽600
+								td Ожидает
+							tr
+								td 98374551
+								td ₽420
+								td ОК
+							tr
+								td 00492213
+								td ₽119.5
+								td ОК
+					.server__widget.server__widget--2.widget
+						+button('Аналитика', 'button--black widget__link', '#', 'arrow-link')
+						.widget__title query.sql
+						pre.widget__code
+					.server__widget.server__widget--3.widget.widget--small
+						.widget__title Продажи
+						.widget__stats
+							.widget__stats-item
+								p Выручка
+								p ₽1.24 млн
+								p ↑ 8.3%
+							.widget__stats-item
+								p Транзакции
+								p 4 218
+								p ↑ 12%
+							.widget__stats-item
+								p Средний чек
+								p ₽294
+								p ↑ 2.1%
+						.widget__bars
+							.widget__bar
+								span Пн
+								span.widget__bar-progress
+									span(style='--percent: 55%')
+								span 55%
+							.widget__bar
+								span Вт
+								span.widget__bar-progress
+									span(style='--percent: 72%')
+								span 72%
+							.widget__bar
+								span Ср
+								span.widget__bar-progress
+									span(style='--percent: 48%')
+								span 48%
+							.widget__bar
+								span Чт
+								span.widget__bar-progress
+									span(style='--percent: 88%')
+								span 88%
+							.widget__bar
+								span Пт
+								span.widget__bar-progress
+									span(style='--percent: 95%')
+								span 95%
+							.widget__bar
+								span Сб
+								span.widget__bar-progress
+									span(style='--percent: 61%')
+								span 61%
+							.widget__bar
+								span Вс
+								span.widget__bar-progress
+									span(style='--percent: 78%')
+								span 78%
+						+icon('chart', 'widget__chart-icon')
 		#model.server__model
-		.advantages.scroll-3
+		section.advantages.scroll-3
 			.container
 				.advantages__title.advantages-anim Ваши приложения «выросли» из PostgreSQL? <br> Не спешите их переписывать.
 				.advantages__top
@@ -374,7 +362,7 @@ block main
 	section#anchor-4.about.scroll-6
 		.container
 			.about__top
-				.about__title Технологическое лидерство – в каждом продукте Tantor
+				.about__title «Платформа Tantor»: <br> AI-first централизованное управление БД PostgreSQL
 				.about__text.
 					Единый технологический стек, в&nbsp;который входят СУБД для&nbsp;высоконагруженных систем, наиболее функциональная на&nbsp;российском
 					рынке платформа управления СУБД и&nbsp;машина баз данных, предоставляющая бизнесу целый ряд прорывных технологий.
@@ -386,7 +374,6 @@ block main
 							span Единый стек Tantor
 						.chart__window
 							.chart__list
-								.chart__list-item.chart-anim-1 СУБД Tantor Postgres
 								.chart__list-item.chart-anim-1 СУБД Tantor Postgres
 								.chart__list-item.chart-anim-1 Платформа Tantor
 								.chart__list-item.chart-anim-1 МБД Tantor XData

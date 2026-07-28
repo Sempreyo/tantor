@@ -43,6 +43,156 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 document.addEventListener("DOMContentLoaded", () => {
 	gsap.registerPlugin(ScrollTrigger);
 
+
+
+	// Смарт хэдер
+	const header = document.querySelector(".header");
+	const media1280 = window.matchMedia("(min-width: 1280px)").matches;
+
+	let isAnimating = false;
+	function setActiveMenuItem(targetId) {
+		document.querySelectorAll(".anchor").forEach(link => {
+			if (link.getAttribute("href") === targetId) {
+				link.classList.add("active");
+			} else {
+				link.classList.remove("active");
+			}
+		});
+	}
+
+	const headerHeight = header ? header.offsetHeight : 80;
+
+	const observerOptions = {
+		root: null,
+		rootMargin: `-${headerHeight}px 0px -50% 0px`,
+		threshold: 0
+	};
+
+	const observer = new IntersectionObserver((entries) => {
+		if (isAnimating) return;
+
+		const visibleEntries = entries.filter(entry => entry.isIntersecting);
+
+		if (visibleEntries.length > 0) {
+			const targetId = `#${visibleEntries[0].target.id}`;
+			setActiveMenuItem(targetId);
+		}
+	}, observerOptions);
+
+	document.querySelectorAll(".anchor").forEach(anchor => {
+		const targetId = anchor.getAttribute("href");
+		if (targetId.startsWith("#")) {
+			const targetElement = document.querySelector(targetId);
+			if (targetElement) {
+				observer.observe(targetElement);
+			}
+		}
+	});
+
+	document.querySelectorAll(".anchor").forEach(anchor => {
+		anchor.addEventListener("click", function(e) {
+			e.preventDefault();
+			const targetId = this.getAttribute("href");
+
+			if (targetId.startsWith("#") && document.querySelector(targetId)) {
+				const targetElement = document.querySelector(targetId);
+
+				isAnimating = true; // Блокируем обсервер на время скролла к блоку
+				setActiveMenuItem(targetId);
+
+				gsap.to(window, {
+					duration: 0.8,
+					ease: "power2.out",
+					scrollTo: {
+						y: targetElement,
+						offsetY: headerHeight,
+						autoKill: false
+					},
+					overwrite: "auto",
+					onComplete: () => {
+						// Разблокируем обсервер чуть позже, когда страница полностью остановится
+						setTimeout(() => {
+							isAnimating = false;
+						}, 100);
+					}
+				});
+			}
+			else {
+				setActiveMenuItem(targetId);
+			}
+
+			if (!media1280 && anchor.closest(".header__menu") !== null) {
+				openNav();
+			}
+		});
+	});
+
+	// Мобильное меню
+	const openNav = () => {
+		let bodyState = document.body.getAttribute("data-state");
+
+		if (bodyState === "mobile-menu") {
+			document.body.dataset.state = "";
+		} else {
+			document.body.dataset.state = "mobile-menu";
+		}
+	}
+	const burger = document.querySelector(".header__burger");
+	const closeButtonMenu = document.querySelector(".header__menu-close");
+
+	burger.addEventListener("click", openNav);
+	closeButtonMenu.addEventListener("click", openNav);
+
+	// Бегущая строка
+	const marqueeContainer = document.querySelector('.migration__marquee');
+	const marqueeInner = document.querySelector('.migration__marquee-inner');
+
+	// Дублируем блок 4 раза, чтобы точно забить экраны любой ширины
+	for (let i = 0; i < 4; i++) {
+		const clone = marqueeInner.cloneNode(true);
+
+		clone.setAttribute("aria-hidden", "true");
+		marqueeContainer.appendChild(clone);
+	}
+
+	gsap.to(".migration__marquee-inner", {
+		xPercent: -100,
+		ease: "none",
+		duration: 20,
+		repeat: -1
+	});
+
+	// Кнопка Наверх
+	const buttonUp = document.querySelector(".button-up");
+
+	const initButtonUp = () => {
+		if (buttonUp) {
+			window.addEventListener("scroll", buttonUpHandler);
+
+			buttonUp.addEventListener("click", () => {
+				document.querySelector("body").scrollIntoView({
+					behavior: 'smooth'
+				});
+			});
+		}
+	}
+
+	const buttonUpHandler = () => {
+		scroll = window.pageYOffset;
+
+		if (scroll > 300) {
+			buttonUp.classList.add("button-up--visible");
+		} else {
+			buttonUp.classList.remove("button-up--visible");
+		}
+	}
+
+	initButtonUp();
+
+
+
+
+
 	const setIntersection = (target, fn, threshold = 0) => {
 		if (target) {
 			const observer = new IntersectionObserver((entries) => {
@@ -252,7 +402,7 @@ document.addEventListener("DOMContentLoaded", () => {
 	let start = Date.now();
 
 	function wiggleLoop() {
-		const elapsed = (Date.now() - start) * 0.0012; // Скорость анимации
+		const elapsed = (Date.now() - start) * 0.0212; // Скорость анимации
 
 		Graph.d3ReheatSimulation();
 
@@ -286,6 +436,32 @@ document.addEventListener("DOMContentLoaded", () => {
 	setTimeout(() => {
 		Graph.zoomToFit(400, 10);
 	}, 100);
+
+
+
+	// Анимации на первом экране
+	const hero = document.querySelector(".hero");
+	const heroRight = document.querySelector(".hero__right");
+
+	setIntersection(hero, () => {
+		gsap.to(".hero__title", {
+			opacity: 1,
+			y: 0,
+			duration: 0.4,
+			ease: "none"
+		});
+	});
+
+	setIntersection(heroRight, () => {
+		gsap.to(".hero__text span", {
+			opacity: 1,
+			x: 0,
+			duration: 0.4,
+			delay: 0.3,
+			stagger: 0.2,
+			ease: "none"
+		});
+	});
 
 	mm.add("(min-width: 1280px)", () => {
 		const scene = new THREE.Scene();
@@ -393,16 +569,21 @@ document.addEventListener("DOMContentLoaded", () => {
 				// Показываем страницу когда модель загрузилась
 				document.body.classList.remove("hidden");
 
+				const modelPivot = new THREE.Group();
+				scene.add(modelPivot);
+
 				model = gltf.scene;
 
-				// Центрирование модели автоматически
+				// Расчет центра модели
 				const box = new THREE.Box3().setFromObject(model);
 				const center = box.getCenter(new THREE.Vector3());
-				model.position.x += (model.position.x - center.x);
-				model.position.z += (model.position.z - center.z);
+				model.position.x = -center.x;
+				model.position.y = -center.y;
+				model.position.z = -center.z;
+				modelPivot.position.y = center.y;
 				//model.scale.set(0, 1, 0);
 
-				scene.add(model);
+				modelPivot.add(model);
 				doorObject = model.getObjectByName("0-Door");
 
 				// Собираем все материалы внутри двери в один массив
@@ -430,39 +611,24 @@ document.addEventListener("DOMContentLoaded", () => {
 					});
 				}
 
-
-
-				// Анимации на первом экране
-				const hero = document.querySelector(".hero");
-				const heroRight = document.querySelector(".hero__right");
-
-				setIntersection(hero, () => {
-					gsap.to(".hero__title", {
-						opacity: 1,
-						y: 0,
-						duration: 0.4,
-						ease: "none"
-					});
-				});
-
-				setIntersection(heroRight, () => {
-					gsap.to(".hero__text span", {
-						opacity: 1,
-						x: 0,
-						duration: 0.4,
-						delay: 0.3,
-						stagger: 0.2,
-						ease: "none"
-					});
-				});
-
 				const tl1 = gsap.timeline({
 					scrollTrigger: {
 						trigger: "#anchor-1",
 						start: "top top",
-						end: "top top",
+						end: "bottom top",
 						invalidateOnRefresh: true,
-						toggleActions: "play none none reverse"
+						paused: true,
+						//toggleActions: "play none reset none",
+						onUpdate: (self) => {
+							const progress = self.progress; // значение от 0 (начало фиксации) до 1 (конец фиксации)
+
+							if (progress > 0 && progress < 0.7) {
+								tl1.play();
+							} else {
+								tl1.pause(0);
+								self.kill();
+							}
+						}
 					}
 				});
 
@@ -475,94 +641,92 @@ document.addEventListener("DOMContentLoaded", () => {
 						y: -111,
 						scale: 0.2,
 						rotate: 0,
-						duration: 0.2,
-						ease: "none",
+						duration: 0.5,
+						ease: "power2.out",
 						overwrite: "auto"
 					})
 					.to(".hero__machine--2", {
 						x: "-2%",
 						scale: 0.2,
 						rotate: "5deg",
-						duration: 0.2,
-						ease: "none",
+						ease: "power2.out",
 						overwrite: "auto"
 					}, "<")
 					.to(".hero__machine--3", {
 						x: "-72%",
 						scale: 0.2,
 						rotate: 0,
-						duration: 0.2,
-						ease: "none",
+						ease: "power2.out",
 						overwrite: "auto"
 					}, "<")
 					// Подписи к серверам перемещаются в погрузчик
 					.to(".hero__label--1", {
+						animation: "none",
 						x: 195,
 						y: -210,
 						scale: 0.8,
 						rotate: "-3deg",
-						duration: 0.2,
-						ease: "none",
+						duration: 0.5,
+						ease: "power2.out",
 						overwrite: "auto"
 					})
 					.to(".hero__label--2", {
+						animation: "none",
 						x: 2,
 						y: -45,
 						scale: 0.8,
 						rotate: 0,
-						duration: 0.2,
-						ease: "none",
+						ease: "power2.out",
 						overwrite: "auto"
-					})
+					}, "<")
 					.to(".hero__label--3", {
+						animation: "none",
 						x: -163,
 						y: -228,
 						scale: 0.8,
 						rotate: "5deg",
-						duration: 0.2,
-						ease: "none",
+						ease: "power2.out",
 						overwrite: "auto"
-					})
+					}, "<")
 					// Погрузчик с серверами уезжает влево за экран
 					.to(".hero__machines", {
 						x: coords.x,
 						y: coords.y,
-						duration: 0.4,
-						ease: "none",
+						duration: 0.6,
+						ease: "power2.out",
 						overwrite: "auto"
-					})
-					.to(".hero__left", {
-						x: "-100vw",
-						duration: 0.8,
-						ease: "none",
-						overwrite: "auto"
-					})
+					}, "+=0.3")
 					.to(".blob--1", {
 						opacity: 0,
 						scale: 0,
-						ease: "none",
+						ease: "power2.out",
 						duration: 1
-					});
+					}, "+=0.5")
+					.to(".hero__left", {
+						x: "-100vw",
+						duration: 2,
+						ease: "power2.out",
+						overwrite: "auto"
+					}, "<");
 
 				const tl2part1 = gsap.timeline({ paused: true });
 				const tl2part2 = gsap.timeline({ paused: true });
-				const tl2part3 = gsap.timeline({ paused: true });
 				const tl2 = gsap.timeline({
 					scrollTrigger: {
-						trigger: "#anchor-2",
-						start: "top top",
-						end: "+=300%",
+						trigger: ".sections-wrapper",
+						start: `top ${headerHeight}px`,
+						end: "+=200%",
 						pin: true,
 						onUpdate: (self) => {
 							const progress = self.progress; // значение от 0 (начало фиксации) до 1 (конец фиксации)
 
 							// Запускаем первый цикл
-							if (progress > 0 && progress < 0.3) {
+							if (progress > 0.1 && progress < 0.5) {
 								tl2part1.play();
 							}
 
-							// Скролл ниже 35%: Запускаем второй цикл в том случае, если первый завершился
-							if (progress >= 0.35 && progress < 0.7) {
+							// Скролл ниже 55%
+							if (progress >= 0.55) {
 								if (tl2part1.progress() === 1) {
 									tl2part2.play();
 								} else {
@@ -571,32 +735,11 @@ document.addEventListener("DOMContentLoaded", () => {
 								}
 							}
 
-							// Скролл ниже 75%: Запускаем третий цикл в том случае, если второй завершился
-							if (progress >= 0.75) {
-								if (tl2part2.progress() === 1) {
-									tl2part3.play();
-								} else {
-									// Принудительно завершаем промежуточный, чтобы избежать каши на экране
-									tl2part2.progress(1);
-									tl2part3.play();
-								}
+							// Реверс
+							if (progress < 0.5) {
+								tl2part2.reverse();
 							}
 
-							// Реверс
-							// Если крутим вверх и поднялись выше третьего цикла
-							if (progress < 0.7) {
-								tl2part3.reverse();
-							}
-							// Если поднялись выше второго цикла
-							if (progress < 0.32) {
-								if (tl2part3.progress() === 0) {
-									tl2part2.reverse();
-								} else {
-									tl2part3.progress(0);
-									tl2part2.reverse();
-								}
-							}
-							// Если вернулись в самое начало
 							if (progress === 0) {
 								if (tl2part2.progress() === 0) {
 									tl2part1.reverse();
@@ -616,15 +759,8 @@ document.addEventListener("DOMContentLoaded", () => {
 						ease: "none",
 						duration: 1
 					})
-					// Масштабирование модели
-					/*.to(model.scale, {
-						x: 1,
-						z: 1,
-						duration: 0.7,
-						ease: "none"
-					})*/
 					// Вращение модели на 1 оборот
-					.to(model.rotation, {
+					.to(modelPivot.rotation, {
 						y: Math.PI * 2,
 						ease: "none",
 						duration: 1.4
@@ -679,92 +815,22 @@ document.addEventListener("DOMContentLoaded", () => {
 						ease: "power2.out",
 						overwrite: "auto"
 					})
-					.to(".server__config", {
+					.to(".server__slider-content", {
 						opacity: 1,
-						x: 0,
-						duration: 0.5,
-						ease: "power2.out",
-						overwrite: "auto"
-					})
-					.to(".board--light", {
-						opacity: 1,
-						x: 0,
-						stagger: 0.2,
-						duration: 0.5,
-						ease: "power2.out",
-						overwrite: "auto"
-					})
-					.to(".board--dark", {
-						opacity: 1,
-						x: 0,
-						stagger: 0.2,
-						duration: 0.5,
-						ease: "power2.out",
-						overwrite: "auto"
-					});
-
-				tl2part2
-					.to(".server__config", {
-						opacity: 0,
-						x: -10,
-						stagger: 0.2,
-						duration: 0.5,
-						ease: "power2.out",
-						overwrite: "auto"
-					})
-					.to(".board--light", {
-						opacity: 0,
-						x: -10,
-						stagger: 0.2,
-						duration: 0.5,
-						ease: "power2.out",
-						overwrite: "auto"
-					}, "<")
-					.to(".board--dark", {
-						opacity: 0,
-						x: -10,
-						stagger: 0.2,
-						duration: 0.5,
-						ease: "power2.out",
-						overwrite: "auto"
-					}, "<")
-					.to(".server__widget", {
-						opacity: 1,
-						stagger: 0.2,
-						duration: 0.5,
 						ease: "power2.out",
 						overwrite: "auto"
 					}, "<");
 
-				tl2part3
+				tl2part2
 					.to(".blob--2", {
 						opacity: 0,
 						duration: 0.5,
 						ease: "power2.out",
 						overwrite: "auto"
-					})
-					.to(".server__container", {
-						opacity: 0,
-						duration: 0.5,
-						ease: "power2.out",
-						overwrite: "auto"
-					}, "<")
-					.to(".advantages", {
-						opacity: 1,
-						duration: 0.5,
-						ease: "power2.out",
-						overwrite: "auto"
-					}, "<")
-					.to(".advantages-anim", {
-						opacity: 1,
-						y: 0,
-						stagger: 0.2,
-						duration: 0.5,
-						ease: "power2.out",
-						overwrite: "auto"
-					}, "+=0.5")
+					});
+
 					// Смена ракурса со смещением на 3 блок
-					.to(model.position, {
+					/*.to(model.position, {
 						x: () => getLeftPositionX(-2.4, window.matchMedia("(min-width: 1800px)").matches ? 0.11 : 0.14), // Сдвиг влево
 						y: getTopPositionY(-2.4, 0.28), // Сдвиг вниз
 						z: -2.4, // Масштаб
@@ -799,6 +865,158 @@ document.addEventListener("DOMContentLoaded", () => {
 							ease: "none"
 						}, "<");
 					}
+				}*/
+
+				const advantages = document.querySelector(".advantages");
+				const tl4Content = gsap.timeline({ paused: true });
+				const tl4 = gsap.timeline({ paused: true });
+				const tl4Leave = gsap.timeline({ paused: true });
+
+				tl4Content
+					.to(".advantages-anim", {
+						opacity: 1,
+						y: 0,
+						stagger: 0.2,
+						duration: 0.5,
+						ease: "power2.out",
+						overwrite: "auto"
+					});
+
+				tl4
+					.to("#model", {
+						top: "unset",
+						opacity: 0,
+						duration: 0,
+						ease: "none"
+					})
+					.to(model.position, {
+						x: () => getLeftPositionX(-2.4, window.matchMedia("(min-width: 1800px)").matches ? -0.11 : -0.14),
+						y: 0,
+						z: 0,
+						duration: 0,
+						ease: "none"
+					})
+					// Начальные позиции света (должны дублировать ваши исходные значения)
+					.to(mainLight.position, { x: 2, y: 4, z: 15, duration: 0, ease: "none" }, "<")
+					.to(fillLight.position, { x: -6, y: 2, z: 2, duration: 0, ease: "none" }, "<")
+					.to(backgroundLight.position, { x: 0, y: 0, z: -3, duration: 0, ease: "none" }, "<")
+					.to(innerLight.position, { x: 0, y: 0, z: -0.3, duration: 0, ease: "none" }, "<")
+					.to("#model", {
+						opacity: 1,
+						duration: 0.3,
+						ease: "none"
+					})
+					.to(model.position, {
+						x: () => getLeftPositionX(
+							-2.4,
+							window.matchMedia("(min-width: 2200px)").matches ? 0.08 :
+								window.matchMedia("(min-width: 1800px)").matches ? 0.11 :
+								0.14
+						),
+						// Сдвиг влево
+						y: getTopPositionY(-2.4, 0.45), // Сдвиг вниз
+						z: -2.4, // Масштаб
+						duration: 1.5,
+						ease: "none"
+					})
+					// Анимируем ГЛАВНЫЙ СВЕТ вслед за моделью (сдвигаем влево и немного уводим вглубь по Z)
+					.to(mainLight.position, {
+						x: 16,
+						y: 3,
+						z: 6.5,
+						duration: 1.5,
+						ease: "none"
+					}, "<")
+					// Анимируем ЗАПОЛНЯЮЩИЙ СВЕТ (уводим еще дальше влево и назад для контуров)
+					.to(fillLight.position, {
+						x: -8,
+						y: 1,
+						z: -1.5,
+						duration: 1.5,
+						ease: "none"
+					}, "<")
+					// Анимируем ФОНОВЫЙ СВЕТ (он привязан к центру модели, поэтому должен идеально повторять её координаты)
+					.to(backgroundLight.position, {
+						x: () => model.position.x,
+						y: getTopPositionY(-2.4, 0.45),
+						z: -5.4,
+						duration: 1.5,
+						ease: "none"
+					}, "<")
+					// Анимируем ВНУТРЕННИЙ СВЕТ (всегда движется строго внутри геометрии модели)
+					.to(innerLight.position, {
+						x: () => model.position.x,
+						y: getTopPositionY(-2.4, 0.45),
+						z: -2.7,
+						duration: 1.5,
+						ease: "none"
+					}, "<")
+					.to(model.rotation, {
+						y: 0.88, // Отрицательное значение вращает модель влево
+						duration: 0.5,
+						ease: "none"
+					}, "<");
+
+				// Закрытие двери
+				if (doorObject) {
+					tl4.to(doorObject.rotation, {
+						y: 0,
+						duration: 0.5,
+						ease: "none"
+					});
+
+					if (doorMaterials.length > 0) {
+						tl4.to(doorMaterials, {
+							opacity: 1,
+							duration: 0.5,
+							ease: "none"
+						}, "<");
+					}
+				}
+
+				tl4
+					.to(".advantages__item", {
+						opacity: 1,
+						x: 0,
+						stagger: 0.3,
+						duration: 0.5,
+						ease: "none"
+					});
+
+				tl4Leave
+					.to("#model", {
+						top: 0,
+						opacity: 1,
+						duration: 0,
+						ease: "none"
+					})
+					.to(model.position, {
+						x: -center.x,
+						y: -center.y,
+						z: -center.z,
+						duration: 0.5,
+						ease: "none"
+					})
+					.to(model.rotation, {
+						y: 0,
+						duration: 0.5,
+						ease: "none"
+					}, "<");
+
+				if (advantages) {
+					const observer = new IntersectionObserver((entries) => {
+						entries.forEach((entry) => {
+							if (entry.isIntersecting) {
+								tl4.play();
+								tl4Content.play();
+							} else {
+								tl4.pause(0).invalidate();
+								tl4Leave.play(0);
+							}
+						});
+					}, { threshold: 0.5 });
+
+					observer.observe(advantages);
 				}
 
 				const tl5 = gsap.timeline({
@@ -812,16 +1030,9 @@ document.addEventListener("DOMContentLoaded", () => {
 				});
 
 				tl5
-					.to(".product__logo", {
-						scale: 1,
-						xPercent: -50,
-						y: -60,
-						transformOrigin: "center top",
-						duration: 0.2,
-						ease: "none"
-					})
 					.to(".product__logo-image", {
 						scale: 0.3,
+						y: -60,
 						duration: 0.2,
 						ease: "none"
 					})
@@ -841,46 +1052,22 @@ document.addEventListener("DOMContentLoaded", () => {
 						ease: "none"
 					});
 
-				const tl6part1 = gsap.timeline({ paused: true });
-				const tl6part2 = gsap.timeline({ paused: true });
 				const tl6 = gsap.timeline({
+					paused: true,
+					repeat: -1,
+					repeatDelay: 3.5,
 					scrollTrigger: {
 						trigger: "#anchor-4",
-						start: "top top",
-						end: "+=300%",
+						start: `-50% ${headerHeight}px`,
+						end: "bottom top",
 						invalidateOnRefresh: true,
-						toggleActions: "play none none reverse",
-						pin: true,
 						onUpdate: (self) => {
 							const progress = self.progress; // значение от 0 (начало фиксации) до 1 (конец фиксации)
 
-							// Запускаем первый цикл
-							if (progress > 0.3 && progress < 0.6) {
-								tl6part1.play();
-							}
-
-							// Скролл ниже 55%
-							if (progress >= 0.65) {
-								if (tl6part1.progress() === 1) {
-									tl6part2.play();
-								} else {
-									tl6part1.progress(1);
-									tl6part2.play();
-								}
-							}
-
-							// Реверс
-							if (progress < 0.6) {
-								tl6part2.reverse();
-							}
-
-							if (progress === 0) {
-								if (tl6part2.progress() === 0) {
-									tl6part1.reverse();
-								} else {
-									tl6part2.progress(0);
-									tl6part1.reverse();
-								}
+							if (progress > 0 && progress < 0.85) {
+								tl6.play();
+							} else {
+								tl6.pause(0);
 							}
 						}
 					}
@@ -907,7 +1094,9 @@ document.addEventListener("DOMContentLoaded", () => {
 							y: 0,
 							duration: 0.5,
 							ease: "none"
-						})
+						});
+
+					tl6
 						.to(".chart--1", {
 							opacity: 1,
 							duration: 0.4,
@@ -919,42 +1108,38 @@ document.addEventListener("DOMContentLoaded", () => {
 							stagger: 0.1,
 							duration: 0.4,
 							ease: "none"
-						});
+						}, "<")
+						.to(".chart--2", {
+							opacity: 1,
+							duration: 0.4,
+							ease: "none"
+						}, "+=3.5")
+						.to(".chart-anim-2", {
+							opacity: 1,
+							y: 0,
+							duration: 0.4,
+							ease: "none"
+						}, "<")
+						.fromTo(".chart__bar", {
+							height: 0
+						}, {
+							height: (index, target) => getComputedStyle(target).getPropertyValue("--bar-height").trim(),
+							stagger: 0.1,
+							duration: 0.4,
+							ease: "none"
+						}, "<")
+						.to(".chart--3", {
+							opacity: 1,
+							duration: 0.4,
+							ease: "none"
+						}, "+=3.5")
+						.to(".chart-anim-3", {
+							opacity: 1,
+							y: 0,
+							duration: 0.4,
+							ease: "none"
+						}, "<");
 				}, 0.3);
-
-				tl6part1
-					.to(".chart--2", {
-						opacity: 1,
-						duration: 0.4,
-						ease: "none"
-					})
-					.to(".chart-anim-2", {
-						opacity: 1,
-						y: 0,
-						duration: 0.4,
-						ease: "none"
-					})
-					.fromTo(".chart__bar", {
-						height: 0
-					}, {
-						height: (index, target) => getComputedStyle(target).getPropertyValue("--bar-height").trim(),
-						stagger: 0.1,
-						duration: 0.4,
-						ease: "none"
-					});
-
-				tl6part2
-					.to(".chart--3", {
-						opacity: 1,
-						duration: 0.4,
-						ease: "none"
-					})
-					.to(".chart-anim-3", {
-						opacity: 1,
-						y: 0,
-						duration: 0.4,
-						ease: "none"
-					});
 
 				const tl7part1 = gsap.timeline({ paused: true });
 				const tl7part2 = gsap.timeline({ paused: true });
@@ -962,8 +1147,8 @@ document.addEventListener("DOMContentLoaded", () => {
 				const tl7 = gsap.timeline({
 					scrollTrigger: {
 						trigger: "#anchor-5",
-						start: "top top",
-						end: "+=300%",
+						start: `top ${headerHeight}px`,
+						end: "+=200%",
 						invalidateOnRefresh: true,
 						toggleActions: "play none none reverse",
 						pin: true,
@@ -1093,82 +1278,110 @@ document.addEventListener("DOMContentLoaded", () => {
 	});
 
 	mm.add("(max-width: 1279px)", () => {
-		const tl1 = gsap.timeline();
-		const heroLeft = document.querySelector(".hero__left");
+		const tl1 = gsap.timeline({
+			scrollTrigger: {
+				trigger: "#anchor-1",
+				start: "top top",
+				end: "bottom top",
+				invalidateOnRefresh: true,
+				paused: true,
+				//toggleActions: "play none reset none",
+				onUpdate: (self) => {
+					const progress = self.progress; // значение от 0 (начало фиксации) до 1 (конец фиксации)
 
-		setIntersection(heroLeft, () => {
-			tl1
-				.to(".hero__machine--1", {
-					xPercent: 0,
-					y: "-8vw",
-					left: 0,
-					scale: 0.2,
-					rotate: 0,
-					duration: 0.7,
-					ease: "none"
-				}, 0)
-				.to(".hero__machine--2", {
-					xPercent: -75,
-					y: "1.6vw",
-					scale: 0.2,
-					rotate: "5deg",
-					duration: 0.7,
-					ease: "none"
-				}, 0)
-				.to(".hero__machine--3", {
-					xPercent: -159,
-					y: "0.6vw",
-					right: 0,
-					scale: 0.2,
-					rotate: 0,
-					duration: 0.7,
-					ease: "none"
-				}, 0);
+					if (progress > 0 && progress < 0.7) {
+						tl1.play();
+					} else {
+						tl1.pause(0);
+						self.kill();
+					}
+				}
+			}
+		});
 
-			tl1
-				.to(".hero__label--1", {
-					xPercent: 20,
-					y: -150,
-					left: 0,
-					scale: 0.8,
-					rotate: "-3deg",
-					duration: 0.7,
-					ease: "none"
-				}, 0)
-				.to(".hero__label--2", {
-					xPercent: 7,
-					y: -39,
-					left: 0,
-					scale: 0.8,
-					rotate: 0,
-					duration: 0.7,
-					ease: "none"
-				}, 0)
-				.to(".hero__label--3", {
-					xPercent: 100,
-					y: -216,
-					left: 0,
-					scale: 0.8,
-					rotate: "5deg",
-					duration: 0.7,
-					ease: "none"
-				}, 0);
+		const coords = getMoveCoords();
 
-			const coords = getMoveCoords();
+		tl1
+			.to(".hero__machine--1", {
+				xPercent: 0,
+				y: "-8vw",
+				left: 0,
+				scale: 0.2,
+				rotate: 0,
+				duration: 0.7,
+				ease: "power2.out",
+				overwrite: "auto"
+			})
+			.to(".hero__machine--2", {
+				xPercent: -75,
+				y: "1.6vw",
+				scale: 0.2,
+				rotate: "5deg",
+				ease: "power2.out",
+				overwrite: "auto"
+			}, "<")
+			.to(".hero__machine--3", {
+				xPercent: -159,
+				y: "0.6vw",
+				right: 0,
+				scale: 0.2,
+				rotate: 0,
+				ease: "power2.out",
+				overwrite: "auto"
+			}, "<");
 
-			tl1
-				.to(".hero__machines", {
-					x: coords.x + 150,
-					y: coords.y,
-					duration: 0.7,
-					ease: "none"
-				}, 0.7)
-				.to(".hero__left", {
-					x: "-100vw",
-					duration: 1.4,
-					ease: "none"
-				}, 1.7);
-		}, 0.5);
+		tl1
+			.to(".hero__label--1", {
+				animation: "none",
+				xPercent: -36,
+				y: -100,
+				left: 0,
+				scale: 0.8,
+				rotate: "-3deg",
+				duration: 0.7,
+				ease: "power2.out",
+				overwrite: "auto"
+			}, "<")
+			.to(".hero__label--2", {
+				animation: "none",
+				xPercent: 7,
+				y: -39,
+				left: 0,
+				scale: 0.8,
+				rotate: 0,
+				ease: "power2.out",
+				overwrite: "auto"
+			}, "<")
+			.to(".hero__label--3", {
+				animation: "none",
+				xPercent: -40,
+				y: -132,
+				left: 0,
+				scale: 0.8,
+				rotate: "5deg",
+				ease: "power2.out",
+				overwrite: "auto"
+			}, "<");
+
+		tl1
+			.to(".hero__machines", {
+				x: coords.x + 70,
+				y: coords.y,
+				duration: 0.7,
+				ease: "power2.out",
+				overwrite: "auto"
+			}, "+=0.3")
+			.to(".blob--1", {
+				opacity: 0,
+				scale: 0,
+				ease: "power2.out",
+				duration: 1
+			}, "+=0.5")
+			.to(".hero__left", {
+				x: "-100vw",
+				ease: "power2.out",
+				overwrite: "auto"
+			}, "<");
 
 		const serverCaptions = document.querySelector(".server__caption");
 		const serverConfig = document.querySelector(".server__config");
@@ -1218,13 +1431,65 @@ document.addEventListener("DOMContentLoaded", () => {
 		});
 
 		setIntersection(serverWidgets, () => {
-			gsap
-				.to(".server__widget", {
+			const tlWidgets = gsap.timeline();
+			const typingText = `SELECT
+  SUM(amount) AS revenue,
+  COUNT(*) AS tx_count,
+  AVG(amount) AS avg_check
+FROM transactions
+WHERE status = 'ok'
+  AND created_at >= NOW() - "7d"
+GROUP BY day
+ORDER BY day ASC`;
+			const typingObj = { length: 0 };
+
+			tlWidgets
+				.to(".widget__link", {
 					opacity: 1,
-					duration: 0.7,
-					stagger: 0.3,
+					x: 0,
+					duration: 0.3,
+					ease: "none",
+					overwrite: "auto"
+				})
+				.to(".widget__title", {
+					opacity: 1,
+					duration: 0.3,
+					ease: "none",
+					overwrite: "auto"
+				})
+				.to(".widget__code, .widget__stats, .widget__bars, .widget__chart-icon", {
+					opacity: 1,
+					stagger: 0.1,
+					duration: 0.5,
+					ease: "none",
+					overwrite: "auto"
+				})
+				.to(".widget__table tr", {
+					opacity: 1,
+					y: 0,
+					borderColor: "rgba(22, 22, 22, 0.6)",
+					stagger: 0.1,
+					duration: 0.3,
+					ease: "none",
+					overwrite: "auto"
+				}, "<")
+				.to(typingObj, {
+					length: typingText.length,
+					duration: 3,
+					ease: "none",
+					overwrite: "auto",
+					onUpdate: () => {
+						document.querySelector(".widget__code").textContent = typingText.substring(0, Math.floor(typingObj.length));
+					}
+				}, "<")
+				.fromTo(".widget__bar-progress span", {
+					width: 0
+				}, {
+					width: (index, target) => getComputedStyle(target).getPropertyValue("--percent").trim(),
+					stagger: 0.1,
+					duration: 0.5,
 					ease: "none"
-				});
+				}, "<");
 		});
 
 		setIntersection(serverSlider, () => {
@@ -1361,6 +1626,110 @@ document.addEventListener("DOMContentLoaded", () => {
 
 	if (serverCarousel.length > 0) {
 		serverCarousel.forEach(el => {
+			const serverPagination = el.querySelector(".server-slider__pagination");
+			const tlSlide1 = gsap.timeline({ paused: true });
+			const tlSlide2 = gsap.timeline({ paused: true });
+
+			tlSlide1
+				.to(".server__config", {
+					opacity: 1,
+					x: 0,
+					duration: 0.5,
+					ease: "power2.out",
+					overwrite: "auto"
+				})
+				.to(".board--1", {
+					opacity: 1,
+					x: 0,
+					stagger: 0.1,
+					duration: 0.3,
+					ease: "power2.out",
+					overwrite: "auto"
+				})
+				.to(".board--2", {
+					opacity: 1,
+					x: 0,
+					stagger: 0.1,
+					duration: 0.3,
+					ease: "power2.out",
+					overwrite: "auto"
+				})
+				.to(".board--3", {
+					opacity: 1,
+					x: 0,
+					stagger: 0.1,
+					duration: 0.3,
+					ease: "power2.out",
+					overwrite: "auto"
+				})
+				.to(".board--4", {
+					opacity: 1,
+					x: 0,
+					stagger: 0.1,
+					duration: 0.3,
+					ease: "power2.out",
+					overwrite: "auto"
+				});
+
+			const typingText = `SELECT
+  SUM(amount) AS revenue,
+  COUNT(*) AS tx_count,
+  AVG(amount) AS avg_check
+FROM transactions
+WHERE status = 'ok'
+  AND created_at >= NOW() - "7d"
+GROUP BY day
+ORDER BY day ASC`;
+			const typingObj = { length: 0 };
+
+			tlSlide2
+				.to(".widget__link", {
+					opacity: 1,
+					x: 0,
+					duration: 0.3,
+					ease: "none",
+					overwrite: "auto"
+				})
+				.to(".widget__title", {
+					opacity: 1,
+					duration: 0.3,
+					ease: "none",
+					overwrite: "auto"
+				})
+				.to(".widget__code, .widget__stats, .widget__bars, .widget__chart-icon", {
+					opacity: 1,
+					stagger: 0.1,
+					duration: 0.5,
+					ease: "none",
+					overwrite: "auto"
+				})
+				.to(".widget__table tr", {
+					opacity: 1,
+					y: 0,
+					borderColor: "rgba(22, 22, 22, 0.6)",
+					stagger: 0.1,
+					duration: 0.3,
+					ease: "none",
+					overwrite: "auto"
+				}, "<")
+				.to(typingObj, {
+					length: typingText.length,
+					duration: 3,
+					ease: "none",
+					overwrite: "auto",
+					onUpdate: () => {
+						document.querySelector(".widget__code").textContent = typingText.substring(0, Math.floor(typingObj.length));
+					}
+				}, "<")
+				.fromTo(".widget__bar-progress span", {
+					width: 0
+				}, {
+					width: (index, target) => getComputedStyle(target).getPropertyValue("--percent").trim(),
+					stagger: 0.1,
+					duration: 0.5,
+					ease: "none"
+				}, "<");
+
 			const slider = new Swiper(el, {
 				slidesPerView: 1,
 				spaceBetween: 10,
@@ -1369,7 +1738,33 @@ document.addEventListener("DOMContentLoaded", () => {
 					crossFade: true
 				},
 				autoplay: {
-					delay: 5800
+					delay: 7000
+				},
+				pagination: {
+					el: serverPagination,
+					clickable: true
+				},
+				on: {
+					init: () => {
+						if (media1280) {
+							tlSlide1.play();
+						}
+					},
+					slideChange: (swiper) => {
+						if (media1280) {
+							if (swiper.realIndex === 0) {
+								tlSlide1.restart();
+								tlSlide2.pause(0);
+								document.querySelector(".server").style.backgroundColor = "#ffffff";
+							}
+
+							if (swiper.realIndex === 1) {
+								tlSlide2.restart();
+								tlSlide1.pause(0);
+								document.querySelector(".server").style.backgroundColor = "#f2f2f2";
+							}
+						}
+					}
 				}
 			});
 		});
@@ -1388,6 +1783,19 @@ document.addEventListener("DOMContentLoaded", () => {
 				spaceBetween: 10,
 				loop: true,
 				loopedSlides: 3,
+				effect: "creative",
+				creativeEffect: {
+					prev: {
+						translate: ["-40%", 0, 0],
+						scale: 0.7,
+						opacity: 0.6
+					},
+					next: {
+						translate: ["40%", 0, 0],
+						scale: 0.7,
+						opacity: 0.6
+					}
+				},
 				pagination: {
 					el: productPagination,
 					clickable: true
@@ -1409,211 +1817,17 @@ document.addEventListener("DOMContentLoaded", () => {
 					},
 				},
 				breakpoints: {
+					0: {
+						effect: "fade",
+						slidesPerView: 1,
+						spaceBetween: 10
+					},
 					576: {
+						effect: "creative",
 						slidesPerView: "auto"
 					}
 				}
 			});
 		});
 	}
-
-	// Смарт хэдер
-	const header = document.querySelector(".header");
-	const HEADER_SCROLL_HIDE = 100;
-	const media1280 = window.matchMedia("(min-width: 1280px)").matches;
-	let previousTop = window.scrollY;
-	let headerTimeout;
-	// Высота зоны у верхнего края экрана в пикселях, где курсор активирует шапку
-	// По умолчанию берем высоту самой шапки (или 100px как запасной вариант)
-	const MOUSE_TOP_ZONE = header ? header.offsetHeight + 20 : 100;
-
-	const setHeaderStyles = () => {
-		if (!media1280) return;
-
-		let currentTop = window.scrollY;
-
-		clearTimeout(headerTimeout);
-
-		if (currentTop > HEADER_SCROLL_HIDE) {
-			// Показываем шапку во время самого процесса скролла (если она была скрыта)
-			header.classList.remove("header--hide");
-
-			// Запускаем таймер на 3 секунды бездействия
-			headerTimeout = setTimeout(() => {
-				// Скрываем только если пользователь не находится в самом верху страницы
-				if (window.scrollY > HEADER_SCROLL_HIDE) {
-					header.classList.add("header--hide");
-				}
-			}, 1000);
-
-		} else {
-			// Если мы вернулись в самый верх страницы, шапка всегда видна
-			header.classList.remove("header--hide");
-		}
-
-		previousTop = currentTop;
-	};
-
-	document.addEventListener("mousemove", (e) => {
-		if (!media1280) return;
-
-		if (e.clientY <= MOUSE_TOP_ZONE) {
-			// Если курсор зашел в верхнюю зону:
-			clearTimeout(headerTimeout);
-			header.classList.remove("header--hide");
-		} else if (header.classList.contains("header--hide") === false && window.scrollY > HEADER_SCROLL_HIDE) {
-			clearTimeout(headerTimeout);
-			headerTimeout = setTimeout(() => {
-				if (window.scrollY > HEADER_SCROLL_HIDE) {
-					header.classList.add("header--hide");
-				}
-			}, 1000);
-		}
-	});
-
-	document.addEventListener("scroll", () => {
-		setHeaderStyles();
-	});
-
-	setHeaderStyles();
-
-	let isAnimating = false;
-	function setActiveMenuItem(targetId) {
-		document.querySelectorAll(".anchor").forEach(link => {
-			if (link.getAttribute("href") === targetId) {
-				link.classList.add("active");
-			} else {
-				link.classList.remove("active");
-			}
-		});
-	}
-
-	const headerHeight = header ? header.offsetHeight : 80;
-
-	const observerOptions = {
-		root: null,
-		rootMargin: `-${headerHeight}px 0px -50% 0px`,
-		threshold: 0
-	};
-
-	const observer = new IntersectionObserver((entries) => {
-		if (isAnimating) return;
-
-		const visibleEntries = entries.filter(entry => entry.isIntersecting);
-
-		if (visibleEntries.length > 0) {
-			const targetId = `#${visibleEntries[0].target.id}`;
-			setActiveMenuItem(targetId);
-		}
-	}, observerOptions);
-
-	document.querySelectorAll(".anchor").forEach(anchor => {
-		const targetId = anchor.getAttribute("href");
-		if (targetId.startsWith("#")) {
-			const targetElement = document.querySelector(targetId);
-			if (targetElement) {
-				observer.observe(targetElement);
-			}
-		}
-	});
-
-	document.querySelectorAll(".anchor").forEach(anchor => {
-		anchor.addEventListener("click", function(e) {
-			e.preventDefault();
-			const targetId = this.getAttribute("href");
-
-			if (targetId.startsWith("#") && document.querySelector(targetId)) {
-				const targetElement = document.querySelector(targetId);
-
-				isAnimating = true; // Блокируем обсервер на время скролла к блоку
-				setActiveMenuItem(targetId);
-
-				gsap.to(window, {
-					duration: 0.8,
-					ease: "power2.out",
-					scrollTo: {
-						y: targetElement,
-						offsetY: headerHeight,
-						autoKill: false
-					},
-					overwrite: "auto",
-					onComplete: () => {
-						// Разблокируем обсервер чуть позже, когда страница полностью остановится
-						setTimeout(() => {
-							isAnimating = false;
-						}, 100);
-					}
-				});
-			}
-			else {
-				setActiveMenuItem(targetId);
-			}
-
-			if (!media1280 && anchor.closest(".header__menu") !== null) {
-				openNav();
-			}
-		});
-	});
-
-	// Мобильное меню
-	const openNav = () => {
-		let bodyState = document.body.getAttribute("data-state");
-
-		if (bodyState === "mobile-menu") {
-			document.body.dataset.state = "";
-		} else {
-			document.body.dataset.state = "mobile-menu";
-		}
-	}
-	const burger = document.querySelector(".header__burger");
-	const closeButtonMenu = document.querySelector(".header__menu-close");
-
-	burger.addEventListener("click", openNav);
-	closeButtonMenu.addEventListener("click", openNav);
-
-	// Бегущая строка
-	const marqueeContainer = document.querySelector('.migration__marquee');
-	const marqueeInner = document.querySelector('.migration__marquee-inner');
-
-	// Дублируем блок 4 раза, чтобы точно забить экраны любой ширины
-	for (let i = 0; i < 4; i++) {
-		const clone = marqueeInner.cloneNode(true);
-
-		clone.setAttribute("aria-hidden", "true");
-		marqueeContainer.appendChild(clone);
-	}
-
-	gsap.to(".migration__marquee-inner", {
-		xPercent: -100,
-		ease: "none",
-		duration: 20,
-		repeat: -1
-	});
-
-	// Кнопка Наверх
-	const buttonUp = document.querySelector(".button-up");
-
-	const initButtonUp = () => {
-		if (buttonUp) {
-			window.addEventListener("scroll", buttonUpHandler);
-
-			buttonUp.addEventListener("click", () => {
-				document.querySelector("body").scrollIntoView({
-					behavior: 'smooth'
-				});
-			});
-		}
-	}
-
-	const buttonUpHandler = () => {
-		scroll = window.pageYOffset;
-
-		if (scroll > 300) {
-			buttonUp.classList.add("button-up--visible");
-		} else {
-			buttonUp.classList.remove("button-up--visible");
-		}
-	}
-
-	initButtonUp();
 });
