@@ -3,6 +3,10 @@
 	padding: 35px 0 0;
 	border-bottom: 1px solid rgba($color-text, 0.3);
 
+	@include min(dxxl) {
+		padding: vw(35) 0 0;
+	}
+
 	@include max(d) {
 		padding: 50px 0 0;
 	}
@@ -13,6 +17,10 @@
 		text-align: center;
 		opacity: 0;
 		transform: translateY(10px);
+
+		@include min(dxxl) {
+			font-size: vw(48);
+		}
 
 		@include max(d) {
 			font-size: fluid(40, 48, 992, 1280);
@@ -38,6 +46,13 @@
 		padding-bottom: 61px;
 		margin-top: 40px;
 
+		@include min(dxxl) {
+			gap: vw(20);
+			padding-left: vw(44);
+			padding-bottom: vw(61);
+			margin-top: vw(40);
+		}
+
 		@include max(d) {
 			flex-direction: column;
 			padding-left: 0;
@@ -51,6 +66,10 @@
 		line-height: 1.2;
 		opacity: 0;
 		transform: translateY(10px);
+
+		@include min(dxxl) {
+			font-size: vw(24);
+		}
 
 		@include max(d) {
 			opacity: 1;
@@ -71,10 +90,18 @@
 
 		p + p {
 			margin-top: 20px;
+
+			@include min(dxxl) {
+				margin-top: vw(20);
+			}
 		}
 
 		sup {
 			font-size: 12px;
+
+			@include min(dxxl) {
+				font-size: vw(12);
+			}
 		}
 	}
 
@@ -87,6 +114,12 @@
 		height: 450px;
 		opacity: 0;
 		transform: translateY(10px);
+
+		@include min(dxxl) {
+			max-width: vw(700);
+			min-width: vw(700);
+			height: vw(450);
+		}
 
 		@include max(d) {
 			min-width: 0;
@@ -110,6 +143,10 @@
 			font-family: $secondFont;
 			font-size: 16px;
 			white-space: nowrap;
+
+			@include min(dxxl) {
+				font-size: vw(16);
+			}
 
 			@include max(dl) {
 				white-space: unset;
@@ -216,6 +253,10 @@
 		border-top: 1px solid rgba($color-text, 0.3);
 		padding: 52px 0 20px;
 		overflow: hidden;
+
+		@include min(dxxl) {
+			padding: vw(52) 0 vw(20);
+		}
 	}
 
 	&__container-bottom {
@@ -246,6 +287,10 @@
 			min-height: 500px;
 			opacity: 0;
 			transform: translateY(10px);
+
+			@include min(dxxl) {
+				min-height: vw(500);
+			}
 
 			@include max(d) {
 				width: 39%;
@@ -280,6 +325,10 @@
 		pointer-events: none;
 		margin-top: -200px;
 
+		@include min(dxxl) {
+			margin-top: vw(-200);
+		}
+
 		@include max(d) {
 			position: absolute;
 			top: 0;
@@ -299,6 +348,11 @@
 		position: absolute;
 		top: 100px;
 		left: 28%;
+
+		@include min(dxxl) {
+			gap: vw(30);
+			top: vw(100);
+		}
 
 		@include max(d) {
 			top: 260px;
@@ -320,6 +374,11 @@
 		opacity: 0;
 		transform: translateX(-10px);
 
+		@include min(dxxl) {
+			gap: vw(10);
+			font-size: vw(16);
+		}
+
 		@include max(t) {
 			font-size: 12px;
 		}
@@ -331,6 +390,12 @@
 			height: 1px;
 			background-color: $black;
 
+			@include min(dxxl) {
+				min-width: vw(93);
+				max-width: vw(93);
+				height: vw(1);
+			}
+
 			@include max(t) {
 				min-width: 50px;
 				max-width: 50px;
@@ -340,5 +405,9 @@
 
 	&__link {
 		margin-top: 35px;
+
+		@include min(dxxl) {
+			margin-top: vw(35);
+		}
 	}
 }

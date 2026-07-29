@@ -6,6 +6,12 @@
 	background-color: $white;
 	padding: 25px 25px 0;
 
+	@include min(dxxl) {
+		max-width: vw(704);
+		border-radius: vw(8);
+		padding: vw(25) vw(25) 0;
+	}
+
 	@include max(tl) {
 		max-width: 600px;
 	}
@@ -26,6 +32,10 @@
 		border-radius: 4px;
 		overflow: hidden;
 		border: 1px solid $color-border;
+
+		@include min(dxxl) {
+			border-radius: vw(4);
+		}
 	}
 
 	&__title {
@@ -37,6 +47,11 @@
 		font-size: 20px;
 		line-height: 1.2;
 		text-align: center;
+
+		@include min(dxxl) {
+			height: vw(80);
+			font-size: vw(20);
+		}
 
 		@include max(ti) {
 			font-size: 16px;

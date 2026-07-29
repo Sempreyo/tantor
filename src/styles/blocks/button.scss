@@ -14,6 +14,12 @@
 	cursor: pointer;
 	transition: 0.3s ease;
 
+	@include min(dxxl) {
+		gap: vw(4);
+		padding: vw(8) vw(12) vw(8) vw(4);
+		font-size: vw(20);
+	}
+
 	@include max(d) {
 		font-size: fluid(18, 20, 992, 1280);
 	}
@@ -35,6 +41,11 @@
 		color: $color-button-text;
 		width: 24px;
 		height: 24px;
+
+		@include min(dxxl) {
+			width: vw(24);
+			height: vw(24);
+		}
 	}
 
 	&--black {

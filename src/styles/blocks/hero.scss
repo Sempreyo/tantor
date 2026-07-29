@@ -11,6 +11,11 @@
 		opacity: 0;
 		transform: translateY(20px);
 
+		@include min(dxxl) {
+			font-size: vw(64);
+			padding: vw(106) 0 vw(36);
+		}
+
 		@include max(d) {
 			font-size: fluid(52, 64, 992, 1280);
 		}
@@ -57,6 +62,10 @@
 	&__left {
 		padding: 21px 48px 183px 0;
 
+		@include min(dxxl) {
+			padding: vw(21) vw(48) vw(183) 0;
+		}
+
 		@include max(d) {
 			height: 100%;
 			padding: 21px 20px 100px;
@@ -71,6 +80,11 @@
 		padding: 26px;
 		border-left: 1px solid rgba($color-text, 0.3);
 
+		@include min(dxxl) {
+			gap: vw(72);
+			padding: vw(26);
+		}
+
 		@include max(d) {
 			order: -1;
 			gap: 20px;
@@ -83,6 +97,10 @@
 		z-index: 1;
 		font-size: 24px;
 		line-height: 1.2;
+
+		@include min(dxxl) {
+			font-size: vw(24);
+		}
 
 		@include max(d) {
 			font-size: fluid(19, 20, 992, 1280);
@@ -110,6 +128,13 @@
 			width: 2px;
 			height: 34px;
 			background-color: $color-text;
+
+			@include min(dxxl) {
+				top: vw(5);
+				left: vw(-27);
+				width: vw(2);
+				height: vw(34);
+			}
 		}
 	}
 
@@ -145,11 +170,25 @@
 			left: -30px;
 			bottom: 30px;
 
+			@include min(dxxl) {
+				margin-right: vw(-88);
+				margin-bottom: vw(-86);
+				left: vw(-30);
+				bottom: vw(-30);
+			}
+
 			@include max(d) {
 				left: 5vw;
 				bottom: -10vw;
 				margin-right: unset;
 				margin-bottom: unset;
+			}
+
+			img {
+				@include min(dxxl) {
+					width: vw(190);
+					height: vw(385);
+				}
 			}
 		}
 
@@ -159,15 +198,34 @@
 			margin-bottom: 40px;
 			transform: rotate(-9deg);
 
+			@include min(dxxl) {
+				margin-right: vw(-38);
+				margin-bottom: vw(40);
+			}
+
 			@include max(d) {
 				margin-right: unset;
 				margin-bottom: unset;
+			}
+
+			img {
+				@include min(dxxl) {
+					width: vw(239);
+					height: vw(423);
+				}
 			}
 		}
 
 		&--3 {
 			@include max(d) {
 				right: 6vw;
+			}
+
+			img {
+				@include min(dxxl) {
+					width: vw(243);
+					height: vw(516);
+				}
 			}
 		}
 	}
@@ -193,6 +251,10 @@
 		font-size: 20px;
 		white-space: nowrap;
 
+		@include min(dxxl) {
+			font-size: vw(20);
+		}
+
 		&:nth-child(1) {
 			animation: moveRotate 7s linear infinite;
 		}
@@ -210,6 +272,10 @@
 			right: 450px;
 			transform: rotate(-12deg);
 
+			@include min(dxxl) {
+				right: vw(450);
+			}
+
 			@include max(d) {
 				right: unset;
 				bottom: 10%;
@@ -222,6 +288,10 @@
 			right: 302px;
 			transform: rotate(6deg);
 
+			@include min(dxxl) {
+				right: vw(302);
+			}
+
 			@include max(d) {
 				right: unset;
 				left: 30%;
@@ -232,6 +302,10 @@
 			bottom: 10%;
 			right: 107px;
 			transform: rotate(-38deg);
+
+			@include min(dxxl) {
+				right: vw(107);
+			}
 
 			@include max(d) {
 				right: unset;
@@ -248,11 +322,29 @@
 		z-index: 1;
 		width: 14px;
 		height: 14px;
+
+		@include min(dxxl) {
+			bottom: vw(-6);
+			width: vw(14);
+			height: vw(14);
+		}
 	}
 
 	&__car {
 		position: absolute;
 		bottom: -2px;
 		right: 10vw;
+
+		@include min(dxxl) {
+			bottom: vw(-2);
+			right: vw(80);
+		}
+
+		img {
+			@include min(dxxl) {
+				width: vw(78);
+				height: vw(78);
+			}
+		}
 	}
 }

@@ -4,6 +4,10 @@
 	height: auto !important;
 	padding: 136px 0 66px;
 
+	@include min(dxxl) {
+		padding: vw(136) 0 vw(66);
+	}
+
 	@include max(d) {
 		padding: 80px 0 40px;
 	}
@@ -26,6 +30,10 @@
 		left: 50%;
 		transform: translateX(-50%);
 
+		@include min(dxxl) {
+			top: vw(40);
+		}
+
 		@include max(d) {
 			display: none;
 		}
@@ -34,6 +42,11 @@
 	&__logo-image {
 		width: 377px;
 		height: 210px;
+
+		@include min(dxxl) {
+			width: vw(377);
+			height: vw(210);
+		}
 	}
 
 	&__title {
@@ -42,6 +55,11 @@
 		font-size: 48px;
 		line-height: 1.2;
 		text-align: center;
+
+		@include min(dxxl) {
+			max-width: vw(1252);
+			font-size: vw(48);
+		}
 
 		@include max(d) {
 			font-size: fluid(40, 48, 992, 1280);
@@ -64,6 +82,12 @@
 		line-height: 1.2;
 		text-align: center;
 
+		@include min(dxxl) {
+			max-width: vw(1252);
+			margin: vw(20) auto 0;
+			font-size: vw(24);
+		}
+
 		@include max(d) {
 			font-size: fluid(19, 20, 992, 1280);
 		}
@@ -81,6 +105,12 @@
 		margin: 75px auto 0;
 		padding-left: 50px;
 		padding-bottom: 60px;
+
+		@include min(dxxl) {
+			margin: vw(75) auto 0;
+			padding-left: vw(50);
+			padding-bottom: vw(60);
+		}
 
 		@include max(d) {
 			padding-left: 0;
@@ -115,6 +145,12 @@
 		max-width: 1156px;
 		margin: 60px auto 0;
 
+		@include min(dxxl) {
+			gap: vw(47) vw(116);
+			max-width: vw(1156);
+			margin: vw(60) auto 0;
+		}
+
 		@include max(d) {
 			gap: 40px;
 		}
@@ -138,5 +174,10 @@
 		padding-top: 17px;
 		font-size: 18px;
 		line-height: 1.2;
+
+		@include min(dxxl) {
+			padding-top: vw(17);
+			font-size: vw(18);
+		}
 	}
 }

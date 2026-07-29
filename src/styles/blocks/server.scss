@@ -23,6 +23,11 @@
 			max-height: 1200px;
 		}
 
+		@include min(dxxl) {
+			min-height: vw(1000);
+			max-height: vw(1000);
+		}
+
 		@include max(d) {
 			min-height: auto;
 			max-height: unset;
@@ -42,6 +47,11 @@
 		@media (min-height: 900px) and (min-width: 1280px) {
 			min-height: 1200px;
 			max-height: 1200px;
+		}
+
+		@include min(dxxl) {
+			min-height: vw(1000);
+			max-height: vw(1000);
 		}
 	}
 
@@ -150,6 +160,12 @@
 			left: calc(50% + 125px);
 		}
 
+		@include min(dxxl) {
+			top: vw(284);
+			gap: vw(13);
+			font-size: vw(16);
+		}
+
 		@include max(d) {
 			top: 380px;
 			left: 290px;
@@ -187,6 +203,11 @@
 			@media (min-height: 900px) and (min-width: 1280px) {
 				height: 304px;
 			}
+
+			@include min(dxxl) {
+				width: vw(28);
+				height: vw(304);
+			}
 		}
 	}
 
@@ -200,6 +221,11 @@
 
 		@media (min-height: 900px) and (min-width: 1280px) {
 			top: 170px;
+		}
+
+		@include min(dxxl) {
+			top: vw(170);
+			gap: vw(12);
 		}
 
 		@include max(d) {
@@ -232,6 +258,10 @@
 			&:nth-child(even) {
 				margin-left: -30px;
 
+				@include min(dxxl) {
+					margin-left: vw(-30);
+				}
+
 				@include max(ti) {
 					margin-left: 0;
 				}
@@ -243,6 +273,10 @@
 
 			@media (min-height: 900px) and (min-width: 1280px) {
 				top: 640px;
+			}
+
+			@include min(dxxl) {
+				top: vw(640);
 			}
 
 			@include max(d) {
@@ -258,6 +292,10 @@
 			.board {
 				&:nth-child(odd) {
 					margin-left: -30px;
+
+					@include min(dxxl) {
+						margin-left: vw(-30);
+					}
 
 					@include max(ti) {
 						margin-left: 0;
@@ -281,6 +319,10 @@
 			top: 154px;
 		}
 
+		@include min(dxxl) {
+			top: vw(154);
+		}
+
 		@include max(d) {
 			position: relative;
 			top: 0;
@@ -299,6 +341,11 @@
 				top: 443px;
 			}
 
+			@include min(dxxl) {
+				top: vw(443);
+				max-width: vw(344);
+			}
+
 			@include max(d) {
 				top: 0;
 				left: 0;
@@ -313,6 +360,11 @@
 
 			@media (min-height: 900px) and (min-width: 1280px) {
 				top: 620px;
+			}
+
+			@include min(dxxl) {
+				top: vw(620);
+				max-width: vw(252);
 			}
 
 			@include max(d) {

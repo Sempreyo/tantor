@@ -7,6 +7,11 @@
 		right: 50%;
 		bottom: -50vh;
 
+		@include min(dxxl) {
+			width: vw(1283);
+			height: vw(1283);
+		}
+
 		@include max(d) {
 			left: 50%;
 			bottom: -400px;
@@ -21,5 +26,10 @@
 		left: 50%;
 		opacity: 0;
 		transform: translate(-50%, -50%) rotate(126deg) scale(0);
+
+		@include min(dxxl) {
+			width: vw(1137);
+			height: vw(912);
+		}
 	}
 }

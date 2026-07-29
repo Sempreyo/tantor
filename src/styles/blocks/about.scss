@@ -2,10 +2,18 @@
 	padding: 63px 0 80px;
 	border-bottom: 1px solid $color-text;
 
+	@include min(dxxl) {
+		padding: vw(63) 0 vw(80);
+	}
+
 	&__top {
 		display: flex;
 		flex-direction: column;
 		gap: 42px;
+
+		@include min(dxxl) {
+			gap: vw(42);
+		}
 
 		@include max(tl) {
 			gap: 30px;
@@ -18,6 +26,10 @@
 		text-align: center;
 		opacity: 0;
 		transform: translateY(10px);
+
+		@include min(dxxl) {
+			font-size: vw(48);
+		}
 
 		@include max(d) {
 			width: calc(52% - 45px);
@@ -44,6 +56,10 @@
 		opacity: 0;
 		transform: translateY(10px);
 
+		@include min(dxxl) {
+			font-size: vw(16);
+		}
+
 		@include max(d) {
 			padding-top: 0;
 		}
@@ -55,6 +71,12 @@
 		gap: 76px;
 		margin-top: 56px;
 		padding-left: 75px;
+
+		@include min(dxxl) {
+			gap: vw(76);
+			margin-top: vw(56);
+			padding-left: vw(75);
+		}
 
 		@include max(d) {
 			padding-left: 0;
@@ -71,6 +93,10 @@
 		position: relative;
 		width: 514px;
 		max-width: 100%;
+
+		@include min(dxxl) {
+			width: vw(514);
+		}
 
 		@include max(d) {
 			display: flex;
@@ -90,6 +116,10 @@
 		opacity: 0;
 		transform: translateY(10px);
 
+		@include min(dxxl) {
+			padding-top: vw(10);
+		}
+
 		@include max(d) {
 			transform: unset;
 		}
@@ -104,6 +134,11 @@
 		font-size: 24px;
 		line-height: 1.2;
 		margin-top: 47px;
+
+		@include min(dxxl) {
+			font-size: vw(24);
+			margin-top: vw(47);
+		}
 
 		@include max(d) {
 			font-size: fluid(19, 20, 992, 1280);
@@ -120,6 +155,10 @@
 		p + p {
 			margin-top: 25px;
 
+			@include min(dxxl) {
+				margin-top: vw(25);
+			}
+
 			@include max(t) {
 				margin-top: 15px;
 			}
@@ -128,6 +167,10 @@
 
 	&__link {
 		margin-top: 46px;
+
+		@include min(dxxl) {
+			margin-top: vw(46);
+		}
 
 		@include max(ti) {
 			margin-top: 20px;

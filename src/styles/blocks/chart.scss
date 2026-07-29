@@ -8,6 +8,10 @@
 	background-color: $white;
 	opacity: 0;
 
+	@include min(dxxl) {
+		max-width: vw(514);
+	}
+
 	@include max(d) {
 		position: relative;
 	}
@@ -22,6 +26,12 @@
 		color: $white;
 		font-size: 20px;
 
+		@include min(dxxl) {
+			gap: vw(26);
+			padding: vw(16) vw(28);
+			font-size: vw(20);
+		}
+
 		@include max(t) {
 			gap: 15px;
 			font-size: 16px;
@@ -32,6 +42,12 @@
 		min-width: 54px;
 		max-width: 54px;
 		height: 54px;
+
+		@include min(dxxl) {
+			min-width: vw(54);
+			max-width: vw(54);
+			height: vw(54);
+		}
 	}
 
 	&__list {}
@@ -49,12 +65,24 @@
 		min-height: 77px;
 		padding: 10px 28px;
 
+		@include min(dxxl) {
+			font-size: vw(16);
+			min-height: vw(77);
+			padding: vw(10) vw(28);
+		}
+
 		&::before {
 			content: "";
 			width: 8px;
 			height: 12px;
 			background-color: $color-text;
 			margin-right: 12px;
+
+			@include min(dxxl) {
+				width: vw(8);
+				height: vw(12);
+				margin-right: vw(12);
+			}
 		}
 
 		& + #{$parent}__list-item {
@@ -66,6 +94,10 @@
 		padding: 40px 0 80px;
 		text-align: center;
 
+		@include min(dxxl) {
+			padding: vw(40) 0 vw(80);
+		}
+
 		@include max(t) {
 			font-size: 14px;
 		}
@@ -74,6 +106,10 @@
 	&__graph {
 		position: relative;
 		padding: 0 30px 107px;
+
+		@include min(dxxl) {
+			padding: 0 vw(30) vw(107);
+		}
 
 		@include max(t) {
 			padding: 0 10px 107px;
@@ -85,6 +121,10 @@
 		flex-direction: column;
 		align-items: center;
 		gap: 30px;
+
+		@include min(dxxl) {
+			gap: vw(30);
+		}
 
 		span {
 			position: relative;
@@ -118,6 +158,10 @@
 		height: 100%;
 		padding: 0 76px 107px;
 
+		@include min(dxxl) {
+			padding: 0 vw(76) vw(107);
+		}
+
 		@include max(t) {
 			padding: 0 50px 107px;
 		}
@@ -134,6 +178,12 @@
 		text-align: center;
 		overflow: hidden;
 
+		@include min(dxxl) {
+			width: vw(42);
+			padding: vw(15) 0;
+			font-size: vw(16);
+		}
+
 		@include max(t) {
 			width: 30px;
 			font-size: 12px;
@@ -147,6 +197,10 @@
 		font-weight: 700;
 		font-size: 14px;
 
+		@include min(dxxl) {
+			font-size: vw(14);
+		}
+
 		&:not(:first-of-type):not(:last-of-type)::before {
 			position: absolute;
 			top: 14px;
@@ -157,6 +211,13 @@
 			height: 10px;
 			border-radius: 50%;
 			background-color: $color-accent;
+
+			@include min(dxxl) {
+				top: vw(14);
+				left: vw(4);
+				width: vw(10);
+				height: vw(10);
+			}
 		}
 
 		&::before {
@@ -180,6 +241,10 @@
 		left: 50%;
 		transform: translateX(-50%);
 
+		@include min(dxxl) {
+			top: vw(6);
+		}
+
 		@include max(t) {
 			display: none;
 		}
@@ -196,6 +261,11 @@
 		width: 100%;
 		padding: 0 76px;
 
+		@include min(dxxl) {
+			bottom: vw(55);
+			padding: 0 vw(76);
+		}
+
 		@include max(t) {
 			padding: 0 45px;
 		}
@@ -204,6 +274,11 @@
 			width: 86px;
 			font-size: 16px;
 			text-align: center;
+
+			@include min(dxxl) {
+				width: vw(86);
+				font-size: vw(16);
+			}
 
 			@include max(t) {
 				font-size: 12px;
@@ -214,6 +289,10 @@
 
 				span {
 					font-size: 24px;
+
+					@include min(dxxl) {
+						font-size: vw(24);
+					}
 
 					@include max(t) {
 						font-size: 16px;

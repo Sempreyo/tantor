@@ -1,6 +1,10 @@
 .footer {
 	padding: 84px 0 42px;
 
+	@include min(dxxl) {
+		padding: vw(84) 0 vw(42);
+	}
+
 	@include max(ti) {
 		padding: 40px 0 60px;
 	}
@@ -10,6 +14,10 @@
 		justify-content: space-between;
 		align-items: flex-end;
 		gap: 20px;
+
+		@include min(dxxl) {
+			gap: vw(20);
+		}
 
 		@include max(ti) {
 			flex-direction: column;
@@ -22,12 +30,21 @@
 	&__logo {
 		width: 247px;
 		height: 98px;
+
+		@include min(dxxl) {
+			width: vw(247);
+			height: vw(98);
+		}
 	}
 
 	&__menu {
 		display: flex;
 		align-items: center;
 		gap: 18px;
+
+		@include min(dxxl) {
+			gap: vw(18);
+		}
 
 		@include max(ti) {
 			flex-direction: column;
@@ -39,6 +56,11 @@
 		position: relative;
 		font-size: 18px;
 		padding: 0 12px;
+
+		@include min(dxxl) {
+			font-size: vw(18);
+			padding: 0 vw(12);
+		}
 
 		&:hover {
 			&::before {

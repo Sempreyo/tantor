@@ -11,6 +11,10 @@
 	background-color: rgba($color-background, 1);
 	transition: 0.3s ease;
 
+	@include min(dxxl) {
+		padding: vw(22) 0 0;
+	}
+
 	&--hide {
 		transform: translateY(-100%);
 	}
@@ -20,6 +24,10 @@
 		align-items: flex-end;
 		justify-content: space-between;
 		padding: 0 70px;
+
+		@include min(dxxl) {
+			padding: 0 vw(70);
+		}
 
 		@include max(d) {
 			align-items: flex-start;
@@ -31,6 +39,10 @@
 		display: inline-block;
 		line-height: 0;
 		padding-bottom: 12px;
+
+		@include min(dxxl) {
+			padding-bottom: vw(12);
+		}
 
 		&:first-child {
 			@include max(d) {
@@ -55,6 +67,11 @@
 		width: 166px;
 		height: 41px;
 
+		@include min(dxxl) {
+			width: vw(166);
+			height: vw(41);
+		}
+
 		@include max(t) {
 			width: 120px;
 			height: 27px;
@@ -64,6 +81,11 @@
 	&__logo-icon-cnews {
 		width: 140px;
 		height: 27px;
+
+		@include min(dxxl) {
+			width: vw(140);
+			height: vw(27);
+		}
 
 		@include max(t) {
 			width: 100px;
@@ -77,6 +99,11 @@
 		gap: 70px;
 		padding-right: 30px;
 		transition: 0.5s ease;
+
+		@include min(dxxl) {
+			gap: vw(70);
+			padding-right: vw(30);
+		}
 
 		@include max(dxl) {
 			gap: 40px;
@@ -101,6 +128,11 @@
 		padding-bottom: 12px;
 		transition: 0.3s ease;
 
+		@include min(dxxl) {
+			font-size: vw(14);
+			padding-bottom: vw(12);
+		}
+
 		@include max(dl) {
 			font-size: 12px;
 		}
@@ -124,6 +156,11 @@
 			width: 100%;
 			height: 2px;
 			background-color: $color-text;
+
+			@include min(dxxl) {
+				bottom: vw(-1);
+				height: vw(2);
+			}
 		}
 
 		&:hover {

@@ -12,6 +12,10 @@
 		top: -80px;
 	}
 
+	@include min(dxxl) {
+		padding-bottom: vw(60);
+	}
+
 	@include max(d) {
 		order: 1;
 		max-width: 100%;
@@ -26,6 +30,10 @@
 	&__subtitle {
 		color: $black;
 		font-size: 18px;
+
+		@include min(dxxl) {
+			font-size: vw(18);
+		}
 	}
 
 	&__filler {
@@ -35,6 +43,11 @@
 		background-color: rgba($color-text, 0.3);
 		margin-top: 15px;
 
+		@include min(dxxl) {
+			height: vw(1);
+			margin-top: vw(15);
+		}
+
 		span {
 			position: absolute;
 			top: 0;
@@ -42,6 +55,11 @@
 			width: 34px;
 			height: 2px;
 			background-color: $color-text;
+
+			@include min(dxxl) {
+				width: vw(34);
+				height: vw(2);
+			}
 		}
 	}
 
@@ -50,6 +68,11 @@
 		font-size: 36px;
 		line-height: 1.2;
 		margin-top: 32px;
+
+		@include min(dxxl) {
+			font-size: vw(36);
+			margin-top: vw(32);
+		}
 	}
 
 	&__text {
@@ -57,12 +80,25 @@
 		line-height: 1.2;
 		margin-top: 16px;
 
+		@include min(dxxl) {
+			font-size: vw(18);
+			margin-top: vw(16);
+		}
+
 		p + p {
 			margin-top: 20px;
+
+			@include min(dxxl) {
+				margin-top: vw(20);
+			}
 		}
 	}
 
 	&__link {
 		margin-top: 50px;
+
+		@include min(dxxl) {
+			margin-top: vw(50);
+		}
 	}
 }

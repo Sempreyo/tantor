@@ -16,6 +16,15 @@
 	transition: background-color 0.3s ease;
 	cursor: pointer;
 
+	@include min(dxxl) {
+		right: vw(10);
+		bottom: vw(35);
+		width: vw(35);
+		height: vw(35);
+		padding: vw(5);
+		border-radius: vw(3);
+	}
+
 	@include max(tl) {
 		bottom: 15px;
 	}
@@ -34,5 +43,10 @@
 		width: 24px;
 		height: 23px;
 		transform: rotate(-90deg);
+
+		@include min(dxxl) {
+			width: vw(24);
+			height: vw(23);
+		}
 	}
 }

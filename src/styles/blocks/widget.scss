@@ -4,10 +4,18 @@
 	max-width: 323px;
 	width: 100%;
 
+	@include min(dxxl) {
+		max-width: vw(323);
+	}
+
 	&--small {
 		#{$parent} {
 			&__title {
 				font-size: 9px;
+
+				@include min(dxxl) {
+					font-size: vw(9);
+				}
 
 				@include max(d) {
 					font-size: 16px;
@@ -23,6 +31,11 @@
 		opacity: 0;
 		transform: translateX(-10px);
 
+		@include min(dxxl) {
+			padding: vw(3) vw(14) vw(3) vw(3);
+			font-size: vw(16);
+		}
+
 		&::before {
 			content: "";
 			position: absolute;
@@ -31,6 +44,12 @@
 			width: 160px;
 			height: 1px;
 			background-color: $color-text;
+
+			@include min(dxxl) {
+				top: vw(15);
+				width: vw(160);
+				height: vw(1);
+			}
 		}
 	}
 
@@ -42,6 +61,12 @@
 		padding: 3px 5px;
 		margin-top: 6px;
 		opacity: 0;
+
+		@include min(dxxl) {
+			font-size: vw(12);
+			padding: vw(3) vw(5);
+			margin-top: vw(6);
+		}
 
 		@include max(d) {
 			font-size: 16px;
@@ -57,6 +82,11 @@
 		margin: 0;
 		opacity: 0;
 
+		@include min(dxxl) {
+			font-size: vw(12);
+			padding: vw(7) vw(5);
+		}
+
 		@include max(d) {
 			font-size: 14px;
 			opacity: 1;
@@ -71,6 +101,11 @@
 		border-bottom: 1px solid $color-text;
 		opacity: 0;
 
+		@include min(dxxl) {
+			gap: vw(20);
+			padding: vw(5) vw(3) vw(3);
+		}
+
 		@include max(d) {
 			opacity: 1;
 		}
@@ -82,6 +117,10 @@
 		font-size: 7px;
 		line-height: 1.4;
 
+		@include min(dxxl) {
+			font-size: vw(7);
+		}
+
 		@include max(d) {
 			font-size: 12px;
 		}
@@ -90,6 +129,10 @@
 			&:nth-child(2) {
 				color: $color-text;
 				font-size: 9px;
+
+				@include min(dxxl) {
+					font-size: vw(9);
+				}
 
 				@include max(d) {
 					font-size: 14px;
@@ -104,6 +147,11 @@
 		gap: 1px;
 		padding: 7px 0 7px 4px;
 		opacity: 0;
+
+		@include min(dxxl) {
+			gap: vw(1);
+			padding: vw(7) 0 vw(7) vw(4);
+		}
 
 		@include max(d) {
 			gap: 10px;
@@ -120,6 +168,11 @@
 		color: $color-widget;
 		font-size: 9px;
 
+		@include min(dxxl) {
+			gap: vw(7);
+			font-size: vw(9);
+		}
+
 		@include max(d) {
 			font-size: 14px;
 		}
@@ -130,6 +183,10 @@
 		flex-grow: 1;
 		height: 7px;
 		background-color: rgba($color-text, 0.3);
+
+		@include min(dxxl) {
+			height: vw(7);
+		}
 
 		@include max(d) {
 			height: 25px;
@@ -150,6 +207,11 @@
 		height: 24px;
 		opacity: 0;
 
+		@include min(dxxl) {
+			width: vw(260);
+			height: vw(24);
+		}
+
 		@include max(d) {
 			display: none;
 			width: 100%;
@@ -162,6 +224,10 @@
 		width: 100%;
 		border-collapse: collapse;
 		margin-top: 8px;
+
+		@include min(dxxl) {
+			margin-top: vw(8);
+		}
 
 		tr {
 			opacity: 0;
@@ -178,6 +244,11 @@
 		td {
 			font-size: 12px;
 			padding: 5px 3px;
+
+			@include min(dxxl) {
+				font-size: vw(12);
+				padding: vw(5) vw(3);
+			}
 
 			@include max(d) {
 				font-size: 14px;

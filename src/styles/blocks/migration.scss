@@ -2,6 +2,10 @@
 	padding: 142px 0 40px;
 	border-bottom: 1px solid $color-text;
 
+	@include min(dxxl) {
+		padding: vw(142) 0 vw(40);
+	}
+
 	@include max(d) {
 		padding: 80px 0 40px;
 	}
@@ -14,6 +18,10 @@
 		font-size: 48px;
 		line-height: 1.2;
 		text-align: center;
+
+		@include min(dxxl) {
+			font-size: vw(48);
+		}
 
 		@include max(d) {
 			font-size: fluid(40, 48, 992, 1280);
@@ -36,6 +44,10 @@
 		user-select: none;
 		white-space: nowrap;
 
+		@include min(dxxl) {
+			margin-top: vw(53);
+		}
+
 		@include max(ti) {
 			margin-top: 30px;
 		}
@@ -46,9 +58,17 @@
 			font-size: 16px;
 			white-space: nowrap;
 
+			@include min(dxxl) {
+				font-size: vw(16);
+			}
+
 			&.divider {
 				color: $color-accent;
 				margin: 0 48px;
+
+				@include min(dxxl) {
+					margin: 0 vw(48);
+				}
 			}
 		}
 	}
@@ -63,6 +83,11 @@
 		display: flex;
 		gap: 85px;
 		margin-top: 77px;
+
+		@include min(dxxl) {
+			gap: vw(85);
+			margin-top: vw(77);
+		}
 
 		@include max(ti) {
 			margin-top: 30px;
@@ -86,11 +111,19 @@
 	&__content {
 		flex: 1;
 		padding-top: 11px;
+
+		@include min(dxxl) {
+			padding-top: vw(11);
+		}
 	}
 
 	&__quote {
 		font-size: 32px;
 		line-height: 1.2;
+
+		@include min(dxxl) {
+			font-size: vw(32);
+		}
 
 		@include max(d) {
 			font-size: fluid(28, 32, 992, 1280);
@@ -117,6 +150,10 @@
 		sup {
 			font-size: 20px;
 
+			@include min(dxxl) {
+				font-size: vw(20);
+			}
+
 			@include max(d) {
 				font-size: fluid(18, 20, 992, 1280);
 			}
@@ -136,6 +173,11 @@
 		align-items: center;
 		gap: 16px;
 		margin-top: 26px;
+
+		@include min(dxxl) {
+			gap: vw(16);
+			margin-top: vw(26);
+		}
 	}
 
 	&__person-image {
@@ -144,22 +186,42 @@
 		height: 60px;
 		border-radius: 50%;
 		object-fit: cover;
+
+		@include min(dxxl) {
+			min-width: vw(60);
+			max-width: vw(60);
+			height: vw(60);
+		}
 	}
 
 	&__name {
 		font-size: 24px;
+
+		@include min(dxxl) {
+			font-size: vw(24);
+		}
 	}
 
 	&__position {
 		color: rgba($color-text, 0.6);
 		font-size: 16px;
 		margin-top: 5px;
+
+		@include min(dxxl) {
+			font-size: vw(16);
+			margin-top: vw(5);
+		}
 	}
 
 	&__link {
 		max-width: 261px;
 		width: 100%;
 		margin-top: 61px;
+
+		@include min(dxxl) {
+			max-width: vw(261);
+			margin-top: vw(61);
+		}
 
 		@include max(tl) {
 			margin-top: 30px;
