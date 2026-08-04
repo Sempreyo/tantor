@@ -3,6 +3,7 @@
 	min-height: 100vh;
 	height: auto !important;
 	padding: 136px 0 66px;
+	border-bottom: 1px solid $color-text;
 
 	@include min(dxxl) {
 		padding: vw(136) 0 vw(66);

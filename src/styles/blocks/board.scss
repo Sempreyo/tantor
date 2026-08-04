@@ -11,6 +11,10 @@
 		gap: vw(16);
 	}
 
+	@include max(d) {
+		transform: unset;
+	}
+
 	@include max(ti) {
 		flex-direction: column;
 	}

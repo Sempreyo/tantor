@@ -1,35 +1,43 @@
 .blob {
 	position: absolute;
+	background: radial-gradient(circle, rgba(204, 59, 3, 1) 0%, rgba(230, 230, 230, 0) 60%);
 
 	&--1 {
 		width: 1283px;
 		height: 1283px;
 		right: 50%;
-		bottom: -50vh;
+		bottom: -600px;
 
 		@include min(dxxl) {
+			bottom: vw(-600);
 			width: vw(1283);
 			height: vw(1283);
 		}
 
 		@include max(d) {
 			left: 50%;
-			bottom: -400px;
+			bottom: -700px;
 			transform: translateX(-50%);
 		}
 	}
 
 	&--2 {
-		width: 1137px;
-		height: 912px;
-		top: 50%;
+		width: 600px;
+		height: 600px;
+		top: 230px;
 		left: 50%;
 		opacity: 0;
-		transform: translate(-50%, -50%) rotate(126deg) scale(0);
+		transform: translateX(-50%) rotateX(75deg) scale(0);
+		transform-origin: center center;
+
+		@media (min-height: 900px) and (min-width: 1280px) {
+			top: 400px;
+		}
 
 		@include min(dxxl) {
-			width: vw(1137);
-			height: vw(912);
+			top: vw(400);
+			width: vw(600);
+			height: vw(600);
 		}
 	}
 }

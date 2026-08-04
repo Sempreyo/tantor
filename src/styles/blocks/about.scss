@@ -6,18 +6,19 @@
 		padding: vw(63) 0 vw(80);
 	}
 
+	&__logo {
+		width: 158px;
+		height: 100px;
+
+		@include min(dxxl) {
+			width: vw(158);
+			height: vw(100);
+		}
+	}
+
 	&__top {
 		display: flex;
 		flex-direction: column;
-		gap: 42px;
-
-		@include min(dxxl) {
-			gap: vw(42);
-		}
-
-		@include max(tl) {
-			gap: 30px;
-		}
 	}
 
 	&__title {
@@ -48,20 +49,33 @@
 	}
 
 	&__text {
+		max-width: 1252px;
 		padding-top: 16px;
+		margin: 20px auto 0;
 		color: rgba($color-text, 0.6);
-		font-size: 18px;
+		font-size: 24px;
 		line-height: 1.2;
 		text-align: center;
 		opacity: 0;
 		transform: translateY(10px);
 
 		@include min(dxxl) {
-			font-size: vw(16);
+			max-width: vw(1252);
+			font-size: vw(24);
+			margin: vw(20) auto 0;
 		}
 
 		@include max(d) {
 			padding-top: 0;
+			font-size: fluid(19, 20, 992, 1280);
+		}
+
+		@include max(tl) {
+			font-size: fluid(18, 19, 768, 992);
+		}
+
+		@include max(ti) {
+			font-size: fluid(16, 18, 0, 768);
 		}
 	}
 
@@ -117,6 +131,7 @@
 		transform: translateY(10px);
 
 		@include min(dxxl) {
+			width: calc(45.6% - (10 / 1920) * 100vw);
 			padding-top: vw(10);
 		}
 

@@ -28,6 +28,7 @@
 		position: relative;
 		padding: 3px 14px 3px 3px;
 		font-size: 16px;
+		pointer-events: none;
 		opacity: 0;
 		transform: translateX(-10px);
 
@@ -36,21 +37,25 @@
 			font-size: vw(16);
 		}
 
-		&::before {
+		/*&::before {
 			content: "";
 			position: absolute;
 			top: 15px;
-			right: 100%;
-			width: 160px;
+			left: 100%;
+			width: 350px;
 			height: 1px;
 			background-color: $color-text;
 
 			@include min(dxxl) {
 				top: vw(15);
-				width: vw(160);
+				width: vw(350);
 				height: vw(1);
 			}
-		}
+
+			@include max(d) {
+				display: none;
+			}
+		}*/
 	}
 
 	&__title {

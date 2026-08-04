@@ -1,0 +1,58 @@
+.preloader {
+	position: fixed;
+	inset: 0;
+	z-index: 100;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: inherit;
+
+	@include max(d) {
+		display: none;
+	}
+
+	&__wrapper {
+		display: flex;
+		flex-direction: column;
+		gap: 20px;
+		max-width: 100%;
+		width: 500px;
+		padding: 0 20px;
+
+		@include min(dxxl) {
+			gap: vw(20);
+			width: vw(500);
+			padding: 0 vw(20);
+		}
+	}
+
+	&__value {
+		color: $color-accent;
+		font-size: 250px;
+
+		@include min(dxxl) {
+			font-size: vw(250);
+		}
+
+		@include min(dxxl) {
+			font-size: vw(250);
+		}
+
+		@include max(d) {
+			font-size: 200px;
+		}
+
+		@include max(ti) {
+			font-size: 120px;
+		}
+	}
+
+	&__text {
+		color: rgba($color-text, 0.6);
+		font-size: 16px;
+
+		@include min(dxxl) {
+			font-size: vw(16);
+		}
+	}
+}

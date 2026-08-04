@@ -85,64 +85,193 @@
 		}
 
 		&--1 {
+			width: 308px;
+			height: 363px;
 			top: -8px;
 			left: 4%;
 
 			@include min(dxxl) {
+				width: vw(308);
+				height: vw(363);
 				top: vw(-8);
+			}
+
+			@include max(d) {
+				width: auto;
+				height: auto;
 			}
 		}
 
 		&--2 {
+			width: 283px;
+			height: 188px;
 			top: 13%;
 			left: 19%;
+
+			@include min(dxxl) {
+				width: vw(283);
+				height: vw(188);
+			}
+
+			@include max(d) {
+				width: auto;
+				height: auto;
+			}
 		}
 
 		&--3 {
+			width: 420px;
+			height: 307px;
 			top: 2%;
 			right: 8.6%;
+
+			@include min(dxxl) {
+				width: vw(420);
+				height: vw(307);
+			}
+
+			@include max(d) {
+				width: auto;
+				height: auto;
+			}
 		}
 
 		&--4 {
+			width: 299px;
+			height: 199px;
 			top: 22%;
 			right: 2%;
+
+			@include min(dxxl) {
+				width: vw(299);
+				height: vw(199);
+			}
+
+			@include max(d) {
+				width: auto;
+				height: auto;
+			}
 		}
 
 		&--5 {
+			width: 355px;
+			height: 420px;
 			top: 63%;
 			left: 11%;
+
+			@include min(dxxl) {
+				width: vw(355);
+				height: vw(420);
+			}
+
+			@include max(d) {
+				width: auto;
+				height: auto;
+			}
 		}
 
 		&--6 {
+			width: 272px;
+			height: 181px;
 			top: 56%;
 			left: 3%;
+
+			@include min(dxxl) {
+				width: vw(272);
+				height: vw(181);
+			}
+
+			@include max(d) {
+				width: auto;
+				height: auto;
+			}
 		}
 
 		&--7 {
+			width: 348px;
+			height: 411px;
 			top: 73%;
 			right: 8%;
+
+			@include min(dxxl) {
+				width: vw(348);
+				height: vw(411);
+			}
+
+			@include max(d) {
+				width: auto;
+				height: auto;
+			}
 		}
 
 		&--8 {
+			width: 238px;
+			height: 158px;
 			top: 68%;
 			right: 24.5%;
+
+			@include min(dxxl) {
+				width: vw(238);
+				height: vw(158);
+			}
+
+			@include max(d) {
+				width: auto;
+				height: auto;
+			}
 		}
 
 		&--9 {
+			width: 263px;
+			height: 175px;
 			top: 61%;
 			right: 3.5%;
+
+			@include min(dxxl) {
+				width: vw(263);
+				height: vw(175);
+			}
+
+			@include max(d) {
+				width: auto;
+				height: auto;
+			}
 		}
 
 		&--10 {
+			width: 331px;
+			height: 220px;
 			top: 2%;
 			right: 2%;
 			opacity: 0;
+
+			@include min(dxxl) {
+				width: vw(331);
+				height: vw(220);
+			}
+
+			@include max(d) {
+				width: auto;
+				height: auto;
+			}
 		}
 
 		&--11 {
+			width: 329px;
+			height: 218px;
 			top: 78%;
 			left: 2%;
 			opacity: 0;
+
+			@include min(dxxl) {
+				width: vw(329);
+				height: vw(218);
+			}
+
+			@include max(d) {
+				width: auto;
+				height: auto;
+			}
 		}
 	}
 

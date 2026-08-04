@@ -39,7 +39,13 @@
 		border-top: 1px solid rgba($color-text, 0.3);
 		border-bottom: 1px solid rgba($color-text, 0.3);
 		overflow: hidden;
-		height: 100vh;
+		height: calc(80vh - 76px);
+		min-height: 788px;
+
+		@include min(dxxl) {
+			height: calc(80vh - (76 / 1920) * 100vw);
+			min-height: vw(788);
+		}
 
 		@include max(d) {
 			flex-direction: column;
@@ -149,13 +155,9 @@
 		@include max(d) {
 			align-items: center;
 			justify-content: center;
-			width: auto;
-			margin-left: 0;
-		}
-
-		@include max(ti) {
 			max-width: 100%;
-			//min-width: 660px;
+			width: 660px;
+			margin: 0 auto;
 		}
 	}
 
@@ -255,31 +257,24 @@
 			font-size: vw(20);
 		}
 
-		&:nth-child(1) {
-			animation: moveRotate 7s linear infinite;
-		}
-
-		&:nth-child(2) {
-			animation: centeredRotate 4s linear infinite;
-		}
-
-		&:nth-child(3) {
-			animation: moveRotate2 20s linear infinite;
+		@include max(ti) {
+			font-size: 14px;
 		}
 
 		&--1 {
 			bottom: -1%;
-			right: 450px;
+			right: 370px;
 			transform: rotate(-12deg);
+			animation: centeredRotateReverse 4s linear infinite;
 
 			@include min(dxxl) {
-				right: vw(450);
+				right: vw(370);
 			}
 
 			@include max(d) {
 				right: unset;
 				bottom: 10%;
-				left: 3%;
+				left: 11%;
 			}
 		}
 
@@ -287,6 +282,7 @@
 			bottom: 36%;
 			right: 302px;
 			transform: rotate(6deg);
+			animation: centeredRotate 4s linear infinite;
 
 			@include min(dxxl) {
 				right: vw(302);
@@ -302,6 +298,7 @@
 			bottom: 10%;
 			right: 107px;
 			transform: rotate(-38deg);
+			animation: centeredRotateReverse 4s linear infinite;
 
 			@include min(dxxl) {
 				right: vw(107);

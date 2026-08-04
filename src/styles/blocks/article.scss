@@ -1,0 +1,106 @@
+.article {
+	height: auto !important;
+	padding: 120px 0 90px;
+	border-bottom: 1px solid $color-text;
+
+	&__container {
+		max-width: 1200px;
+	}
+
+	&__back {
+		margin-bottom: 30px;
+
+		svg {
+			transform: rotate(180deg);
+		}
+	}
+
+	&__title {
+		font-weight: 700;
+		font-size: 54px;
+		line-height: 1.1;
+
+		@include min(dxxl) {
+			font-size: vw(54);
+		}
+
+		@include max(d) {
+			font-size: fluid(48, 54, 992, 1280);
+		}
+
+		@include max(tl) {
+			font-size: fluid(38, 48, 768, 992);
+		}
+
+		@include max(ti) {
+			font-size: fluid(28, 38, 0, 768);
+		}
+	}
+
+	&__main {
+		margin-top: 40px;
+
+		h2 {
+			color: $color-accent;
+			font-weight: 700;
+			font-size: 24px;
+			line-height: 1.2;
+			margin: 40px 0 15px;
+
+			@include min(dxxl) {
+				font-size: vw(24);
+			}
+
+			@include max(ti) {
+				font-size: 18px;
+			}
+		}
+
+		p {
+			font-size: 20px;
+			line-height: 1.2;
+
+			@include min(dxxl) {
+				font-size: vw(20);
+			}
+
+			@include max(ti) {
+				font-size: 16px;
+			}
+
+			& + p {
+				margin-top: 15px;
+			}
+
+			& + ul {
+				margin-top: 15px;
+			}
+		}
+
+		ul {
+			list-style: inherit;
+			padding-left: 40px;
+
+			& + p {
+				margin-top: 15px;
+			}
+
+			li {
+				font-size: 20px;
+				line-height: 1.2;
+
+				@include min(dxxl) {
+					font-size: vw(20);
+				}
+
+				@include max(ti) {
+					font-size: 16px;
+				}
+
+				& + li {
+					margin-top: 10px;
+				}
+			}
+		}
+	}
+}

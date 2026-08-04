@@ -33,6 +33,12 @@
 			max-height: unset;
 			height: auto;
 		}
+
+		& > picture {
+			@include max(d) {
+				order: -1;
+			}
+		}
 	}
 
 	&__model {
@@ -42,16 +48,18 @@
 		width: 100%;
 		min-height: 1000px;
 		max-height: 1000px;
+		margin-top: -30px;
 		pointer-events: none;
 
 		@media (min-height: 900px) and (min-width: 1280px) {
 			min-height: 1200px;
 			max-height: 1200px;
+			margin-top: 0;
 		}
 
 		@include min(dxxl) {
-			min-height: vw(1000);
-			max-height: vw(1000);
+			min-height: vw(1200);
+			max-height: vw(1200);
 		}
 	}
 
@@ -64,6 +72,8 @@
 		transform: translateY(40vh);
 
 		@include max(d) {
+			order: -2;
+			flex-direction: column;
 			position: relative;
 			gap: 30px;
 			padding-top: 20px;
@@ -71,16 +81,8 @@
 			transform: unset;
 		}
 
-		@include max(tl) {
-			order: -2;
-		}
-
 		@include max(ti) {
 			margin-bottom: 40px;
-		}
-
-		@include max(t) {
-			flex-direction: column;
 		}
 	}
 
@@ -90,11 +92,8 @@
 		position: relative;
 
 		@include max(d) {
-			opacity: 0;
-		}
-
-		@include max(t) {
 			width: 100%;
+			opacity: 0;
 		}
 
 		&--1 {
@@ -103,9 +102,6 @@
 
 			@include max(d) {
 				transform: translateX(0);
-			}
-
-			@include max(t) {
 				text-align: center;
 			}
 		}
@@ -115,9 +111,6 @@
 
 			@include max(d) {
 				transform: translate(0);
-			}
-
-			@include max(t) {
 				text-align: center;
 			}
 		}
@@ -140,13 +133,18 @@
 		opacity: 0;
 
 		@include max(d) {
+			position: relative;
+			display: flex;
+			flex-direction: column;
+			gap: 12px;
+			order: -1;
 			opacity: 1;
 		}
 	}
 
 	&__config {
 		position: absolute;
-		top: 284px;
+		top: 254px;
 		left: calc(50% + 100px);
 		display: flex;
 		align-items: center;
@@ -161,30 +159,28 @@
 		}
 
 		@include min(dxxl) {
-			top: vw(284);
+			top: vw(320);
+			left: calc(50% + (120 / 1920) * 100vw);
 			gap: vw(13);
 			font-size: vw(16);
 		}
 
 		@include max(d) {
-			top: 380px;
+			top: unset;
+			bottom: 282px;
 			left: 290px;
 		}
 
 		@include max(ti) {
-			top: 476px;
-		}
-
-		@include max(655) {
-			top: 502px;
+			bottom: 533px;
 		}
 
 		@include max(t) {
-			top: 643px;
+			bottom: 611px;
 		}
 
 		@include max(450) {
-			top: 768px;
+			bottom: 973px;
 		}
 
 		span {
@@ -213,7 +209,7 @@
 
 	&__boards {
 		position: absolute;
-		top: 120px;
+		top: 100px;
 		left: calc(50% + 70px);
 		display: flex;
 		flex-direction: column;
@@ -225,11 +221,13 @@
 
 		@include min(dxxl) {
 			top: vw(170);
+			left: calc(50% + (70 / 1920) * 100vw);
 			gap: vw(12);
 		}
 
 		@include max(d) {
-			top: 170px;
+			top: unset;
+			bottom: 625px;
 			left: 250px;
 		}
 
@@ -239,7 +237,7 @@
 
 		@include max(ti) {
 			position: relative;
-			top: 0;
+			bottom: unset;
 			left: 0;
 			order: -1;
 			display: grid;
@@ -269,7 +267,7 @@
 		}
 
 		&--bottom {
-			top: 516px;
+			top: 486px;
 
 			@media (min-height: 900px) and (min-width: 1280px) {
 				top: 640px;
@@ -280,13 +278,13 @@
 			}
 
 			@include max(d) {
-				top: 720px;
-				bottom: unset;
+				top: unset;
+				bottom: 50px;
 			}
 
 			@include max(ti) {
 				order: 0;
-				top: 0;
+				bottom: unset;
 			}
 
 			.board {
@@ -309,40 +307,34 @@
 		}
 	}
 
-	&__widget {
-		position: absolute;
-		top: 110px;
-		left: calc(50% + 386px);
-		transform: translateX(-50%);
-
-		@media (min-height: 900px) and (min-width: 1280px) {
-			top: 154px;
-		}
+	&__widgets {
+		position: relative;
+		margin-top: 30px;
 
 		@include min(dxxl) {
-			top: vw(154);
+			margin-top: vw(30);
 		}
+	}
+
+	&__widget {
+		position: absolute;
+		top: 0;
+		left: 0;
 
 		@include max(d) {
 			position: relative;
 			top: 0;
 			left: 0;
-			transform: unset;
 			max-width: 100%;
 			margin-top: 40px;
 		}
 
 		&--2 {
-			top: 400px;
-			left: calc(50% + 396px);
+			left: 350px;
 			max-width: 344px;
 
-			@media (min-height: 900px) and (min-width: 1280px) {
-				top: 443px;
-			}
-
 			@include min(dxxl) {
-				top: vw(443);
+				left: vw(350);
 				max-width: vw(344);
 			}
 
@@ -354,16 +346,13 @@
 		}
 
 		&--3 {
-			top: 570px;
-			left: calc(50% + 494px);
+			top: 170px;
+			left: 480px;
 			max-width: 252px;
 
-			@media (min-height: 900px) and (min-width: 1280px) {
-				top: 620px;
-			}
-
 			@include min(dxxl) {
-				top: vw(620);
+				top: vw(170);
+				left: vw(480);
 				max-width: vw(252);
 			}
 

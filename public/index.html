@@ -29,6 +29,12 @@
           </svg></a>
       </div>
     </header>
+    <div class="preloader">
+      <div class="preloader__wrapper">
+        <div class="preloader__value">0%</div>
+        <div class="preloader__text">загружаем сайт..</div>
+      </div>
+    </div>
     <main class="main">
       <section class="hero">
         <div class="container">
@@ -38,9 +44,7 @@
           <svg class="hero__plus">
             <use xlink:href="./images/sprite.svg#plus"></use>
           </svg>
-          <svg class="blob blob--1">
-            <use xlink:href="./images/sprite.svg#blob-1"></use>
-          </svg>
+          <div class="blob blob--1"></div>
           <div class="hero__left">
             <div class="hero__machines">
               <div class="hero__machine hero__machine--1">
@@ -87,9 +91,7 @@
       </section>
       <div class="sections-wrapper">
         <section class="server scroll-2" id="anchor-2">
-          <svg class="blob blob--2">
-            <use xlink:href="./images/sprite.svg#blob-1"></use>
-          </svg>
+          <div class="blob blob--2"></div>
           <div class="server__container container">
             <div class="server__captions">
               <div class="server__caption server__caption--1 caption">
@@ -99,46 +101,142 @@
               <div class="server__caption server__caption--2 caption">
                 <div class="caption__title">Новая точка сборки</div>
                 <div class="caption__subtitle">enterprise-архитектуры</div>
+                <div class="caption__text">Реализует прорывные для российского рынка технологии, ранее доступные только в иностранных решениях класса Oracle Exadata.</div>
               </div>
             </div>
             <picture>
               <source srcset="./images/server-open.webp 1x, ./images/server-open@2x.webp 2x" type="image/webp">
               <source srcset="./images/server-open.webp 1x, ./images/server-open@2x.webp 2x" type="image/webp"><img class="server__model-static" src="./images/server-open.png" srcset="./images/server-open.png 1x, ./images/server-open@2x.png 2x" alt="">
             </picture>
-            <div class="server-slider swiper">
-              <div class="swiper-wrapper">
-                <div class="swiper-slide">
-                  <div class="server-slider__subtitle"><span>Преодоление ограничений «классического» PostgreSQL</span>
-                    <div class="server-slider__filler"><span></span></div>
-                  </div>
-                  <div class="server-slider__title">Горизонтальное масштабирование вычислений и&nbsp;хранения</div>
-                  <div class="server-slider__text">
-                    <p>
-                      МБД Tantor XData Gen3 позволяет масштабировать Compute и Storage в&nbsp;любой момент в&nbsp;зависимости от&nbsp;нагрузки
-                      в&nbsp;вашей информационной системе.
-                    </p>
-                    <p>Это именно то, чего недостает «классическому» PostgreSQL.</p>
-                  </div><a class="button server-slider__link" href="#">
-                    <svg>
-                      <use xlink:href="./images/sprite.svg#arrow-link"></use>
-                    </svg><span>Подробнее о Tantor XData Gen3</span></a>
+            <div class="server-slider">
+              <div class="server-slider__item server-slider__item--1">
+                <div class="server-slider__subtitle"><span>Преодоление ограничений «классического» PostgreSQL</span>
+                  <div class="server-slider__filler"><span></span></div>
                 </div>
-                <div class="swiper-slide">
-                  <div class="server-slider__subtitle"><span>Преодоление ограничений «классического» PostgreSQL</span>
-                    <div class="server-slider__filler"><span></span></div>
+                <div class="server-slider__title">Горизонтальное масштабирование вычислений и&nbsp;хранения</div>
+                <div class="server-slider__text">
+                  <p>
+                    МБД Tantor XData <sup>Gen3</sup> позволяет масштабировать Compute и Storage в&nbsp;любой момент в&nbsp;зависимости от&nbsp;нагрузки
+                    в&nbsp;вашей информационной системе.
+                  </p>
+                  <p>Это именно то, чего недостает «классическому» PostgreSQL.</p>
+                </div><a class="button server-slider__link" href="#">
+                  <svg>
+                    <use xlink:href="./images/sprite.svg#arrow-link"></use>
+                  </svg><span>Подробнее о Tantor XData <sup>Gen3</sup></span></a>
+              </div>
+              <div class="server-slider__item server-slider__item--2">
+                <div class="server-slider__subtitle"><span>Преодоление ограничений «классического» PostgreSQL</span>
+                  <div class="server-slider__filler"><span></span></div>
+                </div>
+                <div class="server-slider__title">Единая платформа для транзакций и&nbsp;аналитики</div>
+                <div class="server-slider__text">
+                  Впервые на российском рынке МБД Tantor XData <sup>Gen3</sup> открывает полноценный HTAP — возможность параллельной
+                  обработки смешанных нагрузок (OLAP+OLTP) на&nbsp;едином наборе данных без&nbsp;дублирования и&nbsp;лишних контуров.
+                  Важно, что при этом не&nbsp;нарушается совместимость с&nbsp;PostgreSQL.
+                </div><a class="button server-slider__link" href="#">
+                  <svg>
+                    <use xlink:href="./images/sprite.svg#arrow-link"></use>
+                  </svg><span>Подробнее о Tantor XData <sup>Gen3</sup></span></a>
+                <div class="server__widgets">
+                  <div class="server__widget server__widget--1 widget"><a class="button button--black widget__link" href="#">
+                      <svg>
+                        <use xlink:href="./images/sprite.svg#arrow-link"></use>
+                      </svg><span>Транзакции</span></a>
+                    <table class="widget__table">
+                      <tr>
+                        <th>ID/Клиент</th>
+                        <th>Сумма</th>
+                        <th>Статус</th>
+                      </tr>
+                      <tr>
+                        <td>10293847</td>
+                        <td>₽4100</td>
+                        <td>ОК</td>
+                      </tr>
+                      <tr>
+                        <td>16267384</td>
+                        <td>₽299.5</td>
+                        <td>Ожидает</td>
+                      </tr>
+                      <tr>
+                        <td>19290498</td>
+                        <td>₽6670</td>
+                        <td>ОК</td>
+                      </tr>
+                      <tr>
+                        <td>04002881</td>
+                        <td>₽2500</td>
+                        <td>ОК</td>
+                      </tr>
+                      <tr>
+                        <td>87492342</td>
+                        <td>₽400</td>
+                        <td>ОК</td>
+                      </tr>
+                      <tr>
+                        <td>26401232</td>
+                        <td>₽1000</td>
+                        <td>Ожидает</td>
+                      </tr>
+                      <tr>
+                        <td>10957366</td>
+                        <td>₽600</td>
+                        <td>Ожидает</td>
+                      </tr>
+                      <tr>
+                        <td>98374551</td>
+                        <td>₽420</td>
+                        <td>ОК</td>
+                      </tr>
+                      <tr>
+                        <td>00492213</td>
+                        <td>₽119.5</td>
+                        <td>ОК</td>
+                      </tr>
+                    </table>
                   </div>
-                  <div class="server-slider__title">Единая платформа для транзакций и&nbsp;аналитики</div>
-                  <div class="server-slider__text">
-                    Впервые на российском рынке МБД Tantor XData Gen3 открывает полноценный HTAP — возможность параллельной
-                    обработки смешанных нагрузок (OLAP+OLTP) на&nbsp;едином наборе данных без&nbsp;дублирования и&nbsp;лишних контуров.
-                    Важно, что при этом не&nbsp;нарушается совместимость с&nbsp;PostgreSQL.
-                  </div><a class="button server-slider__link" href="#">
-                    <svg>
-                      <use xlink:href="./images/sprite.svg#arrow-link"></use>
-                    </svg><span>Подробнее о Tantor XData Gen3</span></a>
+                  <div class="server__widget server__widget--2 widget"><a class="button button--black widget__link" href="#">
+                      <svg>
+                        <use xlink:href="./images/sprite.svg#arrow-link"></use>
+                      </svg><span>Аналитика</span></a>
+                    <div class="widget__title">query.sql</div>
+                    <pre class="widget__code"></pre>
+                  </div>
+                  <div class="server__widget server__widget--3 widget widget--small">
+                    <div class="widget__title">Продажи</div>
+                    <div class="widget__stats">
+                      <div class="widget__stats-item">
+                        <p>Выручка</p>
+                        <p>₽1.24 млн</p>
+                        <p>↑ 8.3%</p>
+                      </div>
+                      <div class="widget__stats-item">
+                        <p>Транзакции</p>
+                        <p>4 218</p>
+                        <p>↑ 12%</p>
+                      </div>
+                      <div class="widget__stats-item">
+                        <p>Средний чек</p>
+                        <p>₽294</p>
+                        <p>↑ 2.1%</p>
+                      </div>
+                    </div>
+                    <div class="widget__bars">
+                      <div class="widget__bar"><span>Пн</span><span class="widget__bar-progress"><span style="--percent: 55%"></span></span><span>55%</span></div>
+                      <div class="widget__bar"><span>Вт</span><span class="widget__bar-progress"><span style="--percent: 72%"></span></span><span>72%</span></div>
+                      <div class="widget__bar"><span>Ср</span><span class="widget__bar-progress"><span style="--percent: 48%"></span></span><span>48%</span></div>
+                      <div class="widget__bar"><span>Чт</span><span class="widget__bar-progress"><span style="--percent: 88%"></span></span><span>88%</span></div>
+                      <div class="widget__bar"><span>Пт</span><span class="widget__bar-progress"><span style="--percent: 95%"></span></span><span>95%</span></div>
+                      <div class="widget__bar"><span>Сб</span><span class="widget__bar-progress"><span style="--percent: 61%"></span></span><span>61%</span></div>
+                      <div class="widget__bar"><span>Вс</span><span class="widget__bar-progress"><span style="--percent: 78%"></span></span><span>78%</span></div>
+                    </div>
+                    <svg class="widget__chart-icon">
+                      <use xlink:href="./images/sprite.svg#chart"></use>
+                    </svg>
+                  </div>
                 </div>
               </div>
-              <div class="server-slider__pagination swiper-pagination"></div>
             </div>
             <div class="server__slider-content">
               <div class="server__config">
@@ -152,21 +250,21 @@
                   <svg class="board__icon">
                     <use xlink:href="./images/sprite.svg#server"></use>
                   </svg>
-                  <div class="board__text">+1 сервер вычисления...</div>
+                  <div class="board__text">+1 сервер вычислений...</div>
                 </div>
                 <div class="board board--light board--2">
                   <div class="board__line"></div>
                   <svg class="board__icon">
                     <use xlink:href="./images/sprite.svg#server"></use>
                   </svg>
-                  <div class="board__text">+1 сервер вычисления...</div>
+                  <div class="board__text">+1 сервер вычислений...</div>
                 </div>
                 <div class="board board--light board--1">
                   <div class="board__line"></div>
                   <svg class="board__icon">
                     <use xlink:href="./images/sprite.svg#server"></use>
                   </svg>
-                  <div class="board__text">+1 сервер вычисления...</div>
+                  <div class="board__text">+1 сервер вычислений...</div>
                 </div>
               </div>
               <div class="server__boards server__boards--bottom">
@@ -199,174 +297,78 @@
                   <div class="board__text">+1 сервер хранения...</div>
                 </div>
               </div>
-              <div class="server__widget server__widget--1 widget"><a class="button button--black widget__link" href="#">
-                  <svg>
-                    <use xlink:href="./images/sprite.svg#arrow-link"></use>
-                  </svg><span>Транзакции</span></a>
-                <table class="widget__table">
-                  <tr>
-                    <th>ID/Клиент</th>
-                    <th>Сумма</th>
-                    <th>Статус</th>
-                  </tr>
-                  <tr>
-                    <td>10293847</td>
-                    <td>₽4100</td>
-                    <td>ОК</td>
-                  </tr>
-                  <tr>
-                    <td>16267384</td>
-                    <td>₽299.5</td>
-                    <td>Ожидает</td>
-                  </tr>
-                  <tr>
-                    <td>19290498</td>
-                    <td>₽6670</td>
-                    <td>ОК</td>
-                  </tr>
-                  <tr>
-                    <td>04002881</td>
-                    <td>₽2500</td>
-                    <td>ОК</td>
-                  </tr>
-                  <tr>
-                    <td>87492342</td>
-                    <td>₽400</td>
-                    <td>ОК</td>
-                  </tr>
-                  <tr>
-                    <td>26401232</td>
-                    <td>₽1000</td>
-                    <td>Ожидает</td>
-                  </tr>
-                  <tr>
-                    <td>10957366</td>
-                    <td>₽600</td>
-                    <td>Ожидает</td>
-                  </tr>
-                  <tr>
-                    <td>98374551</td>
-                    <td>₽420</td>
-                    <td>ОК</td>
-                  </tr>
-                  <tr>
-                    <td>00492213</td>
-                    <td>₽119.5</td>
-                    <td>ОК</td>
-                  </tr>
-                </table>
-              </div>
-              <div class="server__widget server__widget--2 widget"><a class="button button--black widget__link" href="#">
-                  <svg>
-                    <use xlink:href="./images/sprite.svg#arrow-link"></use>
-                  </svg><span>Аналитика</span></a>
-                <div class="widget__title">query.sql</div>
-                <pre class="widget__code"></pre>
-              </div>
-              <div class="server__widget server__widget--3 widget widget--small">
-                <div class="widget__title">Продажи</div>
-                <div class="widget__stats">
-                  <div class="widget__stats-item">
-                    <p>Выручка</p>
-                    <p>₽1.24 млн</p>
-                    <p>↑ 8.3%</p>
-                  </div>
-                  <div class="widget__stats-item">
-                    <p>Транзакции</p>
-                    <p>4 218</p>
-                    <p>↑ 12%</p>
-                  </div>
-                  <div class="widget__stats-item">
-                    <p>Средний чек</p>
-                    <p>₽294</p>
-                    <p>↑ 2.1%</p>
-                  </div>
-                </div>
-                <div class="widget__bars">
-                  <div class="widget__bar"><span>Пн</span><span class="widget__bar-progress"><span style="--percent: 55%"></span></span><span>55%</span></div>
-                  <div class="widget__bar"><span>Вт</span><span class="widget__bar-progress"><span style="--percent: 72%"></span></span><span>72%</span></div>
-                  <div class="widget__bar"><span>Ср</span><span class="widget__bar-progress"><span style="--percent: 48%"></span></span><span>48%</span></div>
-                  <div class="widget__bar"><span>Чт</span><span class="widget__bar-progress"><span style="--percent: 88%"></span></span><span>88%</span></div>
-                  <div class="widget__bar"><span>Пт</span><span class="widget__bar-progress"><span style="--percent: 95%"></span></span><span>95%</span></div>
-                  <div class="widget__bar"><span>Сб</span><span class="widget__bar-progress"><span style="--percent: 61%"></span></span><span>61%</span></div>
-                  <div class="widget__bar"><span>Вс</span><span class="widget__bar-progress"><span style="--percent: 78%"></span></span><span>78%</span></div>
-                </div>
-                <svg class="widget__chart-icon">
-                  <use xlink:href="./images/sprite.svg#chart"></use>
-                </svg>
-              </div>
             </div>
           </div>
         </section>
         <div class="server__model" id="model"></div>
-        <section class="advantages scroll-3">
-          <div class="container">
-            <div class="advantages__title advantages-anim">Ваши приложения «выросли» из PostgreSQL? <br> Не спешите их переписывать.</div>
-            <div class="advantages__top">
-              <div class="advantages__text advantages-anim">
-                <p>На&nbsp;PostgreSQL уже работают сотни российских бизнес-приложений, есть зрелая экосистема инструментов и&nbsp;расширений.</p>
-                <p>
-                  С&nbsp;ростом нагрузки архитектура усложняется: появляются отдельные СУБД для аналитики, инструменты синхронизации
-                  данных между контурами, дополнительные слои интеграции. Инфраструктура становится разрозненной и&nbsp;сложной в&nbsp;сопровождении.
-                </p>
-              </div>
-              <div class="advantages__net advantages-anim">
-                <div class="advantages__net-labels"><span>Проблемы с консистентностью</span><span>Дублирование данных</span><span>Сложные пайплайны</span><span>Трудная и дорогая эксплуатация</span></div>
-                <div class="advantages__images">
-                  <picture>
-                    <source srcset="./images/machine-3.webp 1x, ./images/machine-3@2x.webp 2x" type="image/webp">
-                    <source srcset="./images/machine-3.webp 1x, ./images/machine-3@2x.webp 2x" type="image/webp"><img class="advantages__image advantages__image--3" src="./images/machine-3.png" srcset="./images/machine-3.png 1x, ./images/machine-3@2x.png 2x" alt="">
-                  </picture>
-                  <picture>
-                    <source srcset="./images/machine-2.webp 1x, ./images/machine-2@2x.webp 2x" type="image/webp">
-                    <source srcset="./images/machine-2.webp 1x, ./images/machine-2@2x.webp 2x" type="image/webp"><img class="advantages__image advantages__image--2" src="./images/machine-2.png" srcset="./images/machine-2.png 1x, ./images/machine-2@2x.png 2x" alt="">
-                  </picture>
-                  <picture>
-                    <source srcset="./images/machine-1.webp 1x, ./images/machine-1@2x.webp 2x" type="image/webp">
-                    <source srcset="./images/machine-1.webp 1x, ./images/machine-1@2x.webp 2x" type="image/webp"><img class="advantages__image advantages__image--1" src="./images/machine-1.png" srcset="./images/machine-1.png 1x, ./images/machine-1@2x.png 2x" alt="">
-                  </picture>
-                </div>
-                <div class="advantages__graphs" id="graph"></div>
-              </div>
-            </div>
-          </div>
-          <div class="advantages__bottom">
-            <div class="container advantages__container-bottom">
-              <div class="advantages__col">
-                <picture>
-                  <source srcset="./images/server-close.webp 1x, ./images/server-close@2x.webp 2x" type="image/webp">
-                  <source srcset="./images/server-close.webp 1x, ./images/server-close@2x.webp 2x" type="image/webp"><img class="advantages__model-static" src="./images/server-close.png" srcset="./images/server-close.png 1x, ./images/server-close@2x.png 2x" alt="">
-                </picture>
-                <picture>
-                  <source srcset="./images/eleph.webp 1x, ./images/eleph@2x.webp 2x" type="image/webp">
-                  <source srcset="./images/eleph.webp 1x, ./images/eleph@2x.webp 2x" type="image/webp"><img class="advantages__eleph" src="./images/eleph.png" srcset="./images/eleph.png 1x, ./images/eleph@2x.png 2x" alt="">
-                </picture>
-                <div class="advantages__items">
-                  <div class="advantages__item">100% совместимость <br> с&nbsp;Postgres, 1С и&nbsp;другим ПО</div>
-                  <div class="advantages__item">Обработка транзакций <br> и&nbsp;аналитики</div>
-                  <div class="advantages__item">Горизонтальное <br> масштабирование</div>
-                </div>
-              </div>
-              <div class="advantages__col advantages-anim">
-                <div class="advantages__text advantages__text--full advantages-anim">
-                  <p><b>Подход Tantor: 100% совместимость с&nbsp;PostgreSQL и&nbsp;упрощение архитектуры без переписывания кода бизнес-приложений.</b></p>
-                  <p>
-                    МБД Tantor XData <sup>Gen3</sup> – горизонтально масштабируемая платформа, которая объединяет OLTP и&nbsp;OLAP в&nbsp;одном
-                    контуре и сохраняет полную совместимость с&nbsp;PostgreSQL, существующим ПО и&nbsp;расширениями.
-                  </p>
-                  <p>
-                    Инфраструктура остаётся привычной для разработки и эксплуатации, при этом исчезает необходимость в&nbsp;разнородных
-                    СУБД, синхронизациях и&nbsp;переписывании приложений.
-                  </p>
-                </div><a class="button advantages__link" href="#">
-                  <svg>
-                    <use xlink:href="./images/sprite.svg#arrow-link"></use>
-                  </svg><span>Как это работает?</span></a>
-              </div>
-            </div>
-          </div>
-        </section>
       </div>
+      <section class="advantages scroll-3">
+        <div class="container">
+          <div class="advantages__title advantages-anim">Ваши приложения «выросли» из PostgreSQL? <br> Не спешите их переписывать.</div>
+          <div class="advantages__top">
+            <div class="advantages__text advantages-anim">
+              <p>На&nbsp;PostgreSQL уже работают сотни российских бизнес-приложений, есть зрелая экосистема инструментов и&nbsp;расширений.</p>
+              <p>
+                С&nbsp;ростом нагрузки архитектура усложняется: появляются отдельные СУБД для аналитики, инструменты синхронизации
+                данных между контурами, дополнительные слои интеграции. Инфраструктура становится разрозненной и&nbsp;сложной в&nbsp;сопровождении.
+              </p>
+            </div>
+            <div class="advantages__net advantages-anim">
+              <div class="advantages__net-labels"><span>Проблемы с консистентностью</span><span>Дублирование данных</span><span>Сложные пайплайны</span><span>Трудная и дорогая эксплуатация</span></div>
+              <div class="advantages__images">
+                <picture>
+                  <source srcset="./images/machine-3.webp 1x, ./images/machine-3@2x.webp 2x" type="image/webp">
+                  <source srcset="./images/machine-3.webp 1x, ./images/machine-3@2x.webp 2x" type="image/webp"><img class="advantages__image advantages__image--3" src="./images/machine-3.png" srcset="./images/machine-3.png 1x, ./images/machine-3@2x.png 2x" alt="">
+                </picture>
+                <picture>
+                  <source srcset="./images/machine-2.webp 1x, ./images/machine-2@2x.webp 2x" type="image/webp">
+                  <source srcset="./images/machine-2.webp 1x, ./images/machine-2@2x.webp 2x" type="image/webp"><img class="advantages__image advantages__image--2" src="./images/machine-2.png" srcset="./images/machine-2.png 1x, ./images/machine-2@2x.png 2x" alt="">
+                </picture>
+                <picture>
+                  <source srcset="./images/machine-1.webp 1x, ./images/machine-1@2x.webp 2x" type="image/webp">
+                  <source srcset="./images/machine-1.webp 1x, ./images/machine-1@2x.webp 2x" type="image/webp"><img class="advantages__image advantages__image--1" src="./images/machine-1.png" srcset="./images/machine-1.png 1x, ./images/machine-1@2x.png 2x" alt="">
+                </picture>
+              </div>
+              <div class="advantages__graphs" id="graph"></div>
+            </div>
+          </div>
+        </div>
+        <div class="advantages__bottom">
+          <div class="container advantages__container-bottom">
+            <div class="advantages__col">
+              <picture>
+                <source srcset="./images/server-close.webp 1x, ./images/server-close@2x.webp 2x" type="image/webp">
+                <source srcset="./images/server-close.webp 1x, ./images/server-close@2x.webp 2x" type="image/webp"><img class="advantages__model-static" src="./images/server-close.png" srcset="./images/server-close.png 1x, ./images/server-close@2x.png 2x" alt="">
+              </picture>
+              <picture>
+                <source srcset="./images/eleph.webp 1x, ./images/eleph@2x.webp 2x" type="image/webp">
+                <source srcset="./images/eleph.webp 1x, ./images/eleph@2x.webp 2x" type="image/webp"><img class="advantages__eleph" src="./images/eleph.png" srcset="./images/eleph.png 1x, ./images/eleph@2x.png 2x" alt="">
+              </picture>
+              <div class="advantages__items">
+                <div class="advantages__item">100% совместимость <br> с&nbsp;Postgres, 1С и&nbsp;другим ПО</div>
+                <div class="advantages__item">Обработка транзакций <br> и&nbsp;аналитики</div>
+                <div class="advantages__item">Горизонтальное <br> масштабирование</div>
+              </div>
+            </div>
+            <div class="advantages__col advantages-anim">
+              <div class="advantages__text advantages__text--full advantages-anim">
+                <p><b>Подход Tantor: 100% совместимость с&nbsp;PostgreSQL и&nbsp;упрощение архитектуры без переписывания кода бизнес-приложений.</b></p>
+                <p>
+                  МБД Tantor XData <sup>Gen3</sup> – горизонтально масштабируемая платформа, которая объединяет OLTP и&nbsp;OLAP в&nbsp;одном
+                  контуре и сохраняет полную совместимость с&nbsp;PostgreSQL, существующим ПО и&nbsp;расширениями.
+                </p>
+                <p>
+                  Инфраструктура остаётся привычной для разработки и эксплуатации, при этом исчезает необходимость в&nbsp;разнородных
+                  СУБД, синхронизациях и&nbsp;переписывании приложений.
+                </p>
+              </div><a class="button advantages__link" href="#">
+                <svg>
+                  <use xlink:href="./images/sprite.svg#arrow-link"></use>
+                </svg><span>Как это работает?</span></a>
+            </div>
+          </div>
+        </div>
+      </section>
       <section class="migration scroll-4">
         <div class="container">
           <div class="migration__title">Миграция важнейших информационных систем <br> без риска для бизнеса</div>
@@ -376,7 +378,7 @@
         </div>
         <div class="container">
           <div class="migration__wrapper">
-            <div class="migration__video"></div>
+            <video class="migration__video" src="./assets/tantor_video.mp4" loop muted autoplay></video>
             <div class="migration__content">
               <div class="migration__quote">
                 «Tantor XData <sup>Gen3</sup> — решение <br> для тех, кто отвечает не&nbsp;за&nbsp;тестовые стенды,
@@ -407,7 +409,7 @@
           </picture>
         </div>
         <div class="container product__container">
-          <div class="product__title product-anim">«Платформа Tantor»: <br> централизованное управление БД PostgreSQL с ИИ</div>
+          <div class="product__title product-anim">Платформа Tantor: <br> централизованное управление БД PostgreSQL с ИИ</div>
           <div class="product__text product-anim">
             Без прозрачного управления и&nbsp;контроля даже мощная архитектура превращается в постоянную зону риска. Важна не&nbsp;только
             сама СУБД, но&nbsp;и&nbsp;дополненная современными ИИ-инструментами платформа, которая позволяет эффективно ее эксплуатировать
@@ -550,7 +552,7 @@
       <section class="about scroll-6" id="anchor-4">
         <div class="container">
           <div class="about__top">
-            <div class="about__title">«Платформа Tantor»: <br> AI-first централизованное управление БД PostgreSQL</div>
+            <div class="about__title">Технологическое лидерство &mdash; в каждом продукте Tantor</div>
             <div class="about__text">
               Единый технологический стек, в&nbsp;который входят СУБД для&nbsp;высоконагруженных систем, наиболее функциональная на&nbsp;российском
               рынке платформа управления СУБД и&nbsp;машина баз данных, предоставляющая бизнесу целый ряд прорывных технологий.
@@ -604,7 +606,7 @@
                   <div class="chart__graph">
                     <div class="chart__osy"><span data-value="50"></span><span data-value="40"></span><span data-value="30"></span><span data-value="20"></span><span data-value="10"></span><span data-value="0"></span></div>
                     <div class="chart__bars">
-                      <svg class="chart__dashed-line" width="280" height="114">
+                      <svg class="chart__dashed-line">
                         <use xlink:href="./images/sprite.svg#dashed-line"></use>
                       </svg>
                       <div class="chart__dot" style="--dot-offset: 49px">11</div>
@@ -695,7 +697,7 @@
               Отметить юбилей предлагаем вместе — на&nbsp;нашем традиционном Tantor JAM, который состоится 10 сентября 2026 г. в&nbsp;Москве.
               Будут новинки, общение и, конечно, немного праздника в&nbsp;честь нашего пятилетия!
             </p>
-          </div><a class="button gallery__link" href="#">
+          </div><a class="button gallery__link" href="https://www.cnews.ru/redirect.php?5473476a6c53c273d9f">
             <svg>
               <use xlink:href="./images/sprite.svg#arrow-link"></use>
             </svg><span>Зарегистрироваться</span></a>

@@ -14,7 +14,9 @@ html(lang='ru')
 		title= `${page.title}`
 
 	body.hidden
-		include ../blocks/header
+		block header
+
+		block preloader
 
 		main.main
 			block main
@@ -22,7 +24,7 @@ html(lang='ru')
 		.button-up
 			+icon('arrow-link')
 
-		include ../blocks/footer
+		block footer
 
 	block modals
 

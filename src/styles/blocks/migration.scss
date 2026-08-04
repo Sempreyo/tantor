@@ -103,9 +103,13 @@
 	}
 
 	&__video {
+		max-width: 45%;
 		flex: 1;
-		background-color: rebeccapurple;
-		aspect-ratio: 15/8;
+		aspect-ratio: 14/8;
+
+		@include max(tl) {
+			max-width: 100%;
+		}
 	}
 
 	&__content {

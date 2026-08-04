@@ -36,6 +36,19 @@
 		@include min(dxxl) {
 			border-radius: vw(4);
 		}
+
+		img {
+			min-height: 365px;
+			aspect-ratio: 16/9;
+
+			@include min(dxxl) {
+				min-height: vw(365);
+			}
+
+			@include max(d) {
+				min-height: auto;
+			}
+		}
 	}
 
 	&__title {

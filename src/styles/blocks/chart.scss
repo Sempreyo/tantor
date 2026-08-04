@@ -134,6 +134,10 @@
 			height: 1px;
 			background-color: rgba($color-text, 0.6);
 
+			@include min(dxxl) {
+				width: calc(100% - (84 / 1920) * 100vw);
+			}
+
 			&::before {
 				position: absolute;
 				bottom: 0;
@@ -143,6 +147,12 @@
 				color: rgba($color-text, 0.6);
 				font-size: 16px;
 				text-align: right;
+
+				@include min(dxxl) {
+					left: vw(-42);
+					width: vw(30);
+					font-size: vw(16);
+				}
 			}
 		}
 	}
@@ -240,8 +250,12 @@
 		top: 6px;
 		left: 50%;
 		transform: translateX(-50%);
+		width: 280px;
+		height: 114px;
 
 		@include min(dxxl) {
+			width: vw(280);
+			height: vw(114);
 			top: vw(6);
 		}
 

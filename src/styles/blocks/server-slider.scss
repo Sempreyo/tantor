@@ -1,31 +1,49 @@
 .server-slider {
 	$parent: &;
 
-	position: relative;
-	max-width: 37.6%;
-	margin: auto 0;
-	padding-bottom: 60px;
-	opacity: 0;
-	transform: translateX(-10px);
-
-	@media (max-height: 800px) and (min-width: 1280px) {
-		top: -80px;
-	}
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+	height: 100%;
+	padding: 0 70px;
 
 	@include min(dxxl) {
-		padding-bottom: vw(60);
+		padding: 0 vw(70);
 	}
 
 	@include max(d) {
-		order: 1;
-		max-width: 100%;
-		margin-top: 40px;
+		flex-direction: column;
+		gap: 50px;
+		margin: 40px 0;
+		padding: 0;
 	}
 
-	/*.swiper-slide-active #{$parent}__filler span {
-		width: 100%;
-		transition: width 6s linear;
-	}*/
+	&__item {
+		position: relative;
+		max-width: 37.6%;
+		margin-top: 120px;
+		opacity: 0;
+		transform: translateX(-10px);
+
+		@media (max-height: 800px) and (min-width: 1280px) {
+			top: -80px;
+		}
+
+		@include min(dxxl) {
+			margin-top: vw(120);
+		}
+
+		@include max(d) {
+			order: 1;
+			max-width: 100%;
+			padding-bottom: 0;
+			margin-top: 0;
+		}
+
+		&:last-child {
+			max-width: 80%;
+		}
+	}
 
 	&__subtitle {
 		color: $black;
@@ -76,13 +94,17 @@
 	}
 
 	&__text {
-		font-size: 18px;
+		font-size: 24px;
 		line-height: 1.2;
 		margin-top: 16px;
 
 		@include min(dxxl) {
-			font-size: vw(18);
+			font-size: vw(24);
 			margin-top: vw(16);
+		}
+
+		@include max(ti) {
+			font-size: 18px;
 		}
 
 		p + p {
@@ -95,10 +117,14 @@
 	}
 
 	&__link {
-		margin-top: 50px;
+		margin-top: 20px;
 
 		@include min(dxxl) {
-			margin-top: vw(50);
+			margin-top: vw(20);
+		}
+
+		@include max(d) {
+			margin-top: 20px;
 		}
 	}
 }

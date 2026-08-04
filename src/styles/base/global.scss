@@ -44,12 +44,8 @@ body {
 	line-height: 1;
 	transition: 0.2s ease;
 
-	&.hidden {
-		opacity: 0;
-
-		@include max(d) {
-			opacity: 1;
-		}
+	@include min(dxxl) {
+		font-size: vw(20);
 	}
 
 	/* iOS fix */
@@ -208,6 +204,10 @@ ol {
 	gap: 10px;
 	pointer-events: none;
 
+	@include min(dxxl) {
+		gap: vw(10);
+	}
+
 	.swiper-btn-prev,
 	.swiper-btn-next {
 		cursor: pointer;
@@ -240,6 +240,11 @@ ol {
 	bottom: 10px !important;
 	z-index: 12;
 
+	@include min(dxxl) {
+		gap: vw(8);
+		bottom: vw(10) !important;
+	}
+
 	.swiper-pagination-bullet {
 		width: 8px;
 		height: 8px;
@@ -247,6 +252,11 @@ ol {
 		background-color: rgba($color-text, 0.3);
 		margin: 0 !important;
 		transition: opacity 0.3s ease;
+
+		@include min(dxxl) {
+			width: vw(8);
+			height: vw(8);
+		}
 
 		&:not(.swiper-pagination-bullet-active):hover {
 			opacity: 0.7;
@@ -257,6 +267,11 @@ ol {
 			height: 12px;
 			background-color: $color-button-bg;
 			cursor: default;
+
+			@include min(dxxl) {
+				width: vw(12);
+				height: vw(12);
+			}
 		}
 	}
 }
