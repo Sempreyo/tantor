@@ -13,8 +13,9 @@ block preloader
 	.preloader
 		.preloader__wrapper
 			.preloader__value 0%
-			.preloader__text загружаем сайт..
-
+			svg.preloader__icon(viewBox='0 0 100 100')
+				circle.preloader__bg(cx='50' cy='50' r='40')
+				circle.preloader__ring(cx='50' cy='50' r='40')
 block main
 	section.hero
 		.container
@@ -90,47 +91,50 @@ block main
 						.server__widgets
 							.server__widget.server__widget--1.widget
 								+button('Транзакции', 'button--black widget__link', '#', 'arrow-link')
-								table.widget__table
-									tr
-										th ID/Клиент
-										th Сумма
-										th Статус
-									tr
-										td 10293847
-										td ₽4100
-										td ОК
-									tr
-										td 16267384
-										td ₽299.5
-										td Ожидает
-									tr
-										td 19290498
-										td ₽6670
-										td ОК
-									tr
-										td 04002881
-										td ₽2500
-										td ОК
-									tr
-										td 87492342
-										td ₽400
-										td ОК
-									tr
-										td 26401232
-										td ₽1000
-										td Ожидает
-									tr
-										td 10957366
-										td ₽600
-										td Ожидает
-									tr
-										td 98374551
-										td ₽420
-										td ОК
-									tr
-										td 00492213
-										td ₽119.5
-										td ОК
+								.widget__table-wrapper
+									table.widget__table
+										thead
+											tr
+												th ID/Клиент
+												th Сумма
+												th Статус
+										tbody.marquee-content
+											tr
+												td 10293847
+												td ₽4100
+												td ОК
+											tr
+												td 16267384
+												td ₽299.5
+												td Ожидает
+											tr
+												td 19290498
+												td ₽6670
+												td ОК
+											tr
+												td 04002881
+												td ₽2500
+												td ОК
+											tr
+												td 87492342
+												td ₽400
+												td ОК
+											tr
+												td 26401232
+												td ₽1000
+												td Ожидает
+											tr
+												td 10957366
+												td ₽600
+												td Ожидает
+											tr
+												td 98374551
+												td ₽420
+												td ОК
+											tr
+												td 00492213
+												td ₽119.5
+												td ОК
 							.server__widget.server__widget--2.widget
 								+button('Аналитика', 'button--black widget__link', '#', 'arrow-link')
 								.widget__title query.sql
@@ -246,7 +250,7 @@ block main
 		.advantages__bottom
 			.container.advantages__container-bottom
 				.advantages__col
-					+picture('server-close', 'png', 'advantages__model-static', '')
+					img.advantages__model-static(src='./images/server-close.png')
 					+picture('eleph', 'png', 'advantages__eleph', '')
 					.advantages__items
 						.advantages__item 100% совместимость <br> с&nbsp;Postgres, 1С и&nbsp;другим ПО
@@ -285,7 +289,7 @@ block main
 				span.divider //
 		.container
 			.migration__wrapper
-				video.migration__video(src='./assets/tantor_video.mp4', loop, muted, autoplay)
+				video.migration__video(src='./assets/tantor_video_2.mp4', loop, muted, autoplay)
 				.migration__content
 					.migration__quote.
 						«Tantor XData <sup>Gen3</sup> — решение <br> для тех, кто отвечает не&nbsp;за&nbsp;тестовые стенды,
@@ -417,7 +421,8 @@ block main
 							+icon('logo-chart', 'chart__logo')
 							span Tantor Postgres 18 для 1С
 						.chart__window
-							.chart__legend Количество фич 1С
+							.chart__legend Постоянный рост <br> объема функциональности для 1С
+							+icon('clock', 'chart__icon-clock')
 							.chart__graph
 								.chart__osy
 									span(data-value='50')
@@ -428,10 +433,10 @@ block main
 									span(data-value='0')
 								.chart__bars
 									+icon('dashed-line', 'chart__dashed-line')
-									.chart__dot(style='--dot-offset: 49px') 11
-									.chart__dot(style='--dot-offset: 60px') 18
-									.chart__dot(style='--dot-offset: 112px') 36
-									.chart__dot(style='--dot-offset: 153px') 46
+									.chart__dot(style='--dot-offset: 49') 11
+									.chart__dot(style='--dot-offset: 60') 18
+									.chart__dot(style='--dot-offset: 112') 36
+									.chart__dot(style='--dot-offset: 153') 46
 								.chart__osx
 									span 15 <br> версия
 									span 16 <br> версия

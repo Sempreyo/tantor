@@ -12,6 +12,7 @@
 	}
 
 	&__wrapper {
+		position: relative;
 		display: flex;
 		flex-direction: column;
 		gap: 20px;
@@ -27,32 +28,57 @@
 	}
 
 	&__value {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		width: 304px;
 		color: $color-accent;
-		font-size: 250px;
+		font-size: 120px;
+		text-align: center;
+
 
 		@include min(dxxl) {
-			font-size: vw(250);
-		}
-
-		@include min(dxxl) {
-			font-size: vw(250);
+			width: vw(304);
+			font-size: vw(120);
 		}
 
 		@include max(d) {
-			font-size: 200px;
+			font-size: 100px;
 		}
 
 		@include max(ti) {
-			font-size: 120px;
+			font-size: 80px;
 		}
 	}
 
-	&__text {
-		color: rgba($color-text, 0.6);
-		font-size: 16px;
+	&__icon {
+		width: 460px;
+		height: 460px;
 
 		@include min(dxxl) {
-			font-size: vw(16);
+			width: vw(460);
+			height: vw(460);
 		}
+	}
+
+	&__bg,
+	&__ring {
+		fill: none;
+		stroke-width: 8px;
+	}
+
+	&__bg {
+		stroke: rgba($color-text, 0.1);
+	}
+
+	&__ring {
+		stroke: $color-accent;
+		stroke-linecap: round;
+		stroke-dasharray: 251.2;
+		stroke-dashoffset: 251.2;
+		transform-origin: center;
+		transform: rotate(-90deg);
+		transition: stroke-dashoffset 0.3s ease;
 	}
 }

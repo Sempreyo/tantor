@@ -1,6 +1,12 @@
+@property --color-start {
+	syntax: '<color>';
+	initial-value: rgba(204, 59, 3, 1);
+	inherits: false;
+}
+
 .blob {
 	position: absolute;
-	background: radial-gradient(circle, rgba(204, 59, 3, 1) 0%, rgba(230, 230, 230, 0) 60%);
+	background: radial-gradient(circle, var(--color-start) 0%, rgba(230, 230, 230, 0) 60%);
 
 	&--1 {
 		width: 1283px;
@@ -38,6 +44,10 @@
 			top: vw(400);
 			width: vw(600);
 			height: vw(600);
+		}
+
+		@media (min-width: 1920px) and (min-aspect-ratio: 21/10) {
+			top: vw(320);
 		}
 	}
 }

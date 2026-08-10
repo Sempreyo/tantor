@@ -62,12 +62,12 @@
 		align-items: center;
 		font-family: $secondFont;
 		font-size: 16px;
-		min-height: 77px;
+		min-height: 100px;
 		padding: 10px 28px;
 
 		@include min(dxxl) {
 			font-size: vw(16);
-			min-height: vw(77);
+			min-height: vw(100);
 			padding: vw(10) vw(28);
 		}
 
@@ -201,13 +201,17 @@
 	}
 
 	&__dot {
+		--final-offset: calc(var(--dot-offset) * 1px);
+
 		position: relative;
-		bottom: var(--dot-offset);
+		bottom: var(--final-offset);
 		color: $color-accent;
 		font-weight: 700;
 		font-size: 14px;
 
 		@include min(dxxl) {
+			--final-offset: calc((var(--dot-offset) / 1920) * 100vw);
+
 			font-size: vw(14);
 		}
 
@@ -242,6 +246,21 @@
 				border-radius: 50%;
 				background-color: $color-accent;
 			}
+		}
+	}
+
+	&__icon-clock {
+		position: absolute;
+		top: 200px;
+		right: 30px;
+		width: 24px;
+		height: 24px;
+
+		@include min(dxxl) {
+			top: vw(200);
+			right: vw(30);
+			width: vw(24);
+			height: vw(24);
 		}
 	}
 

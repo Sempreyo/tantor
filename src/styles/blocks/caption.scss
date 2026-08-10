@@ -67,9 +67,11 @@
 		color: rgba($color-text, 0.6);
 		font-size: 24px;
 		line-height: 1.5;
+		margin-top: 15px;
 
 		@include min(dxxl) {
 			font-size: vw(24);
+			margin-top: vw(15);
 		}
 
 		@include max(d) {

@@ -1,9 +1,10 @@
 .about {
-	padding: 63px 0 80px;
+	height: auto !important;
+	padding: 63px 0 100px;
 	border-bottom: 1px solid $color-text;
 
 	@include min(dxxl) {
-		padding: vw(63) 0 vw(80);
+		padding: vw(63) 0 vw(100);
 	}
 
 	&__logo {

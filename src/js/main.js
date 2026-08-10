@@ -260,6 +260,18 @@ document.addEventListener("DOMContentLoaded", () => {
 		return px; // Для обычных экранов оставляем исходные пиксели
 	};
 
+	// Преобразовываем css переменную в высоту для разных экранов
+	const getVwFromVariable = (px) => {
+		const dxxlBreakpoint = 1920;
+		const numericPx = parseFloat(px);
+
+		if (window.innerWidth >= dxxlBreakpoint) {
+			return (numericPx / 1920) * window.innerWidth;
+		}
+
+		return numericPx;
+	};
+
 	const getVwMobile = (px) => {
 		const dxxlBreakpoint = 320;
 
@@ -494,6 +506,24 @@ document.addEventListener("DOMContentLoaded", () => {
 		// Анимации на первом экране
 		const hero = document.querySelector(".hero");
 		const heroRight = document.querySelector(".hero__right");
+		const sectionServer = document.querySelector(".server");
+
+		if (sectionServer) {
+			setIntersection(sectionServer, () => {
+				gsap.to(".server__model", {
+					opacity: 1,
+					duration: 0.4,
+					ease: "none"
+				});
+
+				gsap.to(".server__caption", {
+					opacity: 1,
+					stagger: 0.2,
+					duration: 0.4,
+					ease: "none"
+				});
+			}, 0.3);
+		}
 
 		if (hero) {
 			setIntersection(hero, () => {
@@ -523,6 +553,135 @@ document.addEventListener("DOMContentLoaded", () => {
 	const container = document.getElementById("model");
 
 	if (container) {
+		const dataPairs = [
+			{
+				title: "query.sql",
+				code: `SELECT
+  SUM(amount) AS revenue,
+  COUNT(*) AS tx_count,
+  AVG(amount) AS avg_check
+FROM transactions
+WHERE status = 'ok'
+  AND created_at >= NOW() - "7d"
+GROUP BY day
+ORDER BY day ASC`
+			},
+			{
+				title: "weekly_revenue.sql",
+				code: `SELECT
+  TO_CHAR(created_at, 'TMDy') AS day_of_week,
+  SUM(amount) AS revenue,
+  COUNT(tx_id) AS tx_count,
+  ROUND(AVG(amount), 2) AS avg_check
+FROM erp.transactions
+WHERE status = 'SUCCESS'
+  AND created_at >= CURRENT_DATE - INTERVAL
+    '7 days'
+GROUP BY 
+  DATE_TRUNC('day', created_at), 
+  TO_CHAR(created_at, 'TMDy')
+ORDER BY DATE_TRUNC('day', created_at) ASC;`
+			},
+			{
+				title: "hourly_conversion.sql",
+				code: `SELECT 
+  DATE_TRUNC('hour', session_start) AS 
+    hour_window,
+  COUNT(DISTINCT visitor_id) AS unique_visitors,
+  COUNT(DISTINCT cart_id) AS checkouts,
+  ROUND(
+    COUNT(DISTINCT cart_id)::numeric / 
+    NULLIF(COUNT(DISTINCT visitor_id), 0) * 100, 2
+  ) AS conversion_pct
+FROM web_analytics.sessions
+WHERE session_start >= CURRENT_TIMESTAMP - 
+  INTERVAL '6 hours'
+GROUP BY 1
+ORDER BY 1 ASC;`
+			},
+			{
+				title: "category_revenue_share.sql",
+				code: `SELECT 
+  category_name,
+  SUM(total_price) AS segment_revenue,
+  ROUND(
+    SUM(total_price) / SUM(SUM(total_price)) 
+    OVER() * 100, 
+  2) AS share_pct
+FROM retail.sales_mart
+WHERE order_date >= 
+  DATE_TRUNC('month', CURRENT_DATE)
+GROUP BY category_name
+ORDER BY segment_revenue DESC
+LIMIT 4;`
+			}
+		];
+
+		let currentIndex = 0;
+		const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789[]{}<>/\\!@#$%^&*()_+=-';
+		const typingObj = { length: 0 };
+		const titleElement = document.querySelector('.server__widget--2 .widget__title');
+		const codeElement = document.querySelector('.widget__code');
+		const tableBody = document.querySelector('.widget__table .marquee-content');
+
+		function runGlitch(element, startText, targetText, durationFrames = 30) {
+			const maxLength = Math.max(startText.length, targetText.length);
+			const paddedStart = startText.padEnd(maxLength, ' ');
+			const paddedTarget = targetText.padEnd(maxLength, ' ');
+
+			let frame = 0;
+
+			return new Promise((resolve) => {
+				const interval = setInterval(() => {
+					let currentResult = '';
+
+					for (let i = 0; i < maxLength; i++) {
+						const triggerFrame = (i / maxLength) * (durationFrames * 0.5);
+
+						if (frame > triggerFrame + 12) {
+							currentResult += paddedTarget[i];
+						} else if (frame > triggerFrame) {
+							currentResult += chars[Math.floor(Math.random() * chars.length)];
+						} else {
+							currentResult += paddedStart[i];
+						}
+					}
+
+					element.innerText = currentResult;
+					frame++;
+
+					if (frame > durationFrames) {
+						clearInterval(interval);
+						element.innerText = targetText.trim(); // Убираем технические пробелы
+						resolve(); // Сигнализируем о завершении анимации этого элемента
+					}
+				}, 30);
+			});
+		}
+		function startInfiniteLoop() {
+			const nextIndex = (currentIndex + 1) % dataPairs.length;
+
+			const currentPair = dataPairs[currentIndex];
+			const nextPair = dataPairs[nextIndex];
+
+			// Запускаем анимацию заголовка и кода
+			// Promise.all ждет, пока завершатся оба глитча
+			Promise.all([
+				runGlitch(titleElement, currentPair.title, nextPair.title),
+				runGlitch(codeElement, currentPair.code, nextPair.code)
+			]).then(() => {
+				currentIndex = nextIndex;
+				setTimeout(startInfiniteLoop, 4000);
+			});
+		}
+
+		if (tableBody) {
+			// Копируем все существующие строки и добавляем их в конец таблицы
+			const rows = tableBody.innerHTML;
+
+			tableBody.innerHTML = rows + rows;
+		}
+
 		mm.add("(min-width: 1280px)", () => {
 			const scene = new THREE.Scene();
 			//scene.background = new THREE.Color(0x1a1a1a);
@@ -572,7 +731,7 @@ document.addEventListener("DOMContentLoaded", () => {
 			scene.add(ambientLight);
 
 			// Главный свет (светит спереди, сверху и справа)
-			const mainLight = new THREE.DirectionalLight(0xffffff, 22.5);
+			const mainLight = new THREE.DirectionalLight(0xffffff, 17.5);
 			mainLight.position.set(2, 4, 15);
 			scene.add(mainLight);
 
@@ -594,11 +753,23 @@ document.addEventListener("DOMContentLoaded", () => {
 			const loader = new GLTFLoader();
 			const preloader = document.querySelector(".preloader");
 			const preloaderValue = preloader ? preloader.querySelector(".preloader__value") : null;
-			const preloaderText = preloader ? preloader.querySelector('.preloader__text') : null;
+			const progressCircle = preloader ? preloader.querySelector(".preloader__ring") : null;
+			const ringRadius = progressCircle ? progressCircle.r.baseVal.value : 40;
+			const circumference = 2 * Math.PI * ringRadius;
 			let doorObject = null;
 			let isDoorOpen = false;
 			let model;
 			let modelCenter = new THREE.Vector3();
+
+			if (progressCircle) {
+				// Считываем длину окружности
+				const circumference = progressCircle.getTotalLength();
+
+				// Инициализируем стили: кольцо готово к заполнению, но пока пустое
+				progressCircle.style.strokeDasharray = circumference;
+				progressCircle.style.strokeDashoffset = circumference;
+			}
+
 			// Координаты смещения по оси X и Y для адаптивных экранов
 			function getLeftPositionX(targetZ = -2.4, paddingPercentage = 0.20) {
 				// Считаем точное расстояние от камеры до модели с учетом смещения по Z
@@ -630,7 +801,6 @@ document.addEventListener("DOMContentLoaded", () => {
 				function (gltf) {
 					// Убираем прелоадер после загрузки
 					if (preloaderValue) preloaderValue.textContent = "100%";
-					if (preloaderText) preloaderText.textContent = "сайт готов";
 
 					const tlPreloader = gsap.timeline();
 
@@ -668,6 +838,49 @@ document.addEventListener("DOMContentLoaded", () => {
 					modelPivot.add(model);
 					doorObject = model.getObjectByName("0-Door");
 
+
+					// Настройки для всех подсвечиваемых объектов
+					const glowingObjectsConfig = {
+						"Logo_Tantor": { color: "#cc3b03", intensity: 7.0 },
+						"Lamp": { color: "#cc3b03", intensity: 10.0 },
+						"Grid": { color: "#cc3b03", intensity: 10.0 },
+						"Logo_XData_Gen3": { color: "#cc3b03", intensity: 10.0 }
+					};
+
+					model.traverse((child) => {
+						if (child.isMesh) {
+							// Проверяем, есть ли имя текущего меша в конфиге
+							const configKey = Object.keys(glowingObjectsConfig).find(key =>
+								child.name === key || child.name.includes(key)
+							);
+
+							if (configKey) {
+								const config = glowingObjectsConfig[configKey];
+
+								// Сохраняем исходную текстуру
+								const originalTexture = child.material.map;
+								const baseColor = new THREE.Color(config.color);
+
+								// Переводим материал детали на MeshBasicMaterial в обход AmbientLight
+								child.material = new THREE.MeshBasicMaterial({
+									map: originalTexture,
+									transparent: false,
+									opacity: 1.0
+								});
+
+								// Применяем HDR-умножение цвета на индивидуальную интенсивность
+								child.material.color.setRGB(
+									baseColor.r * config.intensity,
+									baseColor.g * config.intensity,
+									baseColor.b * config.intensity
+								);
+
+								// Обновляем шейдер
+								child.material.needsUpdate = true;
+							}
+						}
+					});
+
 					// Собираем все материалы внутри двери в один массив
 					const doorMaterials = [];
 					if (doorObject) {
@@ -697,9 +910,10 @@ document.addEventListener("DOMContentLoaded", () => {
 						const tl1 = gsap.timeline({
 							scrollTrigger: {
 								trigger: "#anchor-1",
-								start: `top ${headerHeight}px`,
-								end: "+=80%",
+								start: `-${headerHeight}px ${headerHeight}px`,
+								end: "+=100%",
 								invalidateOnRefresh: true,
+								scrub: 3,
 
 								// Управляем прогрессом вручную
 								onUpdate: (self) => {
@@ -735,34 +949,34 @@ document.addEventListener("DOMContentLoaded", () => {
 						});
 
 						tl1
-							// Сервера перемещаются в погрузчик
+							// Сервера перемещаются в точку над погрузчиком
 							.to(".hero__machine--1", {
-								x: "140%",
-								y: () => window.innerWidth >= 1921 ? getVw(80) : getVw(140),
-								scale: 0.2,
+								x: "120%",
+								y: () => window.innerWidth >= 1921 ? getVw(100) : getVw(162),
+								scale: 0.5,
 								rotate: 0,
 								duration: 0.5,
 								ease: "sine.out"
 							})
 							.to(".hero__machine--2", {
 								x: "60%",
-								y: () => getVw(251),
-								scale: 0.2,
+								y: () => getVw(266),
+								scale: 0.5,
 								rotate: "5deg",
 								ease: "sine.out"
 							}, "<")
 							.to(".hero__machine--3", {
-								x: "-10%",
+								x: "10%",
 								y: () => getVw(248),
-								scale: 0.2,
+								scale: 0.5,
 								rotate: 0,
 								ease: "sine.out"
 							}, "<")
-							// Подписи к серверам перемещаются в погрузчик
+							// Подписи к серверам перемещаются в точку над погрузчиком
 							.to(".hero__label--1", {
 								animation: "none",
-								x: () => getVw(281),
-								y: () => getVw(16),
+								x: () => getVw(229),
+								y: () => getVw(86),
 								scale: 0.8,
 								rotate: "-3deg",
 								duration: 0.5,
@@ -770,37 +984,72 @@ document.addEventListener("DOMContentLoaded", () => {
 							}, "<")
 							.to(".hero__label--2", {
 								animation: "none",
-								x: () => getVw(188),
-								y: () => getVw(183),
+								x: () => getVw(190),
+								y: () => getVw(216),
 								scale: 0.8,
 								rotate: 0,
 								ease: "sine.out"
 							}, "<")
 							.to(".hero__label--3", {
 								animation: "none",
-								x: () => getVw(-8),
-								y: () => getVw(23),
+								x: () => getVw(50),
+								y: () => getVw(16),
 								scale: 0.8,
 								rotate: "5deg",
 								ease: "sine.out"
 							}, "<")
-							// Погрузчик с серверами уезжает влево за экран
+							// Мусор помещается в погрузчик
 							.to(".hero__machines", {
 								x: () => getMoveCoords().x - getVw(150),
 								y: () => getMoveCoords().y - getVw(250),
 								duration: 0.6,
 								ease: "sine.out"
 							}, "+=0.3")
+							.to(".hero__machine--1", {
+								x: "140%",
+								y: () => window.innerWidth >= 1921 ? getVw(80) : getVw(140),
+								scale: 0.2,
+								duration: 0.5,
+								ease: "sine.out"
+							}, "<")
+							.to(".hero__machine--2", {
+								y: () => getVw(251),
+								scale: 0.2,
+								ease: "sine.out"
+							}, "<")
+							.to(".hero__machine--3", {
+								x: "-10%",
+								scale: 0.2,
+								rotate: 0,
+								ease: "sine.out"
+							}, "<")
+							.to(".hero__label--1", {
+								x: () => getVw(281),
+								y: () => getVw(16),
+								duration: 0.5,
+								ease: "sine.out"
+							}, "<")
+							.to(".hero__label--2", {
+								x: () => getVw(188),
+								y: () => getVw(183),
+								ease: "sine.out"
+							}, "<")
+							.to(".hero__label--3", {
+								x: () => getVw(-8),
+								y: () => getVw(23),
+								ease: "sine.out"
+							}, "<")
+							// Погрузчик с серверами уезжает влево за экран
+							.to(".hero__left", {
+								x: "-100vw",
+								duration: 2,
+								ease: "sine.in"
+							}, "+=0.3")
 							.to(".blob--1", {
 								opacity: 0,
 								scale: 0,
 								ease: "sine.out",
 								duration: 1
-							}, "+=0.5")
-							.to(".hero__left", {
-								x: "-100vw",
-								duration: 2,
-								ease: "power1.in"
 							}, "<");
 
 						const tl2part1 = gsap.timeline({ paused: true });
@@ -860,11 +1109,11 @@ document.addEventListener("DOMContentLoaded", () => {
 								duration: 1
 							})
 							// Вращение модели на 1 оборот
-							.to(modelPivot.rotation, {
+							/*.to(modelPivot.rotation, {
 								y: Math.PI * 2,
 								ease: "none",
 								duration: 1.4
-							});
+							})*/;
 
 						// Открытие двери
 						if (doorObject) {
@@ -908,9 +1157,10 @@ document.addEventListener("DOMContentLoaded", () => {
 								ease: "none"
 							}, "<")
 							.to(".blob--2", {
+								"--color-start": "#8d8d8d",
 								scale: 1,
 								rotateX: 75,
-								y: () => getVw(115),
+								y: () => getVw(95),
 								duration: 0.5,
 								ease: "none"
 							}, "<")
@@ -945,44 +1195,38 @@ document.addEventListener("DOMContentLoaded", () => {
 								opacity: 1,
 								x: 0,
 								stagger: 0.1,
-								ease: "power2.out"
+								duration: 0.7,
+								ease: "expo.out"
 							}, "+=0.1")
 							.to(".board--2", {
 								opacity: 1,
 								x: 0,
 								stagger: 0.1,
-								ease: "power2.out"
+								duration: 0.7,
+								ease: "expo.out"
 							}, "+=0.1")
 							.to(".board--3", {
 								opacity: 1,
 								x: 0,
 								stagger: 0.1,
-								ease: "power2.out"
+								duration: 0.7,
+								ease: "expo.out"
 							}, "+=0.1")
 							.to(".board--4", {
 								opacity: 1,
 								x: 0,
 								stagger: 0.1,
-								ease: "power2.out"
+								duration: 0.7,
+								ease: "expo.out"
 							}, "+=0.1");
 
-						const typingText = `SELECT
-  SUM(amount) AS revenue,
-  COUNT(*) AS tx_count,
-  AVG(amount) AS avg_check
-FROM transactions
-WHERE status = 'ok'
-  AND created_at >= NOW() - "7d"
-GROUP BY day
-ORDER BY day ASC`;
-						const typingObj = { length: 0 };
 						tl2part2
 							.to(doorObject.rotation, {
 								y: 0,
 								ease: "none"
 							}, 0.3)
 							.to(model.rotation, {
-								y: 0.2, // Отрицательное значение вращает модель влево
+								y: 0.15, // Отрицательное значение вращает модель влево
 								ease: "none"
 							}, "<")
 							.to(model.position, {
@@ -990,7 +1234,7 @@ ORDER BY day ASC`;
 								ease: "none"
 							}, "<")
 							.to(".blob--2", {
-								x: "-27vw",
+								x: () => window.innerWidth >= 2800 ? "-43vw" : "-27vw",
 								ease: "none"
 							}, "<")
 							.to(".server-slider__item--1", {
@@ -1049,14 +1293,16 @@ ORDER BY day ASC`;
 								borderColor: "rgba(22, 22, 22, 0.6)",
 								stagger: 0.1,
 								duration: 0.3,
-								ease: "none"
+								ease: "none",
+								onComplete: () => { document.querySelector(".widget__table .marquee-content").style.animation = "scrollUp 15s linear infinite" }
 							}, "<")
 							.to(typingObj, {
-								length: typingText.length,
+								length: dataPairs[0].code.length,
 								ease: "none",
 								onUpdate: () => {
-									document.querySelector(".widget__code").textContent = typingText.substring(0, Math.floor(typingObj.length));
-								}
+									document.querySelector(".widget__code").textContent = dataPairs[0].code.substring(0, Math.floor(typingObj.length));
+								},
+								onComplete: () => { setTimeout(startInfiniteLoop, 4000) }
 							}, "<")
 							.fromTo(".widget__bar-progress span", {
 								width: 0
@@ -1350,7 +1596,11 @@ ORDER BY day ASC`;
 								.fromTo(".chart__bar", {
 									height: 0
 								}, {
-									height: (index, target) => getComputedStyle(target).getPropertyValue("--bar-height").trim(),
+									height: (index, target) => {
+										const rawHeight = target.style.getPropertyValue("--bar-height") || getComputedStyle(target).getPropertyValue("--bar-height");
+
+										return getVwFromVariable(rawHeight);
+									},
 									stagger: 0.1,
 									duration: 0.4,
 									ease: "none"
@@ -1469,8 +1719,14 @@ ORDER BY day ASC`;
 							preloaderValue.textContent = `${percentComplete}%`;
 						}
 
-						if (percentComplete === 100 && preloaderText) {
-							preloaderText.textContent = 'сайт готов';
+						if (progressCircle) {
+							// Динамически берем длину окружности (она меняется при ресайзе экрана)
+							const circumference = progressCircle.getTotalLength();
+
+							// При первом запуске или если не задано в CSS, инициализируем dasharray
+							progressCircle.style.strokeDasharray = circumference;
+
+							progressCircle.style.strokeDashoffset = circumference - (percentComplete / 100) * circumference;
 						}
 					}
 				},
@@ -1674,16 +1930,6 @@ ORDER BY day ASC`;
 
 			setIntersection(serverWidgets, () => {
 				const tlWidgets = gsap.timeline();
-				const typingText = `SELECT
-  SUM(amount) AS revenue,
-  COUNT(*) AS tx_count,
-  AVG(amount) AS avg_check
-FROM transactions
-WHERE status = 'ok'
-  AND created_at >= NOW() - "7d"
-GROUP BY day
-ORDER BY day ASC`;
-				const typingObj = { length: 0 };
 
 				tlWidgets
 					.to(".widget__link", {
@@ -1713,16 +1959,16 @@ ORDER BY day ASC`;
 						stagger: 0.1,
 						duration: 0.3,
 						ease: "none",
-						overwrite: "auto"
+						onComplete: () => { document.querySelector(".widget__table .marquee-content").style.animation = "scrollUp 15s linear infinite" }
 					}, "<")
 					.to(typingObj, {
-						length: typingText.length,
+						length: dataPairs[0].code.length,
 						duration: 3,
 						ease: "none",
-						overwrite: "auto",
 						onUpdate: () => {
-							document.querySelector(".widget__code").textContent = typingText.substring(0, Math.floor(typingObj.length));
-						}
+							document.querySelector(".widget__code").textContent = dataPairs[0].code.substring(0, Math.floor(typingObj.length));
+						},
+						onComplete: () => { setTimeout(startInfiniteLoop, 4000) }
 					}, "<")
 					.fromTo(".widget__bar-progress span", {
 						width: 0

@@ -6,10 +6,6 @@
 	overflow: hidden;
 	transition: background-color 0.3s ease;
 
-	@media (min-height: 900px) and (min-width: 1280px) {
-		height: 99vh !important;
-	}
-
 	&__container {
 		position: relative;
 		display: flex;
@@ -49,17 +45,29 @@
 		min-height: 1000px;
 		max-height: 1000px;
 		margin-top: -30px;
+		opacity: 0;
 		pointer-events: none;
 
 		@media (min-height: 900px) and (min-width: 1280px) {
 			min-height: 1200px;
 			max-height: 1200px;
-			margin-top: 0;
+			margin-top: -50px;
 		}
 
 		@include min(dxxl) {
 			min-height: vw(1200);
 			max-height: vw(1200);
+			margin-top: vw(-50);
+		}
+
+		@media (min-width: 1920px) and (min-aspect-ratio: 21/10) {
+			min-height: vw(1100);
+			max-height: vw(1100);
+			margin-top: vw(-50);
+		}
+
+		@include max(d) {
+			margin-top: 0;
 		}
 	}
 
@@ -69,7 +77,7 @@
 		justify-content: center;
 		width: 100%;
 		//opacity: 0;
-		transform: translateY(40vh);
+		transform: translateY(30vh);
 
 		@include max(d) {
 			order: -2;
@@ -90,6 +98,7 @@
 		width: 50%;
 		flex-shrink: 0;
 		position: relative;
+		opacity: 0;
 
 		@include max(d) {
 			width: 100%;
@@ -154,12 +163,12 @@
 		opacity: 0;
 
 		@media (min-height: 900px) and (min-width: 1280px) {
-			top: 325px;
+			top: 275px;
 			left: calc(50% + 125px);
 		}
 
 		@include min(dxxl) {
-			top: vw(320);
+			top: vw(275);
 			left: calc(50% + (120 / 1920) * 100vw);
 			gap: vw(13);
 			font-size: vw(16);
@@ -204,6 +213,11 @@
 				width: vw(28);
 				height: vw(304);
 			}
+
+			@media (min-width: 1920px) and (min-aspect-ratio: 21/10) {
+				width: vw(28);
+				height: vw(250);
+			}
 		}
 	}
 
@@ -216,13 +230,17 @@
 		gap: 12px;
 
 		@media (min-height: 900px) and (min-width: 1280px) {
-			top: 170px;
+			top: 120px;
 		}
 
 		@include min(dxxl) {
-			top: vw(170);
+			top: vw(120);
 			left: calc(50% + (70 / 1920) * 100vw);
 			gap: vw(12);
+		}
+
+		@media (min-width: 1920px) and (min-aspect-ratio: 21/10) {
+			top: vw(120);
 		}
 
 		@include max(d) {
@@ -270,11 +288,15 @@
 			top: 486px;
 
 			@media (min-height: 900px) and (min-width: 1280px) {
-				top: 640px;
+				top: 590px;
 			}
 
 			@include min(dxxl) {
-				top: vw(640);
+				top: vw(590);
+			}
+
+			@media (min-width: 1920px) and (min-aspect-ratio: 21/10) {
+				top: vw(520);
 			}
 
 			@include max(d) {
@@ -309,10 +331,10 @@
 
 	&__widgets {
 		position: relative;
-		margin-top: 30px;
+		margin-top: 37px;
 
 		@include min(dxxl) {
-			margin-top: vw(30);
+			margin-top: vw(37);
 		}
 	}
 
@@ -330,11 +352,11 @@
 		}
 
 		&--2 {
-			left: 350px;
+			left: 375px;
 			max-width: 344px;
 
 			@include min(dxxl) {
-				left: vw(350);
+				left: vw(375);
 				max-width: vw(344);
 			}
 
@@ -346,14 +368,19 @@
 		}
 
 		&--3 {
-			top: 170px;
-			left: 480px;
+			top: 30px;
+			left: 735px;
 			max-width: 252px;
 
 			@include min(dxxl) {
-				top: vw(170);
-				left: vw(480);
+				top: vw(30);
+				left: vw(735);
 				max-width: vw(252);
+			}
+
+			@include max(1560) {
+				top: -135px;
+				left: 550px;
 			}
 
 			@include max(d) {

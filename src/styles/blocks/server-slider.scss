@@ -21,7 +21,7 @@
 	&__item {
 		position: relative;
 		max-width: 37.6%;
-		margin-top: 120px;
+		margin-top: 100px;
 		opacity: 0;
 		transform: translateX(-10px);
 
@@ -30,7 +30,7 @@
 		}
 
 		@include min(dxxl) {
-			margin-top: vw(120);
+			margin-top: vw(100);
 		}
 
 		@include max(d) {
@@ -42,10 +42,15 @@
 
 		&:last-child {
 			max-width: 80%;
+
+			@include max(d) {
+				max-width: 100%;
+			}
 		}
 	}
 
 	&__subtitle {
+		display: none;
 		color: $black;
 		font-size: 18px;
 
@@ -85,11 +90,11 @@
 		font-weight: 600;
 		font-size: 36px;
 		line-height: 1.2;
-		margin-top: 32px;
+		//margin-top: 32px;
 
 		@include min(dxxl) {
 			font-size: vw(36);
-			margin-top: vw(32);
+			//margin-top: vw(32);
 		}
 	}
 

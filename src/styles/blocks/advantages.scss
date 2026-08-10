@@ -357,11 +357,14 @@
 	&__model-static {
 		position: relative;
 		z-index: 1;
+		width: 290px;
 		margin-top: -120px;
+		filter: brightness(150%);
 		opacity: 1;
 		transform: translateX(-30vw);
 
 		@include min(dxxl) {
+			width: vw(290);
 			margin-top: vw(-120);
 		}
 
@@ -383,14 +386,17 @@
 		mix-blend-mode: exclusion;
 		pointer-events: none;
 		margin-top: -200px;
+		margin-left: 40px;
 
 		@include min(dxxl) {
-			margin-top: vw(-200);
+			margin-top: vw(-100);
+			margin-left: vw(40);
 		}
 
 		@include max(d) {
 			left: 70px;
 			margin-top: 0;
+			margin-left: 0;
 		}
 
 		@include max(t) {
@@ -417,8 +423,8 @@
 		}
 
 		@include max(t) {
-			top: -30px;
-			left: 70px;
+			top: 0;
+			left: 124px;
 		}
 	}
 
