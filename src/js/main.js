@@ -1044,13 +1044,7 @@ LIMIT 4;`
 								x: "-100vw",
 								duration: 2,
 								ease: "sine.in"
-							}, "+=0.3")
-							.to(".blob--1", {
-								opacity: 0,
-								scale: 0,
-								ease: "sine.out",
-								duration: 1
-							}, "<");
+							}, "+=0.3");
 
 						const tl2part1 = gsap.timeline({ paused: true });
 						const tl2part2 = gsap.timeline({ paused: true });
@@ -1869,12 +1863,6 @@ LIMIT 4;`
 					ease: "sine.out",
 					overwrite: "auto"
 				}, "+=0.3")
-				.to(".blob--1", {
-					opacity: 0,
-					scale: 0,
-					ease: "sine.out",
-					duration: 1
-				}, "+=0.5")
 				.to(".hero__left", {
 					x: "-100vw",
 					ease: "sine.out",
