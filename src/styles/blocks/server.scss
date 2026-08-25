@@ -353,11 +353,11 @@
 		}
 
 		&--2 {
-			left: 375px;
+			left: 350px;
 			max-width: 344px;
 
 			@include min(dxxl) {
-				left: vw(375);
+				left: vw(350);
 				max-width: vw(344);
 			}
 
@@ -369,13 +369,13 @@
 		}
 
 		&--3 {
-			top: 30px;
-			left: 735px;
+			top: 0;
+			left: 715px;
 			max-width: 252px;
 
 			@include min(dxxl) {
-				top: vw(30);
-				left: vw(735);
+				top: 0;
+				left: vw(715);
 				max-width: vw(252);
 			}
 

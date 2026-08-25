@@ -122,10 +122,10 @@
 	}
 
 	&__link {
-		margin-top: 20px;
+		margin-top: 50px;
 
 		@include min(dxxl) {
-			margin-top: vw(20);
+			margin-top: vw(50);
 		}
 
 		@include max(d) {

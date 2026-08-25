@@ -93,11 +93,6 @@ block main
 								+button('Транзакции', 'button--black widget__link', '#', 'arrow-link')
 								.widget__table-wrapper
 									table.widget__table
-										thead
-											tr
-												th ID/Клиент
-												th Сумма
-												th Статус
 										tbody.marquee-content
 											tr
 												td 10293847
@@ -137,10 +132,8 @@ block main
 												td ОК
 							.server__widget.server__widget--2.widget
 								+button('Аналитика', 'button--black widget__link', '#', 'arrow-link')
-								.widget__title query.sql
 								pre.widget__code
 							.server__widget.server__widget--3.widget.widget--small
-								.widget__title Продажи
 								.widget__stats
 									.widget__stats-item
 										p Выручка
@@ -196,11 +189,11 @@ block main
 						+icon('bracket')
 						span Начальная конфигурация
 					.server__boards
-						.board.board--light.board--3
+						.board.board--light.board--6
 							.board__line
 							+icon('server', 'board__icon')
 							.board__text +1 сервер вычислений...
-						.board.board--light.board--2
+						.board.board--light.board--4
 							.board__line
 							+icon('server', 'board__icon')
 							.board__text +1 сервер вычислений...
@@ -209,10 +202,6 @@ block main
 							+icon('server', 'board__icon')
 							.board__text +1 сервер вычислений...
 					.server__boards.server__boards--bottom
-						.board.board--dark.board--1
-							.board__line
-							+icon('server', 'board__icon')
-							.board__text +1 сервер хранения...
 						.board.board--dark.board--2
 							.board__line
 							+icon('server', 'board__icon')
@@ -221,7 +210,11 @@ block main
 							.board__line
 							+icon('server', 'board__icon')
 							.board__text +1 сервер хранения...
-						.board.board--dark.board--4
+						.board.board--dark.board--5
+							.board__line
+							+icon('server', 'board__icon')
+							.board__text +1 сервер хранения...
+						.board.board--dark.board--7
 							.board__line
 							+icon('server', 'board__icon')
 							.board__text +1 сервер хранения...
@@ -397,7 +390,7 @@ block main
 							+icon('logo-chart', 'chart__logo')
 							span Tantor Postgres 18 для 1С
 						.chart__window
-							.chart__legend Расчет себестоимости (мин)
+							.chart__legend Выполнение операции «Закрытие месяца» <br> <span>на тестовой базе ERP 2.5 размером 646 МБ</span>
 							.chart__graph
 								.chart__osy
 									span(data-value='100')
@@ -407,10 +400,11 @@ block main
 									span(data-value='20')
 									span(data-value='0')
 								.chart__bars
-									.chart__bar(style='--bar-height: 188px') 111
-									.chart__bar(style='--bar-height: 182px') 108
-									.chart__bar(style='--bar-height: 166px') 97
-									.chart__bar(style='--bar-height: 144px') 81
+									+icon('clock', 'chart__icon-clock')
+									.chart__bar.chart__bar--1(style='--bar-height: 175') 111 <br> <span>минут</span>
+									.chart__bar.chart__bar--2(style='--bar-height: 170') 108 <br> <span>минут</span>
+									.chart__bar.chart__bar--3(style='--bar-height: 150') 97 <br> <span>минут</span>
+									.chart__bar.chart__bar--4(style='--bar-height: 128') 81 <br> <span>минут</span>
 								.chart__osx
 									span 15 <br> версия
 									span 16 <br> версия
@@ -422,7 +416,6 @@ block main
 							span Tantor Postgres 18 для 1С
 						.chart__window
 							.chart__legend Постоянный рост <br> объема функциональности для 1С
-							+icon('clock', 'chart__icon-clock')
 							.chart__graph
 								.chart__osy
 									span(data-value='50')

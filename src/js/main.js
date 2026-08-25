@@ -620,7 +620,6 @@ LIMIT 4;`
 		let currentIndex = 0;
 		const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789[]{}<>/\\!@#$%^&*()_+=-';
 		const typingObj = { length: 0 };
-		const titleElement = document.querySelector('.server__widget--2 .widget__title');
 		const codeElement = document.querySelector('.widget__code');
 		const tableBody = document.querySelector('.widget__table .marquee-content');
 
@@ -667,7 +666,6 @@ LIMIT 4;`
 			// Запускаем анимацию заголовка и кода
 			// Promise.all ждет, пока завершатся оба глитча
 			Promise.all([
-				runGlitch(titleElement, currentPair.title, nextPair.title),
 				runGlitch(codeElement, currentPair.code, nextPair.code)
 			]).then(() => {
 				currentIndex = nextIndex;
@@ -1046,8 +1044,21 @@ LIMIT 4;`
 								ease: "sine.in"
 							}, "+=0.3");
 
-						const tl2part1 = gsap.timeline({ paused: true });
-						const tl2part2 = gsap.timeline({ paused: true });
+						gsap.set("[class^='board--']", { opacity: 0, x: "20px" });
+						const tl2part1 = gsap.timeline({
+							paused: true,
+							onComplete: () => {
+								if (part1Played && !part2Played) {
+									startRandomBoardLoop();
+								}
+							}
+						});
+						const tl2part2 = gsap.timeline({
+							paused: true,
+							onStart: () => {
+								resetBoardLoop();
+							}
+						});
 						// Флаги, чтобы каждая анимация запускалась строго 1 раз при пересечении экватора
 						let part1Played = false;
 						let part2Played = false;
@@ -1057,6 +1068,9 @@ LIMIT 4;`
 								start: `top ${headerHeight}px`,
 								end: "+=200%",
 								pin: true,
+								onRefresh: () => {
+									resetBoardLoop();
+								},
 								onUpdate: (self) => {
 									const progress = self.progress; // значение от 0 до 1
 
@@ -1064,6 +1078,7 @@ LIMIT 4;`
 									if (progress > 0.05 && progress < 0.5) {
 										if (!part1Played) {
 											part1Played = true;
+											tl2part2.pause().progress(0);
 											tl2part1.play();
 										}
 									}
@@ -1071,7 +1086,8 @@ LIMIT 4;`
 									if (progress >= 0.5) {
 										if (!part2Played) {
 											part2Played = true;
-											tl2part1.progress(1); // Гарантируем, что 1-я часть завершена
+											tl2part1.pause().progress(1);
+											resetBoardLoop();
 											tl2part2.play();
 										}
 									}
@@ -1080,15 +1096,20 @@ LIMIT 4;`
 									if (progress < 0.5 && progress > 0.05) {
 										if (part2Played) {
 											part2Played = false;
-											tl2part2.reverse();
+											resetTypingLoop();
+											tl2part2.pause().progress(0);
+											tl2part1.pause().progress(1);
+											startRandomBoardLoop();
 										}
 									}
 
 									if (progress <= 0.05) {
 										if (part1Played) {
 											part1Played = false;
-											tl2part2.progress(0); // Сбрасываем 2-ю часть
-											tl2part1.reverse();
+											resetTypingLoop();
+											resetBoardLoop();
+											tl2part2.pause().progress(0);
+											tl2part1.pause().progress(0);
 										}
 									}
 								}
@@ -1124,6 +1145,117 @@ LIMIT 4;`
 									ease: "none"
 								});
 							}
+						}
+
+						// Хранилища для отслеживания состояния плат в глобальной области видимости
+						let activeBoards = [];
+						let boardAnimationTimelines = [];
+
+						// Функция сброса
+						function resetBoardLoop() {
+							// 1. Убиваем все запланированные шаги рекурсии в GSAP
+							gsap.killTweensOf(nextRandomStep);
+							gsap.killTweensOf(startRandomBoardLoop);
+
+							// 2. Убиваем все запущенные твины анимации индивидуальных плат
+							boardAnimationTimelines.forEach(tween => {
+								if (tween) tween.kill();
+							});
+							boardAnimationTimelines = [];
+							activeBoards = [];
+
+							const allBoardsSelector = "[class*='board--']";
+
+							// Останавливаем любые текущие анимации на самих платах
+							gsap.killTweensOf(allBoardsSelector);
+
+							// Мгновенно и аппаратно скрываем все 7 плат
+							gsap.set(allBoardsSelector, {
+								opacity: 0,
+								x: 50, // Возвращаем к исходному CSS-значению translateX(50px)
+								clearProps: "transform" // Очищаем инлайн-трансформы, чтобы не ломать адаптивный transform: unset в CSS
+							});
+						}
+
+						// Функция запуска случайного цикла (вызывается в конце tl2part1)
+						function startRandomBoardLoop() {
+							// Делаем сброс перед стартом, чтобы избежать накладывания циклов
+							resetBoardLoop();
+
+							const totalBoards = 7;
+							const maxVisible = 6;
+							const duration = 0.7;
+							const ease = "expo.out";
+
+							// Шаг 1: Случайным образом выбираем первые 6 плат для стартового появления
+							const allIndices = Array.from({ length: totalBoards }, (_, i) => i + 1);
+							const shuffled = allIndices.sort(() => Math.random() - 0.5);
+
+							activeBoards = shuffled.slice(0, maxVisible);
+
+							// Анимируем стартовые 6 плат (opacity + x) с имитацией stagger
+							activeBoards.forEach((boardNum, index) => {
+								const tween = gsap.to(`[class*='board--${boardNum}']`, {
+									opacity: 1,
+									x: 0,
+									duration,
+									ease,
+									delay: index
+								});
+								boardAnimationTimelines.push(tween);
+							});
+
+							// Шаг 2: Рассчитываем общую длину стартовой анимации и планируем запуск круговорота
+							const startLoopDelay = (maxVisible * 0.1) + duration + 0.5;
+
+							// Вместо setTimeout используем gsap.delayedCall для идеальной синхронизации
+							gsap.delayedCall(startLoopDelay, nextRandomStep);
+						}
+
+						// Рекурсивная функция для одного случайного шага
+						function nextRandomStep() {
+							const totalBoards = 7;
+							const allIndices = Array.from({ length: totalBoards }, (_, i) => i + 1);
+							const duration = 1;
+							const ease = "expo.out";
+
+							// 1. Выбираем случайную плату из видимых, чтобы СКРЫТЬ
+							const randomActiveIndex = Math.floor(Math.random() * activeBoards.length);
+							const boardToHide = activeBoards[randomActiveIndex];
+
+							// 2. Находим скрытые платы и выбираем одну случайную, чтобы ПОКАЗАТЬ
+							const hiddenBoards = allIndices.filter(num => !activeBoards.includes(num));
+							const boardToShow = hiddenBoards[Math.floor(Math.random() * hiddenBoards.length)];
+
+							// 3. Обновляем массив активных плат
+							activeBoards.splice(randomActiveIndex, 1);
+							activeBoards.push(boardToShow);
+
+							// 4. Сбрасываем X для новой платы перед её анимацией появления
+							gsap.set(`[class*='board--${boardToShow}']`, { x: "50px" });
+
+							// 5. Запускаем одновременные анимации
+							const hideTween = gsap.to(`.board--${boardToHide}`, {
+								opacity: 0,
+								duration: 0.5,
+								ease: "power2.inOut"
+							});
+
+							const showTween = gsap.to(`[class*='board--${boardToShow}']`, {
+								opacity: 1,
+								x: 0,
+								duration: duration,
+								ease: ease,
+								onComplete: () => {
+									// Очищаем отработавшие твины из массива памяти
+									boardAnimationTimelines = boardAnimationTimelines.filter(t => t !== hideTween && t !== showTween);
+
+									// Планируем следующий шаг через 1 секунду паузы с помощью GSAP
+									gsap.delayedCall(3.0, nextRandomStep);
+								}
+							});
+
+							boardAnimationTimelines.push(hideTween, showTween);
 						}
 
 						tl2part1
@@ -1184,36 +1316,24 @@ LIMIT 4;`
 								opacity: 1,
 								x: 0,
 								ease: "power2.out"
-							}, "<")
-							.to(".board--1", {
-								opacity: 1,
-								x: 0,
-								stagger: 0.1,
-								duration: 0.7,
-								ease: "expo.out"
-							}, "+=0.1")
-							.to(".board--2", {
-								opacity: 1,
-								x: 0,
-								stagger: 0.1,
-								duration: 0.7,
-								ease: "expo.out"
-							}, "+=0.1")
-							.to(".board--3", {
-								opacity: 1,
-								x: 0,
-								stagger: 0.1,
-								duration: 0.7,
-								ease: "expo.out"
-							}, "+=0.1")
-							.to(".board--4", {
-								opacity: 1,
-								x: 0,
-								stagger: 0.1,
-								duration: 0.7,
-								ease: "expo.out"
-							}, "+=0.1");
+							}, "<");
 
+						let typingTimeoutId = null; // Переменная для очистки setTimeout цикла текста
+
+						// Функция для полного и мгновенного сброса печатного текста
+						function resetTypingLoop() {
+							if (typingTimeoutId) {
+								clearTimeout(typingTimeoutId);
+								typingTimeoutId = null;
+							}
+
+							typingObj.length = 0;
+
+							const widgetCodeEl = document.querySelector(".widget__code");
+							if (widgetCodeEl) {
+								widgetCodeEl.textContent = "";
+							}
+						}
 						tl2part2
 							.to(doorObject.rotation, {
 								y: 0,
@@ -1239,26 +1359,6 @@ LIMIT 4;`
 								opacity: 0,
 								ease: "power2.out"
 							}, "<")
-							.to(".board--1", {
-								opacity: 0,
-								stagger: 0.1,
-								ease: "power2.out"
-							}, "<")
-							.to(".board--2", {
-								opacity: 0,
-								stagger: 0.1,
-								ease: "power2.out"
-							}, "<")
-							.to(".board--3", {
-								opacity: 0,
-								stagger: 0.1,
-								ease: "power2.out"
-							}, "<")
-							.to(".board--4", {
-								opacity: 0,
-								stagger: 0.1,
-								ease: "power2.out"
-							}, "<")
 							.to(".server-slider__item--2", {
 								opacity: 1,
 								x: 0,
@@ -1268,11 +1368,6 @@ LIMIT 4;`
 								opacity: 1,
 								x: 0,
 								duration: 0.5,
-								ease: "none"
-							}, "<")
-							.to(".widget__title", {
-								opacity: 1,
-								duration: 0.3,
 								ease: "none"
 							}, "<")
 							.to(".widget__code, .widget__stats, .widget__bars, .widget__chart-icon", {
@@ -1296,7 +1391,7 @@ LIMIT 4;`
 								onUpdate: () => {
 									document.querySelector(".widget__code").textContent = dataPairs[0].code.substring(0, Math.floor(typingObj.length));
 								},
-								onComplete: () => { setTimeout(startInfiniteLoop, 4000) }
+								onComplete: () => { typingTimeoutId = setTimeout(startInfiniteLoop, 4000); }
 							}, "<")
 							.fromTo(".widget__bar-progress span", {
 								width: 0
@@ -1586,30 +1681,64 @@ LIMIT 4;`
 									y: 0,
 									duration: 0.4,
 									ease: "none"
-								}, "<")
-								.fromTo(".chart__bar", {
-									height: 0
-								}, {
-									height: (index, target) => {
-										const rawHeight = target.style.getPropertyValue("--bar-height") || getComputedStyle(target).getPropertyValue("--bar-height");
-
-										return getVwFromVariable(rawHeight);
-									},
-									stagger: 0.1,
-									duration: 0.4,
-									ease: "none"
-								}, "<")
-								.to(".chart--3", {
-									opacity: 1,
-									duration: 0.4,
-									ease: "none"
-								}, "+=3.5")
-								.to(".chart-anim-3", {
-									opacity: 1,
-									y: 0,
-									duration: 0.4,
-									ease: "none"
 								}, "<");
+
+							const bars = document.querySelectorAll(".chart__bar");
+							const clock = document.querySelector(".chart__icon-clock");
+							const firstBarLeft = bars[0].getBoundingClientRect().left;
+
+							bars.forEach((bar, index) => {
+								if (index === 0) {
+									tl6.to(bar, {
+										opacity: 1,
+										scaleY: 1,
+										duration: 0.5,
+										ease: "power2.out"
+									});
+								} else {
+									const prevBar = bars[index - 1];
+									const currentHeight = parseFloat(bar.style.getPropertyValue('--bar-height'));
+									const prevHeight = parseFloat(prevBar.style.getPropertyValue('--bar-height'));
+									const startScaleY = prevHeight / currentHeight;
+									const currentLeft = bar.getBoundingClientRect().left;
+									const prevLeft = prevBar.getBoundingClientRect().left;
+									const clockTargetX = currentLeft - firstBarLeft;
+
+									tl6.set(bar, {
+										x: prevLeft - currentLeft,
+										scaleY: startScaleY,
+										opacity: 0
+									})
+										.to(bar, {
+											x: 0,
+											opacity: 1,
+											duration: 0.6,
+											ease: "power1.inOut"
+										})
+										.to(clock, {
+											x: clockTargetX,
+											duration: 0.6,
+											ease: "power1.inOut"
+										}, "<")
+										.to(bar, {
+											scaleY: 1,
+											duration: 0.4,
+											ease: "power2.out"
+										}, "-=0.15");
+								}
+							});
+
+							tl6.to(".chart--3", {
+								opacity: 1,
+								duration: 0.4,
+								ease: "none"
+							}, "+=3.5")
+							.to(".chart-anim-3", {
+								opacity: 1,
+								y: 0,
+								duration: 0.4,
+								ease: "none"
+							}, "<");
 						}, 0.3);
 
 						const tl7part1 = gsap.timeline({ paused: true });
@@ -1927,12 +2056,6 @@ LIMIT 4;`
 						ease: "none",
 						overwrite: "auto"
 					})
-					.to(".widget__title", {
-						opacity: 1,
-						duration: 0.3,
-						ease: "none",
-						overwrite: "auto"
-					})
 					.to(".widget__code, .widget__stats, .widget__bars, .widget__chart-icon", {
 						opacity: 1,
 						stagger: 0.1,
@@ -2164,12 +2287,6 @@ ORDER BY day ASC`;
 				.to(".widget__link", {
 					opacity: 1,
 					x: 0,
-					duration: 0.3,
-					ease: "none",
-					overwrite: "auto"
-				})
-				.to(".widget__title", {
-					opacity: 1,
 					duration: 0.3,
 					ease: "none",
 					overwrite: "auto"

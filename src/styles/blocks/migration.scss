@@ -187,16 +187,22 @@
 	}
 
 	&__person-image {
-		min-width: 60px;
-		max-width: 60px;
-		height: 60px;
+		min-width: 90px;
+		max-width: 90px;
+		height: 90px;
 		border-radius: 50%;
 		object-fit: cover;
 
 		@include min(dxxl) {
-			min-width: vw(60);
-			max-width: vw(60);
-			height: vw(60);
+			min-width: vw(90);
+			max-width: vw(90);
+			height: vw(90);
+		}
+
+		@include max(d) {
+			min-width: 60px;
+			max-width: 60px;
+			height: 60px;
 		}
 	}
 

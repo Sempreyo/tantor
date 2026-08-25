@@ -291,11 +291,11 @@
 	&__bottom {
 		background-color: $white;
 		border-top: 1px solid rgba($color-text, 0.3);
-		padding: 52px 0 20px;
+		padding: 120px 0 0;
 		//overflow: hidden;
 
 		@include min(dxxl) {
-			padding: vw(52) 0 vw(20);
+			padding: vw(120) 0 0;
 		}
 	}
 
@@ -358,14 +358,14 @@
 		position: relative;
 		z-index: 1;
 		width: 290px;
-		margin-top: -120px;
+		margin-top: -170px;
 		filter: brightness(150%);
 		opacity: 1;
 		transform: translateX(-30vw);
 
 		@include min(dxxl) {
 			width: vw(290);
-			margin-top: vw(-120);
+			margin-top: vw(-170);
 		}
 
 		@include max(d) {
@@ -467,10 +467,10 @@
 	}
 
 	&__link {
-		margin-top: 35px;
+		margin-top: 50px;
 
 		@include min(dxxl) {
-			margin-top: vw(35);
+			margin-top: vw(50);
 		}
 	}
 }

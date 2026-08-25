@@ -101,6 +101,14 @@
 		@include max(t) {
 			font-size: 14px;
 		}
+
+		span {
+			font-size: 12px;
+
+			@include min(dxxl) {
+				font-size: vw(12);
+			}
+		}
 	}
 
 	&__graph {
@@ -179,17 +187,21 @@
 
 	&__bar {
 		width: 42px;
-		height: 0;
+		height: calc(var(--bar-height) * 1px);
 		background-color: $color-text;
-		padding: 15px 0;
+		padding: 10px 0;
 		color: $white;
 		font-size: 16px;
-		line-height: 0;
+		line-height: 1;
 		text-align: center;
 		overflow: hidden;
+		opacity: 0;
+		transform: scaleY(0);
+		transform-origin: bottom center;
 
 		@include min(dxxl) {
 			width: vw(42);
+			height: calc(var(--bar-height) / 1920 * 100vw);
 			padding: vw(15) 0;
 			font-size: vw(16);
 		}
@@ -197,6 +209,33 @@
 		@include max(t) {
 			width: 30px;
 			font-size: 12px;
+		}
+
+		&:nth-of-type(4) {
+			background-color: $color-accent;
+		}
+
+		span {
+			font-size: 10px;
+
+			@include min(dxxl) {
+				font-size: vw(10);
+			}
+		}
+	}
+
+	&__icon-clock {
+		position: absolute;
+		top: -60px;
+		left: 110px;
+		width: 24px;
+		height: 24px;
+
+		@include min(dxxl) {
+			top: vw(-60);
+			left: vw(110);
+			width: vw(24);
+			height: vw(24);
 		}
 	}
 
@@ -246,21 +285,6 @@
 				border-radius: 50%;
 				background-color: $color-accent;
 			}
-		}
-	}
-
-	&__icon-clock {
-		position: absolute;
-		top: 200px;
-		right: 30px;
-		width: 24px;
-		height: 24px;
-
-		@include min(dxxl) {
-			top: vw(200);
-			right: vw(30);
-			width: vw(24);
-			height: vw(24);
 		}
 	}
 
