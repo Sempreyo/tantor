@@ -1122,13 +1122,7 @@ LIMIT 4;`
 								scale: 1,
 								ease: "none",
 								duration: 1
-							})
-							// Вращение модели на 1 оборот
-							/*.to(modelPivot.rotation, {
-								y: Math.PI * 2,
-								ease: "none",
-								duration: 1.4
-							})*/;
+							});
 
 						// Открытие двери
 						if (doorObject) {
@@ -1404,7 +1398,6 @@ LIMIT 4;`
 						const advantages = document.querySelector(".advantages");
 						const tl4Content = gsap.timeline({ paused: true, invalidateOnRefresh: true });
 						const tl4 = gsap.timeline({ paused: true, invalidateOnRefresh: true });
-						//const tl4Leave = gsap.timeline({ paused: true, invalidateOnRefresh: true });
 
 						tl4Content
 							.to(".advantages-anim", {
@@ -1415,97 +1408,6 @@ LIMIT 4;`
 								ease: "power2.out",
 								overwrite: "auto"
 							});
-
-						/*tl4
-							.to("#model", {
-								top: "unset",
-								opacity: 0,
-								duration: 0,
-								ease: "none"
-							})
-							.to(model.position, {
-								x: () => getLeftPositionX(-2.4, window.matchMedia("(min-width: 1800px)").matches ? -0.11 : -0.14),
-								y: 0,
-								z: 0,
-								duration: 0,
-								ease: "none"
-							})
-							// Начальные позиции света (должны дублировать исходные значения)
-							.to(mainLight.position, { x: 2, y: 4, z: 15, duration: 0, ease: "none" }, "<")
-							.to(fillLight.position, { x: -6, y: 2, z: 2, duration: 0, ease: "none" }, "<")
-							.to(backgroundLight.position, { x: 0, y: 0, z: -3, duration: 0, ease: "none" }, "<")
-							.to(innerLight.position, { x: 0, y: 0, z: -0.3, duration: 0, ease: "none" }, "<")
-							.to("#model", {
-								opacity: 1,
-								duration: 0.3,
-								ease: "none"
-							})
-							.to(model.position, {
-								x: () => getLeftPositionX(
-									-2.4,
-									window.matchMedia("(min-width: 1800px)").matches ? 0.11 :
-											0.14
-								),
-								// Сдвиг влево
-								y: getTopPositionY(-2.4, 0.4), // Сдвиг вниз
-								z: -2.4, // Масштаб
-								duration: 1.5,
-								ease: "none"
-							})
-							// Анимируем ГЛАВНЫЙ СВЕТ вслед за моделью (сдвигаем влево и немного уводим вглубь по Z)
-							.to(mainLight.position, {
-								x: 16,
-								y: 3,
-								z: 6.5,
-								duration: 1.5,
-								ease: "none"
-							}, "<")
-							// Анимируем ЗАПОЛНЯЮЩИЙ СВЕТ (уводим еще дальше влево и назад для контуров)
-							.to(fillLight.position, {
-								x: -8,
-								y: 1,
-								z: -1.5,
-								duration: 1.5,
-								ease: "none"
-							}, "<")
-							// Анимируем ФОНОВЫЙ СВЕТ (он привязан к центру модели, поэтому должен идеально повторять её координаты)
-							.to(backgroundLight.position, {
-								x: () => model.position.x,
-								y: getTopPositionY(-2.4, 0.45),
-								z: -5.4,
-								duration: 1.5,
-								ease: "none"
-							}, "<")
-							// Анимируем ВНУТРЕННИЙ СВЕТ (всегда движется строго внутри геометрии модели)
-							.to(innerLight.position, {
-								x: () => model.position.x,
-								y: getTopPositionY(-2.4, 0.45),
-								z: -2.7,
-								duration: 1.5,
-								ease: "none"
-							}, "<")
-							.to(model.rotation, {
-								y: 0.88, // Отрицательное значение вращает модель влево
-								duration: 0.5,
-								ease: "none"
-							}, "<");
-
-						// Закрытие двери
-						if (doorObject) {
-							tl4.to(doorObject.rotation, {
-								y: 0,
-								duration: 0.5,
-								ease: "none"
-							});
-
-							if (doorMaterials.length > 0) {
-								tl4.to(doorMaterials, {
-									opacity: 1,
-									duration: 0.5,
-									ease: "none"
-								}, "<");
-							}
-						}*/
 
 						tl4
 							.to(".advantages__model-static", {
@@ -1521,28 +1423,6 @@ LIMIT 4;`
 								duration: 0.5,
 								ease: "none"
 							});
-
-						/*tl4Leave
-							.to("#model", {
-								top: 0,
-								opacity: 1,
-								duration: 0,
-								ease: "none",
-								immediateRender: false
-							})
-							.to(model.position, {
-								x: () => getLeftPositionX(1.3, 0.15),
-								y: () => -modelCenter.y,
-								z: () => -modelCenter.z,
-								duration: 0.5,
-								ease: "none",
-								immediateRender: false
-							})
-							.to(model.rotation, {
-								y: 0,
-								duration: 0.5,
-								ease: "none"
-							}, "<");*/
 
 						if (advantages) {
 							let contentPlayed = false;
@@ -1854,23 +1734,6 @@ LIMIT 4;`
 					}
 				},
 			);
-
-			// Функция плавного вращения в цикле анимации
-			/*let targetRotation = 0;
-
-			function toggleDoorCode() {
-				if (!doorObject) return;
-
-				if (!isDoorOpen) {
-					targetRotation = Math.PI / 2; // Поворот на 90 градусов (в радианах)
-					isDoorOpen = true;
-				} else {
-					targetRotation = 0; // Возврат в исходное положение
-					isDoorOpen = false;
-				}
-			}*/
-
-			//window.addEventListener('click', toggleDoorCode);
 
 			window.addEventListener("resize", onWindowResize, false);
 
@@ -2217,152 +2080,6 @@ LIMIT 4;`
 		});
 	}
 
-
-
-
-
-
-
-	/*const serverCarousel = document.querySelectorAll(".server-slider");
-
-	if (serverCarousel.length > 0) {
-		serverCarousel.forEach(el => {
-			const serverPagination = el.querySelector(".server-slider__pagination");
-			const tlSlide1 = gsap.timeline({ paused: true });
-			const tlSlide2 = gsap.timeline({ paused: true });
-
-			tlSlide1
-				.to(".server__config", {
-					opacity: 1,
-					x: 0,
-					duration: 0.5,
-					ease: "power2.out",
-					overwrite: "auto"
-				})
-				.to(".board--1", {
-					opacity: 1,
-					x: 0,
-					stagger: 0.1,
-					duration: 0.3,
-					ease: "power2.out",
-					overwrite: "auto"
-				})
-				.to(".board--2", {
-					opacity: 1,
-					x: 0,
-					stagger: 0.1,
-					duration: 0.3,
-					ease: "power2.out",
-					overwrite: "auto"
-				})
-				.to(".board--3", {
-					opacity: 1,
-					x: 0,
-					stagger: 0.1,
-					duration: 0.3,
-					ease: "power2.out",
-					overwrite: "auto"
-				})
-				.to(".board--4", {
-					opacity: 1,
-					x: 0,
-					stagger: 0.1,
-					duration: 0.3,
-					ease: "power2.out",
-					overwrite: "auto"
-				});
-
-			const typingText = `SELECT
-  SUM(amount) AS revenue,
-  COUNT(*) AS tx_count,
-  AVG(amount) AS avg_check
-FROM transactions
-WHERE status = 'ok'
-  AND created_at >= NOW() - "7d"
-GROUP BY day
-ORDER BY day ASC`;
-			const typingObj = { length: 0 };
-
-			tlSlide2
-				.to(".widget__link", {
-					opacity: 1,
-					x: 0,
-					duration: 0.3,
-					ease: "none",
-					overwrite: "auto"
-				})
-				.to(".widget__code, .widget__stats, .widget__bars, .widget__chart-icon", {
-					opacity: 1,
-					stagger: 0.1,
-					duration: 0.5,
-					ease: "none",
-					overwrite: "auto"
-				})
-				.to(".widget__table tr", {
-					opacity: 1,
-					y: 0,
-					borderColor: "rgba(22, 22, 22, 0.6)",
-					stagger: 0.1,
-					duration: 0.3,
-					ease: "none",
-					overwrite: "auto"
-				}, "<")
-				.to(typingObj, {
-					length: typingText.length,
-					duration: 3,
-					ease: "none",
-					overwrite: "auto",
-					onUpdate: () => {
-						document.querySelector(".widget__code").textContent = typingText.substring(0, Math.floor(typingObj.length));
-					}
-				}, "<")
-				.fromTo(".widget__bar-progress span", {
-					width: 0
-				}, {
-					width: (index, target) => getComputedStyle(target).getPropertyValue("--percent").trim(),
-					stagger: 0.1,
-					duration: 0.5,
-					ease: "none"
-				}, "<");
-
-			const slider = new Swiper(el, {
-				slidesPerView: 1,
-				spaceBetween: 10,
-				effect: "fade",
-				fadeEffect: {
-					crossFade: true
-				},
-				autoplay: {
-					delay: 7000
-				},
-				pagination: {
-					el: serverPagination,
-					clickable: true
-				},
-				on: {
-					init: () => {
-						if (media1280) {
-							tlSlide1.play();
-						}
-					},
-					slideChange: (swiper) => {
-						if (media1280) {
-							if (swiper.realIndex === 0) {
-								tlSlide1.restart();
-								tlSlide2.pause(0);
-							}
-
-							if (swiper.realIndex === 1) {
-								tlSlide2.restart();
-								tlSlide1.pause(0);
-							}
-						}
-					}
-				}
-			});
-		});
-	}*/
-
 	const productCarousel = document.querySelectorAll(".product__slider");
 
 	if (productCarousel.length > 0) {
@@ -2422,5 +2139,28 @@ ORDER BY day ASC`;
 				}
 			});
 		});
+	}
+
+
+	// Скрипт для статьи
+	const articleTrack = document.querySelector(".article__track");
+
+	if (articleTrack) {
+		const tlTrack = gsap.timeline({
+			scrollTrigger: {
+				trigger: ".article__track",
+				start: "center center",
+				end: "center center",
+				toggleActions: "play none none reset",
+				invalidateOnRefresh: true
+			}
+		});
+
+		tlTrack
+			.to(".article__machines, .article__car", {
+				x: "-100vw",
+				duration: 1.7,
+				ease: "power3.in"
+			});
 	}
 });

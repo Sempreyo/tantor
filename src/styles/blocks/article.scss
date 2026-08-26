@@ -103,4 +103,213 @@
 			}
 		}
 	}
+
+	&__model-static {
+		max-width: 250px;
+    	float: left;
+	}
+
+	&__track {
+		position: relative;
+		width: 100%;
+		height: 400px;
+		overflow: hidden;
+	}
+
+	&__track-bg {
+		position: absolute;
+		inset: 0;
+		background: linear-gradient(0deg, 
+			rgba(204, 59, 3, 0.8) 0%, 
+			rgba(204, 59, 3, 0.5) 20%, 
+			rgba(204, 59, 3, 0) 40%,
+			transparent 100%
+		);
+		background-size: 100% 200%;
+		background-position: 0% 100%;
+		//animation: gradientBreathe 12s ease-in-out infinite alternate;
+	}
+
+	&__machines {
+		position: absolute;
+		bottom: 15px;
+		left: 71%;
+		display: inline-flex;
+	}
+
+	&__machine {
+		position: relative;
+		display: flex;
+		align-items: flex-end;
+
+		&--1 {
+			z-index: 2;
+			max-width: 38px;
+		}
+
+		&--2 {
+			z-index: 1;
+			max-width: 55px;
+			margin-left: -10px;
+			transform: rotate(5deg);
+		}
+
+		&--3 {
+			max-width: 53px;
+			margin-left: -17px;
+		}
+	}
+
+	&__labels {
+		position: absolute;
+		z-index: 3;
+	}
+
+	&__label {
+		position: absolute;
+		font-family: $secondFont;
+		color: $color-background;
+		font-size: 14px;
+		white-space: nowrap;
+
+		@include min(dxxl) {
+			font-size: vw(14);
+		}
+
+		&--1 {
+			top: 85px;
+			transform: rotate(-6deg);
+		}
+
+		&--2 {
+			top: 53px;
+    		left: 12px;
+			transform: rotate(-6deg);
+		}
+
+		&--3 {
+			top: 25px;
+			left: 40px;
+			transform: rotate(6deg);
+		}
+	}
+
+	&__car {
+		position: absolute;
+		bottom: -2px;
+		left: 80%;
+
+		@include min(dxxl) {
+			bottom: vw(-2);
+		}
+
+		img {
+			@include min(dxxl) {
+				width: vw(78);
+				height: vw(78);
+			}
+		}
+	}
+
+	&__inset {
+		padding: 40px 0;
+	}
+
+	&__quote {
+		position: relative;
+		padding: 30px 50px;
+		font-size: 32px;
+		line-height: 1.2;
+		text-align: center;
+
+		@include min(dxxl) {
+			font-size: vw(32);
+		}
+
+		@include max(d) {
+			font-size: fluid(28, 32, 992, 1280);
+		}
+
+		@include max(tl) {
+			font-size: fluid(24, 28, 768, 992);
+		}
+
+		@include max(ti) {
+			font-size: fluid(20, 24, 0, 768);
+		}
+
+		&::before,
+		&::after  {
+			position: absolute;
+			content: "";
+			display: block;
+			width: 40px;
+			height: 35px;
+			transform: rotate(180deg);
+			background-image: url('data:image/svg+xml,<svg viewBox="0 0 80 71" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M16.603 70.036C11.4786 70.036 7.48161 68.1912 4.61194 64.5017C1.53729 60.8121 0 55.7902 0 49.4359C0 40.007 2.04972 31.398 6.14925 23.6089C10.4538 15.8198 17.3205 8.54312 26.7494 1.7789C29.2091 -0.0658849 31.1564 -0.475838 32.5912 0.549043C33.4111 1.16398 33.8211 2.08637 33.8211 3.31622C33.8211 4.3411 33.1037 5.36598 31.6689 6.39087C24.6997 12.3352 20.1901 16.9472 18.1404 20.2268C16.2956 23.3014 15.3732 26.581 15.3732 30.0656C15.3732 33.7552 16.1932 36.6249 17.833 38.6746C19.4728 40.5194 21.3175 42.1593 23.3673 43.5941C25.417 44.8239 27.2618 46.3613 28.9016 48.2061C30.5414 50.0508 31.3614 52.818 31.3614 56.5076C31.3614 60.1972 30.029 63.3743 27.3643 66.039C24.9046 68.7037 21.3175 70.036 16.603 70.036ZM62.7228 70.036C57.5984 70.036 53.4988 68.1912 50.4242 64.5017C47.5545 60.8121 46.1196 55.7902 46.1196 49.4359C46.1196 40.007 48.1694 31.398 52.269 23.6089C56.5735 15.8198 63.4402 8.54312 72.8691 1.7789C75.3288 -0.0658849 77.2761 -0.475838 78.7109 0.549043C79.5309 1.16398 79.9408 2.08637 79.9408 3.31622C79.9408 4.3411 79.2233 5.36598 77.7885 6.39087C70.8193 12.3352 66.3099 16.9472 64.2601 20.2268C62.4153 23.3014 61.4929 26.581 61.4929 30.0656C61.4929 33.7552 62.3128 36.6249 63.9526 38.6746C65.5924 40.5194 67.4372 42.1593 69.487 43.5941C71.5368 44.8239 73.3816 46.3613 75.0214 48.2061C76.6612 50.0508 77.481 52.818 77.481 56.5076C77.481 60.1972 76.1487 63.3743 73.484 66.039C71.0243 68.7037 67.4372 70.036 62.7228 70.036Z" fill="%23cc3b03"/></svg>');
+			background-repeat: no-repeat;
+		}
+
+		&::before {
+			top: 0;
+			left: 0;
+		}
+
+		&::after {
+			bottom: 0;
+			right: 0;
+		}
+	}
+
+	&__person {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 16px;
+		margin-top: 26px;
+
+		@include min(dxxl) {
+			gap: vw(16);
+			margin-top: vw(26);
+		}
+	}
+
+	&__person-image {
+		min-width: 90px;
+		max-width: 90px;
+		height: 90px;
+		border-radius: 50%;
+		object-fit: cover;
+
+		@include min(dxxl) {
+			min-width: vw(90);
+			max-width: vw(90);
+			height: vw(90);
+		}
+
+		@include max(d) {
+			min-width: 60px;
+			max-width: 60px;
+			height: 60px;
+		}
+	}
+
+	&__person-name {
+		font-size: 24px;
+
+		@include min(dxxl) {
+			font-size: vw(24);
+		}
+	}
+
+	&__person-position {
+		color: rgba($color-text, 0.6);
+		font-size: 16px;
+		margin-top: 5px;
+
+		@include min(dxxl) {
+			font-size: vw(16);
+			margin-top: vw(5);
+		}
+	}
 }
