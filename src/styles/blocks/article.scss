@@ -1,14 +1,28 @@
 .article {
+	$parent: &;
+
 	height: auto !important;
 	padding: 120px 0 90px;
 	border-bottom: 1px solid $color-text;
 
+	@include min(dxxl) {
+		padding: vw(120) 0 vw(90);
+	}
+
 	&__container {
-		max-width: 1200px;
+		max-width: 980px;
+
+		@include min(dxxl) {
+			max-width: vw(980);
+		}
 	}
 
 	&__back {
 		margin-bottom: 30px;
+
+		@include min(dxxl) {
+			margin-bottom: vw(30);
+		}
 
 		svg {
 			transform: rotate(180deg);
@@ -40,6 +54,10 @@
 	&__main {
 		margin-top: 40px;
 
+		@include min(dxxl) {
+			margin-top: vw(40);
+		}
+
 		h2 {
 			color: $color-accent;
 			font-weight: 700;
@@ -49,6 +67,7 @@
 
 			@include min(dxxl) {
 				font-size: vw(24);
+				margin: vw(40) 0 vw(15);
 			}
 
 			@include max(ti) {
@@ -70,10 +89,26 @@
 
 			& + p {
 				margin-top: 15px;
+
+				@include min(dxxl) {
+					margin-top: vw(15);
+				}
 			}
 
 			& + ul {
 				margin-top: 15px;
+
+				@include min(dxxl) {
+					margin-top: vw(15);
+				}
+			}
+
+			& + #{$parent}__image {
+				margin-top: 15px;
+
+				@include min(dxxl) {
+					margin-top: vw(15);
+				}
 			}
 		}
 
@@ -81,8 +116,20 @@
 			list-style: inherit;
 			padding-left: 40px;
 
+			@include min(dxxl) {
+				padding-left: vw(40);
+			}
+
+			@include max(t) {
+				padding-left: 18px;
+			}
+
 			& + p {
 				margin-top: 15px;
+
+				@include min(dxxl) {
+					margin-top: vw(15);
+				}
 			}
 
 			li {
@@ -99,6 +146,10 @@
 
 				& + li {
 					margin-top: 10px;
+
+					@include min(dxxl) {
+						margin-top: vw(10);
+					}
 				}
 			}
 		}
@@ -106,7 +157,19 @@
 
 	&__model-static {
 		max-width: 250px;
-    	float: left;
+		float: left;
+
+		@include min(dxxl) {
+			max-width: vw(250);
+		}
+
+		@include max(t) {
+			max-width: 130px;
+		}
+
+		@include max(375) {
+			max-width: 110px;
+		}
 	}
 
 	&__track {
@@ -114,6 +177,10 @@
 		width: 100%;
 		height: 400px;
 		overflow: hidden;
+
+		@include min(dxxl) {
+			height: vw(400);
+		}
 	}
 
 	&__track-bg {
@@ -133,8 +200,17 @@
 	&__machines {
 		position: absolute;
 		bottom: 15px;
-		left: 71%;
+		left: calc(100% - 300px);
 		display: inline-flex;
+
+		@include min(dxxl) {
+			bottom: vw(15);
+			left: calc(100% - (300 / 1920) * 100vw);
+		}
+
+		@include max(t) {
+			left: calc(100% - 200px);
+		}
 	}
 
 	&__machine {
@@ -145,6 +221,10 @@
 		&--1 {
 			z-index: 2;
 			max-width: 38px;
+
+			@include min(dxxl) {
+				max-width: vw(38);
+			}
 		}
 
 		&--2 {
@@ -152,11 +232,21 @@
 			max-width: 55px;
 			margin-left: -10px;
 			transform: rotate(5deg);
+
+			@include min(dxxl) {
+				max-width: vw(55);
+				margin-left: vw(-10);
+			}
 		}
 
 		&--3 {
 			max-width: 53px;
 			margin-left: -17px;
+
+			@include min(dxxl) {
+				max-width: vw(53);
+				margin-left: vw(-17);
+			}
 		}
 	}
 
@@ -179,28 +269,47 @@
 		&--1 {
 			top: 85px;
 			transform: rotate(-6deg);
+
+			@include min(dxxl) {
+				top: vw(85);
+			}
 		}
 
 		&--2 {
 			top: 53px;
-    		left: 12px;
+			left: 12px;
 			transform: rotate(-6deg);
+
+			@include min(dxxl) {
+				top: vw(53);
+				left: vw(12);
+			}
 		}
 
 		&--3 {
 			top: 25px;
 			left: 40px;
 			transform: rotate(6deg);
+
+			@include min(dxxl) {
+				top: vw(25);
+				left: vw(40);
+			}
 		}
 	}
 
 	&__car {
 		position: absolute;
 		bottom: -2px;
-		left: 80%;
+		left: calc(100% - 200px);
 
 		@include min(dxxl) {
 			bottom: vw(-2);
+			left: calc(100% - (200 / 1920) * 100vw);
+		}
+
+		@include max(t) {
+			left: calc(100% - 100px);
 		}
 
 		img {
@@ -213,9 +322,94 @@
 
 	&__inset {
 		padding: 40px 0;
+
+		@include min(dxxl) {
+			padding: vw(40) 0;
+		}
+
+		@include max(ti) {
+			display: flex;
+			flex-direction: column;
+		}
+
+		&--horizontal {
+			display: flex;
+			align-items: center;
+			gap: 20px;
+			
+			#{$parent} {
+				&__quote {
+					font-size: 26px;
+					text-align: left;
+
+					@include min(dxxl) {
+						font-size: vw(26);
+					}
+
+					@include max(d) {
+						font-size: fluid(24, 26, 992, 1280);
+					}
+
+					@include max(tl) {
+						font-size: fluid(22, 24, 768, 992);
+					}
+
+					&::after {
+						display: none;
+
+						@include max(ti) {
+							display: block;
+							right: unset;
+							left: 0;
+						}
+					}
+				}
+
+				&__person {
+					flex-direction: column;
+					min-width: 140px;
+					margin-top: 0;
+
+					@include min(dxxl) {
+						min-width: vw(140);
+					}
+
+					@include max(ti) {
+						margin-bottom: 0;
+					}
+				}
+
+				&__person-image {
+					@include max(d) {
+						min-width: 90px;
+						max-width: 90px;
+						height: 90px;
+					}
+				}
+
+				&__person-name {
+					font-size: 20px;
+					text-align: center;
+
+					@include min(dxxl) {
+						font-size: vw(20);
+					}
+				}
+
+				&__person-position {
+					font-size: 14px;
+					text-align: center;
+
+					@include min(dxxl) {
+						font-size: vw(14);
+					}
+				}
+			}
+		}
 	}
 
 	&__quote {
+		order: 1;
 		position: relative;
 		padding: 30px 50px;
 		font-size: 32px;
@@ -223,6 +417,7 @@
 		text-align: center;
 
 		@include min(dxxl) {
+			padding: vw(30) vw(50);
 			font-size: vw(32);
 		}
 
@@ -235,7 +430,9 @@
 		}
 
 		@include max(ti) {
+			padding: 50px 0;
 			font-size: fluid(20, 24, 0, 768);
+			text-align: left;
 		}
 
 		&::before,
@@ -248,6 +445,11 @@
 			transform: rotate(180deg);
 			background-image: url('data:image/svg+xml,<svg viewBox="0 0 80 71" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M16.603 70.036C11.4786 70.036 7.48161 68.1912 4.61194 64.5017C1.53729 60.8121 0 55.7902 0 49.4359C0 40.007 2.04972 31.398 6.14925 23.6089C10.4538 15.8198 17.3205 8.54312 26.7494 1.7789C29.2091 -0.0658849 31.1564 -0.475838 32.5912 0.549043C33.4111 1.16398 33.8211 2.08637 33.8211 3.31622C33.8211 4.3411 33.1037 5.36598 31.6689 6.39087C24.6997 12.3352 20.1901 16.9472 18.1404 20.2268C16.2956 23.3014 15.3732 26.581 15.3732 30.0656C15.3732 33.7552 16.1932 36.6249 17.833 38.6746C19.4728 40.5194 21.3175 42.1593 23.3673 43.5941C25.417 44.8239 27.2618 46.3613 28.9016 48.2061C30.5414 50.0508 31.3614 52.818 31.3614 56.5076C31.3614 60.1972 30.029 63.3743 27.3643 66.039C24.9046 68.7037 21.3175 70.036 16.603 70.036ZM62.7228 70.036C57.5984 70.036 53.4988 68.1912 50.4242 64.5017C47.5545 60.8121 46.1196 55.7902 46.1196 49.4359C46.1196 40.007 48.1694 31.398 52.269 23.6089C56.5735 15.8198 63.4402 8.54312 72.8691 1.7789C75.3288 -0.0658849 77.2761 -0.475838 78.7109 0.549043C79.5309 1.16398 79.9408 2.08637 79.9408 3.31622C79.9408 4.3411 79.2233 5.36598 77.7885 6.39087C70.8193 12.3352 66.3099 16.9472 64.2601 20.2268C62.4153 23.3014 61.4929 26.581 61.4929 30.0656C61.4929 33.7552 62.3128 36.6249 63.9526 38.6746C65.5924 40.5194 67.4372 42.1593 69.487 43.5941C71.5368 44.8239 73.3816 46.3613 75.0214 48.2061C76.6612 50.0508 77.481 52.818 77.481 56.5076C77.481 60.1972 76.1487 63.3743 73.484 66.039C71.0243 68.7037 67.4372 70.036 62.7228 70.036Z" fill="%23cc3b03"/></svg>');
 			background-repeat: no-repeat;
+
+			@include min(dxxl) {
+				width: vw(40);
+				height: vw(35);
+			}
 		}
 
 		&::before {
@@ -258,6 +460,11 @@
 		&::after {
 			bottom: 0;
 			right: 0;
+
+			@include max(ti) {
+				right: unset;
+				left: 0;
+			}
 		}
 	}
 
@@ -271,6 +478,12 @@
 		@include min(dxxl) {
 			gap: vw(16);
 			margin-top: vw(26);
+		}
+
+		@include max(ti) {
+			justify-content: flex-start;
+			margin-top: 0;
+			margin-bottom: 26px;
 		}
 	}
 
@@ -310,6 +523,317 @@
 		@include min(dxxl) {
 			font-size: vw(16);
 			margin-top: vw(5);
+		}
+	}
+
+	&__server-wrapper {
+		position: relative;
+		margin-top: 30px;
+		overflow: hidden;
+
+		@include min(dxxl) {
+			margin-top: vw(30);
+		}
+	}
+
+	&__server-image {
+		max-width: 200px;
+
+		@include min(dxxl) {
+			min-width: vw(200);
+		}
+
+		@include max(ti) {
+			max-width: 130px;
+		}
+	}
+
+	&__config {
+		position: absolute;
+		top: 247px;
+		left: 200px;
+		display: flex;
+		align-items: center;
+		gap: 13px;
+		font-family: $secondFont;
+		font-size: 16px;
+
+		@include min(dxxl) {
+			top: vw(247);
+			left: vw(200);
+			gap: vw(13);
+			font-size: vw(16);
+		}
+
+		@include max(ti) {
+			top: 150px;
+			left: 130px;
+		}
+
+		svg {
+			width: 28px;
+			height: 200px;
+
+			@include min(dxxl) {
+				width: vw(28);
+				height: vw(200);
+			}
+
+			@include max(ti) {
+				width: 20px;
+				height: 150px;
+			}
+		}
+	}
+
+	&__boards {
+		position: absolute;
+		top: 75px;
+		left: 135px;
+		display: flex;
+		flex-direction: column;
+		gap: 6px;
+
+		@include min(dxxl) {
+			top: vw(75);
+			left: vw(135);
+			gap: vw(6);
+		}
+
+		@include max(ti) {
+			top: 60px;
+			left: 40px;
+		}
+
+		@include max(t) {
+			left: 150px;
+		}
+
+		&--bottom {
+			top: 462px;
+
+			@include min(dxxl) {
+				top: vw(462);
+			}
+
+			@include max(ti) {
+				top: 298px;
+			}
+
+			@include max(t) {
+				top: 282px;
+			}
+		}
+
+		.board {
+			@include max(d) {
+				transform: translateX(50px);
+			}
+
+			@include max(ti) {
+				flex-direction: row;
+				gap: 5px;
+			}
+
+			@include max(t) {
+				flex-direction: column;
+			}
+
+			&:nth-child(even) {
+				margin-left: -30px;
+
+				@include min(dxxl) {
+					margin-left: vw(-30);
+				}
+
+				@include max(ti) {
+					margin-left: 0;
+				}
+			}
+
+			&__line {
+				@include max(ti) {
+					display: block;
+				}
+
+				@include max(t) {
+					top: 12px;
+					right: calc(100% + 10px);
+				}
+
+				&::before {
+					@include max(t) {
+						display: none;
+					}
+				}
+			}
+
+			&__icon {
+				@include max(ti) {
+					order: 0;
+					width: 120px;
+					height: 22px;
+				}
+			}
+
+			&__text {
+				@include max(ti) {
+					font-size: 10px;
+				}
+
+				@include max(t) {
+					position: absolute;
+					top: -4px;
+					font-size: 8px;
+				}
+			}
+		}
+	}
+
+	&__cards {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 25px;
+		margin-top: 30px;
+
+		@include min(dxxl) {
+			gap: vw(25);
+			margin-top: vw(30);
+		}
+
+		@include max(ti) {
+			grid-template-columns: repeat(2, 1fr);
+		}
+
+		@include max(t) {
+			grid-template-columns: repeat(1, 1fr);
+		}
+	}
+
+	&__card {
+		position: relative;
+		background-color: rgba($color-accent, 0.06);
+		backdrop-filter: blur(4px);
+		border-radius: 28px;
+		padding: 24px 24px 30px;
+		box-shadow: 0 8px 24px -8px rgba(0, 0, 0, 0.06);
+		transition: all 0.25s ease;
+		overflow: hidden;
+
+		@include min(dxxl) {
+			border-radius: vw(28);
+			padding: vw(24) vw(24) vw(30);
+			box-shadow: 0 vw(8) vw(24) vw(-8) rgba(0, 0, 0, 0.06);
+		}
+
+		&::before {
+			content: '';
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 6px;
+			border-radius: 28px 28px 0 0;
+			background-color: $color-accent;
+
+			@include min(dxxl) {
+				height: vw(6);
+				border-radius: vw(28) vw(28) 0 0;
+			}
+		}
+
+		&:hover {
+			transform: translateY(-4px) scale(1.01);
+			box-shadow: 0 16px 40px -12px rgba(0, 0, 0, 0.12);
+			border-color: rgba(255, 255, 255, 0.9);
+
+			@include min(dxxl) {
+				box-shadow: 0 vw(16) vw(40) vw(-12) rgba(0, 0, 0, 0.12);
+			}
+
+			.slice-title::before {
+				transform: scale(1.2);
+			}
+		}
+	}
+
+	&__card-title {
+		margin-bottom: 20px;
+		display: flex;
+		align-items: center;
+		gap: 8px;
+		font-size: 14px !important;
+
+		@include min(dxxl) {
+			margin-bottom: vw(20);
+			gap: vw(8);
+			font-size: vw(14) !important;
+		}
+
+		&::before {
+			content: "";
+			display: inline-block;
+			width: 12px;
+			height: 12px;
+			border-radius: 50%;
+			flex-shrink: 0;
+			background-color: $color-accent;
+			transition: transform 0.2s ease;
+
+			@include min(dxxl) {
+				width: vw(12);
+				height: vw(12);
+			}
+		}
+	}
+
+	&__card-list {
+		list-style: none !important;
+		padding: 0 !important;
+		margin: 6px 0 0 !important;
+
+		@include min(dxxl) {
+			margin: vw(6) 0 0 !important;
+		}
+
+		li {
+			position: relative;
+			padding-left: 20px;
+			font-size: 12px !important;
+
+			@include min(dxxl) {
+				padding-left: vw(20);
+				font-size: vw(12) !important;
+			}
+
+			&::before {
+				content: "•";
+				position: absolute;
+				left: 0;
+				color: $color-accent;
+				font-weight: 700;
+				opacity: 0.6;
+			}
+
+			& + li {
+				margin-top: 6px;
+
+				@include min(dxxl) {
+					margin-top: vw(6);
+				}
+			}
+		}
+	}
+
+	&__image {
+		transform: scale(0);
+
+		& + p {
+			margin-top: 15px;
+
+			@include min(dxxl) {
+				margin-top: vw(15);
+			}
 		}
 	}
 }

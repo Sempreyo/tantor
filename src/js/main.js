@@ -550,6 +550,117 @@ document.addEventListener("DOMContentLoaded", () => {
 		}
 	}
 
+	// Хранилища для отслеживания состояния плат в глобальной области видимости
+	let activeBoards = [];
+	let boardAnimationTimelines = [];
+
+	// Функция сброса для влетающих ящиков
+	function resetBoardLoop() {
+		// 1. Убиваем все запланированные шаги рекурсии в GSAP
+		gsap.killTweensOf(nextRandomStep);
+		gsap.killTweensOf(startRandomBoardLoop);
+
+		// 2. Убиваем все запущенные твины анимации индивидуальных плат
+		boardAnimationTimelines.forEach(tween => {
+			if (tween) tween.kill();
+		});
+		boardAnimationTimelines = [];
+		activeBoards = [];
+
+		const allBoardsSelector = "[class*='board--']";
+
+		// Останавливаем любые текущие анимации на самих платах
+		gsap.killTweensOf(allBoardsSelector);
+
+		// Мгновенно и аппаратно скрываем все 7 плат
+		gsap.set(allBoardsSelector, {
+			opacity: 0,
+			x: 50, // Возвращаем к исходному CSS-значению translateX(50px)
+			clearProps: "transform" // Очищаем инлайн-трансформы, чтобы не ломать адаптивный transform: unset в CSS
+		});
+	}
+
+	// Функция запуска случайного цикла для ящиков
+	function startRandomBoardLoop() {
+		// Делаем сброс перед стартом, чтобы избежать накладывания циклов
+		resetBoardLoop();
+
+		const totalBoards = 7;
+		const maxVisible = 6;
+		const duration = 0.7;
+		const ease = "expo.out";
+
+		// Шаг 1: Случайным образом выбираем первые 6 плат для стартового появления
+		const allIndices = Array.from({ length: totalBoards }, (_, i) => i + 1);
+		const shuffled = allIndices.sort(() => Math.random() - 0.5);
+
+		activeBoards = shuffled.slice(0, maxVisible);
+
+		// Анимируем стартовые 6 плат (opacity + x) с имитацией stagger
+		activeBoards.forEach((boardNum, index) => {
+			const tween = gsap.to(`[class*='board--${boardNum}']`, {
+				opacity: 1,
+				x: 0,
+				duration,
+				ease,
+				delay: index
+			});
+			boardAnimationTimelines.push(tween);
+		});
+
+		// Шаг 2: Рассчитываем общую длину стартовой анимации и планируем запуск круговорота
+		const startLoopDelay = (maxVisible * 0.1) + duration + 0.5;
+
+		// Вместо setTimeout используем gsap.delayedCall для идеальной синхронизации
+		gsap.delayedCall(startLoopDelay, nextRandomStep);
+	}
+
+	// Рекурсивная функция для одного случайного шага
+	function nextRandomStep() {
+		const totalBoards = 7;
+		const allIndices = Array.from({ length: totalBoards }, (_, i) => i + 1);
+		const duration = 1;
+		const ease = "expo.out";
+
+		// 1. Выбираем случайную плату из видимых, чтобы СКРЫТЬ
+		const randomActiveIndex = Math.floor(Math.random() * activeBoards.length);
+		const boardToHide = activeBoards[randomActiveIndex];
+
+		// 2. Находим скрытые платы и выбираем одну случайную, чтобы ПОКАЗАТЬ
+		const hiddenBoards = allIndices.filter(num => !activeBoards.includes(num));
+		const boardToShow = hiddenBoards[Math.floor(Math.random() * hiddenBoards.length)];
+
+		// 3. Обновляем массив активных плат
+		activeBoards.splice(randomActiveIndex, 1);
+		activeBoards.push(boardToShow);
+
+		// 4. Сбрасываем X для новой платы перед её анимацией появления
+		gsap.set(`[class*='board--${boardToShow}']`, { x: "50px" });
+
+		// 5. Запускаем одновременные анимации
+		const hideTween = gsap.to(`.board--${boardToHide}`, {
+			opacity: 0,
+			duration: 0.5,
+			ease: "power2.inOut"
+		});
+
+		const showTween = gsap.to(`[class*='board--${boardToShow}']`, {
+			opacity: 1,
+			x: 0,
+			duration: duration,
+			ease: ease,
+			onComplete: () => {
+				// Очищаем отработавшие твины из массива памяти
+				boardAnimationTimelines = boardAnimationTimelines.filter(t => t !== hideTween && t !== showTween);
+
+				// Планируем следующий шаг через 1 секунду паузы с помощью GSAP
+				gsap.delayedCall(3.0, nextRandomStep);
+			}
+		});
+
+		boardAnimationTimelines.push(hideTween, showTween);
+	}
+
 	const container = document.getElementById("model");
 
 	if (container) {
@@ -1139,117 +1250,6 @@ LIMIT 4;`
 									ease: "none"
 								});
 							}
-						}
-
-						// Хранилища для отслеживания состояния плат в глобальной области видимости
-						let activeBoards = [];
-						let boardAnimationTimelines = [];
-
-						// Функция сброса
-						function resetBoardLoop() {
-							// 1. Убиваем все запланированные шаги рекурсии в GSAP
-							gsap.killTweensOf(nextRandomStep);
-							gsap.killTweensOf(startRandomBoardLoop);
-
-							// 2. Убиваем все запущенные твины анимации индивидуальных плат
-							boardAnimationTimelines.forEach(tween => {
-								if (tween) tween.kill();
-							});
-							boardAnimationTimelines = [];
-							activeBoards = [];
-
-							const allBoardsSelector = "[class*='board--']";
-
-							// Останавливаем любые текущие анимации на самих платах
-							gsap.killTweensOf(allBoardsSelector);
-
-							// Мгновенно и аппаратно скрываем все 7 плат
-							gsap.set(allBoardsSelector, {
-								opacity: 0,
-								x: 50, // Возвращаем к исходному CSS-значению translateX(50px)
-								clearProps: "transform" // Очищаем инлайн-трансформы, чтобы не ломать адаптивный transform: unset в CSS
-							});
-						}
-
-						// Функция запуска случайного цикла (вызывается в конце tl2part1)
-						function startRandomBoardLoop() {
-							// Делаем сброс перед стартом, чтобы избежать накладывания циклов
-							resetBoardLoop();
-
-							const totalBoards = 7;
-							const maxVisible = 6;
-							const duration = 0.7;
-							const ease = "expo.out";
-
-							// Шаг 1: Случайным образом выбираем первые 6 плат для стартового появления
-							const allIndices = Array.from({ length: totalBoards }, (_, i) => i + 1);
-							const shuffled = allIndices.sort(() => Math.random() - 0.5);
-
-							activeBoards = shuffled.slice(0, maxVisible);
-
-							// Анимируем стартовые 6 плат (opacity + x) с имитацией stagger
-							activeBoards.forEach((boardNum, index) => {
-								const tween = gsap.to(`[class*='board--${boardNum}']`, {
-									opacity: 1,
-									x: 0,
-									duration,
-									ease,
-									delay: index
-								});
-								boardAnimationTimelines.push(tween);
-							});
-
-							// Шаг 2: Рассчитываем общую длину стартовой анимации и планируем запуск круговорота
-							const startLoopDelay = (maxVisible * 0.1) + duration + 0.5;
-
-							// Вместо setTimeout используем gsap.delayedCall для идеальной синхронизации
-							gsap.delayedCall(startLoopDelay, nextRandomStep);
-						}
-
-						// Рекурсивная функция для одного случайного шага
-						function nextRandomStep() {
-							const totalBoards = 7;
-							const allIndices = Array.from({ length: totalBoards }, (_, i) => i + 1);
-							const duration = 1;
-							const ease = "expo.out";
-
-							// 1. Выбираем случайную плату из видимых, чтобы СКРЫТЬ
-							const randomActiveIndex = Math.floor(Math.random() * activeBoards.length);
-							const boardToHide = activeBoards[randomActiveIndex];
-
-							// 2. Находим скрытые платы и выбираем одну случайную, чтобы ПОКАЗАТЬ
-							const hiddenBoards = allIndices.filter(num => !activeBoards.includes(num));
-							const boardToShow = hiddenBoards[Math.floor(Math.random() * hiddenBoards.length)];
-
-							// 3. Обновляем массив активных плат
-							activeBoards.splice(randomActiveIndex, 1);
-							activeBoards.push(boardToShow);
-
-							// 4. Сбрасываем X для новой платы перед её анимацией появления
-							gsap.set(`[class*='board--${boardToShow}']`, { x: "50px" });
-
-							// 5. Запускаем одновременные анимации
-							const hideTween = gsap.to(`.board--${boardToHide}`, {
-								opacity: 0,
-								duration: 0.5,
-								ease: "power2.inOut"
-							});
-
-							const showTween = gsap.to(`[class*='board--${boardToShow}']`, {
-								opacity: 1,
-								x: 0,
-								duration: duration,
-								ease: ease,
-								onComplete: () => {
-									// Очищаем отработавшие твины из массива памяти
-									boardAnimationTimelines = boardAnimationTimelines.filter(t => t !== hideTween && t !== showTween);
-
-									// Планируем следующий шаг через 1 секунду паузы с помощью GSAP
-									gsap.delayedCall(3.0, nextRandomStep);
-								}
-							});
-
-							boardAnimationTimelines.push(hideTween, showTween);
 						}
 
 						tl2part1
@@ -2162,5 +2162,36 @@ LIMIT 4;`
 				duration: 1.7,
 				ease: "power3.in"
 			});
+	}
+
+	const articleServer = document.querySelector(".article__server-wrapper");
+
+	if (articleServer) {
+		const tl2 = gsap.timeline({
+			scrollTrigger: {
+				trigger: ".article__server-wrapper",
+				start: "center center",
+				end: "center center"
+			}
+		});
+
+		tl2
+			.add(() => {
+				startRandomBoardLoop();
+			});
+	}
+
+	const articleImages = document.querySelectorAll(".article__image");
+
+	if (articleImages && articleImages.length > 0) {
+		articleImages.forEach(image => {
+			setIntersection(image, () => {
+				gsap.to(image, {
+					scale: 1,
+					duration: 0.4,
+					ease: "none"
+				});
+			});
+		});
 	}
 });
