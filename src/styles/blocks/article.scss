@@ -27,6 +27,15 @@
 		svg {
 			transform: rotate(180deg);
 		}
+
+		&--bottom {
+			margin-bottom: 0;
+			margin-top: 30px;
+
+			@include min(dxxl) {
+				margin-top: vw(30);
+			}
+		}
 	}
 
 	&__title {
@@ -200,16 +209,16 @@
 	&__machines {
 		position: absolute;
 		bottom: 15px;
-		left: calc(100% - 300px);
+		left: calc(100% - 385px);
 		display: inline-flex;
 
 		@include min(dxxl) {
 			bottom: vw(15);
-			left: calc(100% - (300 / 1920) * 100vw);
+			left: calc(100% - (385 / 1920) * 100vw);
 		}
 
 		@include max(t) {
-			left: calc(100% - 200px);
+			left: calc(100% - 280px);
 		}
 	}
 
@@ -220,32 +229,32 @@
 
 		&--1 {
 			z-index: 2;
-			max-width: 38px;
+			max-width: 75px;
 
 			@include min(dxxl) {
-				max-width: vw(38);
+				max-width: vw(75);
 			}
 		}
 
 		&--2 {
 			z-index: 1;
-			max-width: 55px;
-			margin-left: -10px;
+			max-width: 90px;
+			margin-left: -22px;
 			transform: rotate(5deg);
 
 			@include min(dxxl) {
-				max-width: vw(55);
-				margin-left: vw(-10);
+				max-width: vw(90);
+				margin-left: vw(-22);
 			}
 		}
 
 		&--3 {
-			max-width: 53px;
-			margin-left: -17px;
+			max-width: 86px;
+			margin-left: -30px;
 
 			@include min(dxxl) {
-				max-width: vw(53);
-				margin-left: vw(-17);
+				max-width: vw(86);
+				margin-left: vw(-30);
 			}
 		}
 	}
@@ -267,33 +276,33 @@
 		}
 
 		&--1 {
-			top: 85px;
+			top: 145px;
 			transform: rotate(-6deg);
 
 			@include min(dxxl) {
-				top: vw(85);
+				top: vw(145);
 			}
 		}
 
 		&--2 {
-			top: 53px;
-			left: 12px;
+			top: 90px;
+			left: 46px;
 			transform: rotate(-6deg);
 
 			@include min(dxxl) {
-				top: vw(53);
-				left: vw(12);
+				top: vw(90);
+				left: vw(46);
 			}
 		}
 
 		&--3 {
-			top: 25px;
-			left: 40px;
+			top: 40px;
+			left: 117px;
 			transform: rotate(6deg);
 
 			@include min(dxxl) {
-				top: vw(25);
-				left: vw(40);
+				top: vw(40);
+				left: vw(117);
 			}
 		}
 	}
@@ -302,6 +311,7 @@
 		position: absolute;
 		bottom: -2px;
 		left: calc(100% - 200px);
+		max-width: 120px;
 
 		@include min(dxxl) {
 			bottom: vw(-2);
@@ -322,6 +332,8 @@
 
 	&__inset {
 		padding: 40px 0;
+		margin-top: 40px;
+		border: 1px solid $color-accent;
 
 		@include min(dxxl) {
 			padding: vw(40) 0;
@@ -330,12 +342,17 @@
 		@include max(ti) {
 			display: flex;
 			flex-direction: column;
+			padding: 40px 24px;
+			margin: 40px -24px 0;
+			border-left: 0;
+			border-right: 0;
 		}
 
 		&--horizontal {
 			display: flex;
 			align-items: center;
 			gap: 20px;
+			margin-bottom: 40px;
 			
 			#{$parent} {
 				&__quote {
@@ -352,6 +369,10 @@
 
 					@include max(tl) {
 						font-size: fluid(22, 24, 768, 992);
+					}
+
+					&::before {
+						left: 0;
 					}
 
 					&::after {
@@ -412,7 +433,7 @@
 		order: 1;
 		position: relative;
 		padding: 30px 50px;
-		font-size: 32px;
+		font-size: 25px;
 		line-height: 1.2;
 		text-align: center;
 
@@ -422,16 +443,16 @@
 		}
 
 		@include max(d) {
-			font-size: fluid(28, 32, 992, 1280);
+			font-size: fluid(22, 25, 992, 1280);
 		}
 
 		@include max(tl) {
-			font-size: fluid(24, 28, 768, 992);
+			font-size: fluid(18, 22, 768, 992);
 		}
 
 		@include max(ti) {
 			padding: 50px 0;
-			font-size: fluid(20, 24, 0, 768);
+			font-size: fluid(16, 18, 0, 768);
 			text-align: left;
 		}
 
@@ -454,12 +475,24 @@
 
 		&::before {
 			top: 0;
-			left: 0;
+			left: 10px;
+
+			@include min(dxxl) {
+				left: vw(10);
+			}
+
+			@include max(ti) {
+				left: 0;
+			}
 		}
 
 		&::after {
 			bottom: 0;
-			right: 0;
+			right: 10px;
+
+			@include min(dxxl) {
+				right: vw(10);
+			}
 
 			@include max(ti) {
 				right: unset;
@@ -692,17 +725,13 @@
 
 	&__cards {
 		display: grid;
-		grid-template-columns: repeat(3, 1fr);
+		grid-template-columns: repeat(2, 1fr);
 		gap: 25px;
 		margin-top: 30px;
 
 		@include min(dxxl) {
 			gap: vw(25);
 			margin-top: vw(30);
-		}
-
-		@include max(ti) {
-			grid-template-columns: repeat(2, 1fr);
 		}
 
 		@include max(t) {
@@ -762,12 +791,12 @@
 		display: flex;
 		align-items: center;
 		gap: 8px;
-		font-size: 14px !important;
+		font-size: 18px !important;
 
 		@include min(dxxl) {
 			margin-bottom: vw(20);
 			gap: vw(8);
-			font-size: vw(14) !important;
+			font-size: vw(18) !important;
 		}
 
 		&::before {
@@ -799,11 +828,11 @@
 		li {
 			position: relative;
 			padding-left: 20px;
-			font-size: 12px !important;
+			font-size: 14px !important;
 
 			@include min(dxxl) {
 				padding-left: vw(20);
-				font-size: vw(12) !important;
+				font-size: vw(14) !important;
 			}
 
 			&::before {
