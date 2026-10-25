@@ -1,10 +1,14 @@
 .about {
 	height: auto !important;
-	padding: 63px 0 100px;
+	padding: 63px 0 140px;
 	border-bottom: 1px solid $color-text;
 
 	@include min(dxxl) {
-		padding: vw(63) 0 vw(100);
+		padding: vw(63) 0 vw(140);
+	}
+
+	@include max(d) {
+		padding: 63px 0 80px;
 	}
 
 	&__logo {
@@ -20,11 +24,21 @@
 	&__top {
 		display: flex;
 		flex-direction: column;
+		padding-bottom: 65px;
+
+		@include min(dxxl) {
+			padding-bottom: vw(65);
+		}
+
+		@include max(tl) {
+			padding-bottom: 0;
+		}
 	}
 
 	&__title {
 		font-size: 48px;
 		line-height: 1.2;
+		font-weight: 600;
 		text-align: center;
 		opacity: 0;
 		transform: translateY(10px);
@@ -34,13 +48,11 @@
 		}
 
 		@include max(d) {
-			width: calc(52% - 45px);
 			font-size: fluid(40, 48, 992, 1280);
 			transform: unset;
 		}
 
 		@include max(tl) {
-			width: 100%;
 			font-size: fluid(34, 40, 768, 992);
 		}
 
@@ -81,25 +93,40 @@
 	}
 
 	&__bottom {
-		display: flex;
-		justify-content: center;
-		gap: 76px;
-		margin-top: 56px;
 		padding-left: 75px;
+		margin-top: 150px;
 
 		@include min(dxxl) {
-			gap: vw(76);
-			margin-top: vw(56);
 			padding-left: vw(75);
+			margin-top: vw(150);
 		}
 
 		@include max(d) {
 			padding-left: 0;
+		}
+
+		@include max(tl) {
+			margin-top: 60px;
+		}
+	}
+
+	&__wrapper {
+		display: flex;
+		justify-content: center;
+		gap: 76px;
+		margin-top: 40px;
+
+		@include min(dxxl) {
+			gap: vw(76);
+			margin-top: vw(40);
+		}
+
+		@include max(d) {
+			flex-direction: column;
 			gap: 45px;
 		}
 
 		@include max(tl) {
-			flex-direction: column;
 			gap: 30px;
 		}
 	}
@@ -116,33 +143,34 @@
 		@include max(d) {
 			display: flex;
 			flex-direction: column;
-			gap: 20px;
-		}
-
-		@include max(tl) {
-			order: 1;
 			align-items: center;
+			gap: 20px;
+			order: 1;
+			width: 100%;
 		}
 	}
 
 	&__content {
 		width: calc(45.6% - 10px);
-		padding-top: 10px;
+		min-height: 520px;
+		margin-top: -150px;
 		opacity: 0;
 		transform: translateY(10px);
 
 		@include min(dxxl) {
 			width: calc(45.6% - (10 / 1920) * 100vw);
-			padding-top: vw(10);
+			min-height: vw(520);
+			margin-top: vw(-150);
 		}
 
 		@include max(d) {
+			width: 100%;
+			min-height: auto;
 			transform: unset;
 		}
 
 		@include max(tl) {
-			width: 100%;
-			padding-top: 0;
+			margin-top: 0;
 		}
 	}
 

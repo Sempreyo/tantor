@@ -1,0 +1,135 @@
+.menu {
+	$parent: &;
+
+	position: fixed;
+	inset: 0;
+	z-index: 20;
+	opacity: 0;
+	pointer-events: none;
+	transition: 0.3s ease;
+
+	&__close {
+		position: absolute;
+		top: 20px;
+		right: 20px;
+		z-index: 1;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 30px;
+		height: 30px;
+		cursor: pointer;
+
+		&:hover svg {
+			color: $color-accent;
+		}
+
+		svg {
+			color: $color-text;
+			transition: 0.3s ease;
+		}
+	}
+
+	&__list {
+		position: absolute;
+		top: 0;
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		width: 700px;
+		background-color: $white;
+		border-left: 1px solid $color-border;
+		border-bottom: 1px solid $color-border;
+		padding: 30px 0;
+		opacity: 0;
+		pointer-events: none;
+		transition: 0.3s ease;
+
+		@include max(ti) {
+			width: 100%;
+		}
+
+		&--header {
+			right: 0;
+
+			#{$parent} {
+				&__item {
+					&.active {
+						font-weight: 700;
+						color: $color-accent;
+					}
+
+					br {
+						display: none;
+					}
+				}
+			}
+		}
+
+		&--articles {
+			left: 0;
+		}
+	}
+
+	&__list-inner {
+		display: none;
+
+		@include max(d) {
+			display: flex;
+			flex-direction: column;
+			align-items: flex-start;
+		}
+	}
+
+	&__delimiter-title {
+		font-size: 24px;
+		font-weight: 700;
+		padding: 20px 60px 20px 20px;
+
+		@include min(dxxl) {
+			font-size: vw(24);
+			padding: vw(20) vw(60) vw(20) vw(20);
+		}
+
+		@include max(t) {
+			padding: 20px 45px 20px 20px;
+		}
+	}
+
+	&__item {
+		position: relative;
+		width: 100%;
+		color: $color-text;
+		font-size: 14px;
+		line-height: 1.1;
+		padding: 12px 60px 12px 20px;
+		transition: 0.3s ease;
+
+		@include min(dxxl) {
+			font-size: vw(14);
+			padding: vw(12) vw(60) vw(12) vw(20);
+		}
+
+		@include max(dl) {
+			font-size: 12px;
+		}
+
+		@include max(d) {
+			font-size: 14px;
+			text-align: left;
+		}
+
+		@include max(t) {
+			padding: 12px 45px 12px 20px;
+		}
+
+		&:hover {
+			background-color: rgba($black, 0.05);
+			color: $color-accent;
+		}
+
+		&:not(:last-child) {
+			border-bottom: 1px solid $color-border;
+		}
+	}
+}

@@ -1,0 +1,94 @@
+.adv {
+	$parent: &;
+
+	position: relative;
+	display: inline-block;
+
+	span {
+		display: inline-flex;
+		align-items: center;
+		gap: 8px;
+		color: $color-accent;
+		font-size: 12px;
+		cursor: pointer;
+
+		@include min(dxxl) {
+			gap: vw(8);
+			font-size: vw(12);
+		}
+
+		&:hover {
+			& + #{$parent}__tooltip {
+				opacity: 1;
+				pointer-events: auto;
+			}
+		}
+
+		&::before {
+			content: "";
+			width: 5px;
+			height: 5px;
+			background-color: $color-accent;
+
+			@include min(dxxl) {
+				width: vw(5);
+				height: vw(5);
+			}
+		}
+	}
+
+	&__tooltip {
+		position: absolute;
+		left: 0;
+		bottom: 100%;
+		width: 270px;
+		background-color: rgba($color-accent, 0.8);
+		backdrop-filter: blur(11px);
+		border-radius: 6px;
+		padding: 20px 10px;
+		opacity: 0;
+		pointer-events: none;
+		transition: 0.3s ease;
+
+		@include min(dxxl) {
+			width: vw(270);
+			border-radius: vw(6);
+			padding: vw(20) vw(10);
+		}
+
+		@include max(ti) {
+			left: 0;
+		}
+	}
+
+	&__tooltip-block {
+		color: $white;
+		font-size: 12px;
+		line-height: 1.2;
+
+		@include min(dxxl) {
+			font-size: vw(12);
+		}
+
+		a {
+			color: $white;
+			text-decoration: underline;
+
+			&:hover {
+				text-decoration: none;
+			}
+		}
+
+		& + #{$parent}__tooltip-block {
+			margin-top: 12px;
+			padding-top: 12px;
+			border-top: 1px solid $white;
+
+			@include min(dxxl) {
+				margin-top: vw(12);
+				padding-top: vw(12);
+				border-top: vw(1) solid $white;
+			}
+		}
+	}
+}

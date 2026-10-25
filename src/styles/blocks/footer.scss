@@ -1,4 +1,5 @@
 .footer {
+	position: relative;
 	padding: 84px 0 42px;
 
 	@include min(dxxl) {
@@ -90,6 +91,22 @@
 		&::after {
 			content: "]";
 			right: 0;
+		}
+	}
+
+	&__adv {
+		position: absolute;
+		top: 20px;
+		left: 24px;
+		z-index: 1;
+
+		@include min(dxxl) {
+			top: vw(20);
+			left: vw(24);
+		}
+
+		@include max(t) {
+			top: 10px;
 		}
 	}
 }

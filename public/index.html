@@ -10,23 +10,22 @@
   </head>
   <body class="hidden">
     <header class="header">
-      <div class="container header__container"><a class="header__logo" href="#" target="_blank">
+      <div class="container header__container"><a class="header__logo header__logo--tantor" href="/">
           <svg class="header__logo-icon-tantor">
             <use xlink:href="./images/sprite.svg#logo-tantor"></use>
           </svg></a>
-        <div class="header__burger">
-          <div class="header__burger-line"></div>
+        <div class="header__menu"><a class="header__menu-item anchor active" href="#anchor-1"><span>Альтернатива <br> Oracle Exadata</span></a><a class="header__menu-item anchor" href="#anchor-2">Что делать, когда <br> PostgreSQL уже не хватает?</a><a class="header__menu-item anchor" href="#anchor-3">Как ИИ меняет <br> эксплуатацию СУБД?</a><a class="header__menu-item anchor" href="#anchor-4">Экосистема <br> Tantor</a><a class="header__menu-item anchor" href="#anchor-5">5 лет <br> «Тантор Лабс»</a>
         </div>
-        <div class="header__menu">
-          <div class="header__menu-close">
-            <svg width="30" height="30">
-              <use xlink:href="./images/sprite.svg#close"></use>
-            </svg>
-          </div><a class="header__menu-item anchor active" href="#anchor-1"><span>Замещение СУБД <br> в core-системах</span></a><a class="header__menu-item anchor" href="#anchor-2">Горизонтальное масштабирование, <br> HTAP и совместимость с PostgreSQL</a><a class="header__menu-item anchor" href="#anchor-3">Центр управления <br> корпоративными СУБД</a><a class="header__menu-item anchor" href="#anchor-4">Новая СУБД <br> Tantor Postgres 18</a><a class="header__menu-item anchor" href="#anchor-5">5 лет <br> «Тантор Лабс»</a>
-        </div><a class="header__logo" href="#" target="_blank">
-          <svg class="header__logo-icon-cnews">
-            <use xlink:href="./images/sprite.svg#logo-cnews"></use>
-          </svg></a>
+        <div class="header__last-group"><a class="header__logo header__logo--cnews" href="https://www.cnews.ru/" target="_blank">
+            <svg class="header__logo-icon-cnews">
+              <use xlink:href="./images/sprite.svg#logo-cnews"></use>
+            </svg></a>
+          <div class="header__burger burger" data-type="header">
+            <div class="burger__button">
+              <div class="burger__line"></div>
+            </div>
+          </div>
+        </div>
       </div>
     </header>
     <div class="preloader">
@@ -38,12 +37,38 @@
         </svg>
       </div>
     </div>
+    <div class="menu">
+      <div class="overlay"></div>
+      <div class="menu__list menu__list--header">
+        <div class="menu__close">
+          <svg width="30" height="30">
+            <use xlink:href="./images/sprite.svg#close"></use>
+          </svg>
+        </div><a class="menu__item anchor active" href="#anchor-1"><span>Замещение СУБД <br> в core-системах</span></a><a class="menu__item anchor" href="#anchor-2">Горизонтальное масштабирование, <br> HTAP и совместимость с PostgreSQL</a><a class="menu__item anchor" href="#anchor-3">Центр управления <br> корпоративными СУБД</a><a class="menu__item anchor" href="#anchor-4">Новая СУБД <br> Tantor Postgres 18</a><a class="menu__item anchor" href="#anchor-5">5 лет <br> «Тантор Лабс»</a>
+        <div class="menu__list-inner">
+          <p class="menu__delimiter-title">Статьи в спецпроекте Tantor</p><a class="menu__item" href="https://tantorlabs.cnews.ru/articles/preview/3071366a726595190c0">Машина баз данных Tantor XData Gen3: на шаг ближе к технологиям Oracle Exadata для самых требовательных бизнес-систем</a><a class="menu__item" href="https://tantorlabs.cnews.ru/articles/preview/9357416ac3af5ae5bb7">PostgreSQL без компромиссов: горизонтальное масштабирование, более 5000 соединений и полноценный HTAP</a><a class="menu__item" href="https://tantorlabs.cnews.ru/articles/preview/4729536ac3a89e67d29">Вадим Яценко, «Тантор Лабс»: Заказчику нужна СУБД с запасом на несколько лет вперед</a><a class="menu__item" href="https://tantorlabs.cnews.ru/articles/preview/8069566aac03d9772ef">Как ИИ меняет экономику эксплуатации СУБД</a><a class="menu__item" href="https://tantorlabs.cnews.ru/articles/preview/4162396aac3c98ead30">Tantor Postgres 18: технологии следующего поколения для корпоративных СУБД</a>
+        </div>
+      </div>
+      <div class="menu__list menu__list--articles">
+        <div class="menu__close">
+          <svg width="30" height="30">
+            <use xlink:href="./images/sprite.svg#close"></use>
+          </svg>
+        </div>
+        <p class="menu__delimiter-title">Статьи в спецпроекте Tantor</p><a class="menu__item" href="https://tantorlabs.cnews.ru/articles/preview/3071366a726595190c0">Машина баз данных Tantor XData Gen3: на шаг ближе к технологиям Oracle Exadata для самых требовательных бизнес-систем</a><a class="menu__item" href="https://tantorlabs.cnews.ru/articles/preview/9357416ac3af5ae5bb7">PostgreSQL без компромиссов: горизонтальное масштабирование, более 5000 соединений и полноценный HTAP</a><a class="menu__item" href="https://tantorlabs.cnews.ru/articles/preview/4729536ac3a89e67d29">Вадим Яценко, «Тантор Лабс»: Заказчику нужна СУБД с запасом на несколько лет вперед</a><a class="menu__item" href="https://tantorlabs.cnews.ru/articles/preview/8069566aac03d9772ef">Как ИИ меняет экономику эксплуатации СУБД</a><a class="menu__item" href="https://tantorlabs.cnews.ru/articles/preview/4162396aac3c98ead30">Tantor Postgres 18: технологии следующего поколения для корпоративных СУБД</a>
+      </div>
+    </div>
     <main class="main">
       <section class="hero">
         <div class="container">
-          <div class="hero__title">Чего бизнес ждет от <br> <span>корпоративной СУБД</span> нового поколения?</div>
+          <div class="hero__title">Чего ждет бизнес <br> от&nbsp;<span>корпоративной СУБД</span> нового поколения?</div>
         </div>
         <div class="hero__wrapper scroll-1" id="anchor-1">
+          <div class="hero__burger burger" data-type="articles">
+            <div class="burger__button">
+              <div class="burger__line"></div>
+            </div><span>Читать статьи</span>
+          </div>
           <svg class="hero__plus">
             <use xlink:href="./images/sprite.svg#plus"></use>
           </svg>
@@ -84,22 +109,22 @@
           <div class="hero__right">
             <div class="hero__text"><span>
                 Почему так трудно замещать западные решения в&nbsp;ключевых системах банков, энергетики, промышленности и&nbsp;других
-                отраслей с&nbsp;высокими требованиями &mdash; тысячи пользователей, потоки транзакций и&nbsp;тяжелая аналитика?</span></div>
+                отраслей с&nbsp;высокими требованиями, где тысячи пользователей, потоки транзакций и&nbsp;тяжелая аналитика?</span></div>
             <div class="hero__text"><span>
                 «Классический» PostgreSQL и&nbsp;его производные не&nbsp;позволяют это делать из-за архитектурных ограничений: нет
                 горизонтального масштабирования и&nbsp;нельзя эффективно обрабатывать смешанные нагрузки.</span></div>
-            <div class="hero__text"><span>Каким может быть выход &mdash; читайте в&nbsp;спецпроекте CNews.</span></div>
+            <div class="hero__text"><span>Каким может быть выход &mdash; читайте в&nbsp;спецпроекте Tantor на CNews.</span></div>
           </div>
         </div>
       </section>
       <div class="sections-wrapper">
-        <section class="server scroll-2" id="anchor-2">
+        <section class="server scroll-2">
           <div class="blob blob--2"></div>
           <div class="server__container container">
             <div class="server__captions">
               <div class="server__caption server__caption--1 caption">
                 <div class="caption__subtitle">Машина баз данных</div>
-                <div class="caption__title">Tantor XData <sup>Gen3</sup></div>
+                <div class="caption__title">Tantor XData</div>
               </div>
               <div class="server__caption server__caption--2 caption">
                 <div class="caption__title">Новая точка сборки</div>
@@ -108,8 +133,8 @@
               </div>
             </div>
             <picture>
-              <source srcset="./images/server-open.webp 1x, ./images/server-open@2x.webp 2x" type="image/webp">
-              <source srcset="./images/server-open.webp 1x, ./images/server-open@2x.webp 2x" type="image/webp"><img class="server__model-static" src="./images/server-open.png" srcset="./images/server-open.png 1x, ./images/server-open@2x.png 2x" alt="">
+              <source srcset="./images/server-close.webp 1x, ./images/server-close@2x.webp 2x" type="image/webp">
+              <source srcset="./images/server-close.webp 1x, ./images/server-close@2x.webp 2x" type="image/webp"><img class="server__model-static" src="./images/server-close.png" srcset="./images/server-close.png 1x, ./images/server-close@2x.png 2x" alt="">
             </picture>
             <div class="server-slider">
               <div class="server-slider__item server-slider__item--1">
@@ -119,14 +144,14 @@
                 <div class="server-slider__title">Горизонтальное масштабирование вычислений и&nbsp;хранения</div>
                 <div class="server-slider__text">
                   <p>
-                    МБД Tantor XData <sup>Gen3</sup> позволяет масштабировать Compute и Storage в&nbsp;любой момент в&nbsp;зависимости от&nbsp;нагрузки
+                    МБД Tantor XData позволяет масштабировать Compute и Storage в&nbsp;любой момент в&nbsp;зависимости от&nbsp;нагрузки
                     в&nbsp;вашей информационной системе.
                   </p>
                   <p>Это именно то, чего недостает «классическому» PostgreSQL.</p>
-                </div><a class="button server-slider__link" href="#">
+                </div><a class="button server-slider__link" href="https://tantorlabs.cnews.ru/articles/preview/3071366a726595190c0">
                   <svg>
                     <use xlink:href="./images/sprite.svg#arrow-link"></use>
-                  </svg><span>Подробнее о Tantor XData <sup>Gen3</sup></span></a>
+                  </svg><span>Читать о Tantor XData</span></a>
               </div>
               <div class="server-slider__item server-slider__item--2">
                 <div class="server-slider__subtitle"><span>Преодоление ограничений «классического» PostgreSQL</span>
@@ -134,13 +159,10 @@
                 </div>
                 <div class="server-slider__title">Единая платформа для транзакций и&nbsp;аналитики</div>
                 <div class="server-slider__text">
-                  Впервые на российском рынке МБД Tantor XData <sup>Gen3</sup> открывает полноценный HTAP — возможность параллельной
+                  Впервые на российском рынке МБД Tantor XData открывает полноценный HTAP — возможность параллельной
                   обработки смешанных нагрузок (OLAP+OLTP) на&nbsp;едином наборе данных без&nbsp;дублирования и&nbsp;лишних контуров.
                   Важно, что при этом не&nbsp;нарушается совместимость с&nbsp;PostgreSQL.
-                </div><a class="button server-slider__link" href="#">
-                  <svg>
-                    <use xlink:href="./images/sprite.svg#arrow-link"></use>
-                  </svg><span>Подробнее о Tantor XData <sup>Gen3</sup></span></a>
+                </div>
                 <div class="server__widgets">
                   <div class="server__widget server__widget--1 widget"><a class="button button--black widget__link" href="#">
                       <svg>
@@ -194,6 +216,21 @@
                             <td>₽119.5</td>
                             <td>ОК</td>
                           </tr>
+                          <tr>
+                            <td>10293847</td>
+                            <td>₽4100</td>
+                            <td>ОК</td>
+                          </tr>
+                          <tr>
+                            <td>16267384</td>
+                            <td>₽299.5</td>
+                            <td>Ожидает</td>
+                          </tr>
+                          <tr>
+                            <td>19290498</td>
+                            <td>₽6670</td>
+                            <td>ОК</td>
+                          </tr>
                         </tbody>
                       </table>
                     </div>
@@ -235,10 +272,14 @@
                       <use xlink:href="./images/sprite.svg#chart"></use>
                     </svg>
                   </div>
-                </div>
+                </div><a class="button server-slider__link" href="https://tantorlabs.cnews.ru/articles/preview/3071366a726595190c0">
+                  <svg>
+                    <use xlink:href="./images/sprite.svg#arrow-link"></use>
+                  </svg><span>Читать о Tantor XData</span></a>
               </div>
             </div>
             <div class="server__slider-content">
+              <div class="server__boards-text">Резерв юнитов в стойке для установки <br> дополнительных серверов <b>вычислений</b></div>
               <div class="server__config">
                 <svg>
                   <use xlink:href="./images/sprite.svg#bracket"></use>
@@ -250,21 +291,18 @@
                   <svg class="board__icon">
                     <use xlink:href="./images/sprite.svg#server"></use>
                   </svg>
-                  <div class="board__text">+1 сервер вычислений...</div>
                 </div>
                 <div class="board board--light board--4">
                   <div class="board__line"></div>
                   <svg class="board__icon">
                     <use xlink:href="./images/sprite.svg#server"></use>
                   </svg>
-                  <div class="board__text">+1 сервер вычислений...</div>
                 </div>
                 <div class="board board--light board--1">
                   <div class="board__line"></div>
                   <svg class="board__icon">
                     <use xlink:href="./images/sprite.svg#server"></use>
                   </svg>
-                  <div class="board__text">+1 сервер вычислений...</div>
                 </div>
               </div>
               <div class="server__boards server__boards--bottom">
@@ -273,36 +311,33 @@
                   <svg class="board__icon">
                     <use xlink:href="./images/sprite.svg#server"></use>
                   </svg>
-                  <div class="board__text">+1 сервер хранения...</div>
                 </div>
                 <div class="board board--dark board--3">
                   <div class="board__line"></div>
                   <svg class="board__icon">
                     <use xlink:href="./images/sprite.svg#server"></use>
                   </svg>
-                  <div class="board__text">+1 сервер хранения...</div>
                 </div>
                 <div class="board board--dark board--5">
                   <div class="board__line"></div>
                   <svg class="board__icon">
                     <use xlink:href="./images/sprite.svg#server"></use>
                   </svg>
-                  <div class="board__text">+1 сервер хранения...</div>
                 </div>
                 <div class="board board--dark board--7">
                   <div class="board__line"></div>
                   <svg class="board__icon">
                     <use xlink:href="./images/sprite.svg#server"></use>
                   </svg>
-                  <div class="board__text">+1 сервер хранения...</div>
                 </div>
               </div>
+              <div class="server__boards-text server__boards-text--bottom">Резерв юнитов в стойке для установки <br> дополнительных серверов <b>хранения</b></div>
             </div>
           </div>
         </section>
         <div class="server__model" id="model"></div>
       </div>
-      <section class="advantages scroll-3">
+      <section class="advantages scroll-3" id="anchor-2">
         <div class="container">
           <div class="advantages__title advantages-anim">Ваши приложения «выросли» из PostgreSQL? <br> Не спешите их переписывать.</div>
           <div class="advantages__top">
@@ -314,7 +349,7 @@
               </p>
             </div>
             <div class="advantages__net advantages-anim">
-              <div class="advantages__net-labels"><span>Проблемы с консистентностью</span><span>Дублирование данных</span><span>Сложные пайплайны</span><span>Трудная и дорогая эксплуатация</span></div>
+              <div class="advantages__net-labels"><span>Проблемы с&nbsp;консистентностью</span><span>Дублирование данных</span><span>Сложные пайплайны</span><span>Трудная и&nbsp;дорогая эксплуатация</span></div>
               <div class="advantages__images">
                 <picture>
                   <source srcset="./images/machine-3.webp 1x, ./images/machine-3@2x.webp 2x" type="image/webp">
@@ -342,32 +377,33 @@
               </picture>
               <div class="advantages__items">
                 <div class="advantages__item">100% совместимость <br> с&nbsp;Postgres, 1С и&nbsp;другим ПО</div>
-                <div class="advantages__item">Обработка транзакций <br> и&nbsp;аналитики</div>
+                <div class="advantages__item">Обработка транзакций <br> и&nbsp;аналитики (HTAP)</div>
                 <div class="advantages__item">Горизонтальное <br> масштабирование</div>
+                <div class="advantages__item">Готовность <br> к ИИ-нагрузкам</div>
               </div>
             </div>
             <div class="advantages__col advantages-anim">
               <div class="advantages__text advantages__text--full advantages-anim">
                 <p><b>Подход Tantor: 100% совместимость с&nbsp;PostgreSQL и&nbsp;упрощение архитектуры без переписывания кода бизнес-приложений.</b></p>
                 <p>
-                  МБД Tantor XData <sup>Gen3</sup> – горизонтально масштабируемая платформа, которая объединяет OLTP и&nbsp;OLAP в&nbsp;одном
+                  МБД Tantor XData – горизонтально масштабируемая платформа, которая объединяет OLTP и&nbsp;OLAP в&nbsp;одном
                   контуре и сохраняет полную совместимость с&nbsp;PostgreSQL, существующим ПО и&nbsp;расширениями.
                 </p>
                 <p>
                   Инфраструктура остаётся привычной для разработки и эксплуатации, при этом исчезает необходимость в&nbsp;разнородных
                   СУБД, синхронизациях и&nbsp;переписывании приложений.
                 </p>
-              </div><a class="button advantages__link" href="#">
+              </div><a class="button advantages__link" href="https://tantorlabs.cnews.ru/articles/preview/9357416ac3af5ae5bb7">
                 <svg>
                   <use xlink:href="./images/sprite.svg#arrow-link"></use>
-                </svg><span>Как это работает?</span></a>
+                </svg><span>Читать, как это работает</span></a>
             </div>
           </div>
         </div>
       </section>
       <section class="migration scroll-4">
         <div class="container">
-          <div class="migration__title">Миграция важнейших информационных систем <br> без риска для бизнеса</div>
+          <div class="migration__title">Миграция СУБД должна давать критическим системам <br> запас на годы вперёд</div>
         </div>
         <div class="migration__marquee">
           <div class="migration__marquee-inner"><span>Финансы (АБС)</span><span class="divider">//</span><span>Госкорпорации</span><span class="divider">//</span><span>Энергетика</span><span class="divider">//</span><span>Промышленность</span><span class="divider">//</span><span>Ритейл</span><span class="divider">//</span><span>Госсектор</span><span class="divider">//</span><span>Телеком</span><span class="divider">//</span></div>
@@ -377,8 +413,9 @@
             <video class="migration__video" src="./assets/tantor_video_2.mp4" loop muted autoplay></video>
             <div class="migration__content">
               <div class="migration__quote">
-                «Tantor XData <sup>Gen3</sup> — решение <br> для тех, кто отвечает не&nbsp;за&nbsp;тестовые стенды,
-                а&nbsp;за&nbsp;<span>непрерывность крупнейшего бизнеса».</span>
+                «МБД Tantor XData создана для тех, кто в&nbsp;крупнейших структурах отвечает за&nbsp;непрерывность. И&nbsp;логика
+                в&nbsp;том, что критичная СУБД должна не&nbsp;просто выдерживать бизнес сегодня — она должна быть готова к&nbsp;внедрению ИИ,
+                к&nbsp;росту объемов и&nbsp;аналитики, вообще к&nbsp;тому, каким бизнес станет завтра».
               </div>
               <div class="migration__person">
                 <picture>
@@ -389,7 +426,7 @@
                   <div class="migration__name">Вадим Яценко</div>
                   <div class="migration__position">генеральный директор «Тантор Лабс»</div>
                 </div>
-              </div><a class="button migration__link" href="#">
+              </div><a class="button migration__link" href="https://tantorlabs.cnews.ru/articles/preview/4729536ac3a89e67d29">
                 <svg>
                   <use xlink:href="./images/sprite.svg#arrow-link"></use>
                 </svg><span>Читать интервью</span></a>
@@ -405,144 +442,15 @@
           </picture>
         </div>
         <div class="container product__container">
-          <div class="product__title product-anim">Платформа Tantor: <br> централизованное управление БД PostgreSQL с ИИ</div>
+          <div class="product__title product-anim">Платформа Tantor: <br> ИИ, harness и&nbsp;централизованное управление БД PostgreSQL</div>
           <div class="product__text product-anim">
             Без прозрачного управления и&nbsp;контроля даже мощная архитектура превращается в постоянную зону риска. Важна не&nbsp;только
             сама СУБД, но&nbsp;и&nbsp;дополненная современными ИИ-инструментами платформа, которая позволяет эффективно ее эксплуатировать
             в&nbsp;enterprise-среде.
-          </div>
-          <div class="product__slider swiper product-anim">
-            <div class="swiper-wrapper">
-              <div class="product-card swiper-slide">
-                <div class="product-card__image-wrapper">
-                  <picture>
-                    <source srcset="./images/product/1.webp 1x, ./images/product/1@2x.webp 2x" type="image/webp">
-                    <source srcset="./images/product/1.webp 1x, ./images/product/1@2x.webp 2x" type="image/webp"><img class="product-card__image" src="./images/product/1.jpg" srcset="./images/product/1.jpg 1x, ./images/product/1@2x.jpg 2x" alt="">
-                  </picture>
-                </div>
-                <div class="product-card__title">Дашборд администратора</div>
-              </div>
-              <div class="product-card swiper-slide">
-                <div class="product-card__image-wrapper">
-                  <picture>
-                    <source srcset="./images/product/2.webp 1x, ./images/product/2@2x.webp 2x" type="image/webp">
-                    <source srcset="./images/product/2.webp 1x, ./images/product/2@2x.webp 2x" type="image/webp"><img class="product-card__image" src="./images/product/2.jpg" srcset="./images/product/2.jpg 1x, ./images/product/2@2x.jpg 2x" alt="">
-                  </picture>
-                </div>
-                <div class="product-card__title">AI-first: <br> продвинутое контекстное взаимодействие</div>
-              </div>
-              <div class="product-card swiper-slide">
-                <div class="product-card__image-wrapper">
-                  <picture>
-                    <source srcset="./images/product/3.webp 1x, ./images/product/3@2x.webp 2x" type="image/webp">
-                    <source srcset="./images/product/3.webp 1x, ./images/product/3@2x.webp 2x" type="image/webp"><img class="product-card__image" src="./images/product/3.jpg" srcset="./images/product/3.jpg 1x, ./images/product/3@2x.jpg 2x" alt="">
-                  </picture>
-                </div>
-                <div class="product-card__title">Управление кластерами Patroni</div>
-              </div>
-              <div class="product-card swiper-slide">
-                <div class="product-card__image-wrapper">
-                  <picture>
-                    <source srcset="./images/product/4.webp 1x, ./images/product/4@2x.webp 2x" type="image/webp">
-                    <source srcset="./images/product/4.webp 1x, ./images/product/4@2x.webp 2x" type="image/webp"><img class="product-card__image" src="./images/product/4.jpg" srcset="./images/product/4.jpg 1x, ./images/product/4@2x.jpg 2x" alt="">
-                  </picture>
-                </div>
-                <div class="product-card__title">Просмотр топологии кластеров</div>
-              </div>
-              <div class="product-card swiper-slide">
-                <div class="product-card__image-wrapper">
-                  <picture>
-                    <source srcset="./images/product/5.webp 1x, ./images/product/5@2x.webp 2x" type="image/webp">
-                    <source srcset="./images/product/5.webp 1x, ./images/product/5@2x.webp 2x" type="image/webp"><img class="product-card__image" src="./images/product/5.jpg" srcset="./images/product/5.jpg 1x, ./images/product/5@2x.jpg 2x" alt="">
-                  </picture>
-                </div>
-                <div class="product-card__title">Управление правилами доступа</div>
-              </div>
-              <div class="product-card swiper-slide">
-                <div class="product-card__image-wrapper">
-                  <picture>
-                    <source srcset="./images/product/6.webp 1x, ./images/product/6@2x.webp 2x" type="image/webp">
-                    <source srcset="./images/product/6.webp 1x, ./images/product/6@2x.webp 2x" type="image/webp"><img class="product-card__image" src="./images/product/6.jpg" srcset="./images/product/6.jpg 1x, ./images/product/6@2x.jpg 2x" alt="">
-                  </picture>
-                </div>
-                <div class="product-card__title">Анонимизация конфиденциальной информации</div>
-              </div>
-              <div class="product-card swiper-slide">
-                <div class="product-card__image-wrapper">
-                  <picture>
-                    <source srcset="./images/product/7.webp 1x, ./images/product/7@2x.webp 2x" type="image/webp">
-                    <source srcset="./images/product/7.webp 1x, ./images/product/7@2x.webp 2x" type="image/webp"><img class="product-card__image" src="./images/product/7.jpg" srcset="./images/product/7.jpg 1x, ./images/product/7@2x.jpg 2x" alt="">
-                  </picture>
-                </div>
-                <div class="product-card__title">Профилирование запросов и аналитика</div>
-              </div>
-              <div class="product-card swiper-slide">
-                <div class="product-card__image-wrapper">
-                  <picture>
-                    <source srcset="./images/product/8.webp 1x, ./images/product/8@2x.webp 2x" type="image/webp">
-                    <source srcset="./images/product/8.webp 1x, ./images/product/8@2x.webp 2x" type="image/webp"><img class="product-card__image" src="./images/product/8.jpg" srcset="./images/product/8.jpg 1x, ./images/product/8@2x.jpg 2x" alt="">
-                  </picture>
-                </div>
-                <div class="product-card__title">Планировщик заданий</div>
-              </div>
-              <div class="product-card swiper-slide">
-                <div class="product-card__image-wrapper">
-                  <picture>
-                    <source srcset="./images/product/9.webp 1x, ./images/product/9@2x.webp 2x" type="image/webp">
-                    <source srcset="./images/product/9.webp 1x, ./images/product/9@2x.webp 2x" type="image/webp"><img class="product-card__image" src="./images/product/9.jpg" srcset="./images/product/9.jpg 1x, ./images/product/9@2x.jpg 2x" alt="">
-                  </picture>
-                </div>
-                <div class="product-card__title">SQL-редактор</div>
-              </div>
-              <div class="product-card swiper-slide">
-                <div class="product-card__image-wrapper">
-                  <picture>
-                    <source srcset="./images/product/10.webp 1x, ./images/product/10@2x.webp 2x" type="image/webp">
-                    <source srcset="./images/product/10.webp 1x, ./images/product/10@2x.webp 2x" type="image/webp"><img class="product-card__image" src="./images/product/10.jpg" srcset="./images/product/10.jpg 1x, ./images/product/10@2x.jpg 2x" alt="">
-                  </picture>
-                </div>
-                <div class="product-card__title">Обслуживание</div>
-              </div>
-              <div class="product-card swiper-slide">
-                <div class="product-card__image-wrapper">
-                  <picture>
-                    <source srcset="./images/product/11.webp 1x, ./images/product/11@2x.webp 2x" type="image/webp">
-                    <source srcset="./images/product/11.webp 1x, ./images/product/11@2x.webp 2x" type="image/webp"><img class="product-card__image" src="./images/product/11.jpg" srcset="./images/product/11.jpg 1x, ./images/product/11@2x.jpg 2x" alt="">
-                  </picture>
-                </div>
-                <div class="product-card__title">Группы параметров</div>
-              </div>
-              <div class="product-card swiper-slide">
-                <div class="product-card__image-wrapper">
-                  <picture>
-                    <source srcset="./images/product/12.webp 1x, ./images/product/12@2x.webp 2x" type="image/webp">
-                    <source srcset="./images/product/12.webp 1x, ./images/product/12@2x.webp 2x" type="image/webp"><img class="product-card__image" src="./images/product/12.jpg" srcset="./images/product/12.jpg 1x, ./images/product/12@2x.jpg 2x" alt="">
-                  </picture>
-                </div>
-                <div class="product-card__title">Мультитенантность</div>
-              </div>
-              <div class="product-card swiper-slide">
-                <div class="product-card__image-wrapper">
-                  <picture>
-                    <source srcset="./images/product/13.webp 1x, ./images/product/13@2x.webp 2x" type="image/webp">
-                    <source srcset="./images/product/13.webp 1x, ./images/product/13@2x.webp 2x" type="image/webp"><img class="product-card__image" src="./images/product/13.jpg" srcset="./images/product/13.jpg 1x, ./images/product/13@2x.jpg 2x" alt="">
-                  </picture>
-                </div>
-                <div class="product-card__title">Инспекция уязвимостей</div>
-              </div>
-            </div>
-            <div class="product__pagination swiper-pagination"></div>
-          </div>
-          <div class="product__items product-anim">
-            <div class="product__item">Централизованное управление c ИИ</div>
-            <div class="product__item">ИИ-мониторинг и&nbsp;администрирование любых БД Postgres</div>
-            <div class="product__item">Рекомендации по настройкам серверов</div>
-            <div class="product__item">Выявление неоптимальных запросов</div>
-            <div class="product__item">Заблаговременные оповещения об&nbsp;инцидентах</div>
-            <div class="product__item">Автоматизация рутинных операций</div>
-            <div class="product__item">Низкий порог вхождения для администраторов БД</div>
-            <div class="product__item">Маскирование конфиденциальных данных</div>
-          </div>
+          </div><img class="article__image product__image" src="./images/article/2.png" alt="DBA"><a class="button button product__link" href="https://tantorlabs.cnews.ru/articles/preview/8069566aac03d9772ef">
+            <svg>
+              <use xlink:href="./images/sprite.svg#arrow-link"></use>
+            </svg><span>Читать, как ИИ меняет экономику эксплуатации СУБД</span></a>
         </div>
       </section>
       <section class="about scroll-6" id="anchor-4">
@@ -555,151 +463,257 @@
             </div>
           </div>
           <div class="about__bottom">
-            <div class="about__charts">
-              <div class="about__chart chart chart--1">
-                <div class="chart__top chart-anim-1">
-                  <svg class="chart__logo">
-                    <use xlink:href="./images/sprite.svg#logo-chart"></use>
-                  </svg><span>Единый стек Tantor</span>
-                </div>
-                <div class="chart__window">
-                  <div class="chart__list">
-                    <div class="chart__list-item chart-anim-1">СУБД Tantor Postgres</div>
-                    <div class="chart__list-item chart-anim-1">Платформа Tantor</div>
-                    <div class="chart__list-item chart-anim-1">МБД Tantor XData</div>
-                    <div class="chart__list-item chart-anim-1">ПО Tantor DI</div>
+            <div class="about__wrapper">
+              <div class="about__charts">
+                <div class="about__chart chart chart--1">
+                  <div class="chart__top chart-anim-1">
+                    <svg class="chart__logo">
+                      <use xlink:href="./images/sprite.svg#logo-chart"></use>
+                    </svg><span>Единый стек Tantor</span>
                   </div>
-                </div>
-              </div>
-              <div class="about__chart chart chart--2">
-                <div class="chart__top chart-anim-2">
-                  <svg class="chart__logo">
-                    <use xlink:href="./images/sprite.svg#logo-chart"></use>
-                  </svg><span>Tantor Postgres 18 для 1С</span>
-                </div>
-                <div class="chart__window">
-                  <div class="chart__legend">Выполнение операции «Закрытие месяца» <br> <span>на тестовой базе ERP 2.5 размером 646 МБ</span></div>
-                  <div class="chart__graph">
-                    <div class="chart__osy"><span data-value="100"></span><span data-value="80"></span><span data-value="60"></span><span data-value="40"></span><span data-value="20"></span><span data-value="0"></span></div>
-                    <div class="chart__bars">
-                      <svg class="chart__icon-clock">
-                        <use xlink:href="./images/sprite.svg#clock"></use>
-                      </svg>
-                      <div class="chart__bar chart__bar--1" style="--bar-height: 175">111 <br> <span>минут</span></div>
-                      <div class="chart__bar chart__bar--2" style="--bar-height: 170">108 <br> <span>минут</span></div>
-                      <div class="chart__bar chart__bar--3" style="--bar-height: 150">97 <br> <span>минут</span></div>
-                      <div class="chart__bar chart__bar--4" style="--bar-height: 128">81 <br> <span>минут</span></div>
+                  <div class="chart__window">
+                    <div class="chart__list">
+                      <div class="chart__list-item chart-anim-1">СУБД Tantor Postgres</div>
+                      <div class="chart__list-item chart-anim-1">Платформа Tantor</div>
+                      <div class="chart__list-item chart-anim-1">МБД Tantor XData</div>
+                      <div class="chart__list-item chart-anim-1">ПО Tantor DI</div>
                     </div>
-                    <div class="chart__osx"><span>15 <br> версия</span><span>16 <br> версия</span><span>17 <br> версия</span><span><b><span>18</span> <br> версия</b></span></div>
                   </div>
                 </div>
-              </div>
-              <div class="about__chart chart chart--3">
-                <div class="chart__top chart-anim-3">
-                  <svg class="chart__logo">
-                    <use xlink:href="./images/sprite.svg#logo-chart"></use>
-                  </svg><span>Tantor Postgres 18 для 1С</span>
-                </div>
-                <div class="chart__window">
-                  <div class="chart__legend">Постоянный рост <br> объема функциональности для 1С</div>
-                  <div class="chart__graph">
-                    <div class="chart__osy"><span data-value="50"></span><span data-value="40"></span><span data-value="30"></span><span data-value="20"></span><span data-value="10"></span><span data-value="0"></span></div>
-                    <div class="chart__bars">
-                      <svg class="chart__dashed-line">
-                        <use xlink:href="./images/sprite.svg#dashed-line"></use>
-                      </svg>
-                      <div class="chart__dot" style="--dot-offset: 49">11</div>
-                      <div class="chart__dot" style="--dot-offset: 60">18</div>
-                      <div class="chart__dot" style="--dot-offset: 112">36</div>
-                      <div class="chart__dot" style="--dot-offset: 153">46</div>
+                <div class="about__chart chart chart--2">
+                  <div class="chart__top chart-anim-2">
+                    <svg class="chart__logo">
+                      <use xlink:href="./images/sprite.svg#logo-chart"></use>
+                    </svg><span>Tantor Postgres 18 для 1С</span>
+                  </div>
+                  <div class="chart__window">
+                    <div class="chart__legend">Выполнение операции «Закрытие месяца» <br> <span>на тестовой базе ERP 2.5 размером 646 МБ</span></div>
+                    <div class="chart__graph">
+                      <div class="chart__osy"><span data-value="100"></span><span data-value="80"></span><span data-value="60"></span><span data-value="40"></span><span data-value="20"></span><span data-value="0"></span></div>
+                      <div class="chart__bars">
+                        <svg class="chart__icon-clock">
+                          <use xlink:href="./images/sprite.svg#clock"></use>
+                        </svg>
+                        <div class="chart__bar chart__bar--1" style="--bar-height: 175">111 <br> <span>минут</span></div>
+                        <div class="chart__bar chart__bar--2" style="--bar-height: 170">108 <br> <span>минут</span></div>
+                        <div class="chart__bar chart__bar--3" style="--bar-height: 150">97 <br> <span>минут</span></div>
+                        <div class="chart__bar chart__bar--4" style="--bar-height: 128">81 <br> <span>минут</span></div>
+                      </div>
+                      <div class="chart__osx"><span>15 <br> версия</span><span>16 <br> версия</span><span>17 <br> версия</span><span><b><span>18</span> <br> версия</b></span></div>
                     </div>
-                    <div class="chart__osx"><span>15 <br> версия</span><span>16 <br> версия</span><span>17 <br> версия</span><span><b><span>18</span> <br> версия</b></span></div>
+                  </div>
+                </div>
+                <div class="about__chart chart chart--3">
+                  <div class="chart__top chart-anim-3">
+                    <svg class="chart__logo">
+                      <use xlink:href="./images/sprite.svg#logo-chart"></use>
+                    </svg><span>Tantor Postgres 18 для 1С</span>
+                  </div>
+                  <div class="chart__window">
+                    <div class="chart__legend">Постоянный рост <br> объема функциональности для 1С</div><img class="chart__mobile-graph" src="./images/graph-line-mobile.png" alt="">
+                    <div class="chart__graph">
+                      <div class="chart__osy"><span data-value="50"></span><span data-value="40"></span><span data-value="30"></span><span data-value="20"></span><span data-value="10"></span><span data-value="0"></span></div>
+                      <div class="chart__bars">
+                        <svg class="chart__dashed-line">
+                          <use xlink:href="./images/sprite.svg#dashed-line"></use>
+                        </svg>
+                        <div class="chart__dot" style="--dot-offset: 49">11</div>
+                        <div class="chart__dot" style="--dot-offset: 60">18</div>
+                        <div class="chart__dot" style="--dot-offset: 112">36</div>
+                        <div class="chart__dot" style="--dot-offset: 153">46</div>
+                      </div>
+                      <div class="chart__osx"><span>15 <br> версия</span><span>16 <br> версия</span><span>17 <br> версия</span><span><b><span>18</span> <br> версия</b></span></div>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-            <div class="about__content">
-              <picture>
-                <source srcset="./images/tantor-postgres.webp 1x, ./images/tantor-postgres@2x.webp 2x" type="image/webp">
-                <source srcset="./images/tantor-postgres.webp 1x, ./images/tantor-postgres@2x.webp 2x" type="image/webp"><img class="about__logo" src="./images/tantor-postgres.png" srcset="./images/tantor-postgres.png 1x, ./images/tantor-postgres@2x.png 2x" alt="">
-              </picture>
-              <div class="about__description">
-                <p>
-                  <b>Tantor Postgres 18 —</b> это СУБД для высоконагруженных систем с&nbsp;огромным количеством доработок на&nbsp;уровне ядра
-                  для&nbsp;повышения производительности, в&nbsp;том&nbsp;числе для работы с&nbsp;«1С».
-                </p>
-                <p>Каждый релиз проходит тщательное тестирование на&nbsp;прикладных сценариях.</p>
-              </div><a class="button about__link" href="#">
-                <svg>
-                  <use xlink:href="./images/sprite.svg#arrow-link"></use>
-                </svg><span>Узнать о новинках 18 релиза</span></a>
+              <div class="about__content">
+                <picture>
+                  <source srcset="./images/tantor-postgres.webp 1x, ./images/tantor-postgres@2x.webp 2x" type="image/webp">
+                  <source srcset="./images/tantor-postgres.webp 1x, ./images/tantor-postgres@2x.webp 2x" type="image/webp"><img class="about__logo" src="./images/tantor-postgres.png" srcset="./images/tantor-postgres.png 1x, ./images/tantor-postgres@2x.png 2x" alt="">
+                </picture>
+                <div class="about__description">
+                  <p>
+                    <b>Tantor Postgres 18 —</b> это СУБД для высоконагруженных систем с&nbsp;огромным количеством доработок на&nbsp;уровне ядра
+                    для&nbsp;повышения производительности, в&nbsp;том&nbsp;числе для работы с&nbsp;«1С».
+                  </p>
+                  <p>
+                    Отдельные технологии для задач, которые выходят за рамки классической архитектуры PostgreSQL,
+                    после проверки мы включаем и в Tantor Postgres.
+                  </p>
+                  <p>Каждый релиз проходит тщательное тестирование на&nbsp;прикладных сценариях.</p>
+                </div><a class="button button about__link" href="https://tantorlabs.cnews.ru/articles/preview/4162396aac3c98ead30">
+                  <svg>
+                    <use xlink:href="./images/sprite.svg#arrow-link"></use>
+                  </svg><span>Читать о СУБД Tantor Postgres 18</span></a>
+              </div>
             </div>
           </div>
         </div>
       </section>
       <section class="gallery scroll-7" id="anchor-5">
-        <picture>
-          <source srcset="./images/gallery/1.webp 1x, ./images/gallery/1@2x.webp 2x" type="image/webp">
-          <source srcset="./images/gallery/1.webp 1x, ./images/gallery/1@2x.webp 2x" type="image/webp"><img class="gallery__image gallery__image--1 gallery-anim-image" src="./images/gallery/1.jpg" srcset="./images/gallery/1.jpg 1x, ./images/gallery/1@2x.jpg 2x" alt="">
-        </picture>
-        <picture>
-          <source srcset="./images/gallery/2.webp 1x, ./images/gallery/2@2x.webp 2x" type="image/webp">
-          <source srcset="./images/gallery/2.webp 1x, ./images/gallery/2@2x.webp 2x" type="image/webp"><img class="gallery__image gallery__image--2 gallery-anim-image" src="./images/gallery/2.jpg" srcset="./images/gallery/2.jpg 1x, ./images/gallery/2@2x.jpg 2x" alt="">
-        </picture>
-        <picture>
-          <source srcset="./images/gallery/3.webp 1x, ./images/gallery/3@2x.webp 2x" type="image/webp">
-          <source srcset="./images/gallery/3.webp 1x, ./images/gallery/3@2x.webp 2x" type="image/webp"><img class="gallery__image gallery__image--3 gallery-anim-image" src="./images/gallery/3.jpg" srcset="./images/gallery/3.jpg 1x, ./images/gallery/3@2x.jpg 2x" alt="">
-        </picture>
-        <picture>
-          <source srcset="./images/gallery/4.webp 1x, ./images/gallery/4@2x.webp 2x" type="image/webp">
-          <source srcset="./images/gallery/4.webp 1x, ./images/gallery/4@2x.webp 2x" type="image/webp"><img class="gallery__image gallery__image--4 gallery-anim-image" src="./images/gallery/4.jpg" srcset="./images/gallery/4.jpg 1x, ./images/gallery/4@2x.jpg 2x" alt="">
-        </picture>
-        <picture>
-          <source srcset="./images/gallery/5.webp 1x, ./images/gallery/5@2x.webp 2x" type="image/webp">
-          <source srcset="./images/gallery/5.webp 1x, ./images/gallery/5@2x.webp 2x" type="image/webp"><img class="gallery__image gallery__image--5 gallery-anim-image" src="./images/gallery/5.jpg" srcset="./images/gallery/5.jpg 1x, ./images/gallery/5@2x.jpg 2x" alt="">
-        </picture>
-        <picture>
-          <source srcset="./images/gallery/6.webp 1x, ./images/gallery/6@2x.webp 2x" type="image/webp">
-          <source srcset="./images/gallery/6.webp 1x, ./images/gallery/6@2x.webp 2x" type="image/webp"><img class="gallery__image gallery__image--6 gallery-anim-image" src="./images/gallery/6.jpg" srcset="./images/gallery/6.jpg 1x, ./images/gallery/6@2x.jpg 2x" alt="">
-        </picture>
-        <picture>
-          <source srcset="./images/gallery/7.webp 1x, ./images/gallery/7@2x.webp 2x" type="image/webp">
-          <source srcset="./images/gallery/7.webp 1x, ./images/gallery/7@2x.webp 2x" type="image/webp"><img class="gallery__image gallery__image--7 gallery-anim-image" src="./images/gallery/7.jpg" srcset="./images/gallery/7.jpg 1x, ./images/gallery/7@2x.jpg 2x" alt="">
-        </picture>
-        <picture>
-          <source srcset="./images/gallery/8.webp 1x, ./images/gallery/8@2x.webp 2x" type="image/webp">
-          <source srcset="./images/gallery/8.webp 1x, ./images/gallery/8@2x.webp 2x" type="image/webp"><img class="gallery__image gallery__image--8 gallery-anim-image" src="./images/gallery/8.jpg" srcset="./images/gallery/8.jpg 1x, ./images/gallery/8@2x.jpg 2x" alt="">
-        </picture>
-        <picture>
-          <source srcset="./images/gallery/9.webp 1x, ./images/gallery/9@2x.webp 2x" type="image/webp">
-          <source srcset="./images/gallery/9.webp 1x, ./images/gallery/9@2x.webp 2x" type="image/webp"><img class="gallery__image gallery__image--9 gallery-anim-image" src="./images/gallery/9.jpg" srcset="./images/gallery/9.jpg 1x, ./images/gallery/9@2x.jpg 2x" alt="">
-        </picture>
-        <picture>
-          <source srcset="./images/gallery/10.webp 1x, ./images/gallery/10@2x.webp 2x" type="image/webp">
-          <source srcset="./images/gallery/10.webp 1x, ./images/gallery/10@2x.webp 2x" type="image/webp"><img class="gallery__image gallery__image--10 gallery-anim-image-last" src="./images/gallery/10.jpg" srcset="./images/gallery/10.jpg 1x, ./images/gallery/10@2x.jpg 2x" alt="">
-        </picture>
-        <picture>
-          <source srcset="./images/gallery/11.webp 1x, ./images/gallery/11@2x.webp 2x" type="image/webp">
-          <source srcset="./images/gallery/11.webp 1x, ./images/gallery/11@2x.webp 2x" type="image/webp"><img class="gallery__image gallery__image--11 gallery-anim-image-last" src="./images/gallery/11.jpg" srcset="./images/gallery/11.jpg 1x, ./images/gallery/11@2x.jpg 2x" alt="">
-        </picture>
+        <div class="gallery__slider-wrapper">
+          <div class="gallery__slider swiper">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide gallery__slide">
+                <picture>
+                  <source srcset="./images/gallery/2.webp 1x, ./images/gallery/2@2x.webp 2x" type="image/webp">
+                  <source srcset="./images/gallery/2.webp 1x, ./images/gallery/2@2x.webp 2x" type="image/webp"><img class="gallery__image gallery__image--2" src="./images/gallery/2.jpg" srcset="./images/gallery/2.jpg 1x, ./images/gallery/2@2x.jpg 2x" alt="">
+                </picture>
+              </div>
+              <div class="swiper-slide gallery__slide">
+                <picture>
+                  <source srcset="./images/gallery/1.webp 1x, ./images/gallery/1@2x.webp 2x" type="image/webp">
+                  <source srcset="./images/gallery/1.webp 1x, ./images/gallery/1@2x.webp 2x" type="image/webp"><img class="gallery__image gallery__image--1" src="./images/gallery/1.jpg" srcset="./images/gallery/1.jpg 1x, ./images/gallery/1@2x.jpg 2x" alt="">
+                </picture>
+              </div>
+              <div class="swiper-slide gallery__slide">
+                <picture>
+                  <source srcset="./images/gallery/4.webp 1x, ./images/gallery/4@2x.webp 2x" type="image/webp">
+                  <source srcset="./images/gallery/4.webp 1x, ./images/gallery/4@2x.webp 2x" type="image/webp"><img class="gallery__image gallery__image--4" src="./images/gallery/4.jpg" srcset="./images/gallery/4.jpg 1x, ./images/gallery/4@2x.jpg 2x" alt="">
+                </picture>
+              </div>
+              <div class="swiper-slide gallery__slide">
+                <picture>
+                  <source srcset="./images/gallery/3.webp 1x, ./images/gallery/3@2x.webp 2x" type="image/webp">
+                  <source srcset="./images/gallery/3.webp 1x, ./images/gallery/3@2x.webp 2x" type="image/webp"><img class="gallery__image gallery__image--3" src="./images/gallery/3.jpg" srcset="./images/gallery/3.jpg 1x, ./images/gallery/3@2x.jpg 2x" alt="">
+                </picture>
+              </div>
+              <div class="swiper-slide gallery__slide">
+                <picture>
+                  <source srcset="./images/gallery/6.webp 1x, ./images/gallery/6@2x.webp 2x" type="image/webp">
+                  <source srcset="./images/gallery/6.webp 1x, ./images/gallery/6@2x.webp 2x" type="image/webp"><img class="gallery__image gallery__image--6" src="./images/gallery/6.jpg" srcset="./images/gallery/6.jpg 1x, ./images/gallery/6@2x.jpg 2x" alt="">
+                </picture>
+              </div>
+              <div class="swiper-slide gallery__slide">
+                <picture>
+                  <source srcset="./images/gallery/5.webp 1x, ./images/gallery/5@2x.webp 2x" type="image/webp">
+                  <source srcset="./images/gallery/5.webp 1x, ./images/gallery/5@2x.webp 2x" type="image/webp"><img class="gallery__image gallery__image--5" src="./images/gallery/5.jpg" srcset="./images/gallery/5.jpg 1x, ./images/gallery/5@2x.jpg 2x" alt="">
+                </picture>
+              </div>
+              <div class="swiper-slide gallery__slide">
+                <picture>
+                  <source srcset="./images/gallery/8.webp 1x, ./images/gallery/8@2x.webp 2x" type="image/webp">
+                  <source srcset="./images/gallery/8.webp 1x, ./images/gallery/8@2x.webp 2x" type="image/webp"><img class="gallery__image gallery__image--8" src="./images/gallery/8.jpg" srcset="./images/gallery/8.jpg 1x, ./images/gallery/8@2x.jpg 2x" alt="">
+                </picture>
+              </div>
+              <div class="swiper-slide gallery__slide">
+                <picture>
+                  <source srcset="./images/gallery/9.webp 1x, ./images/gallery/9@2x.webp 2x" type="image/webp">
+                  <source srcset="./images/gallery/9.webp 1x, ./images/gallery/9@2x.webp 2x" type="image/webp"><img class="gallery__image gallery__image--9" src="./images/gallery/9.jpg" srcset="./images/gallery/9.jpg 1x, ./images/gallery/9@2x.jpg 2x" alt="">
+                </picture>
+              </div>
+              <div class="swiper-slide gallery__slide">
+                <picture>
+                  <source srcset="./images/gallery/7.webp 1x, ./images/gallery/7@2x.webp 2x" type="image/webp">
+                  <source srcset="./images/gallery/7.webp 1x, ./images/gallery/7@2x.webp 2x" type="image/webp"><img class="gallery__image gallery__image--7" src="./images/gallery/7.jpg" srcset="./images/gallery/7.jpg 1x, ./images/gallery/7@2x.jpg 2x" alt="">
+                </picture>
+              </div>
+              <div class="swiper-slide gallery__slide">
+                <picture>
+                  <source srcset="./images/gallery/10.webp 1x, ./images/gallery/10@2x.webp 2x" type="image/webp">
+                  <source srcset="./images/gallery/10.webp 1x, ./images/gallery/10@2x.webp 2x" type="image/webp"><img class="gallery__image gallery__image--10" src="./images/gallery/10.jpg" srcset="./images/gallery/10.jpg 1x, ./images/gallery/10@2x.jpg 2x" alt="">
+                </picture>
+              </div>
+            </div>
+          </div>
+          <div class="gallery__nav swiper-nav">
+            <div class="swiper-btn-prev">
+              <svg width="35" height="35">
+                <use xlink:href="./images/sprite.svg#arrow-link"></use>
+              </svg>
+            </div>
+            <div class="swiper-btn-next">
+              <svg width="35" height="35">
+                <use xlink:href="./images/sprite.svg#arrow-link"></use>
+              </svg>
+            </div>
+          </div>
+        </div>
+        <div class="gallery__slider-wrapper">
+          <div class="gallery__slider gallery__slider--reverse swiper">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide gallery__slide">
+                <picture>
+                  <source srcset="./images/gallery/12.webp 1x, ./images/gallery/12@2x.webp 2x" type="image/webp">
+                  <source srcset="./images/gallery/12.webp 1x, ./images/gallery/12@2x.webp 2x" type="image/webp"><img class="gallery__image gallery__image--12" src="./images/gallery/12.jpg" srcset="./images/gallery/12.jpg 1x, ./images/gallery/12@2x.jpg 2x" alt="">
+                </picture>
+              </div>
+              <div class="swiper-slide gallery__slide">
+                <picture>
+                  <source srcset="./images/gallery/13.webp 1x, ./images/gallery/13@2x.webp 2x" type="image/webp">
+                  <source srcset="./images/gallery/13.webp 1x, ./images/gallery/13@2x.webp 2x" type="image/webp"><img class="gallery__image gallery__image--13" src="./images/gallery/13.jpg" srcset="./images/gallery/13.jpg 1x, ./images/gallery/13@2x.jpg 2x" alt="">
+                </picture>
+              </div>
+              <div class="swiper-slide gallery__slide">
+                <picture>
+                  <source srcset="./images/gallery/11.webp 1x, ./images/gallery/11@2x.webp 2x" type="image/webp">
+                  <source srcset="./images/gallery/11.webp 1x, ./images/gallery/11@2x.webp 2x" type="image/webp"><img class="gallery__image gallery__image--11" src="./images/gallery/11.jpg" srcset="./images/gallery/11.jpg 1x, ./images/gallery/11@2x.jpg 2x" alt="">
+                </picture>
+              </div>
+              <div class="swiper-slide gallery__slide">
+                <picture>
+                  <source srcset="./images/gallery/18.webp 1x, ./images/gallery/18@2x.webp 2x" type="image/webp">
+                  <source srcset="./images/gallery/18.webp 1x, ./images/gallery/18@2x.webp 2x" type="image/webp"><img class="gallery__image gallery__image--18" src="./images/gallery/18.jpg" srcset="./images/gallery/18.jpg 1x, ./images/gallery/18@2x.jpg 2x" alt="">
+                </picture>
+              </div>
+              <div class="swiper-slide gallery__slide">
+                <picture>
+                  <source srcset="./images/gallery/14.webp 1x, ./images/gallery/14@2x.webp 2x" type="image/webp">
+                  <source srcset="./images/gallery/14.webp 1x, ./images/gallery/14@2x.webp 2x" type="image/webp"><img class="gallery__image gallery__image--14" src="./images/gallery/14.jpg" srcset="./images/gallery/14.jpg 1x, ./images/gallery/14@2x.jpg 2x" alt="">
+                </picture>
+              </div>
+              <div class="swiper-slide gallery__slide">
+                <picture>
+                  <source srcset="./images/gallery/15.webp 1x, ./images/gallery/15@2x.webp 2x" type="image/webp">
+                  <source srcset="./images/gallery/15.webp 1x, ./images/gallery/15@2x.webp 2x" type="image/webp"><img class="gallery__image gallery__image--15" src="./images/gallery/15.jpg" srcset="./images/gallery/15.jpg 1x, ./images/gallery/15@2x.jpg 2x" alt="">
+                </picture>
+              </div>
+              <div class="swiper-slide gallery__slide">
+                <picture>
+                  <source srcset="./images/gallery/16.webp 1x, ./images/gallery/16@2x.webp 2x" type="image/webp">
+                  <source srcset="./images/gallery/16.webp 1x, ./images/gallery/16@2x.webp 2x" type="image/webp"><img class="gallery__image gallery__image--16" src="./images/gallery/16.jpg" srcset="./images/gallery/16.jpg 1x, ./images/gallery/16@2x.jpg 2x" alt="">
+                </picture>
+              </div>
+              <div class="swiper-slide gallery__slide">
+                <picture>
+                  <source srcset="./images/gallery/17.webp 1x, ./images/gallery/17@2x.webp 2x" type="image/webp">
+                  <source srcset="./images/gallery/17.webp 1x, ./images/gallery/17@2x.webp 2x" type="image/webp"><img class="gallery__image gallery__image--17" src="./images/gallery/17.jpg" srcset="./images/gallery/17.jpg 1x, ./images/gallery/17@2x.jpg 2x" alt="">
+                </picture>
+              </div>
+              <div class="swiper-slide gallery__slide">
+                <picture>
+                  <source srcset="./images/gallery/19.webp 1x, ./images/gallery/19@2x.webp 2x" type="image/webp">
+                  <source srcset="./images/gallery/19.webp 1x, ./images/gallery/19@2x.webp 2x" type="image/webp"><img class="gallery__image gallery__image--19" src="./images/gallery/19.jpg" srcset="./images/gallery/19.jpg 1x, ./images/gallery/19@2x.jpg 2x" alt="">
+                </picture>
+              </div>
+            </div>
+          </div>
+          <div class="gallery__nav swiper-nav">
+            <div class="swiper-btn-prev">
+              <svg width="35" height="35">
+                <use xlink:href="./images/sprite.svg#arrow-link"></use>
+              </svg>
+            </div>
+            <div class="swiper-btn-next">
+              <svg width="35" height="35">
+                <use xlink:href="./images/sprite.svg#arrow-link"></use>
+              </svg>
+            </div>
+          </div>
+        </div>
         <div class="container gallery__container">
           <svg class="gallery__logo-icon">
             <use xlink:href="./images/sprite.svg#logo-tantor"></use>
           </svg>
           <div class="gallery__text">
-            <p>В этом году «Тантор Лабс» исполняется 5 лет.</p>
+            <p>В 2026 году «Тантор Лабс» исполнилось 5 лет.</p>
             <p>
-              За это время мы выросли из компании, оказывающей коммерческие услуги вокруг PostgreSQL, в&nbsp;полноценного вендора
-              и&nbsp;одного из технологических лидеров российского рынка СУБД.
+              За это время мы выросли из&nbsp;компании, оказывающей коммерческие услуги вокруг PostgreSQL, в&nbsp;полноценного вендора
+              и&nbsp;технологического лидера российского рынка СУБД.
             </p>
-            <p>
-              Отметить юбилей предлагаем вместе — на&nbsp;нашем традиционном Tantor JAM, который состоится 10 сентября 2026 г. в&nbsp;Москве.
-              Будут новинки, общение и, конечно, немного праздника в&nbsp;честь нашего пятилетия!
-            </p>
-          </div><a class="button gallery__link" href="https://www.cnews.ru/redirect.php?5473476a6c53c273d9f">
-            <svg>
-              <use xlink:href="./images/sprite.svg#arrow-link"></use>
-            </svg><span>Зарегистрироваться</span></a>
+            <p>В сентябре на нашей ежегодной конференции <a href="https://www.cnews.ru/redirect.php?7734976ad8e51322c63" target="_blank">Tantor JAM</a> рассказали о новых разработках. Смотрите видео! Дальше &mdash; больше!</p><br><a href="https://www.cnews.ru/redirect.php?3244936ad7428ca56cc" target="_blank">5 лет «Тантор Лабс». Российским СУБД пора играть по-крупному</a><a href="https://www.cnews.ru/redirect.php?8093546ad742ad0216e" target="_blank">AI-first подход в управлении и администрировании СУБД. Как меняется профессия DBA?</a><a href="https://www.cnews.ru/redirect.php?2556816ad742ce5f65e" target="_blank">МБД Tantor XData Gen3: результаты тестов OLTP, OLAP и HTAP</a><a href="https://www.cnews.ru/redirect.php?4221636ad7241989c4d+bday" target="_blank">Все выступления</a>
+          </div>
         </div>
       </section>
     </main>
@@ -709,20 +723,21 @@
       </svg>
     </div>
     <footer class="footer">
-      <div class="container footer__container"><a class="footer__logo" href="#" target="_blank">
+      <div class="container footer__container"><a class="footer__logo" href="/">
           <svg class="footer__logo">
             <use xlink:href="./images/sprite.svg#logo-tantor-2"></use>
           </svg></a>
-        <div class="footer__menu"><a class="footer__menu-link" href="#" target="_blank">Новости</a><a class="footer__menu-link" href="#" target="_blank">Кейсы</a><a class="footer__menu-link footer__menu-link--accent" href="#" target="_blank">Связаться с Tantor</a></div>
-        <!--.footer__adv
-        span Реклама
-        .footer__adv-tooltip
-        	.footer__adv-tooltip-block.
-        		erid: x <br>
-        		Рекламодатель: x <br>
-        		ИНН/ОГРН: x <br>
-        		<a href="#" target="_blank">x</a>
-        -->
+        <div class="footer__menu"><a class="footer__menu-link" href="https://www.cnews.ru/redirect.php?1692566ad7240e10bba" target="_blank">Новости</a><a class="footer__menu-link" href="https://www.cnews.ru/redirect.php?4221636ad7241989c4d" target="_blank">Выступления</a><a class="footer__menu-link footer__menu-link--accent" href="https://www.cnews.ru/redirect.php?2673096ad724234479a" target="_blank">Связаться с Tantor</a></div>
+        <div class="footer__adv adv"><span></span>
+          <div class="adv__tooltip">
+            <div class="adv__tooltip-block">
+              erid: 2W5zFJz3yWH <br>
+              Рекламодатель: ООО «ТАНТОР ЛАБС» <br>
+              ИНН/ОГРН: 9701183207/1217700399949 <br>
+              Сайт: <a href="https://tantorlabs.ru/" target="_blank">https://tantorlabs.ru/</a>
+            </div>
+          </div>
+        </div>
       </div>
     </footer>
   </body>

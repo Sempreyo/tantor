@@ -71,11 +71,29 @@ main {
 	//margin: 0 auto;
 }
 
-[data-state="mobile-menu"] {
-	overflow: hidden;
+[data-state="header"] {
+	.menu {
+		opacity: 1;
+		pointer-events: auto;
 
-	.header__menu {
-		transform: translateX(0);
+		&__list--header,
+		.overlay {
+			opacity: 1;
+			pointer-events: auto;
+		}
+	}
+}
+
+[data-state="articles"] {
+	.menu {
+		opacity: 1;
+		pointer-events: auto;
+
+		&__list--articles,
+		.overlay {
+			opacity: 1;
+			pointer-events: auto;
+		}
 	}
 }
 
@@ -220,6 +238,12 @@ ol {
 
 		svg {
 			color: $color-button-bg;
+		}
+	}
+
+	.swiper-btn-prev {
+		svg {
+			transform: rotate(180deg);
 		}
 	}
 

@@ -10,16 +10,50 @@
   </head>
   <body class="hidden">
     <header class="header">
-      <div class="container header__container"><a class="header__logo" href="#" target="_blank">
+      <div class="container header__container"><a class="header__logo header__logo--tantor" href="/">
           <svg class="header__logo-icon-tantor">
             <use xlink:href="./images/sprite.svg#logo-tantor"></use>
-          </svg></a><a class="header__logo" href="#" target="_blank">
-          <svg class="header__logo-icon-cnews">
-            <use xlink:href="./images/sprite.svg#logo-cnews"></use>
-          </svg></a></div>
+          </svg></a>
+        <div class="header__last-group"><a class="header__logo header__logo--cnews" href="https://www.cnews.ru/" target="_blank">
+            <svg class="header__logo-icon-cnews">
+              <use xlink:href="./images/sprite.svg#logo-cnews"></use>
+            </svg></a>
+          <div class="header__burger burger" data-type="header">
+            <div class="burger__button">
+              <div class="burger__line"></div>
+            </div>
+          </div>
+        </div>
+      </div>
     </header>
+    <div class="menu">
+      <div class="overlay"></div>
+      <div class="menu__list menu__list--header">
+        <div class="menu__close">
+          <svg width="30" height="30">
+            <use xlink:href="./images/sprite.svg#close"></use>
+          </svg>
+        </div><a class="menu__item anchor active" href="#anchor-1"><span>Замещение СУБД <br> в core-системах</span></a><a class="menu__item anchor" href="#anchor-2">Горизонтальное масштабирование, <br> HTAP и совместимость с PostgreSQL</a><a class="menu__item anchor" href="#anchor-3">Центр управления <br> корпоративными СУБД</a><a class="menu__item anchor" href="#anchor-4">Новая СУБД <br> Tantor Postgres 18</a><a class="menu__item anchor" href="#anchor-5">5 лет <br> «Тантор Лабс»</a>
+        <div class="menu__list-inner">
+          <p class="menu__delimiter-title">Статьи в спецпроекте Tantor</p><a class="menu__item" href="https://tantorlabs.cnews.ru/articles/preview/3071366a726595190c0">Машина баз данных Tantor XData Gen3: на шаг ближе к технологиям Oracle Exadata для самых требовательных бизнес-систем</a><a class="menu__item" href="https://tantorlabs.cnews.ru/articles/preview/9357416ac3af5ae5bb7">PostgreSQL без компромиссов: горизонтальное масштабирование, более 5000 соединений и полноценный HTAP</a><a class="menu__item" href="https://tantorlabs.cnews.ru/articles/preview/4729536ac3a89e67d29">Вадим Яценко, «Тантор Лабс»: Заказчику нужна СУБД с запасом на несколько лет вперед</a><a class="menu__item" href="https://tantorlabs.cnews.ru/articles/preview/8069566aac03d9772ef">Как ИИ меняет экономику эксплуатации СУБД</a><a class="menu__item" href="https://tantorlabs.cnews.ru/articles/preview/4162396aac3c98ead30">Tantor Postgres 18: технологии следующего поколения для корпоративных СУБД</a>
+        </div>
+      </div>
+      <div class="menu__list menu__list--articles">
+        <div class="menu__close">
+          <svg width="30" height="30">
+            <use xlink:href="./images/sprite.svg#close"></use>
+          </svg>
+        </div>
+        <p class="menu__delimiter-title">Статьи в спецпроекте Tantor</p><a class="menu__item" href="https://tantorlabs.cnews.ru/articles/preview/3071366a726595190c0">Машина баз данных Tantor XData Gen3: на шаг ближе к технологиям Oracle Exadata для самых требовательных бизнес-систем</a><a class="menu__item" href="https://tantorlabs.cnews.ru/articles/preview/9357416ac3af5ae5bb7">PostgreSQL без компромиссов: горизонтальное масштабирование, более 5000 соединений и полноценный HTAP</a><a class="menu__item" href="https://tantorlabs.cnews.ru/articles/preview/4729536ac3a89e67d29">Вадим Яценко, «Тантор Лабс»: Заказчику нужна СУБД с запасом на несколько лет вперед</a><a class="menu__item" href="https://tantorlabs.cnews.ru/articles/preview/8069566aac03d9772ef">Как ИИ меняет экономику эксплуатации СУБД</a><a class="menu__item" href="https://tantorlabs.cnews.ru/articles/preview/4162396aac3c98ead30">Tantor Postgres 18: технологии следующего поколения для корпоративных СУБД</a>
+      </div>
+    </div>
     <main class="main">
       <section class="article">
+        <div class="article__burger burger" data-type="articles">
+          <div class="burger__button">
+            <div class="burger__line"></div>
+          </div><span>Читать статьи</span>
+        </div>
         <div class="container article__container"><a class="button article__back" href="#">
             <svg>
               <use xlink:href="./images/sprite.svg#arrow-link"></use>
@@ -133,20 +167,21 @@
       </svg>
     </div>
     <footer class="footer">
-      <div class="container footer__container"><a class="footer__logo" href="#" target="_blank">
+      <div class="container footer__container"><a class="footer__logo" href="/">
           <svg class="footer__logo">
             <use xlink:href="./images/sprite.svg#logo-tantor-2"></use>
           </svg></a>
-        <div class="footer__menu"><a class="footer__menu-link" href="#" target="_blank">Новости</a><a class="footer__menu-link" href="#" target="_blank">Кейсы</a><a class="footer__menu-link footer__menu-link--accent" href="#" target="_blank">Связаться с Tantor</a></div>
-        <!--.footer__adv
-        span Реклама
-        .footer__adv-tooltip
-        	.footer__adv-tooltip-block.
-        		erid: x <br>
-        		Рекламодатель: x <br>
-        		ИНН/ОГРН: x <br>
-        		<a href="#" target="_blank">x</a>
-        -->
+        <div class="footer__menu"><a class="footer__menu-link" href="https://www.cnews.ru/redirect.php?1692566ad7240e10bba" target="_blank">Новости</a><a class="footer__menu-link" href="https://www.cnews.ru/redirect.php?4221636ad7241989c4d" target="_blank">Выступления</a><a class="footer__menu-link footer__menu-link--accent" href="https://www.cnews.ru/redirect.php?2673096ad724234479a" target="_blank">Связаться с Tantor</a></div>
+        <div class="footer__adv adv"><span></span>
+          <div class="adv__tooltip">
+            <div class="adv__tooltip-block">
+              erid: 2W5zFJz3yWH <br>
+              Рекламодатель: ООО «ТАНТОР ЛАБС» <br>
+              ИНН/ОГРН: 9701183207/1217700399949 <br>
+              Сайт: <a href="https://tantorlabs.ru/" target="_blank">https://tantorlabs.ru/</a>
+            </div>
+          </div>
+        </div>
       </div>
     </footer>
   </body>

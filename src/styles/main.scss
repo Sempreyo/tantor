@@ -1,6 +1,3 @@
-/* Libraries */
-@import "../../node_modules/swiper/swiper-bundle.css";
-
 /* Base */
 @import "base/var";
 @import "base/mixin";
@@ -15,6 +12,10 @@
 @import "blocks/title";
 @import "blocks/preloader";
 @import "blocks/blob";
+@import "blocks/menu";
+@import "blocks/burger";
+@import "blocks/overlay";
+@import "blocks/adv";
 @import "blocks/header";
 @import "blocks/footer";
 @import "blocks/hero";
@@ -31,3 +32,5 @@
 @import "blocks/about";
 @import "blocks/gallery";
 @import "blocks/article";
+@import "blocks/other-articles";
+@import "blocks/customer";

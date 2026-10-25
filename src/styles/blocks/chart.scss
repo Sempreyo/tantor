@@ -16,6 +16,31 @@
 		position: relative;
 	}
 
+	&--3 {
+		#{$parent} {
+			&__legend {
+				@include max(t) {
+					padding-bottom: 20px;
+				}
+			}
+
+			&__graph {
+				@include max(t) {
+					display: none;
+				}
+			}
+
+			&__mobile-graph {
+				display: none;
+				padding: 0 10px 50px;
+
+				@include max(t) {
+					display: block;
+				}
+			}
+		}
+	}
+
 	&__top {
 		display: flex;
 		align-items: center;
@@ -69,6 +94,10 @@
 			font-size: vw(16);
 			min-height: vw(100);
 			padding: vw(10) vw(28);
+		}
+
+		@include max(ti) {
+			min-height: 60px;
 		}
 
 		&::before {
@@ -221,6 +250,10 @@
 			@include min(dxxl) {
 				font-size: vw(10);
 			}
+
+			@include max(t) {
+				font-size: 8px;
+			}
 		}
 	}
 
@@ -236,6 +269,10 @@
 			left: vw(110);
 			width: vw(24);
 			height: vw(24);
+		}
+
+		@include max(t) {
+			left: 17vw;
 		}
 	}
 

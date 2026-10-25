@@ -1,4 +1,6 @@
 .product {
+	$parent: &;
+
 	position: relative;
 	min-height: 100vh;
 	height: auto !important;
@@ -10,11 +12,69 @@
 	}
 
 	@include max(d) {
+		min-height: auto;
 		padding: 80px 0 40px;
 	}
 
 	@include max(ti) {
 		padding: 40px 0;
+	}
+
+	&--article {
+		min-height: auto;
+		padding: 40px 0;
+		border-bottom: 0;
+
+		@include min(dxxl) {
+			padding: vw(40) 0;
+		}
+
+		.product-card {
+			@include max(d) {
+				max-width: 420px;
+			}
+
+			@include max(620) {
+				max-width: 360px;
+			}
+
+			@include max(t) {
+				max-width: 100%;
+			}
+
+			&__title {
+				@include max(d) {
+					font-size: 16px;
+				}
+			}
+		}
+
+		#{$parent} {
+			&__container {
+				opacity: 1;
+				padding: 0;
+			}
+
+			&__slider {
+				margin: 0 -100px;
+
+				@include min(dxxl) {
+					margin: 0 vw(-100);
+				}
+
+				@include max(d) {
+					margin: 0;
+				}
+			}
+
+			&__items {
+				gap: 47px 20px;
+
+				@include min(dxxl) {
+					gap: vw(47) vw(20);
+				}
+			}
+		}
 	}
 
 	&__container {
@@ -55,6 +115,7 @@
 		margin: 0 auto;
 		font-size: 48px;
 		line-height: 1.2;
+		font-weight: 600;
 		text-align: center;
 
 		@include min(dxxl) {
@@ -102,6 +163,16 @@
 		}
 	}
 
+	&__image {
+		max-width: 1252px;
+		width: 100%;
+		margin: 0 auto;
+
+		@include min(dxxl) {
+			max-width: vw(1252);
+		}
+	}
+
 	&__slider {
 		margin: 75px auto 0;
 		padding-left: 50px;
@@ -136,6 +207,17 @@
 			&-active {
 				z-index: 1;
 			}
+		}
+	}
+
+	&__link {
+		margin: 20px auto 0;
+		position: relative;
+		left: 50%;
+		transform: translateX(-50%);
+
+		@include min(dxxl) {
+			margin: vw(20) auto 0;
 		}
 	}
 

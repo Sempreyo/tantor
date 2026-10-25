@@ -3,6 +3,9 @@ import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
 // Объявляем функцию сброса, которая действует как обновление страницы
+let lastWidth = window.innerWidth;
+let resizeTimeout;
+
 function resetPageForResize() {
 	if (typeof ScrollTrigger !== "undefined") {
 		ScrollTrigger.getAll().forEach(trigger => trigger.kill());
@@ -30,9 +33,16 @@ function resetPageForResize() {
 	window.location.reload();
 }
 
-let resizeTimeout;
-
 window.addEventListener("resize", () => {
+	// Получаем текущую ширину
+	const currentWidth = window.innerWidth;
+
+	// Если ширина не изменилась (изменилась только высота из-за адресной строки), ничего не делаем
+	if (currentWidth === lastWidth) return;
+
+	// Если ширина изменилась, обновляем сохраненное значение
+	lastWidth = currentWidth;
+
 	// Очищаем предыдущий таймер, пока пользователь всё еще тянет окно
 	clearTimeout(resizeTimeout);
 
@@ -126,32 +136,58 @@ document.addEventListener("DOMContentLoaded", () => {
 				setActiveMenuItem(targetId);
 			}
 
-			if (!media1280 && anchor.closest(".header__menu") !== null) {
+			if (!media1280) {
 				openNav();
 			}
 		});
 	});
 
 	// Мобильное меню
-	const openNav = () => {
+	const openNav = (type) => {
 		let bodyState = document.body.getAttribute("data-state");
 
-		if (bodyState === "mobile-menu") {
+		if (bodyState === type) {
 			document.body.dataset.state = "";
 		} else {
-			document.body.dataset.state = "mobile-menu";
+			document.body.dataset.state = type;
 		}
 	}
-	const burger = document.querySelector(".header__burger");
-	const closeButtonMenu = document.querySelector(".header__menu-close");
+	const burgers = document.querySelectorAll(".burger");
+	const overlays = document.querySelectorAll(".overlay");
+	const closeButtons = document.querySelectorAll(".menu__close");
 
-	if (burger) {
-		burger.addEventListener("click", openNav);
+	if (burgers) {
+		burgers.forEach(burger => {
+			burger.addEventListener("click", () => openNav(burger.dataset.type));
+		});
 	}
 
-	if (closeButtonMenu) {
-		closeButtonMenu.addEventListener("click", openNav);
+	if (overlays) {
+		overlays.forEach(overlay => {
+			overlay.addEventListener("click", openNav);
+		});
 	}
+
+	if (closeButtons) {
+		closeButtons.forEach(closeButton => {
+			closeButton.addEventListener("click", openNav);
+		});
+	}
+
+	// Делаем кнопку для статей плавающую при скролле
+	const burgerArticles = document.querySelector('.burger[data-type="articles"]');
+
+	window.addEventListener('scroll', () => {
+		const headerHeight = header.offsetHeight;
+		const secondScreenTop = document.querySelector(".hero__wrapper, .article__container").getBoundingClientRect().top;
+		const triggerPoint = headerHeight + (document.querySelector(".hero__wrapper") ? 10 : 80);
+
+		if (secondScreenTop <= triggerPoint) {
+			burgerArticles.classList.add('fixed');
+		} else {
+			burgerArticles.classList.remove('fixed');
+		}
+	});
 
 	// Бегущая строка
 	const marqueeContainer = document.querySelector('.migration__marquee');
@@ -367,7 +403,9 @@ document.addEventListener("DOMContentLoaded", () => {
 			centerY = rect.height / 2;
 
 			// Адаптируем радиусы распределения узлов
-			radiusX = rect.width * 0.45;
+			const isMobile768 = rect.width < 768;
+			const isMobile400 = rect.width < 400;
+			radiusX = rect.width * (isMobile400 ? 0.005 : isMobile768 ? 0.26 : 0.45);
 			radiusY = Math.max(getVw(30), centerY - getVw(40));
 
 			const nonCenterNodes = combinedData.nodes.filter(node => node.id !== "center");
@@ -397,14 +435,10 @@ document.addEventListener("DOMContentLoaded", () => {
 				return { x: centerX, y: centerY };
 			}
 
-			const baseAngle = (index / totalNodes) * 2 * Math.PI - Math.PI / 2;
-			const randomOffset = (Math.random() - 0.5) * 0.15;
-			const angle = baseAngle + randomOffset;
+			const angle = (index / totalNodes) * 2 * Math.PI - Math.PI / 2;
 
-			const variation = 1 + (Math.random() - 0.5) * 0.08;
-
-			const x = centerX + radiusX * variation * Math.cos(angle);
-			const y = centerY + radiusY * variation * Math.sin(angle);
+			const x = centerX + radiusX * Math.cos(angle);
+			const y = centerY + radiusY * Math.sin(angle);
 
 			return { x, y, homeX: x, homeY: y };
 		}
@@ -417,9 +451,9 @@ document.addEventListener("DOMContentLoaded", () => {
 			.width(rect.width)
 			.height(rect.height)
 			.graphData(combinedData)
-			.nodeRelSize(getVw(7))               // Адаптивный относительный размер узла
+			.nodeRelSize(getVw(7)) // Адаптивный относительный размер узла
 			.linkColor(() => "#333333")
-			.linkWidth(getVw(1.5))               // Адаптивная толщина линий связей
+			.linkWidth(getVw(1.5)) // Адаптивная толщина линий связей
 			.cooldownTime(Infinity)
 			.d3AlphaDecay(0)
 
@@ -586,7 +620,7 @@ document.addEventListener("DOMContentLoaded", () => {
 		resetBoardLoop();
 
 		const totalBoards = 7;
-		const maxVisible = 6;
+		const maxVisible = 5;
 		const duration = 0.7;
 		const ease = "expo.out";
 
@@ -680,33 +714,39 @@ ORDER BY day ASC`
 			{
 				title: "weekly_revenue.sql",
 				code: `SELECT
-  TO_CHAR(created_at, 'TMDy') AS day_of_week,
+  TO_CHAR(created_at, 'TMDy') 
+    AS day_of_week,
   SUM(amount) AS revenue,
   COUNT(tx_id) AS tx_count,
-  ROUND(AVG(amount), 2) AS avg_check
+  ROUND(AVG(amount), 2) 
+    AS avg_check
 FROM erp.transactions
 WHERE status = 'SUCCESS'
-  AND created_at >= CURRENT_DATE - INTERVAL
-    '7 days'
+  AND created_at >= CURRENT_DATE 
+    - INTERVAL '7 days'
 GROUP BY 
   DATE_TRUNC('day', created_at), 
   TO_CHAR(created_at, 'TMDy')
-ORDER BY DATE_TRUNC('day', created_at) ASC;`
+ORDER BY DATE_TRUNC('day', 
+    created_at) ASC;`
 			},
 			{
 				title: "hourly_conversion.sql",
 				code: `SELECT 
   DATE_TRUNC('hour', session_start) AS 
     hour_window,
-  COUNT(DISTINCT visitor_id) AS unique_visitors,
-  COUNT(DISTINCT cart_id) AS checkouts,
+  COUNT(DISTINCT visitor_id) 
+    AS unique_visitors,
+  COUNT(DISTINCT cart_id) 
+    AS checkouts,
   ROUND(
-    COUNT(DISTINCT cart_id)::numeric / 
-    NULLIF(COUNT(DISTINCT visitor_id), 0) * 100, 2
-  ) AS conversion_pct
+    COUNT(DISTINCT cart_id)::numeric 
+      / NULLIF(COUNT(DISTINCT visitor_id
+        ), 0) * 100, 2) 
+    AS conversion_pct
 FROM web_analytics.sessions
-WHERE session_start >= CURRENT_TIMESTAMP - 
-  INTERVAL '6 hours'
+WHERE session_start >= 
+  CURRENT_TIMESTAMP - INTERVAL '6 hours'
 GROUP BY 1
 ORDER BY 1 ASC;`
 			},
@@ -716,7 +756,8 @@ ORDER BY 1 ASC;`
   category_name,
   SUM(total_price) AS segment_revenue,
   ROUND(
-    SUM(total_price) / SUM(SUM(total_price)) 
+    SUM(total_price) / 
+    SUM(SUM(total_price)) 
     OVER() * 100, 
   2) AS share_pct
 FROM retail.sales_mart
@@ -1084,8 +1125,8 @@ LIMIT 4;`
 							// Подписи к серверам перемещаются в точку над погрузчиком
 							.to(".hero__label--1", {
 								animation: "none",
-								x: () => getVw(229),
-								y: () => getVw(86),
+								x: () => getVw(171),
+								y: () => getVw(161),
 								scale: 0.8,
 								rotate: "-3deg",
 								duration: 0.5,
@@ -1093,7 +1134,7 @@ LIMIT 4;`
 							}, "<")
 							.to(".hero__label--2", {
 								animation: "none",
-								x: () => getVw(190),
+								x: () => getVw(206),
 								y: () => getVw(216),
 								scale: 0.8,
 								rotate: 0,
@@ -1101,8 +1142,8 @@ LIMIT 4;`
 							}, "<")
 							.to(".hero__label--3", {
 								animation: "none",
-								x: () => getVw(50),
-								y: () => getVw(16),
+								x: () => getVw(73),
+								y: () => getVw(197),
 								scale: 0.8,
 								rotate: "5deg",
 								ease: "sine.out"
@@ -1133,19 +1174,19 @@ LIMIT 4;`
 								ease: "sine.out"
 							}, "<")
 							.to(".hero__label--1", {
-								x: () => getVw(281),
-								y: () => getVw(16),
+								x: () => getVw(198),
+								y: () => getVw(100),
 								duration: 0.5,
 								ease: "sine.out"
 							}, "<")
 							.to(".hero__label--2", {
-								x: () => getVw(188),
-								y: () => getVw(183),
+								x: () => getVw(229),
+								y: () => getVw(252),
 								ease: "sine.out"
 							}, "<")
 							.to(".hero__label--3", {
-								x: () => getVw(-8),
-								y: () => getVw(23),
+								x: () => getVw(28),
+								y: () => getVw(155),
 								ease: "sine.out"
 							}, "<")
 							// Погрузчик с серверами уезжает влево за экран
@@ -1351,6 +1392,11 @@ LIMIT 4;`
 							}, "<")
 							.to(".server__config", {
 								opacity: 0,
+								ease: "power2.out"
+							}, "<")
+							.to(".server__boards-text", {
+								opacity: 0,
+								stagger: 0.1,
 								ease: "power2.out"
 							}, "<")
 							.to(".server-slider__item--2", {
@@ -1621,77 +1667,61 @@ LIMIT 4;`
 							}, "<");
 						}, 0.3);
 
-						const tl7part1 = gsap.timeline({ paused: true });
-						const tl7part2 = gsap.timeline({ paused: true });
-
 						const tl7 = gsap.timeline({
 							scrollTrigger: {
 								trigger: "#anchor-5",
 								start: `top ${headerHeight}px`,
 								end: "+=200%",
-								invalidateOnRefresh: true,
-								toggleActions: "play none none reverse",
-								pin: true,
-								onUpdate: (self) => {
-									const progress = self.progress; // значение от 0 (начало фиксации) до 1 (конец фиксации)
-
-									// Запускаем первый цикл
-									if (progress > 0.3 && progress < 0.6) {
-										tl7part1.play();
-									}
-
-									// Скролл ниже 55%
-									if (progress >= 0.65) {
-										if (tl7part1.progress() === 1) {
-											tl7part2.play();
-										} else {
-											tl7part1.progress(1);
-											tl7part2.play();
-										}
-									}
-
-									// Реверс
-									if (progress < 0.6) {
-										tl7part2.reverse();
-									}
-
-									if (progress === 0) {
-										if (tl7part2.progress() === 0) {
-											tl7part1.reverse();
-										} else {
-											tl7part2.progress(0);
-											tl7part1.reverse();
-										}
-									}
-								}
+								invalidateOnRefresh: true
 							}
 						});
 
 						const gallery = document.querySelector(".gallery");
 						const galleryTl = gsap.timeline();
+						function toggleImageRandomly(image) {
+							// Случайная длительность анимации
+							const duration = Math.random() * 1 + 0.5;
+							// Случайная задержка перед следующим шагом
+							const delay = Math.random() * 2 + 3;
+							// Случайная целевая прозрачность (0 - скрыта, 1 - видна)
+							const randomVal = Math.random();
+							// Повышаем шанс того, что картинка останется видимой (80% против прежних 50%)
+							const isVisible = randomVal > 0.2;
+							const targetOpacity = isVisible > 0.5 ? 1 : 0;
+							const targetScale = isVisible > 0.5 ? 1 : 0.8;
+
+							gsap.to(image, {
+								opacity: targetOpacity,
+								scale: targetScale,
+								duration: duration,
+								delay: delay,
+								ease: "power1.inOut",
+								onComplete: () => {
+									// Рекурсивно запускаем для этой же картинки снова по завершении анимации
+									toggleImageRandomly(image);
+								}
+							});
+						}
+
 						setIntersection(gallery, () => {
-							galleryTl
-								.to(".gallery__image", {
-									opacity: 1,
-									stagger: 0.2,
-									duration: 0.5,
-									ease: "none"
-								});
+							galleryTl.to(".gallery__image", {
+								opacity: 1,
+								scale: 1,
+								stagger: 0.2,
+								duration: 0.5,
+								ease: "power1.out", // Сделаем появление чуть мягче, чем "none"
+								onComplete: () => {
+									// Как только начальное появление завершено, запускаем хаос
+									const images = document.querySelectorAll('.gallery__image');
+
+									images.forEach(img => {
+										toggleImageRandomly(img);
+									});
+								}
+							});
 						}, 0.3);
 
-						tl7part1
-							.to(".gallery-anim-image", {
-								opacity: 0,
-								duration: 0.2,
-								ease: "none"
-							})
-							.to(".gallery-anim-image-last", {
-								opacity: 1,
-								duration: 0.2,
-								ease: "none"
-							});
-
-						tl7part2
+						tl7
 							.to(".gallery__logo-icon", {
 								y: () => getVw(-150),
 								scale: 0.5,
@@ -1775,11 +1805,15 @@ LIMIT 4;`
 		mm.add("(max-width: 1279px)", () => {
 			initStartAnimations();
 
+			const media700 = window.matchMedia("(min-width: 700px)").matches;
+			const media576 = window.matchMedia("(min-width: 576px)").matches;
+			const media320 = window.matchMedia("(min-width: 320px)").matches;
+
 			const tl1 = gsap.timeline({
 				scrollTrigger: {
 					trigger: "#anchor-1",
-					start: "top top",
-					end: "bottom top",
+					start: "35% top",
+					end: "68% top",
 					scrub: 2,
 					invalidateOnRefresh: true
 				}
@@ -1790,25 +1824,25 @@ LIMIT 4;`
 					xPercent: 0,
 					y: "-8vw",
 					left: 0,
-					scale: 0.2,
+					scale: media576 ? 0.2 : media320 ? 0.6 : 0.6,
 					rotate: 0,
 					duration: 0.7,
 					ease: "sine.out",
 					overwrite: "auto"
 				})
 				.to(".hero__machine--2", {
-					xPercent: -75,
+					xPercent: media576 ? -75 : media320 ? -50 : -50,
 					y: "1.6vw",
-					scale: 0.2,
+					scale: media576 ? 0.2 : media320 ? 0.6 : 0.6,
 					rotate: "5deg",
 					ease: "sine.out",
 					overwrite: "auto"
 				}, "<")
 				.to(".hero__machine--3", {
-					xPercent: -159,
-					y: "0.6vw",
+					xPercent: media576 ? -159 : media320 ? -109 : -109,
+					y: media576 ? "0.6vw" : media320 ? "-0.5vw" : "-0.5vw",
 					right: 0,
-					scale: 0.2,
+					scale: media576 ? 0.2 : media320 ? 0.6 : 0.6,
 					rotate: 0,
 					ease: "sine.out",
 					overwrite: "auto"
@@ -1817,8 +1851,8 @@ LIMIT 4;`
 			tl1
 				.to(".hero__label--1", {
 					animation: "none",
-					xPercent: 23,
-					y: media800 ? -152 : "-20vw",
+					xPercent: media700 ? 23 : 13,
+					y: media700 ? -152 : media576 ? -118 : media320 ? -35 : -35,
 					left: 0,
 					scale: 0.8,
 					rotate: "-3deg",
@@ -1828,8 +1862,8 @@ LIMIT 4;`
 				}, "<")
 				.to(".hero__label--2", {
 					animation: "none",
-					xPercent: 46,
-					y: media800 ? -48 : "-6vw",
+					xPercent: media700 ? 46 : 25,
+					y: 12,
 					left: 0,
 					scale: 0.8,
 					rotate: 0,
@@ -1838,8 +1872,8 @@ LIMIT 4;`
 				}, "<")
 				.to(".hero__label--3", {
 					animation: "none",
-					xPercent: 85,
-					y: media800 ? -204 : "-27vw",
+					xPercent: media700 ? 85 : 63,
+					y: media700 ? -78 : media576 ? -64 : media320 ? -45 : -45,
 					left: 0,
 					scale: 0.8,
 					rotate: "5deg",
@@ -1849,7 +1883,7 @@ LIMIT 4;`
 
 			tl1
 				.to(".hero__machines", {
-					x: () => getMoveCoords().x + getVwMobile(55),
+					x: () => getMoveCoords().x + (media800 ? getVwMobile(150) : media576 ? getVwMobile(55) : media800 ? getVwMobile(0) : getVwMobile(0)),
 					y: () => getMoveCoords().y,
 					duration: 0.7,
 					ease: "sine.out",
@@ -1859,12 +1893,12 @@ LIMIT 4;`
 					x: "-100vw",
 					ease: "sine.out",
 					overwrite: "auto"
-				}, "<");
+				}, "+=0.3");
 
 			const serverCaptions = document.querySelector(".server__caption");
 			const serverConfig = document.querySelector(".server__config");
 			const serverBoards = document.querySelector(".board");
-			const serverWidgets = document.querySelector(".server__widget");
+			const serverWidgets = document.querySelectorAll(".server__widget");
 			const serverSlider = document.querySelector(".server-slider__item");
 			const advantages = document.querySelector(".advantages");
 			const advantagesItems = document.querySelector(".advantages__item");
@@ -1873,7 +1907,9 @@ LIMIT 4;`
 			const aboutContent = document.querySelector(".about__content");
 			const chart = document.querySelector(".chart");
 			const chartAnim1 = document.querySelector(".chart-anim-1");
-			const chartBars = document.querySelector(".chart__bar");
+			const chartBars = document.querySelectorAll(".chart__bar");
+			const clock = document.querySelector(".chart__icon-clock");
+			const firstBarLeft = chartBars[0].getBoundingClientRect().left;
 			const galleryLogo = document.querySelector(".gallery__logo-icon");
 			const galleryText = document.querySelector(".gallery__text");
 			const galleryLink = document.querySelector(".gallery__link");
@@ -1908,50 +1944,83 @@ LIMIT 4;`
 					});
 			});
 
-			setIntersection(serverWidgets, () => {
-				const tlWidgets = gsap.timeline();
+			serverWidgets.forEach(widget => {
+				setIntersection(widget, () => {
+					const tlWidgets = gsap.timeline();
 
-				tlWidgets
-					.to(".widget__link", {
-						opacity: 1,
-						x: 0,
-						duration: 0.3,
-						ease: "none",
-						overwrite: "auto"
-					})
-					.to(".widget__code, .widget__stats, .widget__bars, .widget__chart-icon", {
-						opacity: 1,
-						stagger: 0.1,
-						duration: 0.5,
-						ease: "none",
-						overwrite: "auto"
-					})
-					.to(".widget__table tr", {
-						opacity: 1,
-						y: 0,
-						borderColor: "rgba(22, 22, 22, 0.6)",
-						stagger: 0.1,
-						duration: 0.3,
-						ease: "none",
-						onComplete: () => { document.querySelector(".widget__table .marquee-content").style.animation = "scrollUp 15s linear infinite" }
-					}, "<")
-					.to(typingObj, {
-						length: dataPairs[0].code.length,
-						duration: 3,
-						ease: "none",
-						onUpdate: () => {
-							document.querySelector(".widget__code").textContent = dataPairs[0].code.substring(0, Math.floor(typingObj.length));
-						},
-						onComplete: () => { setTimeout(startInfiniteLoop, 4000) }
-					}, "<")
-					.fromTo(".widget__bar-progress span", {
-						width: 0
-					}, {
-						width: (index, target) => getComputedStyle(target).getPropertyValue("--percent").trim(),
-						stagger: 0.1,
-						duration: 0.5,
-						ease: "none"
-					}, "<");
+					if (widget.querySelector(".widget__link") !== null) {
+						tlWidgets
+							.to(".widget__link", {
+								opacity: 1,
+								x: 0,
+								duration: 0.3,
+								ease: "none",
+								overwrite: "auto"
+							});
+					}
+
+					if (widget.querySelector(".widget__code") !== null) {
+						tlWidgets
+							.to(".widget__code", {
+								opacity: 1,
+								duration: 0,
+								ease: "none",
+								overwrite: "auto"
+							})
+							.to(typingObj, {
+								length: dataPairs[0].code.length,
+								duration: 3,
+								ease: "none",
+								onUpdate: () => {
+									document.querySelector(".widget__code").textContent = dataPairs[0].code.substring(0, Math.floor(typingObj.length));
+								},
+								onComplete: () => { setTimeout(startInfiniteLoop, 4000) }
+							}, "<");
+					}
+
+					if (widget.querySelector(".widget__stats") !== null) {
+						tlWidgets
+							.to(".widget__stats", {
+								opacity: 1,
+								stagger: 0.1,
+								duration: 0.5,
+								ease: "none",
+								overwrite: "auto"
+							});
+					}
+
+					if (widget.querySelector(".widget__bars") !== null) {
+						tlWidgets
+							.to(".widget__bars", {
+								opacity: 1,
+								stagger: 0.1,
+								duration: 0.5,
+								ease: "none",
+								overwrite: "auto"
+							})
+							.fromTo(".widget__bar-progress span", {
+								width: 0
+							}, {
+								width: (index, target) => getComputedStyle(target).getPropertyValue("--percent").trim(),
+								stagger: 0.1,
+								duration: 0.5,
+								ease: "none"
+							});
+					}
+
+					if (widget.querySelector(".widget__table") !== null) {
+						tlWidgets
+							.to(".widget__table tr", {
+								opacity: 1,
+								y: 0,
+								borderColor: "rgba(22, 22, 22, 0.6)",
+								stagger: 0.1,
+								duration: 0.3,
+								ease: "none",
+								onComplete: () => { document.querySelector(".widget__table .marquee-content").style.animation = "scrollUp 15s linear infinite" }
+							});
+					}
+				});
 			});
 
 			setIntersection(serverSlider, () => {
@@ -2031,14 +2100,49 @@ LIMIT 4;`
 					});
 			});
 
-			setIntersection(chartBars, () => {
-				gsap
-					.to(".chart__bar", {
-						height: (index, target) => getComputedStyle(target).getPropertyValue("--bar-height").trim(),
-						duration: 0.7,
-						stagger: 0.3,
-						ease: "none"
-					});
+			setIntersection(chartBars[0], () => {
+				const tlBars = gsap.timeline();
+
+				chartBars.forEach((bar, index) => {
+					if (index === 0) {
+						tlBars.to(bar, {
+							opacity: 1,
+							scaleY: 1,
+							duration: 0.5,
+							ease: "power2.out"
+						});
+					} else {
+						const prevBar = chartBars[index - 1];
+						const currentHeight = parseFloat(bar.style.getPropertyValue('--bar-height'));
+						const prevHeight = parseFloat(prevBar.style.getPropertyValue('--bar-height'));
+						const startScaleY = prevHeight / currentHeight;
+						const currentLeft = bar.getBoundingClientRect().left;
+						const prevLeft = prevBar.getBoundingClientRect().left;
+						const clockTargetX = currentLeft - firstBarLeft;
+
+						tlBars.set(bar, {
+							x: prevLeft - currentLeft,
+							scaleY: startScaleY,
+							opacity: 0
+						})
+							.to(bar, {
+								x: 0,
+								opacity: 1,
+								duration: 0.6,
+								ease: "power1.inOut"
+							})
+							.to(clock, {
+								x: clockTargetX,
+								duration: 0.6,
+								ease: "power1.inOut"
+							}, "<")
+							.to(bar, {
+								scaleY: 1,
+								duration: 0.4,
+								ease: "power2.out"
+							}, "-=0.15");
+					}
+				});
 			});
 
 			setIntersection(galleryLogo, () => {
@@ -2068,7 +2172,36 @@ LIMIT 4;`
 					});
 			});
 
-			setIntersection(galleryImages, () => {
+			const galleryCarousel = document.querySelectorAll(".gallery__slider");
+
+			if (galleryCarousel.length > 0) {
+				galleryCarousel.forEach(el => {
+					const galleryCarouselNext = el.nextElementSibling.querySelector(".swiper-btn-next");
+					const galleryCarouselPrev = el.nextElementSibling.querySelector(".swiper-btn-prev");
+
+					const slider = new Swiper(el, {
+						slidesPerView: 1,
+						spaceBetween: 10,
+						loop: true,
+						navigation: {
+							nextEl: galleryCarouselNext,
+							prevEl: galleryCarouselPrev
+						},
+						autoplay: {
+							delay: 3500,
+							reverseDirection: el.classList.contains("gallery__slider--reverse"),
+							disableOnInteraction: false
+						},
+						breakpoints: {
+							576: {
+								slidesPerView: 2
+							}
+						}
+					});
+				});
+			}
+
+			/*setIntersection(galleryImages, () => {
 				gsap
 					.to(".gallery__image", {
 						opacity: 1,
@@ -2076,7 +2209,7 @@ LIMIT 4;`
 						stagger: 0.3,
 						ease: "none"
 					});
-			});
+			});*/
 		});
 	}
 
@@ -2167,18 +2300,26 @@ LIMIT 4;`
 	const articleServer = document.querySelector(".article__server-wrapper");
 
 	if (articleServer) {
+		gsap.set(".article__server-wrapper .board", { opacity: 0, x: 30 });
+
 		const tl2 = gsap.timeline({
 			scrollTrigger: {
 				trigger: ".article__server-wrapper",
-				start: "center center",
-				end: "center center"
+				start: "top center",
+				toggleActions: "play none none reverse",
 			}
 		});
 
-		tl2
-			.add(() => {
-				startRandomBoardLoop();
-			});
+		tl2.to(".board", {
+			opacity: 1,
+			x: 0,
+			duration: 0.7,
+			stagger: {
+				each: 0.3,
+				from: "random"
+			},
+			ease: "back.out(1.7)"
+		});
 	}
 
 	const articleImages = document.querySelectorAll(".article__image");
@@ -2191,6 +2332,29 @@ LIMIT 4;`
 					duration: 0.4,
 					ease: "none"
 				});
+			});
+		});
+	}
+
+	const articlesCarousel = document.querySelectorAll(".other-articles__slider");
+
+	if (articlesCarousel.length > 0) {
+		articlesCarousel.forEach(el => {
+			const articlesCarouselNext = el.nextElementSibling.querySelector(".swiper-btn-next");
+			const articlesCarouselPrev = el.nextElementSibling.querySelector(".swiper-btn-prev");
+
+			const slider = new Swiper(el, {
+				slidesPerView: 1,
+				spaceBetween: 10,
+				navigation: {
+					nextEl: articlesCarouselNext,
+					prevEl: articlesCarouselPrev,
+				},
+				breakpoints: {
+					576: {
+						slidesPerView: 2,
+					}
+				}
 			});
 		});
 	}
